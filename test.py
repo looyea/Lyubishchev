@@ -1,5 +1,9 @@
 import string
 
+
+'''
+测试字符串相关的问题
+'''
 values = {'var': 'foo'}
 
 tem = string.Template('''
