@@ -21,7 +21,7 @@ pt = pd.pivot_table(df,
                      # columns=["并行"],
                      values="历时分钟",
                      aggfunc=[np.sum],
-                     fill_value=0, margins=True)
+                      fill_value=0, margins=True)
 fig = plt.plot()
 
 print(pt.values)
