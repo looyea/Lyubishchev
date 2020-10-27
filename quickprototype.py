@@ -1,6 +1,8 @@
+# -.- encoding=utf-8 -.-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 
 file_name = "Resources\\2020TimeTable.xlsx"
 sheet_names = [x for x in range(1, 13)]
@@ -17,14 +19,41 @@ df = xlsx.parse("8")
 
 # 获取历时分钟数
 pt = pd.pivot_table(df,
-                     index=["时间分类","事件"],
+                     index=["时间分类"],
                      # columns=["并行"],
                      values="历时分钟",
                      aggfunc=[np.sum],
                       fill_value=0, margins=True)
-fig = plt.plot()
 
-print(pt.values)
+def make_autopct(values):
+    def my_autopct(pct):
+        total = sum(values)
+        val = int(round(pct*total/100.0))
+        # 同时显示数值和占比的饼图
+        return '{p:.2f}%  ({v:d})'.format(p=pct,v=val)
+    return my_autopct
+
+# print(pt)
+pt = pt.drop(index=['All'])
+pt = pt['sum']
+#print(pt.index.values)
+# print(pt['sum']['历时分钟'])
+# print(type(pt['sum']['历时分钟']))
+print(pt['历时分钟'].values)
+print(pt['历时分钟'].index.values)
+
+
+def auto_value(val):
+    print(val)
+    return val
+
+#
+plt.rcParams['font.sans-serif']=['SimHei']
+pt.plot(kind='pie', subplots=True, figsize=(8, 8), autopct=auto_value)
+plt.title("分类时间表")
+plt.ylabel("")
+plt.show()
+
 
 
 # 将内容转换成字典，批量读取
