@@ -6,10 +6,7 @@ Created on Fri Oct  2 07:49:59 2020
 """
 
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from pylab import mpl
-import seaborn as sns
+
 import global_static as gs
 
 

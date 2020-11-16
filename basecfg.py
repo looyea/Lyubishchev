@@ -14,7 +14,9 @@ config.read(r"configure.ini", encoding="utf-8")
 cur_month = datetime.datetime.now().month
 pre_month = 0
 # 如果统计的是上一个月的
-if config["Global"]["base_on_previous_month"]:
+base_on_previous_month = int(config["Global"]["base_on_previous_month"])
+
+if base_on_previous_month == 1:
     cur_month = cur_month - 1
 
 # 基于上一个月的处理，现在月份是0，实际月份是1，
