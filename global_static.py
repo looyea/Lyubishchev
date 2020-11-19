@@ -2,7 +2,7 @@
 """
 Created on Sun Oct  4 14:45:35 2020
 
-@author: Administrator
+@author: looyea
 """
 import pandas as pd
 import numpy as np
@@ -161,3 +161,7 @@ def monthly_time_class_trend(data, month):
     pvt = pvt.fillna(0)
     
     return pvt
+
+
+if __name__ == 'main':
+    print(ctx)

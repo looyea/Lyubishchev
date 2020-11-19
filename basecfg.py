@@ -1,4 +1,9 @@
 # -*- coding: utf8 -*-
+"""
+Created on Sun Oct  4 14:45:35 2020
+
+@author: looyea
+"""
 from configparser import ConfigParser, ExtendedInterpolation
 import datetime, calendar
 from datetime import timedelta
@@ -41,6 +46,6 @@ ctx['font_color'] = config['ChartSettings']['font_color']
 # 设置文件资源相关的参数
 ctx['data_file'] = config['Resources']['data_file']
 
-# if __name__ == 'main':
-print(ctx)
+if __name__ == 'main':
+    print(ctx)
 

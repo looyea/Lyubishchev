@@ -1,61 +1,38 @@
 # -*- coding: utf8 -*-
+"""
+Created on Sun Oct  4 14:45:35 2020
+
+@author: looyea
+"""
+
 from basecfg import ctx
 import pandas as pd
 import global_static as gs
+import global_draw as gd
 
-
-# 1. 程序从根目录加载配置
-# 1. Main program loads configuration from root folder
-
-
-# 读取完毕就是key，value形式，key是work_sheet名字，值是data frame
+# read data from data_file
 data = pd.read_excel(
     ctx['data_file'],
     sheet_name=None,
     index_col=None
 )
 
+# set up configuration for drawing
 gs.plt_set()
+
+# 画当前整体的图形
 img_df = gs.current_month_barh(data, ctx["cur_month"])
+gd.global_draw(img_df)
 
-axes = img_df.plot(
-    kind='barh',
-    width=0.3,
-    mark_right=True,
-    subplots=False,
-    legend=False
-)
-
-for a, b in zip(img_df['历时分钟'], axes.get_yticks()):
-    axes.text(a / 2, b, a, ha="right", va="center", color=ctx['font_color'])
-
+# 画上个月，本月I类时间对比
 img_df2 = gs.time_clss_static(data, ctx["pre_month"], ctx["cur_month"])
-axes2 = img_df2.plot(
-    kind='barh',
-    width=0.3,
-    mark_right=True,
-    subplots=False,
-    legend=False
-)
+gd.global_bi_month_compare(img_df2)
 
-for a, b, c in zip(img_df2['9月'], img_df2['10月'], axes.get_yticks()):
-    axes2.text(a, c - 0.075, a, ha="right", va="center", color=ctx['font_color'])
-    axes2.text(b, c + 0.075, b, ha="right", va="center", color=ctx['font_color'])
-axes2.legend()
-
+# 画上个月，本月II类时间对比
 img_df3 = gs.event_class_static(data, ctx["pre_month"], ctx["cur_month"])
-axes3 = img_df3.plot(
-    kind='barh',
-    width=0.5,
-    mark_right=True,
-    subplots=False,
-    legend=False
-)
-for a, b, c in zip(img_df3['9月'], img_df3['10月'], axes3.get_yticks()):
-    axes3.text(a + 250, c - 0.125, "%.0f" % a, ha="right", va="center", fontsize='small', color=ctx['font_color'])
-    axes3.text(b + 250, c + 0.125, "%.0f" % b, ha="right", va="center", fontsize='small', color=ctx['font_color'])
-axes3.legend()
+gd.draw_event_class_static(img_df3)
 
+# 画两个月分所有的3级分类时间对比
 event_sub_df = gs.event_sub_class_static(data, ctx["pre_month"], ctx["cur_month"])
 event_sub_df.plot(kind='barh')
 
