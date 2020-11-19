@@ -7,8 +7,10 @@ Created on Sun Oct  4 14:45:35 2020
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-from pylab import mpl
+import matplotlib as mpl
+mpl.use('Agg')
 import seaborn as sns
+from basecfg import ctx
 
 duration = '历时分钟'
 time_class = '时间分类'
@@ -68,7 +70,7 @@ def time_clss_static(data, first_month, second_month, aggrfunc=np.sum):
 # 下一步改成支持序列month的能力
 def event_class_static(data, first_month, second_month, aggrfunc=np.sum):
     sub_idx = [time_class, event_class]
-    pp = [first_month + '月', second_month + '月']
+    pp = [ctx['legend_cur_month'], ctx['legend_pre_month']]
     fm = pd.pivot_table(
         data[first_month], 
         values=duration, 
@@ -105,7 +107,7 @@ def event_class_static(data, first_month, second_month, aggrfunc=np.sum):
 
 def event_sub_class_static(data, first_month, second_month, aggrfunc=np.sum):
     sub_idx = [time_class, event_class, event_sub_class]
-    pp = [first_month + '月', second_month + '月']
+    pp = [ctx['legend_cur_month'], ctx['legend_pre_month']]
     fm = pd.pivot_table(
         data[first_month], 
         values=duration, 

@@ -28,11 +28,19 @@ elif cur_month == 1:
 else:
     pre_month = cur_month - 1
 
-
-ctx["cur_month"] = cur_month
-ctx["pre_month"] = pre_month
+# 关于月份设置
+ctx["cur_month"] = str(cur_month)
+ctx["pre_month"] = str(pre_month)
 ctx["legend_cur_month"] = str(cur_month) + '月'
 ctx["legend_pre_month"] = str(pre_month) + '月'
 
-# print(ctx)
+
+# 关于展示参数设置
+ctx['font_color'] = config['ChartSettings']['font_color']
+
+# 设置文件资源相关的参数
+ctx['data_file'] = config['Resources']['data_file']
+
+# if __name__ == 'main':
+print(ctx)
 
