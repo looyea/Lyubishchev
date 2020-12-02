@@ -6,9 +6,8 @@ Created on Sun Oct  4 14:45:35 2020
 """
 from basecfg import ctx
 import matplotlib.pyplot as plt
-import numpy as np
-
 import seaborn as sns
+
 
 def plt_set():
     plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
@@ -53,6 +52,7 @@ def draw_time_class_static_range(pivot_table):
         for x, y_cord in zip(pivot_table.loc[line], position_calculation(pivot_table.shape[1], 0.3, y)):
             print(x, y, line, y_cord)
             axes2.text(x, y_cord, x, ha="right", va="center", color=ctx['font_color'])
+
 
 def draw_event_class_static_range(pivot_table):
     axes3 = pivot_table.plot(
