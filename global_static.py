@@ -6,10 +6,6 @@ Created on Sun Oct  4 14:45:35 2020
 """
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib as mpl
-mpl.use('Agg')
-import seaborn as sns
 from basecfg import ctx
 
 duration = '历时分钟'
@@ -17,21 +13,7 @@ time_class = '时间分类'
 event_class = '事件'
 event_sub_class = '子分类'
 
-def plt_set():
-    plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
-    plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
-    # mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']    # 指定默认字体：解决plot不能显示中文问题
-    # mpl.rcParams['axes.unicode_minus'] = False           # 解决保存图像是负号'-'显示为方块的问题
-    
-    sns.set()
-    sns.set_style("whitegrid")
-    sns.set_palette(sns.color_palette("Blues",10))
-    sns.set_style({"font.sans-serif":['Microsoft YaHei','SimHei']})#显示中文
 
-    # 设置图形色盘
-    # pal = sns.color_palette("Greens_d",len(grouped_values))
-    # sns.set_palette(pal)
-    
     
     
     
@@ -70,7 +52,7 @@ def time_clss_static(data, first_month, second_month, aggrfunc=np.sum):
 # 下一步改成支持序列month的能力
 def event_class_static(data, first_month, second_month, aggrfunc=np.sum):
     sub_idx = [time_class, event_class]
-    pp = [ctx['legend_cur_month'], ctx['legend_pre_month']]
+    pp = [ctx['legend_pre_month'], ctx['legend_cur_month']]
     fm = pd.pivot_table(
         data[first_month], 
         values=duration, 

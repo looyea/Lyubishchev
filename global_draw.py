@@ -5,6 +5,26 @@ Created on Sun Oct  4 14:45:35 2020
 @author: looyea
 """
 from basecfg import ctx
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+
+import seaborn as sns
+
+def plt_set():
+    plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
+    plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
+    # mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']    # 指定默认字体：解决plot不能显示中文问题
+    # mpl.rcParams['axes.unicode_minus'] = False           # 解决保存图像是负号'-'显示为方块的问题
+    
+    sns.set()
+    sns.set_style("whitegrid")
+    sns.set_palette(sns.color_palette("Accent"))
+    sns.set_style({"font.sans-serif":['Microsoft YaHei','SimHei']})#显示中文
+
+    # 设置图形色盘
+    # pal = sns.color_palette("Greens_d",len(grouped_values))
+    # sns.set_palette(pal)
+    
 
 def global_draw(pivot_table):
     axes = pivot_table.plot(
