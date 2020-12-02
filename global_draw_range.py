@@ -26,7 +26,7 @@ def plt_set():
     # sns.set_palette(pal)
     
 
-def global_draw(pivot_table):
+def draw_current_month(pivot_table):
     axes = pivot_table.plot(
         kind='barh',
         width=0.3,
@@ -39,7 +39,7 @@ def global_draw(pivot_table):
         axes.text(a / 2, b, a, ha="right", va="center", color=ctx['font_color'])
 
 
-def global_bi_month_compare(pivot_table):
+def draw_time_class_static_range(pivot_table):
     axes2 = pivot_table.plot(
         kind='barh',
         width=0.3,
@@ -47,13 +47,15 @@ def global_bi_month_compare(pivot_table):
         subplots=False,
         legend=False
     )
-
-    for a, b, c in zip(pivot_table[ctx["legend_month_from"]], pivot_table[ctx["legend_month_to"]], axes2.get_yticks()):
-        axes2.text(a, c - 0.075, a, ha="right", va="center", color=ctx['font_color'])
-        axes2.text(b, c + 0.075, b, ha="right", va="center", color=ctx['font_color'])
+    print(pivot_table)
+    for i in zip(pivot_table[ctx["month_scope_legends"]], axes2.get_yticks()):
+        print(i)
+    # for a, b, c in zip(pivot_table[ctx["month_scope_legends"]], axes2.get_yticks()):
+    #     axes2.text(a, c - 0.075, a, ha="right", va="center", color=ctx['font_color'])
+    #     axes2.text(b, c + 0.075, b, ha="right", va="center", color=ctx['font_color'])
     axes2.legend()
 
-def draw_event_class_static(pivot_table):
+def draw_event_class_static_range(pivot_table):
     axes3 = pivot_table.plot(
         kind='barh',
         width=0.5,
@@ -61,7 +63,16 @@ def draw_event_class_static(pivot_table):
         subplots=False,
         legend=False
     )
-    for a, b, c in zip(pivot_table[ctx["legend_month_from"]], pivot_table[ctx["legend_month_to"]], axes3.get_yticks()):
-        axes3.text(a + 250, c - 0.125, "%.0f" % a, ha="right", va="center", fontsize='small', color=ctx['font_color'])
-        axes3.text(b + 250, c + 0.125, "%.0f" % b, ha="right", va="center", fontsize='small', color=ctx['font_color'])
+    # 组成月份1分类耗时，月份2分类耗时。。。月份n分类耗时
+    list_to_zip = list()
+    for i in ctx["month_scope_legends"]:
+        list_to_zip.append(pivot_table[i])
+
+    # 组成月份1分类耗时，月份2分类耗时。。。月份n分类耗时，坐标轴
+    print(axes3.get_yticks())
+    print(list_to_zip)
+    #for durations, y_tick in zip(list_to_zip, axes3.get_yticks()):
+        # print(durations, y_tick)
+        # for duration in durations:
+        #     axes3.text(duration + 250, ytick - 0.125, "%.0f" % duration, ha="right", va="center", fontsize='small', color=ctx['font_color'])
     axes3.legend()

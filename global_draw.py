@@ -48,7 +48,8 @@ def global_bi_month_compare(pivot_table):
         legend=False
     )
 
-    for a, b, c in zip(pivot_table[ctx["legend_pre_month"]], pivot_table[ctx["legend_cur_month"]], axes2.get_yticks()):
+    for a, b, c in zip(pivot_table[ctx["legend_month_from"]], pivot_table[ctx["legend_month_to"]], axes2.get_yticks()):
+        print(a,b,c)
         axes2.text(a, c - 0.075, a, ha="right", va="center", color=ctx['font_color'])
         axes2.text(b, c + 0.075, b, ha="right", va="center", color=ctx['font_color'])
     axes2.legend()
@@ -61,7 +62,8 @@ def draw_event_class_static(pivot_table):
         subplots=False,
         legend=False
     )
-    for a, b, c in zip(pivot_table[ctx["legend_pre_month"]], pivot_table[ctx["legend_cur_month"]], axes3.get_yticks()):
+    for a, b, c in zip(pivot_table[ctx["legend_month_from"]], pivot_table[ctx["legend_month_to"]], axes3.get_yticks()):
+        print(a,b,c)
         axes3.text(a + 250, c - 0.125, "%.0f" % a, ha="right", va="center", fontsize='small', color=ctx['font_color'])
         axes3.text(b + 250, c + 0.125, "%.0f" % b, ha="right", va="center", fontsize='small', color=ctx['font_color'])
     axes3.legend()

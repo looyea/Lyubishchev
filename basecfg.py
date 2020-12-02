@@ -55,7 +55,6 @@ ctx['font_color'] = config['ChartSettings']['font_color']
 
 # 设置文件资源相关的参数
 ctx['data_file'] = config['Resources']['data_file']
-print(ctx)
 
 if __name__ == 'main':
     print(ctx)

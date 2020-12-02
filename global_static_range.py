@@ -14,7 +14,7 @@ event_class = '事件'
 event_sub_class = '子分类'
 
 
-def current_month_barh(data, month, aggrfunc=np.sum):
+def current_month(data, month, aggrfunc=np.sum):
     month_pivot_table = pd.pivot_table(
         data[month],
         values=duration,

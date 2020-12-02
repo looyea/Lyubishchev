@@ -27,7 +27,7 @@ def current_month_barh(data, month, aggrfunc=np.sum):
     return month_pivot_table
 
 # 下一步改成支持序列month的能力
-def time_clss_static(data, first_month, second_month, aggrfunc=np.sum):
+def time_class_static(data, first_month, second_month, aggrfunc=np.sum):
     first_month_pivot_table = pd.pivot_table(
             data[first_month], 
             values=duration, 
@@ -52,7 +52,7 @@ def time_clss_static(data, first_month, second_month, aggrfunc=np.sum):
 # 下一步改成支持序列month的能力
 def event_class_static(data, first_month, second_month, aggrfunc=np.sum):
     sub_idx = [time_class, event_class]
-    pp = [ctx['legend_pre_month'], ctx['legend_cur_month']]
+    pp = [ctx['legend_month_from'], ctx['legend_month_to']]
     fm = pd.pivot_table(
         data[first_month], 
         values=duration, 
@@ -89,7 +89,7 @@ def event_class_static(data, first_month, second_month, aggrfunc=np.sum):
 
 def event_sub_class_static(data, first_month, second_month, aggrfunc=np.sum):
     sub_idx = [time_class, event_class, event_sub_class]
-    pp = [ctx['legend_cur_month'], ctx['legend_pre_month']]
+    pp = [ctx['legend_month_from'], ctx['legend_month_to']]
     fm = pd.pivot_table(
         data[first_month], 
         values=duration, 
