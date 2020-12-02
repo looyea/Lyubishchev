@@ -10,9 +10,10 @@ import matplotlib as mpl
 
 import seaborn as sns
 
+
 def plt_set():
-    plt.rcParams['font.sans-serif']=['SimHei'] #用来正常显示中文标签
-    plt.rcParams['axes.unicode_minus']=False #用来正常显示负号
+    plt.rcParams['font.sans-serif'] = ['SimHei'] #用来正常显示中文标签
+    plt.rcParams['axes.unicode_minus'] = False #用来正常显示负号
     # mpl.rcParams['font.sans-serif'] = ['Microsoft YaHei']    # 指定默认字体：解决plot不能显示中文问题
     # mpl.rcParams['axes.unicode_minus'] = False           # 解决保存图像是负号'-'显示为方块的问题
     
@@ -49,10 +50,11 @@ def global_bi_month_compare(pivot_table):
     )
 
     for a, b, c in zip(pivot_table[ctx["legend_month_from"]], pivot_table[ctx["legend_month_to"]], axes2.get_yticks()):
-        print(a,b,c)
         axes2.text(a, c - 0.075, a, ha="right", va="center", color=ctx['font_color'])
         axes2.text(b, c + 0.075, b, ha="right", va="center", color=ctx['font_color'])
+
     axes2.legend()
+
 
 def draw_event_class_static(pivot_table):
     axes3 = pivot_table.plot(

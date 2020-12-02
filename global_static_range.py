@@ -68,9 +68,5 @@ def event_class_static_range(data, aggrfunc=np.sum):
     return img_df
 
 
-
-
-
-
 if __name__ == 'main':
     print(ctx)
