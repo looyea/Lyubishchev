@@ -6,7 +6,7 @@ Created on Sun Oct  4 14:45:35 2020
 """
 from basecfg import ctx
 import matplotlib.pyplot as plt
-import matplotlib as mpl
+import numpy as np
 
 import seaborn as sns
 
@@ -43,17 +43,16 @@ def draw_time_class_static_range(pivot_table):
     axes2 = pivot_table.plot(
         kind='barh',
         width=0.3,
-        mark_right=True,
+        # mark_right=True,
         subplots=False,
-        legend=False
+        legend=True
     )
-    print(pivot_table)
-    for i in zip(pivot_table[ctx["month_scope_legends"]], axes2.get_yticks()):
-        print(i)
-    # for a, b, c in zip(pivot_table[ctx["month_scope_legends"]], axes2.get_yticks()):
-    #     axes2.text(a, c - 0.075, a, ha="right", va="center", color=ctx['font_color'])
-    #     axes2.text(b, c + 0.075, b, ha="right", va="center", color=ctx['font_color'])
-    axes2.legend()
+    # line 每个pivot表一行的数据，都是1月、2月、3月这种的对应某一类时间的值
+    # y就是y周坐标的值，0,1,2,3,4这种
+    for line, y in zip(pivot_table.index, axes2.get_yticks()):
+        for x, y_cord in zip(pivot_table.loc[line], position_calculation(pivot_table.shape[1], 0.3, y)):
+            print(x, y, line, y_cord)
+            axes2.text(x, y_cord, x, ha="right", va="center", color=ctx['font_color'])
 
 def draw_event_class_static_range(pivot_table):
     axes3 = pivot_table.plot(
@@ -76,3 +75,21 @@ def draw_event_class_static_range(pivot_table):
         # for duration in durations:
         #     axes3.text(duration + 250, ytick - 0.125, "%.0f" % duration, ha="right", va="center", fontsize='small', color=ctx['font_color'])
     axes3.legend()
+
+
+def position_calculation(n, width, offset):
+    # width 是总宽度
+    width = width / n
+    step = width / 2
+    results = []
+    if n % 2 == 0:
+        base = n / 2 * width
+    else:
+        base = n / 2 * width + step
+    for i in range(0, n):
+
+        result = width * (n - i) - base - step + offset
+        # print("width=", width, "i=", i, "n=", n, "base=", base, "step=", step, "offset=", offset, result)
+        results.append(result)
+    results.sort()
+    return results

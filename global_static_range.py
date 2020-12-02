@@ -34,14 +34,9 @@ def time_class_static_range(data, aggrfunc=np.sum):
             index=time_class,
             aggfunc=aggrfunc)
         )
-    a = list()
-    for idx in pivotTables[0].index:
-        temp_list = list()
-        for pivotTable in pivotTables:
-            temp_list.append(pivotTable.loc[idx][duration])
-    a.append(temp_list)
-    img_df = pd.DataFrame(a, index=pivotTables[0].index, columns=ctx["month_scope_legends"])
-    return img_df
+    pivotTables = pd.concat(pivotTables, axis=1)
+    pivotTables.columns = ctx["month_scope_legends"]
+    return pivotTables
 
 
 # 支持序列的月份统计处理表
