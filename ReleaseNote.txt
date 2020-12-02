@@ -1,8 +1,17 @@
-Functions to Go
-V0.30 Done 最基本功能可用
-V0.50 Done 配置化统计功能
+当前版本 V0.50
+Current Version V0.50
+> 实现了统计功能配置化的能力
+> Configuration based statistics
+
+
+未来版本规划
+Future Plan
 V0.60 同年内不限两个月的计算功能
 V0.80 统计分类自动修正功能
 V0.90 自动报告生成
 V1.00 GUI
 V1.10 自定义图形 + 聚类可能
+
+
+V0.50 Done 配置化统计功能
+V0.30 Done 最基本功能可用
