@@ -49,23 +49,25 @@ def event_class_static_range(data, aggrfunc=np.sum):
         pivotTable = pd.pivot_table(
             data[month],
             values=duration,
-            index=time_class,
+            index=sub_idx,
             aggfunc=aggrfunc)
         pivotTables.append(pivotTable)
-        idx_set = idx_set + tuple(pivotTable.index.values)
+
 
     idx_set = np.hstack(idx_set)
     idx_set = np.unique(idx_set)
 
-    img_df = pd.DataFrame(columns=sub_idx + pp, dtype=np.long)
-    img_df.set_index(sub_idx, inplace=True)
+    return idx_set, pivotTables
 
-    for idx in idx_set:
-        durations = []
-        for pivotTable in pivotTables:
-            durations.append(pivotTable.loc[idx, duration] if idx in pivotTable.index else 0)
-        img_df.loc[idx, pp] = durations
-    return img_df
+    # img_df = pd.DataFrame(columns=sub_idx + pp, dtype=np.long)
+    # img_df.set_index(sub_idx, inplace=True)
+    #
+    # for idx in idx_set:
+    #     durations = []
+    #     for pivotTable in pivotTables:
+    #         durations.append(pivotTable.loc[idx, duration] if idx in pivotTable.index else 0)
+    #     img_df.loc[idx, pp] = durations
+    # return img_df
 
 
 if __name__ == 'main':

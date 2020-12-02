@@ -33,14 +33,9 @@ gdr.plt_set()
 # img_df2 = gsr.time_class_static_range(data)
 # gdr.draw_time_class_static_range(img_df2)
 
-# 画上个月，本月II类时间对比
+# 画上个月，本月事件类时间对比
 # img_df3 = gs.event_class_static(data, ctx["month_from"], ctx["month_to"])
 # gd.draw_event_class_static(img_df3)
-img_df3 = gsr.event_class_static_range(data)
-gdr.draw_event_class_static_range(img_df3)
-
-# 画两个月分所有的3级分类时间对比
-# event_sub_df = gs.event_sub_class_static(data, ctx["pre_month"], ctx["cur_month"])
-# event_sub_df.plot(kind='barh')
-
-
+# img_df3 = gsr.event_class_static_range(data)
+# gdr.draw_event_class_static_range(img_df3)
+idx_set, pivotTables = gsr.event_class_static_range(data)
