@@ -40,7 +40,7 @@ def global_draw(pivot_table):
         axes.text(a / 2, b, a, ha="right", va="center", color=ctx['font_color'])
 
 
-def global_bi_month_compare(pivot_table):
+def draw_time_class_static(pivot_table):
     axes2 = pivot_table.plot(
         kind='barh',
         width=0.3,
@@ -65,7 +65,6 @@ def draw_event_class_static(pivot_table):
         legend=False
     )
     for a, b, c in zip(pivot_table[ctx["legend_month_from"]], pivot_table[ctx["legend_month_to"]], axes3.get_yticks()):
-        print(a,b,c)
         axes3.text(a + 250, c - 0.125, "%.0f" % a, ha="right", va="center", fontsize='small', color=ctx['font_color'])
         axes3.text(b + 250, c + 0.125, "%.0f" % b, ha="right", va="center", fontsize='small', color=ctx['font_color'])
     axes3.legend()

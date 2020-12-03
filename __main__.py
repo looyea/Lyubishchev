@@ -28,13 +28,17 @@ img_df = gsr.current_month(data, ctx["month_from"])
 gdr.draw_current_month(img_df)
 
 # 画从开始到结束月份I\II\III类时间比对
-# img_df2 = gs.time_class_static_range(data, ctx["pre_month"], ctx["cur_month"])
-# gd.global_bi_month_compare_range(img_df2)
-img_df2 = gsr.time_class_static_range(data)
-gdr.draw_time_class_static_range(img_df2)
+img_df2 = gs.time_class_static(data, ctx["month_from"], ctx["month_to"])
+gd.draw_time_class_static(img_df2)
+
+# 连月统计
+# img_df2 = gsr.time_class_static_range(data)
+# gdr.draw_time_class_static_range(img_df2)
 
 # 画上个月，本月事件类时间对比
-# img_df3 = gs.event_class_static(data, ctx["month_from"], ctx["month_to"])
-# gd.draw_event_class_static(img_df3)
-img_df3 = gsr.event_class_static_range(data)
-gdr.draw_event_class_static_range(img_df3)
+img_df3 = gs.event_class_static(data, ctx["month_from"], ctx["month_to"])
+gd.draw_event_class_static(img_df3)
+
+# 连月统计
+# img_df3 = gsr.event_class_static_range(data)
+# gdr.draw_event_class_static_range(img_df3)
