@@ -36,6 +36,5 @@ gdr.plt_set()
 # 画上个月，本月事件类时间对比
 # img_df3 = gs.event_class_static(data, ctx["month_from"], ctx["month_to"])
 # gd.draw_event_class_static(img_df3)
-# img_df3 = gsr.event_class_static_range(data)
-# gdr.draw_event_class_static_range(img_df3)
-idx_set, pivotTables = gsr.event_class_static_range(data)
+img_df3 = gsr.event_class_static_range(data)
+gdr.draw_event_class_static_range(img_df3)

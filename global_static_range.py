@@ -26,15 +26,15 @@ def current_month(data, month, aggrfunc=np.sum):
 
 # 时间层级，多月份支持，时间层级，目前就I\II\III三类，不需要扩展
 def time_class_static_range(data, aggrfunc=np.sum):
-    pivotTables = list()
+    pivotTables = pd.DataFrame()
     for month in ctx["month_scope"]:
-        pivotTables.append(pd.pivot_table(
+        pivotTable = pd.pivot_table(
             data[month],
             values=duration,
             index=time_class,
             aggfunc=aggrfunc)
-        )
-    pivotTables = pd.concat(pivotTables, axis=1)
+        pivotTables.concat([pivotTables, pivotTable], axis=1)
+    pivotTables = pivotTables.fillna(0)
     pivotTables.columns = ctx["month_scope_legends"]
     return pivotTables
 
@@ -42,32 +42,17 @@ def time_class_static_range(data, aggrfunc=np.sum):
 # 支持序列的月份统计处理表
 def event_class_static_range(data, aggrfunc=np.sum):
     sub_idx = [time_class, event_class]
-    pp = ctx['month_scope_legends']
-    pivotTables = list()
-    idx_set = tuple()
+    resultTable = pd.DataFrame()
     for month in ctx["month_scope"]:
         pivotTable = pd.pivot_table(
             data[month],
             values=duration,
             index=sub_idx,
             aggfunc=aggrfunc)
-        pivotTables.append(pivotTable)
-
-
-    idx_set = np.hstack(idx_set)
-    idx_set = np.unique(idx_set)
-
-    return idx_set, pivotTables
-
-    # img_df = pd.DataFrame(columns=sub_idx + pp, dtype=np.long)
-    # img_df.set_index(sub_idx, inplace=True)
-    #
-    # for idx in idx_set:
-    #     durations = []
-    #     for pivotTable in pivotTables:
-    #         durations.append(pivotTable.loc[idx, duration] if idx in pivotTable.index else 0)
-    #     img_df.loc[idx, pp] = durations
-    # return img_df
+        resultTable = pd.concat([resultTable, pivotTable], axis=1)
+    resultTable = resultTable.fillna(0)
+    resultTable.columns = ctx["month_scope_legends"]
+    return resultTable
 
 
 if __name__ == 'main':

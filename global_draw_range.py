@@ -50,7 +50,7 @@ def draw_time_class_static_range(pivot_table):
     # y就是y周坐标的值，0,1,2,3,4这种
     for line, y in zip(pivot_table.index, axes2.get_yticks()):
         for x, y_cord in zip(pivot_table.loc[line], position_calculation(pivot_table.shape[1], 0.3, y)):
-            print(x, y, line, y_cord)
+            # print(x, y, line, y_cord)
             axes2.text(x, y_cord, x, ha="right", va="center", color=ctx['font_color'])
 
 
@@ -62,19 +62,11 @@ def draw_event_class_static_range(pivot_table):
         subplots=False,
         legend=False
     )
-    # 组成月份1分类耗时，月份2分类耗时。。。月份n分类耗时
-    list_to_zip = list()
-    for i in ctx["month_scope_legends"]:
-        list_to_zip.append(pivot_table[i])
-
-    # 组成月份1分类耗时，月份2分类耗时。。。月份n分类耗时，坐标轴
-    print(axes3.get_yticks())
-    print(list_to_zip)
-    #for durations, y_tick in zip(list_to_zip, axes3.get_yticks()):
-        # print(durations, y_tick)
-        # for duration in durations:
-        #     axes3.text(duration + 250, ytick - 0.125, "%.0f" % duration, ha="right", va="center", fontsize='small', color=ctx['font_color'])
-    axes3.legend()
+    # line 每个pivot表一行的数据，都是1月、2月、3月这种的对应某一类时间的值
+    # y就是y周坐标的值，0,1,2,3,4这种
+    for line, y in zip(pivot_table.index, axes3.get_yticks()):
+        for x, y_cord in zip(pivot_table.loc[line], position_calculation(pivot_table.shape[1], 0.5, y)):
+            axes3.text(x+300, y_cord, x, ha="right", va="center", fontsize='xx-small', color=ctx['font_color'])
 
 
 def position_calculation(n, width, offset):
