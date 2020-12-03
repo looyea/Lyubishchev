@@ -24,14 +24,14 @@ data = pd.read_excel(
 gdr.plt_set()
 
 # 画当月份的I\II\III类时间
-# img_df = gsr.current_month(data, ctx["month_from"])
-# gdr.draw_current_month(img_df)
+img_df = gsr.current_month(data, ctx["month_from"])
+gdr.draw_current_month(img_df)
 
 # 画从开始到结束月份I\II\III类时间比对
 # img_df2 = gs.time_class_static_range(data, ctx["pre_month"], ctx["cur_month"])
 # gd.global_bi_month_compare_range(img_df2)
-# img_df2 = gsr.time_class_static_range(data)
-# gdr.draw_time_class_static_range(img_df2)
+img_df2 = gsr.time_class_static_range(data)
+gdr.draw_time_class_static_range(img_df2)
 
 # 画上个月，本月事件类时间对比
 # img_df3 = gs.event_class_static(data, ctx["month_from"], ctx["month_to"])

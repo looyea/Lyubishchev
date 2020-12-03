@@ -26,34 +26,39 @@ def current_month(data, month, aggrfunc=np.sum):
 
 # 时间层级，多月份支持，时间层级，目前就I\II\III三类，不需要扩展
 def time_class_static_range(data, aggrfunc=np.sum):
-    pivotTables = pd.DataFrame()
-    for month in ctx["month_scope"]:
-        pivotTable = pd.pivot_table(
-            data[month],
-            values=duration,
-            index=time_class,
-            aggfunc=aggrfunc)
-        pivotTables.concat([pivotTables, pivotTable], axis=1)
-    pivotTables = pivotTables.fillna(0)
-    pivotTables.columns = ctx["month_scope_legends"]
-    return pivotTables
+    tables = contactPivotTables(data,
+                                ctx["month_scope"],
+                                time_class,
+                                duration,
+                                ctx["month_scope_legends"],
+                                aggrfunc)
+    return tables
 
 
 # 支持序列的月份统计处理表
 def event_class_static_range(data, aggrfunc=np.sum):
     sub_idx = [time_class, event_class]
-    resultTable = pd.DataFrame()
-    for month in ctx["month_scope"]:
+    tables = contactPivotTables(data,
+                       ctx["month_scope"],
+                       sub_idx,
+                       duration,
+                       ctx["month_scope_legends"],
+                       aggrfunc)
+    return tables
+
+
+def contactPivotTables(data, monthScope, subIdx, valueItem, columns, aggfunc):
+    tables = pd.DataFrame()
+    for month in monthScope:
         pivotTable = pd.pivot_table(
             data[month],
-            values=duration,
-            index=sub_idx,
-            aggfunc=aggrfunc)
-        resultTable = pd.concat([resultTable, pivotTable], axis=1)
-    resultTable = resultTable.fillna(0)
-    resultTable.columns = ctx["month_scope_legends"]
-    return resultTable
-
+            values=valueItem,
+            index=subIdx,
+            aggfunc=aggfunc)
+        tables = pd.concat([tables, pivotTable], axis=1)
+    tables = tables.fillna(0)
+    tables.columns = columns
+    return tables
 
 if __name__ == 'main':
     print(ctx)

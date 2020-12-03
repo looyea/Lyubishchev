@@ -60,7 +60,7 @@ def draw_event_class_static_range(pivot_table):
         width=0.5,
         mark_right=True,
         subplots=False,
-        legend=False
+        legend=True
     )
     # line 每个pivot表一行的数据，都是1月、2月、3月这种的对应某一类时间的值
     # y就是y周坐标的值，0,1,2,3,4这种
