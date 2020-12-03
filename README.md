@@ -13,11 +13,15 @@
 
 
 ## global_static.py
+## global_static_range.py
 主要是负责统计、变换的类，根据实际需求，将需要统计的类，变幻出目标的Pivot table，然后交给相关的程序进行画图处理。
 原本是想将这个类，也做画图处理，现在会分开进行。
+带range结尾的，是用作连续月份统计，方便后续年分析的时候使用
 
 ## global_draw.py
+## global_draw_range.py
 主要负责画图，特别是，针对文字标签进行描述的部分
+带range结尾的，是用作连续月份统计，方便后续年分析的时候使用
 
 ## README.md
 现在阅读的本尊
