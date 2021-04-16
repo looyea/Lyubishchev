@@ -1,9 +1,20 @@
+
+Release 0.9
+> 完成了全新的设计思想，使用了新的任务链系统完成，详细内容见README
+
 Release 0.6
 > 实现了连月统计的能力，为后续年度统计提供基础
 > Implemented statics with range, for later usage of annually static
 
 Release 0.5
-> 实现了统计功能配置化的能力
+> 实现了统计功能配置化的能力划 Product Plan
+V0.80 统计分类自动修正功能
+V0.90 自动报告生成
+V1.00 GUI
+V1.10 自定义图形 + 聚类可能
+
+Release 0.7
+
 > Configuration based statistics
 
 Release 0.3
@@ -13,8 +24,5 @@ Release 0.3
 未来版本规划
 Future Plan
 
-V0.80 统计分类自动修正功能
-V0.90 自动报告生成
-V1.00 GUI
-V1.10 自定义图形 + 聚类可能
+
 
