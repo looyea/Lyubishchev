@@ -19,7 +19,7 @@ taskChains = list()
 
 for profile in profiles:
     module = __import__(profile + "." + profile, fromlist=True)
-    # module.sayHi()
-    taskChains.append(module)
+    cls = getattr(module, profile)
+    taskChains.append(cls())
 
 print("任务链加载完毕...")
