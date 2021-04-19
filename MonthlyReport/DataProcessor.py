@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-class DataProcessor():
+class DataProcessor:
 
     def __init__(self, ctx=None):
         self.__ctx__ = ctx
@@ -11,13 +11,13 @@ class DataProcessor():
         return data
 
     def __dataTransform(self, data):
-        month_pivot_table = pd.pivot_table(
+        monthpt = pd.pivot_table(
             data['2'],
             values='历时分钟',
             index='时间分类',
             aggfunc=np.sum)
-        print(month_pivot_table)
-        return month_pivot_table
+        print(monthpt)
+        return monthpt
 
     def __dataAdapting(self, data):
         return data
