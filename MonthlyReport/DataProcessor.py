@@ -11,13 +11,32 @@ class DataProcessor:
         return data
 
     def __dataTransform(self, data):
-        monthpt = pd.pivot_table(
-            data['2'],
+
+        results = dict()
+
+        l1pt = pd.pivot_table(
+            data[self.__ctx__['cur_month']],
             values='历时分钟',
             index='时间分类',
             aggfunc=np.sum)
-        print(monthpt)
-        return monthpt
+        print(l1pt)
+
+        eventpt = pd.pivot_table(
+            data[self.__ctx__['cur_month']],
+            values='历时分钟',
+            index=['时间分类', '事件'],
+            aggfunc=np.sum
+        )
+        print(eventpt)
+        l1event = eventpt.loc['I类时间']
+        l2event = eventpt.loc['II类时间']
+        print(l1event)
+        print(l2event)
+
+        results['l1pt'] = l1pt
+        results['l1event'] = l1event
+        results['l2event'] = l2event
+        return results
 
     def __dataAdapting(self, data):
         return data
