@@ -54,4 +54,4 @@ class DataProcessor:
 
         print("数据处理完毕！")
 
-        return results
+        self.__ctx__['results'] = results
