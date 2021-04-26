@@ -10,6 +10,6 @@ from basecfg import taskChains
 for taskChain in taskChains:
 
     taskChain.dataProcess()
-    #taskChain.chartProcess()
-    #taskChain.outputProcess()
-    #taskChain.release()
+    taskChain.chartProcess()
+    taskChain.outputProcess()
+    taskChain.release()
