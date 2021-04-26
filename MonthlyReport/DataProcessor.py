@@ -4,12 +4,12 @@ import pandas as pd
 
 class DataProcessor:
 
-    __baseTage = '历时分钟1'
+    _base_tag = '历时分钟1'
 
     def __init__(self, ctx=None):
         self.__ctx__ = ctx
 
-    def __dataWashing(self):
+    def data_washing(self):
         l1_evt_idx = self.__ctx__['l1_evt_idx'].split(",")
         self.__ctx__['l1_evt_idx'] = l1_evt_idx
         l2_evt_idx = self.__ctx__['l2_evt_idx'].split(",")
@@ -17,8 +17,8 @@ class DataProcessor:
         len1 = len(l1_evt_idx)
         len2 = len(l2_evt_idx)
 
-        df1 = pd.DataFrame(data=np.zeros((len1,), dtype=int), index=l1_evt_idx, columns=[self.__baseTage])
-        df2 = pd.DataFrame(data=np.zeros((len2,), dtype=int), index=l2_evt_idx, columns=[self.__baseTage])
+        df1 = pd.DataFrame(data=np.zeros((len1,), dtype=int), index=l1_evt_idx, columns=[self._base_tag])
+        df2 = pd.DataFrame(data=np.zeros((len2,), dtype=int), index=l2_evt_idx, columns=[self._base_tag])
         df1.index.name = '事件'
         df2.index.name = '事件'
 
@@ -28,11 +28,11 @@ class DataProcessor:
     def __merge(self, base, data):
 
         base = pd.concat([base, data], axis=1, join='outer')
-        base = base.drop(columns=[self.__baseTage])
+        base = base.drop(columns=[self._base_tag])
         base = base.fillna(0)
         return base
 
-    def __dataTransform(self):
+    def data_transform(self):
         results = dict()
         self.__ctx__['results'] = results
         data = self.__ctx__['data']
@@ -61,7 +61,7 @@ class DataProcessor:
         results['l1_values'] = l1event
         results['l2_values'] = l2event
 
-    def __dataAdapting(self):
+    def data_adapting(self):
         l1df = self.__ctx__['results']['l1_values']
         l2df = self.__ctx__['results']['l2_values']
 
@@ -81,12 +81,12 @@ class DataProcessor:
     def process(self):
 
         # piovt清洗
-        self.__dataWashing()
+        self.data_washing()
 
         # pivot变换
-        self.__dataTransform()
+        self.data_transform()
 
         # 适配图形数据输出
-        self.__dataAdapting()
+        self.data_adapting()
 
         print("数据处理完毕！")
