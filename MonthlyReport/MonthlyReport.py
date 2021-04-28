@@ -35,7 +35,7 @@ class MonthlyReport():
         task_processors_names = self.__ctx__["task_chain"]
         self.__ctx__["process_chain"] = list()
         for name in task_processors_names:
-            processor = __import__(self.__moduleName__ + "." + name, fromlist=True)
+            processor = __import__(self.__moduleName__ + "." + name, fromlist="True")
             cls = getattr(processor, name)
             self.__ctx__["process_chain"].append(cls(self.__ctx__))
 

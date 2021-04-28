@@ -15,7 +15,7 @@ with open("config.yaml", 'r') as stream:
     try:
         ctx = yaml.safe_load(stream)
         for profile in ctx["ActiveProfiles"]:
-            module = __import__(profile + "." + profile, fromlist=True)
+            module = __import__(profile + "." + profile, fromlist="True")
             cls = getattr(module, profile)
             taskChains.append(cls())
         stream.close()

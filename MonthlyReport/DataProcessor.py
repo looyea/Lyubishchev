@@ -10,9 +10,9 @@ class DataProcessor:
         self.__ctx__ = ctx
 
     def data_washing(self):
-        l1_evt_idx = self.__ctx__['l1_evt_idx'].split(",")
+        l1_evt_idx = self.__ctx__['l1_evt_idx']
         self.__ctx__['l1_evt_idx'] = l1_evt_idx
-        l2_evt_idx = self.__ctx__['l2_evt_idx'].split(",")
+        l2_evt_idx = self.__ctx__['l2_evt_idx']
         self.__ctx__['l2_evt_idx'] = l2_evt_idx
         len1 = len(l1_evt_idx)
         len2 = len(l2_evt_idx)
