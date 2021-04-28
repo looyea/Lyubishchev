@@ -8,7 +8,7 @@ from basecfg import taskChains
 
 for taskChain in taskChains:
 
-    taskChain.dataProcess()
-    taskChain.chartProcess()
-    taskChain.outputProcess()
+    taskChain.data_process()
+    taskChain.chart_process()
+    taskChain.output_process()
     taskChain.release()

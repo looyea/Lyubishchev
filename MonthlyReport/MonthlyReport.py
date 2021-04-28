@@ -6,13 +6,13 @@ import yaml
 class MonthlyReport():
 
     def __init__(self, data=None):
-        self.__moduleName__ = "MonthlyReport"
+        self.__module_name__ = "MonthlyReport"
         self.__ctx__ = dict()
         self.__data__ = data
 
-        print(self.__moduleName__ + "初始化……")
+        print(self.__module_name__ + "初始化……")
         # 配置加载
-        with open(self.__moduleName__ + "/" + self.__moduleName__ + ".yaml", 'rb') as stream:
+        with open(self.__module_name__ + "/" + self.__module_name__ + ".yaml", 'rb') as stream:
             try:
                 ctx = yaml.safe_load(stream)
                 for key in ctx.keys():
@@ -35,7 +35,7 @@ class MonthlyReport():
         task_processors_names = self.__ctx__["task_chain"]
         self.__ctx__["process_chain"] = list()
         for name in task_processors_names:
-            processor = __import__(self.__moduleName__ + "." + name, fromlist="True")
+            processor = __import__(self.__module_name__ + "." + name, fromlist="True")
             cls = getattr(processor, name)
             self.__ctx__["process_chain"].append(cls(self.__ctx__))
 
@@ -43,17 +43,17 @@ class MonthlyReport():
         self.__ctx__["chart_processor"] = self.__ctx__["process_chain"][1]
         self.__ctx__["output_processor"] = self.__ctx__["process_chain"][2]
 
-        print(self.__moduleName__ + "初始化完毕，开始执行")
+        print(self.__module_name__ + "初始化完毕，开始执行")
 
-    def dataProcess(self):
+    def data_process(self):
         print("处理数据中")
         self.__ctx__["data_processor"].process()
 
-    def chartProcess(self):
+    def chart_process(self):
         print("图表绘制中")
         self.__ctx__["chart_processor"].process()
 
-    def outputProcess(self):
+    def output_process(self):
         print("最后输出中")
         self.__ctx__["output_processor"].process()
 
