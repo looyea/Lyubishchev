@@ -4,22 +4,20 @@ Created on Sun Oct  4 14:45:35 2020
 
 @author: looyea
 """
-from configparser import ConfigParser, ExtendedInterpolation
-import sys #  模块，sys指向这个模块对象
+import yaml
 import inspect
+import sys
 
 # 最后用来承载配置的内容，相当于上下文
-ctx = dict()
-
-config = ConfigParser(interpolation=ExtendedInterpolation())
-config.read(r"configure.ini", encoding="utf-8")
-
-profiles = config["ActiveProfiles"]["profiles"].split(",")
 taskChains = list()
 
-for profile in profiles:
-    module = __import__(profile + "." + profile, fromlist=True)
-    cls = getattr(module, profile)
-    taskChains.append(cls())
-
-print("任务链加载完毕...")
+with open("config.yaml", 'r') as stream:
+    try:
+        ctx = yaml.safe_load(stream)
+        for profile in ctx["ActiveProfiles"]:
+            module = __import__(profile + "." + profile, fromlist=True)
+            cls = getattr(module, profile)
+            taskChains.append(cls())
+        stream.close()
+    except yaml.YAMLError as exc:
+        print(exc)

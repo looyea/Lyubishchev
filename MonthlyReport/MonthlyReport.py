@@ -1,5 +1,6 @@
 from configparser import ConfigParser, ExtendedInterpolation
 import pandas as pd
+import yaml
 
 
 class MonthlyReport():
@@ -11,10 +12,15 @@ class MonthlyReport():
 
         print(self.__moduleName__ + "初始化……")
         # 配置加载
-        ctx = ConfigParser(interpolation=ExtendedInterpolation())
-        ctx.read(self.__moduleName__ + "/" + self.__moduleName__ + ".ini", encoding="utf-8")
-        for key in ctx[self.__moduleName__].keys():
-            self.__ctx__[key] = ctx[self.__moduleName__][key]
+        with open(self.__moduleName__ + "/" + self.__moduleName__ + ".yaml", 'rb') as stream:
+            try:
+                ctx = yaml.safe_load(stream)
+                for key in ctx.keys():
+                    self.__ctx__[key] = ctx[key]
+                stream.close()
+            except yaml.YAMLError as exc:
+                print(exc)
+
 
         # 数据加载
         if data is None:
@@ -26,7 +32,7 @@ class MonthlyReport():
         self.__ctx__['data'] = data
 
         # 处理链加载
-        task_processors_names = self.__ctx__["task_chain"].split(",")
+        task_processors_names = self.__ctx__["task_chain"]
         self.__ctx__["process_chain"] = list()
         for name in task_processors_names:
             processor = __import__(self.__moduleName__ + "." + name, fromlist=True)
@@ -53,9 +59,6 @@ class MonthlyReport():
 
     def release(self):
         print("资源已释放")
-
-    def sayHi(self):
-        print("hello this is from Monthly Report")
 
 
 if __name__ == 'main':

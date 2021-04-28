@@ -42,13 +42,12 @@ class ChartProcessor:
         ax.set_theta_zero_location('N')  # 设置极坐标的起点（即0°）在正北方向，即相当于坐标轴逆时针旋转90°
 
         # 添加图例和标题
-        plt.legend(labels=('index1'), loc='lower right', frameon=True, bbox_to_anchor=(1.5, 0.0))  # loc为图例位置
+        # plt.legend(labels=(''), loc='lower right', frameon=True, bbox_to_anchor=(1.5, 0.0))  # loc为图例位置
 
         plt.title("事件分布")
+        # plt.savefig(self.__ctx__["module_name"] + "/output/test.png")
 
         plt.show()
-
-
 
     def plot_df_pie_chart(self, data=None):
         data.plot(kind="pie", y='历时分钟', figsize=(10, 8))
