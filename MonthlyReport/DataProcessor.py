@@ -10,10 +10,9 @@ class DataProcessor:
         self.__ctx__ = ctx
 
     def data_washing(self):
+        # 这里用来创建一个基础的DF，用来方便合并DF并且进行数据清洗
         l1_evt_idx = self.__ctx__['l1_evt_idx']
-        self.__ctx__['l1_evt_idx'] = l1_evt_idx
         l2_evt_idx = self.__ctx__['l2_evt_idx']
-        self.__ctx__['l2_evt_idx'] = l2_evt_idx
         len1 = len(l1_evt_idx)
         len2 = len(l2_evt_idx)
 
@@ -25,58 +24,80 @@ class DataProcessor:
         self.__ctx__['l1_evt_base'] = df1
         self.__ctx__['l2_evt_base'] = df2
 
-    def __merge(self, base, data):
-
-        base = pd.concat([base, data], axis=1, join='outer')
-        base = base.drop(columns=[self._base_tag])
-        base = base.fillna(0)
-        return base
+        time_idx = self.__ctx__['time_idx']
+        len3 = len(time_idx)
+        df3 = pd.DataFrame(data=np.zeros((len3,), dtype=int), index=time_idx, columns=[self._base_tag])
+        self.__ctx__['time_base'] = df3
 
     def data_transform(self):
-        results = dict()
-        self.__ctx__['results'] = results
         data = self.__ctx__['data']
 
-        l1pt = pd.pivot_table(
-            data[self.__ctx__['cur_month']],
-            values='历时分钟',
-            index='时间分类',
-            aggfunc=np.sum)
+        results = dict()
+        self.__ctx__['results'] = results
 
-        eventpt = pd.pivot_table(
-            data[self.__ctx__['cur_month']],
-            values='历时分钟',
-            index=['时间分类', '事件'],
-            aggfunc=np.sum
-        )
-        l1event = eventpt.loc['I类时间']
-        l2event = eventpt.loc['II类时间']
-        l1event = self.__merge(self.__ctx__['l1_evt_base'], l1event)
-        l2event = self.__merge(self.__ctx__['l2_evt_base'], l2event)
-        del (eventpt)
+        # 循环当前已经设定的月份，查找相关的数据
+        for month in self.__ctx__['month_to_do']:
+            l1pt = pd.pivot_table(
+                data[month],
+                values=self.__ctx__['sum_tag'],
+                index=self.__ctx__['l1_agg_tag'],
+                aggfunc=np.sum)
+            l1pt.columns = [month]
+            self.__ctx__['time_base'] = pd.concat([self.__ctx__['time_base'], l1pt], axis=1, join='outer')
 
-        print(l1event)
+            eventpt = pd.pivot_table(
+                data[month],
+                values=self.__ctx__['sum_tag'],
+                index=self.__ctx__['l2_agg_tags'],
+                aggfunc=np.sum
+            )
+            l1event = eventpt.loc[self.__ctx__['l1_time_tag']]
+            l1event.columns = [month]
+            l2event = eventpt.loc[self.__ctx__['l2_time_tag']]
+            l2event.columns = [month]
 
-        results['l1pt'] = l1pt
-        results['l1_values'] = l1event
-        results['l2_values'] = l2event
+            self.__ctx__['l1_evt_base'] = pd.concat([self.__ctx__['l1_evt_base'], l1event], axis=1, join='outer')
+            self.__ctx__['l2_evt_base'] = pd.concat([self.__ctx__['l2_evt_base'], l2event], axis=1, join='outer')
+
+            del (eventpt)
+
+        self.__ctx__['time_base'] = self.__ctx__['time_base'].fillna(0).drop(columns=[self._base_tag])
+        self.__ctx__['l1_evt_base'] = self.__ctx__['l1_evt_base'].fillna(0).drop(columns=[self._base_tag])
+        self.__ctx__['l2_evt_base'] = self.__ctx__['l2_evt_base'].fillna(0).drop(columns=[self._base_tag])
+
+        results['time_base'] = self.__ctx__['time_base']
+        results['l1_evt_base'] = self.__ctx__['l1_evt_base']
+        results['l2_evt_base'] = self.__ctx__['l2_evt_base']
+
+        del(self.__ctx__['time_base'])
+        del(self.__ctx__['l1_evt_base'])
+        del(self.__ctx__['l2_evt_base'])
+
 
     def data_adapting(self):
-        l1df = self.__ctx__['results']['l1_values']
-        l2df = self.__ctx__['results']['l2_values']
+        l1df = self.__ctx__['results']['l1_evt_base']
+        l2df = self.__ctx__['results']['l2_evt_base']
 
-        l1_values = list()
-        l2_values = list()
-        for idx in l1df.index:
-            l1_values.append(l1df.loc[idx])
-        l1_values.append(l1_values[0])
-        for idx in l2df.index:
-            l2_values.append(l2df.loc[idx])
-        l2_values.append(l2_values[0])
+        l1_vals = dict()
+        l2_vals = dict()
 
-        self.__ctx__['results']['l1_values'] = l1_values
-        self.__ctx__['results']['l2_values'] = l2_values
+        for month in self.__ctx__['month_to_do']:
 
+            l1_values = list()
+            l2_values = list()
+
+            for idx in l1df.index:
+                l1_values.append(l1df.loc[idx][month])
+            l1_values.append(l1_values[0])
+            for idx in l2df.index:
+                l2_values.append(l2df.loc[idx][month])
+            l2_values.append(l2_values[0])
+
+            l1_vals[month] = l1_values
+            l2_vals[month] = l2_values
+
+        self.__ctx__['results']['l1_values'] = l1_vals
+        self.__ctx__['results']['l2_values'] = l2_vals
 
     def process(self):
 
