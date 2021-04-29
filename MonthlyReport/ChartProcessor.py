@@ -44,7 +44,7 @@ class ChartProcessor:
 
 
         # 添加图例和标题
-        plt.legend(labels=(''), loc='lower right', frameon=True, bbox_to_anchor=(1.5, 0.0))  # loc为图例位置
+        plt.legend(labels=(self.__ctx__['month_to_do']), loc='lower right', frameon=True, bbox_to_anchor=(1.5, 0.0))  # loc为图例位置
 
         plt.title("事件分布")
         # plt.savefig(self.__ctx__["module_name"] + "/output/test.png")

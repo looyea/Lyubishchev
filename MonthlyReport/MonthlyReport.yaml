@@ -10,7 +10,7 @@ task_chain: [DataProcessor,ChartProcessor,OutputProcessor]
 
 # 要做处理的月份，是个数组，里面有几个就是几个月份
 cur_month: '3'
-month_to_do: ['2', '3']
+month_to_do: ['1','2', '3']
 
 #时间分类聚合Index
 time_idx: [I类时间, II类时间]
