@@ -100,10 +100,15 @@ class ChartProcessor:
         plt.show()
 
     def plot_df_pie_chart(self, data=None):
-        data.plot(kind="pie", y='历时分钟', figsize=(10, 8))
+        data.plot(kind="pie", y=self.__ctx__['sum_tag'], figsize=(10, 8))
         plt.show()
 
-    '''这里必须是Dataframe才能用'''
+    # 这里必须是Dataframe才能用
     def plot_df_bar_chart(self, data=None):
-        data.plot(kind='bar', figsize=(10, 8))
+        ax = data.plot(kind='bar', figsize=(10, 8))
+        for x, idx in zip(ax.get_xticks(), data.index):
+            for val in data.loc[idx]:
+                ax.text(x, val, val, ha="center", va="center")
+
         plt.show()
+
