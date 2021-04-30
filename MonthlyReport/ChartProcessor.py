@@ -33,9 +33,8 @@ class ChartProcessor:
         plt.figure(figsize=(10, 6))  # 设置图形大小
         ax = plt.subplot(polar=True)  # 设置图形为极坐标图
         ax.set_theta_zero_location('N')  # 设置极坐标的起点（即0°）在正北方向，即相当于坐标轴逆时针旋转90°
-        # 设置网格，标签
-        # lines, labels = \
-        plt.thetagrids(range(0, 360, int(360 / len(titles))), titles)
+        plt.thetagrids(range(0, 360, int(360 / len(titles))), titles)  # 设置网格，标签
+
         # 绘制
         theta = np.linspace(0, 2 * np.pi, len(data[[*data][0]]))  # 根据index1的数量将圆均分
         for key in data.keys():
@@ -71,13 +70,17 @@ class ChartProcessor:
             for a, b in zip(theta, data[key]):
                 ax.text(a, b + 5, '%.00f' % b, ha='center', va='center', fontsize=8, color='b')
 
+        print(max_value)
         # 绘制刻度线 先确定刻度线最大值外围情况
-        for i in range(0, 10000, 500):
+        for i in range(0, 10000, 200):
             if max_value < i:
                 max_value = i
                 break
+
+        print(max_value)
         # 再确定一下具体的Step的数值是多少了，之后绘制就可以根据情况来了
         step_value = math.floor(max_value / len(titles))
+        print(step_value)
         for j in np.arange(0, max_value, step_value):
             ax.plot(theta, len(theta) * [j], '--', lw=0.5, color='black')
         # 绘制从中心到四周的轴线
@@ -90,7 +93,7 @@ class ChartProcessor:
         ax.spines['polar'].set_visible(False)  # 隐藏最外圈的圆
         ax.grid(False)  # 隐藏圆形网格线
         ax.set_theta_zero_location('N')  # 角度专项正北
-        ax.set_rlim(0, 1000)  # 设置半径上面的刻度
+        ax.set_rlim(0, max_value)  # 设置半径上面的刻度
         ax.set_rlabel_position(0)  # 设置半径标签偏转
         # 添加图例和标题 loc为图例位置
         plt.legend(labels=(self.__ctx__['month_to_do']), loc='lower right', frameon=True, bbox_to_anchor=(1.5, 0.0))
