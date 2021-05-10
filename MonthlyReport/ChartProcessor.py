@@ -65,10 +65,10 @@ class ChartProcessor:
             # 绘制图形
             max_value = max(max_value, max(data[key]))
             ax.plot(theta, data[key], 'o-', linewidth=1)  # 绘制线段
-            plt.fill(theta, data[key], alpha=0.1)  # 设置颜色与透明度
+            plt.fill(theta, data[key], alpha=0.5)  # 设置颜色与透明度
             # 绘制数据标签
             for a, b in zip(theta, data[key]):
-                ax.text(a, b + 5, '%.00f' % b, ha='center', va='center', fontsize=8, color='b')
+                ax.text(a, b + 5, '%.00f' % b, ha='center', va='center', fontsize=10, color='b')
 
         print(max_value)
         # 绘制刻度线 先确定刻度线最大值外围情况
