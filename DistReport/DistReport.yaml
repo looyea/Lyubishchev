@@ -1,5 +1,5 @@
-module_name: MonthlyReport
-module_desc: 负责处理单个月份的数据统计图来做的内容
+module_name: DistReport
+module_desc: 负责查看时间分布的内容
 
 # 1. 自己加载数据源，数据源位置自己定义; 2. 从外部传入数据源
 data_source_type: 1
@@ -9,7 +9,7 @@ data_source_path: 'D:/2021时间日志.xlsx'
 task_chain: [DataProcessor,ChartProcessor,OutputProcessor]
 
 # 要做处理的月份，是个数组，里面有几个就是几个月份
-month_to_do: ['1','2','3']
+month_to_do: ['5']
 
 #时间分类聚合Index
 time_idx: [I类时间, II类时间]
@@ -18,8 +18,5 @@ l1_evt_idx: [健康,学习,阅读,产出,投资,社交]
 # II类时间事件类index
 l2_evt_idx: [思考,整理,兴趣]
 
-sum_tag: 历时分钟
-l1_agg_tag: 时间分类
-l2_agg_tags: [时间分类, 事件]
 l1_time_tag: I类时间
 l2_time_tag: II类时间
