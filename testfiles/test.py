@@ -1,2 +1,2 @@
-a = range(1,5)
-print([x for x in a])
+a = [ 1,2,3,4,5]
+print(a[1:3])
