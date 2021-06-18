@@ -25,9 +25,10 @@ class ChartProcessor:
     def draw_line_chart(self):
         for month in self.__ctx__["summaries"].keys():
             month_data = self.__ctx__["summaries"][month]
-            legend_list = list()
-            for key in month_data.keys():
-                legend_list.append(key)
-                plt.plot(self.__ctx__["xStick"], month_data[key])
-            plt.legend(legend_list)
+            # legend_list = list()
+            # for key in month_data.keys():
+            #     legend_list.append(key)
+            #     plt.plot(self.__ctx__["xStick"], month_data[key])
+            # plt.legend(legend_list)
+            plt.plot(self.__ctx__["xStick"], month_data['I类时间_阅读'], lw=0.7, marker='D', ms=2.0, )
         plt.show()

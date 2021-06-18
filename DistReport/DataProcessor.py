@@ -1,10 +1,7 @@
 import numpy as np
-import pandas as pd
 
 
 class DataProcessor:
-
-    _base_tag = '历时分钟1'
 
     def __init__(self, ctx=None):
         self.__ctx__ = ctx
@@ -69,9 +66,7 @@ class DataProcessor:
                         time_table[lable_time_class][i] += 1
                         time_table[label_event_class][i] += 1
 
-
     def data_adapting(self):
-        # a stub not used by this one
         pass
 
     def process(self):

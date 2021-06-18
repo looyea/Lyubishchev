@@ -9,7 +9,7 @@ data_source_path: 'D:/2021时间日志.xlsx'
 task_chain: [DataProcessor,ChartProcessor,OutputProcessor]
 
 # 要做处理的月份，是个数组，里面有几个就是几个月份
-month_to_do: ['5']
+month_to_do: ['4','5']
 
 #时间分类聚合Index
 time_idx: [I类时间, II类时间]
@@ -20,3 +20,5 @@ l2_evt_idx: [思考,整理,兴趣]
 
 l1_time_tag: I类时间
 l2_time_tag: II类时间
+
+sampling: False
