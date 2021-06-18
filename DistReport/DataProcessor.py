@@ -67,6 +67,7 @@ class DataProcessor:
                         time_table[label_event_class][i] += 1
 
     def data_adapting(self):
+        # 暂时不需要这部分的工作内容
         pass
 
     def process(self):
