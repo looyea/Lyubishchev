@@ -1,3 +1,12 @@
+# 0. 目录结构
+
+- `Web_VER/` —— 网站版（当前发展方向）
+    - `lyubishchev-web/` Vue 3 前端工程
+    - `start-web.bat` 开发服务器启动脚本
+- `PY_VER/` —— Python 版（2021 年归档，以下内容均描述该版本）
+    - `__main__.py`、`basecfg.py`、`config.yaml`
+    - `DistReport/`、`MonthlyReport/`、`Template2020/`、`testfiles/`
+
 # 1. 整体设计
 
 全都重新做了设计，依照与完全配置化的内容进行的处理的思路。也就是说完全依赖配置类完成具体的工作了。 
