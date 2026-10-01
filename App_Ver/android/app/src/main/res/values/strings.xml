@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">柳比歇夫</string>
+
+    <!-- 底部五个入口 / five bottom tabs -->
+    <string name="tab_home">概览</string>
+    <string name="tab_log">记录</string>
+    <string name="tab_add">记一笔</string>
+    <string name="tab_report">报表</string>
+    <string name="tab_mine">我的</string>
+
+    <!-- 概览 / home -->
+    <string name="home_stat_today">今日已记录</string>
+    <string name="home_stat_week">本周累计记录</string>
+    <string name="home_radar_legend_item">%1$s %2$s</string>
+    <string name="home_dim_class_i">一类时间</string>
+    <string name="home_dim_class_ii">二类时间</string>
+    <string name="home_period_today">今日</string>
+    <string name="home_period_week">本周</string>
+    <string name="home_series_today">今天</string>
+    <string name="home_series_yesterday">昨天</string>
+    <string name="home_series_week">本周</string>
+    <string name="home_series_last_week">上周</string>
+    <string name="placeholder_coming_soon">该模块待开发</string>
+
+    <!-- 记录页 / read-only log browser -->
+    <string name="log_mode_day">日</string>
+    <string name="log_mode_week">周</string>
+    <string name="log_mode_month">月</string>
+    <string name="log_mode_year">年</string>
+    <string name="log_week_title">第%1$d周</string>
+    <string name="log_week_current_suffix">（当前周）</string>
+    <string name="log_month_title">%1$d 月</string>
+    <string name="log_year_title">%1$d 年</string>
+    <string name="log_total">共 %1$s</string>
+    <string name="log_cat_totals">一类合计 %1$s · 二类合计 %2$s</string>
+    <string name="log_empty">该时段还没有记录</string>
+
+    <!-- 我的 / mine -->
+    <string name="mine_title">我的</string>
+    <string name="mine_header_subtitle">纯本地时间统计 · 数据只存手机</string>
+    <string name="mine_stat_entries">已记录 %1$d 条</string>
+    <string name="mine_theme">颜色模式</string>
+    <string name="mine_theme_dialog_title">选择颜色模式</string>
+    <string name="mine_theme_system">跟随系统</string>
+    <string name="mine_theme_light">浅色</string>
+    <string name="mine_theme_dark">深色</string>
+    <string name="mine_settings">设置</string>
+    <string name="mine_settings_value">待规划</string>
+    <string name="mine_settings_soon">设置模块还在规划中，这里先占个位置。</string>
+    <string name="mine_category">时间分类</string>
+    <string name="mine_category_value">分类树维护</string>
+    <string name="mine_quick">常用</string>
+    <string name="mine_quick_value">快捷组合配置</string>
+    <string name="mine_export">导出</string>
+    <string name="mine_export_value">按区间导出报告</string>
+    <string name="mine_style">主题</string>
+    <string name="mine_style_value">待规划</string>
+    <string name="mine_style_soon">小清新、都市、沉稳商务三种主题正在设计，各自带背景图与整套配色；做好后在设置里直接套用。</string>
+
+    <!-- 导出 / export -->
+    <string name="export_title">导出报告</string>
+    <string name="export_hint">选起止日期与文件格式，确认区间汇总后生成文件，再选择保存或分享目标</string>
+    <string name="export_range_label">区间</string>
+    <string name="export_format_label">文件格式</string>
+    <string name="export_summary_label">区间汇总</string>
+    <string name="export_total">总计 %1$s</string>
+    <string name="export_radar_note">生成的文件内附各类别逐事件雷达图与逐条记录（年 / 月日 / 星期 / 类别 / 事件 / 起止 / 时长 / 备注）</string>
+    <string name="export_run">生成并分享</string>
+    <string name="export_busy">生成中…</string>
+    <string name="export_empty">该区间没有记录</string>
+    <string name="export_invalid_range">开始日期需早于结束日期</string>
+    <string name="export_saved">报告已生成，请在分享面板选择保存位置</string>
+    <string name="export_share_title">导出报告</string>
+
+    <!-- 记一笔 / add record -->
+    <string name="add_title">登记一条</string>
+    <string name="add_hint">白天随手记录，做完一件事就登记一条；开始时间自动承接当天结束的最新时间（同时记两条时也不冲突），仍可手动修改</string>
+    <string name="field_date">日期</string>
+    <string name="field_start">开始</string>
+    <string name="field_end">结束</string>
+    <string name="field_duration">时长</string>
+    <string name="field_category">分类</string>
+    <string name="field_event">事件</string>
+    <string name="field_note">备注</string>
+    <string name="add_note_placeholder">可选</string>
+    <string name="add_duration_pending">待填写时间</string>
+    <string name="add_quick_label">常用</string>
+    <string name="add_save">保存并继续</string>
+    <string name="add_err_time">请填写开始与结束时间</string>
+    <string name="add_err_event">请选择事件</string>
+    <string name="add_err_order">结束时间需晚于开始时间</string>
+    <string name="add_saved">已记录 %1$s</string>
+    <string name="add_backfill_label">补充记录</string>
+    <string name="add_duration_label">记录时间长度：</string>
+    <string name="add_time_pending">待填写</string>
+    <string name="dialog_ok">确定</string>
+    <string name="dialog_cancel">取消</string>
+
+    <!-- 时间分类维护 / category tree editor -->
+    <string name="cat_editor_title">时间分类</string>
+    <string name="cat_editor_hint">最多三级，每个节点下最多 8 个子项。改名等于新建：新名字从零累计，保留原名的继续累加历史。</string>
+    <string name="cat_add_category">添加一级分类</string>
+    <string name="cat_add_event">添加事件</string>
+    <string name="cat_add_sub">添加子类</string>
+    <string name="cat_rename">改名</string>
+    <string name="cat_delete">删除</string>
+    <string name="cat_back">返回</string>
+    <string name="cat_max_children">每个节点最多 8 个子项</string>
+    <string name="cat_input_title">命名</string>
+    <string name="cat_delete_confirm_title">确认删除</string>
+    <string name="cat_delete_confirm_text">删除"%1$s"后，该名称停止累计，旧数据保留在库里。</string>
+
+    <!-- 常用配置 / quick pick editor -->
+    <string name="pick_editor_title">常用配置</string>
+    <string name="pick_editor_hint">每项由一级分类、二级事件和持续时间组成，点一下就在"记一笔"里套用。</string>
+    <string name="pick_add_title">添加常用</string>
+    <string name="pick_category_label">一级分类</string>
+    <string name="pick_event_label">二级事件</string>
+    <string name="pick_minutes_label">持续时间</string>
+    <string name="pick_item_label">%1$s · %2$s · %3$s</string>
+    <string name="pick_no_event">请先选一级分类</string>
+</resources>
