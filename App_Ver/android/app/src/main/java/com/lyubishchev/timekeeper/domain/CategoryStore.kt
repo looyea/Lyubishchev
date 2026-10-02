@@ -7,16 +7,15 @@ import androidx.compose.runtime.setValue
 import org.json.JSONArray
 import org.json.JSONObject
 
-/** 一级分类节点：名称 + 二级事件列表 */
+/** 一级分类节点：名称 + 二级事件列表。分类固定两类，不可增删 */
 data class TimeCategory(
     val name: String,
     val events: List<TimeEvent>,
 )
 
-/** 二级事件节点：名称 + 三级子类列表 */
+/** 二级事件（子类）节点 / second-level event, the CRUD unit of the tree */
 data class TimeEvent(
     val name: String,
-    val subs: List<String>,
 )
 
 /** 一条"常用"：一级分类 + 二级事件 + 固定时长（分钟） */
@@ -24,9 +23,9 @@ data class QuickPick(val category: String, val event: String, val minutes: Int)
 
 /**
  * 时间分类树与常用配置的唯一种子源，SharedPreferences + JSON 持久化。
- * The single source of truth for the (up to three-level) category tree and
- * the quick-pick list. Statistics match by NAME: a renamed node simply stops
- * accumulating old rows, an existing name keeps summing its history.
+ * 分类固定两类；每个分类下最多 8 个事件，事件可增删改。
+ * Statistics match by NAME: a renamed event simply stops accumulating old rows,
+ * an existing name keeps summing its history.
  */
 object CategoryStore {
 
@@ -39,11 +38,11 @@ object CategoryStore {
     private val DEFAULT_CATEGORIES = listOf(
         TimeCategory(
             TimeRules.CATEGORY_L1,
-            listOf("健康", "学习", "阅读", "产出", "投资", "社交").map { TimeEvent(it, emptyList()) },
+            listOf("健康", "学习", "阅读", "产出", "投资", "社交").map { TimeEvent(it) },
         ),
         TimeCategory(
             TimeRules.CATEGORY_L2,
-            listOf("思考", "整理", "兴趣").map { TimeEvent(it, emptyList()) },
+            listOf("思考", "整理", "兴趣").map { TimeEvent(it) },
         ),
     )
 
@@ -65,7 +64,11 @@ object CategoryStore {
 
     fun init(context: Context) {
         prefs = context.applicationContext.getSharedPreferences(FILE, Context.MODE_PRIVATE)
-        categories = read(KEY_CATS, ::parseCategories) ?: DEFAULT_CATEGORIES
+        // 固定两类：旧的多余分类截断，缺的用默认名补齐
+        val loaded = (read(KEY_CATS, ::parseCategories) ?: DEFAULT_CATEGORIES).take(2)
+        categories = if (loaded.size >= 2) loaded else loaded + DEFAULT_CATEGORIES
+            .filter { def -> loaded.none { it.name == def.name } }
+            .take(2 - loaded.size)
         quickPicks = read(KEY_PICKS, ::parsePicks) ?: DEFAULT_PICKS
     }
 
@@ -93,38 +96,16 @@ object CategoryStore {
         return ROMANS.getOrNull(index) ?: "I"
     }
 
-    // ---------- 变更（全部按索引定位，界面里拿的就是索引） ----------
-
-    fun addCategory(name: String) = mutate(categories + TimeCategory(name, emptyList()))
-
-    fun renameCategory(ci: Int, name: String) =
-        mutate(categories.setAt(ci) { it.copy(name = name) })
-
-    fun deleteCategory(ci: Int) = mutate(categories.removedAt(ci))
+    // ---------- 变更（分类固定两类；事件按索引增删改） ----------
 
     fun addEvent(ci: Int, name: String) =
-        mutate(categories.setAt(ci) { c -> c.copy(events = c.events + TimeEvent(name, emptyList())) })
+        mutate(categories.setAt(ci) { c -> c.copy(events = c.events + TimeEvent(name)) })
 
     fun renameEvent(ci: Int, ei: Int, name: String) =
         mutate(categories.setAt(ci) { c -> c.copy(events = c.events.setAt(ei) { it.copy(name = name) }) })
 
     fun deleteEvent(ci: Int, ei: Int) =
         mutate(categories.setAt(ci) { c -> c.copy(events = c.events.removedAt(ei)) })
-
-    fun addSub(ci: Int, ei: Int, name: String) =
-        mutate(categories.setAt(ci) { c ->
-            c.copy(events = c.events.setAt(ei) { e -> e.copy(subs = e.subs + name) })
-        })
-
-    fun renameSub(ci: Int, ei: Int, si: Int, name: String) =
-        mutate(categories.setAt(ci) { c ->
-            c.copy(events = c.events.setAt(ei) { e -> e.copy(subs = e.subs.setAt(si) { name }) })
-        })
-
-    fun deleteSub(ci: Int, ei: Int, si: Int) =
-        mutate(categories.setAt(ci) { c ->
-            c.copy(events = c.events.setAt(ei) { e -> e.copy(subs = e.subs.removedAt(si)) })
-        })
 
     fun addPick(category: String, event: String, minutes: Int) =
         mutatePicks(quickPicks + QuickPick(category, event, minutes))
@@ -156,13 +137,7 @@ object CategoryStore {
                 JSONObject()
                     .put("name", cat.name)
                     .put("events", JSONArray().apply {
-                        cat.events.forEach { e ->
-                            put(
-                                JSONObject()
-                                    .put("name", e.name)
-                                    .put("subs", JSONArray().apply { e.subs.forEach { put(it) } }),
-                            )
-                        }
+                        cat.events.forEach { put(JSONObject().put("name", it.name)) }
                     }),
             )
         }
@@ -182,18 +157,10 @@ object CategoryStore {
                 add(
                     TimeCategory(
                         name = o.getString("name"),
+                        // 旧版本存过 subs 字段，这里只取事件名，天然向后兼容
                         events = buildList {
                             for (j in 0 until events.length()) {
-                                val e = events.getJSONObject(j)
-                                val subs = JSONArray(e.optString("subs", "[]"))
-                                add(
-                                    TimeEvent(
-                                        name = e.getString("name"),
-                                        subs = buildList {
-                                            for (k in 0 until subs.length()) add(subs.getString(k))
-                                        },
-                                    ),
-                                )
+                                add(TimeEvent(events.getJSONObject(j).getString("name")))
                             }
                         },
                     ),

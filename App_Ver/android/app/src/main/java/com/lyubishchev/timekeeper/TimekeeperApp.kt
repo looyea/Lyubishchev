@@ -12,8 +12,10 @@ import com.lyubishchev.timekeeper.ui.theme.ThemePrefs
  */
 class TimekeeperApp : Application() {
 
+    val database: AppDatabase by lazy { AppDatabase.get(this) }
+
     val repository: TimeLogRepository by lazy {
-        TimeLogRepository(AppDatabase.get(this).timeLogDao())
+        TimeLogRepository(database.timeLogDao())
     }
 
     override fun onCreate() {

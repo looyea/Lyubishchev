@@ -25,10 +25,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.SelectableDates
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -49,9 +51,8 @@ import com.lyubishchev.timekeeper.domain.TimeRules
 import com.lyubishchev.timekeeper.ui.log.LogMode
 import com.lyubishchev.timekeeper.ui.log.LogState
 import com.lyubishchev.timekeeper.ui.log.LogViewModel
-import com.lyubishchev.timekeeper.ui.log.MonthBlock
 import com.lyubishchev.timekeeper.ui.log.StatRow
-import com.lyubishchev.timekeeper.ui.log.WeekBlock
+import com.lyubishchev.timekeeper.ui.theme.NumberSerif
 import com.lyubishchev.timekeeper.ui.widget.ChoiceRow
 import java.time.Instant
 import java.time.LocalDate
@@ -69,6 +70,7 @@ fun LogScreen(
     modifier: Modifier = Modifier,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) { viewModel.alignWithToday() }
     var showPicker by rememberSaveable { mutableStateOf(false) }
 
     Column(
@@ -88,8 +90,12 @@ fun LogScreen(
                 onSelect = viewModel::selectMode,
                 modifier = Modifier.weight(1f),
             )
+            // 年视图直接铺开数据库里有记录的年份，没有"锚点"可选，所以按钮置灰但仍占位
             Spacer(modifier = Modifier.width(10.dp))
-            OutlinedButton(onClick = { showPicker = true }) {
+            OutlinedButton(
+                onClick = { showPicker = true },
+                enabled = state.mode != LogMode.YEAR,
+            ) {
                 Text(anchorLabel(state))
             }
         }
@@ -109,6 +115,7 @@ fun LogScreen(
     if (showPicker) {
         AnchorDatePicker(
             anchor = state.anchor,
+            mode = state.mode,
             onPick = viewModel::selectAnchor,
             onDismiss = { showPicker = false },
         )
@@ -251,8 +258,7 @@ private fun PeriodAccordion(
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = stringResource(R.string.log_total, TimeRules.formatMinutes(total)),
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
+                style = NumberSerif,
                 color = MaterialTheme.colorScheme.primary,
             )
         }
@@ -282,50 +288,45 @@ private fun PeriodAccordion(
     }
 }
 
-/** 年视图：不折叠，直接铺开大列表，顶部先给一类/二类总账。 */
+/** 年视图：只列出数据库里有记录的年份，一年一块直接铺开，不用日期锚点。 */
 @Composable
 private fun YearList(state: LogState) {
-    SectionCard {
-        Column(modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp)) {
-            Text(
-                text = stringResource(R.string.log_year_title, TimeRules.year(state.anchor)),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = stringResource(R.string.log_cat_totals, TimeRules.formatMinutes(state.yearCat1), TimeRules.formatMinutes(state.yearCat2)),
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.primary,
-            )
-        }
-    }
-    Spacer(modifier = Modifier.height(12.dp))
-    if (state.yearRows.isEmpty()) {
+    if (state.years.isEmpty()) {
         EmptyHint()
         return
     }
-    TimeRules.CATEGORIES.forEach { category ->
-        val rows = state.yearRows.filter { it.category == category }
-        if (rows.isNotEmpty()) {
-            SectionCard {
-                Column(modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp)) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        RomanBadge(category)
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = category,
-                            style = MaterialTheme.typography.titleSmall,
-                            color = MaterialTheme.colorScheme.onSurface,
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(4.dp))
-                    rows.forEach { StatRowLine(it) }
+    state.years.forEach { year ->
+        SectionCard {
+            Column(modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp)) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text(
+                        text = stringResource(R.string.log_year_title, year.year),
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                    )
+                    Spacer(modifier = Modifier.weight(1f))
+                    Text(
+                        text = stringResource(R.string.log_total, TimeRules.formatMinutes(year.total)),
+                        style = NumberSerif,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
                 }
+                Spacer(modifier = Modifier.height(6.dp))
+                Text(
+                    text = stringResource(
+                        R.string.log_cat_totals,
+                        TimeRules.formatMinutes(year.cat1),
+                        TimeRules.formatMinutes(year.cat2),
+                    ),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+                Spacer(modifier = Modifier.height(6.dp))
+                year.rows.forEach { StatRowLine(it) }
             }
-            Spacer(modifier = Modifier.height(8.dp))
         }
+        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 
@@ -407,10 +408,26 @@ private fun EmptyHint() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun AnchorDatePicker(anchor: String, onPick: (String) -> Unit, onDismiss: () -> Unit) {
-    val initialMillis = LocalDate.parse(anchor, TimeRules.DATE)
-        .atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
-    val pickerState = rememberDatePickerState(initialSelectedDateMillis = initialMillis)
+private fun AnchorDatePicker(
+    anchor: String,
+    mode: LogMode,
+    onPick: (String) -> Unit,
+    onDismiss: () -> Unit,
+) {
+    val anchorDate = LocalDate.parse(anchor, TimeRules.DATE)
+    val today = LocalDate.parse(TimeRules.todayText(), TimeRules.DATE)
+    // 周/月只在锚点那一年的 1 月 1 日到"当前"之间选：下周、下月这些还没到的日子选不了
+    val lower = if (mode == LogMode.DAY) LocalDate.of(2000, 1, 1) else anchorDate.withDayOfYear(1)
+    val upper = when {
+        mode == LogMode.DAY -> today
+        anchorDate.year < today.year -> anchorDate.withDayOfYear(anchorDate.lengthOfYear())
+        else -> today
+    }
+    val initialMillis = anchorDate.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli()
+    val pickerState = rememberDatePickerState(
+        initialSelectedDateMillis = initialMillis,
+        selectableDates = BoundedDates(lower, upper),
+    )
     DatePickerDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
@@ -429,6 +446,19 @@ private fun AnchorDatePicker(anchor: String, onPick: (String) -> Unit, onDismiss
     ) {
         DatePicker(state = pickerState)
     }
+}
+
+/** 只允许选 [start, end] 区间内的日子（含两端）：用来挡掉还没到来的周/月。 */
+private class BoundedDates(
+    private val start: LocalDate,
+    private val end: LocalDate,
+) : SelectableDates {
+    override fun isSelectableDate(utcTimeMillis: Long): Boolean {
+        val day = Instant.ofEpochMilli(utcTimeMillis).atZone(ZoneOffset.UTC).toLocalDate()
+        return !day.isBefore(start) && !day.isAfter(end)
+    }
+
+    override fun isSelectableYear(year: Int): Boolean = year in start.year..end.year
 }
 
 private fun anchorLabel(state: LogState): String {

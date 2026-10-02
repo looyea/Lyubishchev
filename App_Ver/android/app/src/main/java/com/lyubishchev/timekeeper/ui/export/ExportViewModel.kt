@@ -52,8 +52,27 @@ class ExportViewModel(application: Application) : AndroidViewModel(application) 
     var shareTrigger by mutableStateOf(0)
         private set
     private var lastFile: File? = null
+    private var lastMime: String? = null
+
+    /** 分享面板拉起后置零，避免返回列表页时重新触发 */
+    fun consumeShare() {
+        shareTrigger = 0
+    }
 
     private val range = MutableStateFlow(fromDate to toDate)
+
+    /** VM 跨午夜存活时，把还停在旧"今天"的区间整体平移到真实今天 */
+    private var createdDay = today
+
+    fun alignWithToday() {
+        val real = TimeRules.todayText()
+        if (real == createdDay) return
+        if (toDate == createdDay) {
+            onToChange(real)
+            onFromChange(TimeRules.dateMinusDays(real, 29))
+        }
+        createdDay = real
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val preview = range.flatMapLatest { (from, to) ->
@@ -117,8 +136,51 @@ class ExportViewModel(application: Application) : AndroidViewModel(application) 
                 out.write(text.toByteArray(Charsets.UTF_8))
             }
             lastFile = file
+            lastMime = format.mime
             busy = false
             message = "DONE"
+            shareTrigger++
+        }
+    }
+
+    /** 全量导出：整个记录数据库 → 一个 CSV（带 BOM，Excel 直接打开）→ 分享面板 */
+    fun exportAll() {
+        if (busy) return
+        busy = true
+        viewModelScope.launch {
+            val entries = repository.entriesInRange("0000-01-01", "9999-12-31")
+            val from = entries.minOfOrNull { it.date } ?: TimeRules.todayText()
+            val to = entries.maxOfOrNull { it.date } ?: TimeRules.todayText()
+            val text = ExportRenderer.render(ExportFormat.EXCEL, from, to, entries)
+            val dir = File(getApplication<TimekeeperApp>().getExternalFilesDir(null), "export").apply { mkdirs() }
+            val file = File(dir, "timekeeper_all_${from}_$to.csv")
+            file.outputStream().use { out ->
+                out.write(byteArrayOf(0xEF.toByte(), 0xBB.toByte(), 0xBF.toByte()))
+                out.write(text.toByteArray(Charsets.UTF_8))
+            }
+            lastFile = file
+            lastMime = ExportFormat.EXCEL.mime
+            busy = false
+            shareTrigger++
+        }
+    }
+
+    /** 全量导出数据库文件：先把 WAL 落盘，.db 单文件即携带全部数据 */
+    fun exportDatabase() {
+        if (busy) return
+        busy = true
+        message = null
+        viewModelScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+            val app = getApplication<TimekeeperApp>()
+            app.database.openHelper.writableDatabase
+                .query("PRAGMA wal_checkpoint(TRUNCATE)").use { }
+            val src = app.getDatabasePath("timekeeper.db")
+            val dir = File(app.getExternalFilesDir(null), "export").apply { mkdirs() }
+            val file = File(dir, "timekeeper_backup_${TimeRules.todayText()}.db")
+            src.copyTo(file, overwrite = true)
+            lastFile = file
+            lastMime = "application/octet-stream"
+            busy = false
             shareTrigger++
         }
     }
@@ -135,7 +197,7 @@ class ExportViewModel(application: Application) : AndroidViewModel(application) 
             file,
         )
         return Intent(Intent.ACTION_SEND).apply {
-            type = format.mime
+            type = lastMime ?: format.mime
             putExtra(Intent.EXTRA_STREAM, uri)
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }

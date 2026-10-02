@@ -7,20 +7,21 @@
     <string name="tab_log">记录</string>
     <string name="tab_add">记一笔</string>
     <string name="tab_report">报表</string>
-    <string name="tab_mine">我的</string>
+    <string name="tab_mine">设置</string>
 
     <!-- 概览 / home -->
     <string name="home_stat_today">今日已记录</string>
     <string name="home_stat_week">本周累计记录</string>
-    <string name="home_radar_legend_item">%1$s %2$s</string>
-    <string name="home_dim_class_i">一类时间</string>
-    <string name="home_dim_class_ii">二类时间</string>
+    <string name="home_stat_month">本月累计记录</string>
     <string name="home_period_today">今日</string>
     <string name="home_period_week">本周</string>
+    <string name="home_period_month">本月</string>
     <string name="home_series_today">今天</string>
     <string name="home_series_yesterday">昨天</string>
     <string name="home_series_week">本周</string>
     <string name="home_series_last_week">上周</string>
+    <string name="home_series_month">本月</string>
+    <string name="home_series_last_month">上月</string>
     <string name="placeholder_coming_soon">该模块待开发</string>
 
     <!-- 记录页 / read-only log browser -->
@@ -36,8 +37,8 @@
     <string name="log_cat_totals">一类合计 %1$s · 二类合计 %2$s</string>
     <string name="log_empty">该时段还没有记录</string>
 
-    <!-- 我的 / mine -->
-    <string name="mine_title">我的</string>
+    <!-- 设置（原"我的"） / settings (was "mine") -->
+    <string name="mine_title">设置</string>
     <string name="mine_header_subtitle">纯本地时间统计 · 数据只存手机</string>
     <string name="mine_stat_entries">已记录 %1$d 条</string>
     <string name="mine_theme">颜色模式</string>
@@ -45,21 +46,32 @@
     <string name="mine_theme_system">跟随系统</string>
     <string name="mine_theme_light">浅色</string>
     <string name="mine_theme_dark">深色</string>
-    <string name="mine_settings">设置</string>
-    <string name="mine_settings_value">待规划</string>
-    <string name="mine_settings_soon">设置模块还在规划中，这里先占个位置。</string>
+    <string name="mine_version">版本</string>
     <string name="mine_category">时间分类</string>
-    <string name="mine_category_value">分类树维护</string>
-    <string name="mine_quick">常用</string>
-    <string name="mine_quick_value">快捷组合配置</string>
-    <string name="mine_export">导出</string>
-    <string name="mine_export_value">按区间导出报告</string>
+    <string name="mine_quick">快捷设置</string>
+    <string name="mine_export">按需导出</string>
+    <string name="mine_export_all">全量导出</string>
+    <string name="mine_export_all_value">整库导出 db/CSV</string>
+    <string name="export_all_share_title">全量导出</string>
+    <string name="export_all_hint">选择全量导出的文件格式：</string>
+    <string name="export_all_db">SQLite 数据库（.db，可被全量导入还原）</string>
+    <string name="export_all_csv">CSV 表格（.csv，Excel 可直接打开）</string>
+    <string name="mine_import">全量导入</string>
+    <string name="mine_import_value">合并 db 或 CSV</string>
+    <string name="import_busy">导入中…</string>
+    <string name="import_result_text">合并完成：新增 %1$d 条，跳过重复 %2$d 条（文件共解析 %3$d 条）。</string>
+    <string name="version_title">版本历史</string>
+    <string name="version_hint">当前版本 v%1$s · 最新在上</string>
+    <string name="version_current_tag">当前版本</string>
     <string name="mine_style">主题</string>
-    <string name="mine_style_value">待规划</string>
-    <string name="mine_style_soon">小清新、都市、沉稳商务三种主题正在设计，各自带背景图与整套配色；做好后在设置里直接套用。</string>
+    <string name="mine_style_dialog_title">选择主题配色</string>
+    <string name="mine_palette_morandi">莫兰迪灰绿</string>
+    <string name="mine_palette_tiffany">蒂芙尼蓝</string>
+    <string name="mine_palette_ocean">海运蓝</string>
+    <string name="mine_palette_forest">森林绿</string>
 
-    <!-- 导出 / export -->
-    <string name="export_title">导出报告</string>
+    <!-- 按需导出 / range export -->
+    <string name="export_title">按需导出</string>
     <string name="export_hint">选起止日期与文件格式，确认区间汇总后生成文件，再选择保存或分享目标</string>
     <string name="export_range_label">区间</string>
     <string name="export_format_label">文件格式</string>
@@ -99,20 +111,18 @@
 
     <!-- 时间分类维护 / category tree editor -->
     <string name="cat_editor_title">时间分类</string>
-    <string name="cat_editor_hint">最多三级，每个节点下最多 8 个子项。改名等于新建：新名字从零累计，保留原名的继续累加历史。</string>
-    <string name="cat_add_category">添加一级分类</string>
+    <string name="cat_editor_hint">分类固定两类；每类下最多 8 个事件（子类），可新建、改名、删除。改名等于新建：新名字从零累计，保留原名的继续累加历史。</string>
     <string name="cat_add_event">添加事件</string>
-    <string name="cat_add_sub">添加子类</string>
     <string name="cat_rename">改名</string>
     <string name="cat_delete">删除</string>
     <string name="cat_back">返回</string>
-    <string name="cat_max_children">每个节点最多 8 个子项</string>
+    <string name="cat_max_children">每个分类下最多 8 个事件</string>
     <string name="cat_input_title">命名</string>
     <string name="cat_delete_confirm_title">确认删除</string>
     <string name="cat_delete_confirm_text">删除"%1$s"后，该名称停止累计，旧数据保留在库里。</string>
 
-    <!-- 常用配置 / quick pick editor -->
-    <string name="pick_editor_title">常用配置</string>
+    <!-- 快捷设置（原"常用"） / quick pick editor -->
+    <string name="pick_editor_title">快捷设置</string>
     <string name="pick_editor_hint">每项由一级分类、二级事件和持续时间组成，点一下就在"记一笔"里套用。</string>
     <string name="pick_add_title">添加常用</string>
     <string name="pick_category_label">一级分类</string>

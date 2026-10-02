@@ -76,10 +76,6 @@ object TimeRules {
     fun dateMinusDays(dateText: String, days: Long): String =
         LocalDate.parse(dateText, DATE).minusDays(days).format(DATE)
 
-    /** 该日期所在 ISO 周的周一 / Monday of the ISO week containing the date */
-    fun mondayOf(dateText: String): String =
-        LocalDate.parse(dateText, DATE).with(java.time.DayOfWeek.MONDAY).format(DATE)
-
     /**
      * 雷达图刻度：取刚好盖住最大值的档位，全 0 时给 1 小时，避免图形塌成一个点。
      * Radar axis scale — the smallest ring value that still contains the data.

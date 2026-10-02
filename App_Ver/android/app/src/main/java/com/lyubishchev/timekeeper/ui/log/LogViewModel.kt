@@ -4,10 +4,10 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.lyubishchev.timekeeper.TimekeeperApp
-import com.lyubishchev.timekeeper.data.EventMinutes
 import com.lyubishchev.timekeeper.data.TimeLogEntity
 import com.lyubishchev.timekeeper.domain.CategoryStore
 import com.lyubishchev.timekeeper.domain.TimeRules
+import java.time.LocalDate
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -49,6 +49,15 @@ data class MonthBlock(
     val rows: List<StatRow>,
 )
 
+/** 一年的汇总块，年视图只列出有记录的年份 */
+data class YearBlock(
+    val year: Int,
+    val total: Int,
+    val cat1: Int,
+    val cat2: Int,
+    val rows: List<StatRow>,
+)
+
 /**
  * 记录页状态：只读展示，写入仍走"记一笔"。
  * Read-only log state for whichever mode + anchor date is selected.
@@ -59,9 +68,7 @@ data class LogState(
     val dayEntries: List<TimeLogEntity> = emptyList(),
     val weeks: List<WeekBlock> = emptyList(),
     val months: List<MonthBlock> = emptyList(),
-    val yearCat1: Int = 0,
-    val yearCat2: Int = 0,
-    val yearRows: List<StatRow> = emptyList(),
+    val years: List<YearBlock> = emptyList(),
     val expanded: Set<String> = emptySet(),
 )
 
@@ -74,7 +81,7 @@ private sealed interface Loaded {
     data class Day(val entries: List<TimeLogEntity>) : Loaded
     data class Weeks(val blocks: List<WeekBlock>) : Loaded
     data class Months(val blocks: List<MonthBlock>) : Loaded
-    data class Year(val cat1: Int, val cat2: Int, val rows: List<StatRow>) : Loaded
+    data class Years(val blocks: List<YearBlock>) : Loaded
 }
 
 class LogViewModel(app: Application) : AndroidViewModel(app) {
@@ -83,6 +90,17 @@ class LogViewModel(app: Application) : AndroidViewModel(app) {
 
     private val selection = MutableStateFlow(LogSelection())
     private val expanded = MutableStateFlow(emptySet<String>())
+
+    /** 锚点若还停在 VM 创建那天，进页时挪回真实的今天（跨午夜兜底） */
+    private var createdDay = TimeRules.todayText()
+
+    fun alignWithToday() {
+        val real = TimeRules.todayText()
+        if (real == createdDay) return
+        val stale = createdDay
+        createdDay = real
+        selection.update { if (it.anchor == stale) it.copy(anchor = real) else it }
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     val state: StateFlow<LogState> = selection
@@ -106,62 +124,67 @@ class LogViewModel(app: Application) : AndroidViewModel(app) {
         LogMode.DAY -> repository.entriesOfDate(sel.anchor)
             .map { Loaded.Day(it.reversed()) }
 
+        // 周：GROUP BY (year, week_number) 得到什么周就列什么周，没有记录的周压根不在结果里
         LogMode.WEEK -> {
-            val thisMonday = TimeRules.mondayOf(sel.anchor)
-            val mondays = listOf(
-                thisMonday,
-                TimeRules.dateMinusDays(thisMonday, 7),
-                TimeRules.dateMinusDays(thisMonday, 14),
-            )
-            val flows = mondays.map {
-                repository.breakdownOfWeekBy(TimeRules.year(it), TimeRules.isoWeek(it))
-            }
-            combine(flows[0], flows[1], flows[2]) { a, b, c ->
-                Loaded.Weeks(listOf(a, b, c).mapIndexed { i, rows -> weekBlock(mondays[i], rows) })
-            }
-        }
-
-        LogMode.MONTH -> {
-            val year = TimeRules.year(sel.anchor)
-            repository.breakdownOfMonthYear(year).map { rows ->
-                Loaded.Months(
-                    rows.groupBy { it.month }.entries
-                        .sortedByDescending { it.key }
-                        .map { (month, group) ->
+            val anchorDate = LocalDate.parse(sel.anchor, TimeRules.DATE)
+            repository.breakdownOfWeeksOfYear("${anchorDate.year}-01-01", "${anchorDate.year}-12-31")
+                .map { rows ->
+                    Loaded.Weeks(
+                        rows.groupBy { it.week }.entries.sortedByDescending { it.key }.map { (week, group) ->
                             val stats = group.map {
                                 StatRow(TimeRules.roman(it.category), it.category, it.event, it.minutes)
                             }.toSortedStatRows()
-                            MonthBlock(
-                                month = month,
+                            WeekBlock(
+                                year = anchorDate.year,
+                                week = week,
                                 total = group.sumOf { it.minutes },
                                 cat1 = stats.cat1Minutes(),
                                 cat2 = stats.cat2Minutes(),
                                 rows = stats,
                             )
                         }
+                    )
+                }
+        }
+
+        // 月：同理，只有 GROUP BY 出来的月份才出现
+        LogMode.MONTH -> {
+            val anchorDate = LocalDate.parse(sel.anchor, TimeRules.DATE)
+            repository.breakdownOfMonthYear(anchorDate.year).map { rows ->
+                Loaded.Months(
+                    rows.groupBy { it.month }.entries.sortedByDescending { it.key }.map { (month, group) ->
+                        val stats = group.map {
+                            StatRow(TimeRules.roman(it.category), it.category, it.event, it.minutes)
+                        }.toSortedStatRows()
+                        MonthBlock(
+                            month = month,
+                            total = group.sumOf { it.minutes },
+                            cat1 = stats.cat1Minutes(),
+                            cat2 = stats.cat2Minutes(),
+                            rows = stats,
+                        )
+                    }
                 )
             }
         }
 
-        LogMode.YEAR -> {
-            val year = TimeRules.year(sel.anchor)
-            repository.breakdownOfRange("$year-01-01", "$year-12-31").map { rows ->
-                val stats = rows.toStatRows()
-                Loaded.Year(stats.cat1Minutes(), stats.cat2Minutes(), stats)
-            }
+        // 年：只列数据库里有记录的年份，倒序
+        LogMode.YEAR -> repository.breakdownOfYears().map { rows ->
+            Loaded.Years(
+                rows.groupBy { it.year }.entries.sortedByDescending { it.key }.map { (year, group) ->
+                    val stats = group.map {
+                        StatRow(TimeRules.roman(it.category), it.category, it.event, it.minutes)
+                    }.toSortedStatRows()
+                    YearBlock(
+                        year = year,
+                        total = group.sumOf { it.minutes },
+                        cat1 = stats.cat1Minutes(),
+                        cat2 = stats.cat2Minutes(),
+                        rows = stats,
+                    )
+                }
+            )
         }
-    }
-
-    private fun weekBlock(monday: String, rows: List<EventMinutes>): WeekBlock {
-        val stats = rows.toStatRows()
-        return WeekBlock(
-            year = TimeRules.year(monday),
-            week = TimeRules.isoWeek(monday),
-            total = rows.sumOf { it.minutes },
-            cat1 = stats.cat1Minutes(),
-            cat2 = stats.cat2Minutes(),
-            rows = stats,
-        )
     }
 
     private fun buildState(sel: LogSelection, data: Loaded?, keys: Set<String>): LogState =
@@ -169,18 +192,10 @@ class LogViewModel(app: Application) : AndroidViewModel(app) {
             is Loaded.Day -> LogState(sel.mode, sel.anchor, dayEntries = data.entries, expanded = keys)
             is Loaded.Weeks -> LogState(sel.mode, sel.anchor, weeks = data.blocks, expanded = keys)
             is Loaded.Months -> LogState(sel.mode, sel.anchor, months = data.blocks, expanded = keys)
-            is Loaded.Year -> LogState(
-                mode = sel.mode, anchor = sel.anchor,
-                yearCat1 = data.cat1, yearCat2 = data.cat2, yearRows = data.rows,
-                expanded = keys,
-            )
+            is Loaded.Years -> LogState(sel.mode, sel.anchor, years = data.blocks, expanded = keys)
             null -> LogState(mode = sel.mode, anchor = sel.anchor, expanded = keys)
         }
 }
-
-private fun List<EventMinutes>.toStatRows(): List<StatRow> =
-    map { StatRow(TimeRules.roman(it.category), it.category, it.event, it.minutes) }
-        .toSortedStatRows()
 
 private fun List<StatRow>.toSortedStatRows(): List<StatRow> =
     sortedWith(

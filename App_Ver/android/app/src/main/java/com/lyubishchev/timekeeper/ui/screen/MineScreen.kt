@@ -1,9 +1,12 @@
 package com.lyubishchev.timekeeper.ui.screen
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,9 +14,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
@@ -23,6 +28,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -30,6 +36,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -37,26 +44,38 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lyubishchev.timekeeper.R
 import com.lyubishchev.timekeeper.ui.export.ExportScreen
+import com.lyubishchev.timekeeper.ui.export.ExportViewModel
+import com.lyubishchev.timekeeper.ui.export.ImportViewModel
 import com.lyubishchev.timekeeper.ui.mine.MineViewModel
 import com.lyubishchev.timekeeper.ui.theme.ThemeMode
+import com.lyubishchev.timekeeper.ui.theme.ThemePalette
 import com.lyubishchev.timekeeper.ui.theme.ThemePrefs
 
 /**
- * 我的：可点列表形式的入口。当前两项——主题与设置（占位）。
- * Mine: a plain tappable list. Theme picker (system/light/dark) and a settings placeholder.
+ * 设置：可点列表形式的入口——时间分类、快捷设置、按需/全量导出、全量导入、颜色模式、主题配色、版本。
+ * Settings: a plain tappable list; full export writes the whole DB to one .db/.csv,
+ * and the version row opens the release-note history.
  */
 @Composable
 fun MineScreen(
     viewModel: MineViewModel = viewModel(),
+    exportViewModel: ExportViewModel = viewModel(),
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
+    val importVm: ImportViewModel = viewModel()
+    LaunchedEffect(Unit) { viewModel.refresh() }
     var showThemeDialog by rememberSaveable { mutableStateOf(false) }
-    var showSettingsDialog by rememberSaveable { mutableStateOf(false) }
     var showCategoryEditor by rememberSaveable { mutableStateOf(false) }
     var showQuickEditor by rememberSaveable { mutableStateOf(false) }
     var showExport by rememberSaveable { mutableStateOf(false) }
     var showStyleDialog by rememberSaveable { mutableStateOf(false) }
+    var showVersionHistory by rememberSaveable { mutableStateOf(false) }
+    var showFullExportDialog by rememberSaveable { mutableStateOf(false) }
+
+    val pickFile = rememberLauncherForActivityResult(
+        ActivityResultContracts.OpenDocument(),
+    ) { uri -> uri?.let { importVm.import(it) } }
 
     if (showCategoryEditor) {
         CategoryEditorScreen(onBack = { showCategoryEditor = false })
@@ -68,6 +87,10 @@ fun MineScreen(
     }
     if (showExport) {
         ExportScreen(onBack = { showExport = false })
+        return
+    }
+    if (showVersionHistory) {
+        VersionHistoryScreen(onBack = { showVersionHistory = false })
         return
     }
 
@@ -127,20 +150,33 @@ fun MineScreen(
         ) {
             SettingRow(
                 title = stringResource(R.string.mine_category),
-                value = stringResource(R.string.mine_category_value),
                 onClick = { showCategoryEditor = true },
             )
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
             SettingRow(
                 title = stringResource(R.string.mine_quick),
-                value = stringResource(R.string.mine_quick_value),
                 onClick = { showQuickEditor = true },
             )
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
             SettingRow(
                 title = stringResource(R.string.mine_export),
-                value = stringResource(R.string.mine_export_value),
                 onClick = { showExport = true },
+            )
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+            SettingRow(
+                title = stringResource(R.string.mine_export_all),
+                value = stringResource(
+                    if (exportViewModel.busy) R.string.export_busy else R.string.mine_export_all_value,
+                ),
+                onClick = { showFullExportDialog = true },
+            )
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+            SettingRow(
+                title = stringResource(R.string.mine_import),
+                value = stringResource(
+                    if (importVm.busy) R.string.import_busy else R.string.mine_import_value,
+                ),
+                onClick = { pickFile.launch(arrayOf("*/*")) },
             )
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
             SettingRow(
@@ -151,18 +187,32 @@ fun MineScreen(
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
             SettingRow(
                 title = stringResource(R.string.mine_style),
-                value = stringResource(R.string.mine_style_value),
+                value = stringResource(paletteLabel(ThemePrefs.palette)),
                 onClick = { showStyleDialog = true },
             )
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
             SettingRow(
-                title = stringResource(R.string.mine_settings),
-                value = stringResource(R.string.mine_settings_value),
-                onClick = { showSettingsDialog = true },
+                title = stringResource(R.string.mine_version),
+                value = AppVersions.CURRENT,
+                onClick = { showVersionHistory = true },
             )
         }
 
         Spacer(modifier = Modifier.height(24.dp))
+    }
+
+    LaunchedEffect(exportViewModel.shareTrigger) {
+        if (exportViewModel.shareTrigger > 0) {
+            exportViewModel.shareIntent()?.let { intent ->
+                context.startActivity(
+                    android.content.Intent.createChooser(
+                        intent,
+                        context.getString(R.string.export_all_share_title),
+                    ),
+                )
+            }
+            exportViewModel.consumeShare()
+        }
     }
 
     if (showThemeDialog) {
@@ -175,38 +225,66 @@ fun MineScreen(
         )
     }
 
-    if (showSettingsDialog) {
+    if (showStyleDialog) {
+        PalettePickerDialog(
+            onPick = { chosen ->
+                ThemePrefs.set(context, chosen)
+                showStyleDialog = false
+            },
+            onDismiss = { showStyleDialog = false },
+        )
+    }
+
+    if (showFullExportDialog) {
         AlertDialog(
-            onDismissRequest = { showSettingsDialog = false },
-            title = { Text(stringResource(R.string.mine_settings)) },
-            text = { Text(stringResource(R.string.mine_settings_soon)) },
+            onDismissRequest = { showFullExportDialog = false },
+            title = { Text(stringResource(R.string.mine_export_all)) },
+            text = {
+                Column {
+                    Text(
+                        text = stringResource(R.string.export_all_hint),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                    FullExportOption(stringResource(R.string.export_all_db)) {
+                        showFullExportDialog = false
+                        exportViewModel.exportDatabase()
+                    }
+                    FullExportOption(stringResource(R.string.export_all_csv)) {
+                        showFullExportDialog = false
+                        exportViewModel.exportAll()
+                    }
+                }
+            },
+            confirmButton = {},
+            dismissButton = {
+                TextButton(onClick = { showFullExportDialog = false }) {
+                    Text(stringResource(R.string.dialog_cancel))
+                }
+            },
+        )
+    }
+
+    importVm.outcome?.let { o ->
+        AlertDialog(
+            onDismissRequest = { importVm.dismissOutcome() },
+            title = { Text(stringResource(R.string.mine_import)) },
+            text = { Text(stringResource(R.string.import_result_text, o.added, o.skipped, o.parsed)) },
             confirmButton = {
-                TextButton(onClick = { showSettingsDialog = false }) {
+                TextButton(onClick = { importVm.dismissOutcome() }) {
                     Text(stringResource(R.string.dialog_ok))
                 }
             },
         )
     }
 
-    if (showStyleDialog) {
+    importVm.error?.let { message ->
         AlertDialog(
-            onDismissRequest = { showStyleDialog = false },
-            title = { Text(stringResource(R.string.mine_style)) },
-            text = {
-                Column {
-                    Text(stringResource(R.string.mine_style_soon))
-                    listOf("小清新", "都市", "沉稳商务").forEach { name ->
-                        Text(
-                            text = "· $name",
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurface,
-                            modifier = Modifier.padding(top = 6.dp),
-                        )
-                    }
-                }
-            },
+            onDismissRequest = { importVm.dismissError() },
+            title = { Text(stringResource(R.string.mine_import)) },
+            text = { Text(message) },
             confirmButton = {
-                TextButton(onClick = { showStyleDialog = false }) {
+                TextButton(onClick = { importVm.dismissError() }) {
                     Text(stringResource(R.string.dialog_ok))
                 }
             },
@@ -215,7 +293,22 @@ fun MineScreen(
 }
 
 @Composable
-private fun SettingRow(title: String, value: String, onClick: () -> Unit) {
+private fun FullExportOption(label: String, onClick: () -> Unit) {
+    Text(
+        text = label,
+        style = MaterialTheme.typography.bodyLarge,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(10.dp))
+            .clickable(onClick = onClick)
+            .padding(vertical = 12.dp),
+    )
+}
+
+/** 设置里的一行：标题在左，右侧可选一个说明文字，末尾总是那枚进入次级页的箭头。 */
+@Composable
+private fun SettingRow(title: String, value: String? = null, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -229,12 +322,14 @@ private fun SettingRow(title: String, value: String, onClick: () -> Unit) {
             color = MaterialTheme.colorScheme.onSurface,
         )
         Spacer(modifier = Modifier.weight(1f))
-        Text(
-            text = value,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary,
-        )
-        Spacer(modifier = Modifier.width(6.dp))
+        if (value != null) {
+            Text(
+                text = value,
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary,
+            )
+            Spacer(modifier = Modifier.width(6.dp))
+        }
         Text(
             text = "›",
             style = MaterialTheme.typography.titleMedium,
@@ -284,4 +379,67 @@ private fun themeModeLabel(mode: ThemeMode): Int = when (mode) {
     ThemeMode.SYSTEM -> R.string.mine_theme_system
     ThemeMode.LIGHT -> R.string.mine_theme_light
     ThemeMode.DARK -> R.string.mine_theme_dark
+}
+
+/** 主题选择：列出四套控件配色，每套给出主/辅/第三色的色卡。 */
+@Composable
+private fun PalettePickerDialog(onPick: (ThemePalette) -> Unit, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.mine_style_dialog_title)) },
+        text = {
+            Column {
+                ThemePalette.entries.forEach { palette ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(10.dp))
+                            .clickable { onPick(palette) }
+                            .padding(vertical = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        RadioButton(
+                            selected = palette == ThemePrefs.palette,
+                            onClick = { onPick(palette) },
+                        )
+                        Column(modifier = Modifier.padding(start = 6.dp)) {
+                            Text(
+                                text = stringResource(paletteLabel(palette)),
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onSurface,
+                            )
+                            Row(modifier = Modifier.padding(top = 6.dp)) {
+                                PaletteDot(palette.day.primary)
+                                PaletteDot(palette.day.secondary)
+                                PaletteDot(palette.day.tertiary)
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        confirmButton = {},
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.dialog_cancel)) }
+        },
+    )
+}
+
+@Composable
+private fun PaletteDot(color: Color) {
+    Box(
+        modifier = Modifier
+            .padding(end = 6.dp)
+            .size(16.dp)
+            .clip(CircleShape)
+            .background(color),
+    )
+}
+
+@StringRes
+private fun paletteLabel(palette: ThemePalette): Int = when (palette) {
+    ThemePalette.MORANDI -> R.string.mine_palette_morandi
+    ThemePalette.TIFFANY -> R.string.mine_palette_tiffany
+    ThemePalette.OCEAN -> R.string.mine_palette_ocean
+    ThemePalette.FOREST -> R.string.mine_palette_forest
 }

@@ -5,58 +5,58 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 
-private val DarkColors = darkColorScheme(
-    primary = InkPrimary,
-    onPrimary = InkOnPrimary,
-    primaryContainer = InkPrimaryContainer,
-    onPrimaryContainer = InkOnPrimaryContainer,
-    secondary = InkSecondary,
-    onSecondary = Color(0xFF0A1620),
-    secondaryContainer = InkSecondaryContainer,
-    onSecondaryContainer = InkOnSecondaryContainer,
-    tertiary = InkAccent,
-    tertiaryContainer = InkTertiaryContainer,
-    onTertiaryContainer = InkOnTertiaryContainer,
-    background = InkBackground,
-    onBackground = InkText,
-    surface = InkSurface,
-    onSurface = InkText,
-    onSurfaceVariant = InkMuted,
-    surfaceVariant = InkSurfaceHigh,
-    outline = InkOutline,
-    outlineVariant = InkOutlineVariant,
-    error = InkError,
-    onError = Color(0xFF330000),
+private fun nightScheme(a: Accents) = darkColorScheme(
+    primary = a.primary,
+    onPrimary = a.onPrimary,
+    primaryContainer = a.primaryContainer,
+    onPrimaryContainer = a.onPrimaryContainer,
+    secondary = a.secondary,
+    onSecondary = a.onSecondary,
+    secondaryContainer = a.secondaryContainer,
+    onSecondaryContainer = a.onSecondaryContainer,
+    tertiary = a.tertiary,
+    tertiaryContainer = a.tertiaryContainer,
+    onTertiaryContainer = a.onTertiaryContainer,
+    background = NightBackground,
+    onBackground = NightText,
+    surface = NightSurface,
+    onSurface = NightText,
+    onSurfaceVariant = NightMuted,
+    surfaceVariant = NightSurfaceHigh,
+    outline = NightOutline,
+    outlineVariant = NightOutlineVariant,
+    error = NightError,
+    onError = NightOnError,
 )
 
-private val LightColors = lightColorScheme(
-    primary = Color(0xFF0E7A6C),
-    onPrimary = Color.White,
-    primaryContainer = Color(0xFFBDF2EA),
-    onPrimaryContainer = Color(0xFF00332C),
-    secondary = Color(0xFF3D5A73),
-    secondaryContainer = Color(0xFFD6E6F5),
-    onSecondaryContainer = Color(0xFF0A1C2A),
-    tertiary = Color(0xFF9A5B12),
-    tertiaryContainer = Color(0xFFFFE0B8),
-    onTertiaryContainer = Color(0xFF321B00),
-    background = PaperBackground,
-    onBackground = PaperText,
-    surface = PaperSurface,
-    onSurface = PaperText,
-    onSurfaceVariant = PaperMuted,
-    surfaceVariant = PaperSurfaceHigh,
-    outline = Color(0xFFCBD2D9),
-    outlineVariant = Color(0xFFE3E8ED),
-    error = Color(0xFFB3261E),
-    onError = Color(0xFFFFDAD5),
+private fun dayScheme(a: Accents) = lightColorScheme(
+    primary = a.primary,
+    onPrimary = a.onPrimary,
+    primaryContainer = a.primaryContainer,
+    onPrimaryContainer = a.onPrimaryContainer,
+    secondary = a.secondary,
+    onSecondary = a.onSecondary,
+    secondaryContainer = a.secondaryContainer,
+    onSecondaryContainer = a.onSecondaryContainer,
+    tertiary = a.tertiary,
+    tertiaryContainer = a.tertiaryContainer,
+    onTertiaryContainer = a.onTertiaryContainer,
+    background = DayBackground,
+    onBackground = DayText,
+    surface = DaySurface,
+    onSurface = DayText,
+    onSurfaceVariant = DayMuted,
+    surfaceVariant = DaySurfaceHigh,
+    outline = DayOutline,
+    outlineVariant = DayOutlineVariant,
+    error = DayError,
+    onError = DayOnError,
 )
 
 /**
- * 主题入口：按用户在「我的」里的选择决定深浅色，跟随系统时看环境。
- * Theme entry: honours the stored ThemeMode; SYSTEM defers to the platform.
+ * 主题入口：颜色模式决定深浅，主题决定整套控件配色。跟随系统时看环境。
+ * Theme entry: ThemeMode picks light/dark, ThemePalette swaps the accent set.
  */
 @Composable
 fun TimekeeperTheme(content: @Composable () -> Unit) {
@@ -65,8 +65,9 @@ fun TimekeeperTheme(content: @Composable () -> Unit) {
         ThemeMode.LIGHT -> false
         ThemeMode.DARK -> true
     }
+    val palette = ThemePrefs.palette
     MaterialTheme(
-        colorScheme = if (dark) DarkColors else LightColors,
+        colorScheme = if (dark) nightScheme(palette.night) else dayScheme(palette.day),
         typography = TimekeeperTypography,
         content = content,
     )

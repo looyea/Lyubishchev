@@ -59,6 +59,7 @@ fun ExportScreen(
 ) {
     val context = LocalContext.current
     val preview by viewModel.preview.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) { viewModel.alignWithToday() }
     var pickingFrom by remember { mutableStateOf(false) }
     var pickingTo by remember { mutableStateOf(false) }
 
@@ -244,6 +245,7 @@ fun ExportScreen(
                     android.content.Intent.createChooser(intent, context.getString(R.string.export_share_title)),
                 )
             }
+            viewModel.consumeShare()
         }
     }
 }

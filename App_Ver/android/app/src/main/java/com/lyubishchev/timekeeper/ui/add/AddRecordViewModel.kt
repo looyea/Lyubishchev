@@ -65,6 +65,12 @@ class AddRecordViewModel(application: Application) : AndroidViewModel(applicatio
         if (!enabled && form.date != TimeRules.todayText()) onDateChange(TimeRules.todayText())
     }
 
+    /** 每次进入记一笔调用：VM 跨午夜存活时把"当天"追认为真实今天 */
+    fun alignWithToday() {
+        val t = TimeRules.todayText()
+        if (!form.backfillEnabled && form.date != t) onDateChange(t)
+    }
+
     fun onStartChange(time: String) {
         form = form.copy(
             startTime = time,

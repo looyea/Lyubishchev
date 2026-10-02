@@ -18,6 +18,11 @@ class MineViewModel(app: Application) : AndroidViewModel(app) {
         private set
 
     init {
+        refresh()
+    }
+
+    /** 进页重读一次条数：VM 常驻，新记的行不该等到冷启动 */
+    fun refresh() {
         viewModelScope.launch { entryCount = repository.count() }
     }
 }

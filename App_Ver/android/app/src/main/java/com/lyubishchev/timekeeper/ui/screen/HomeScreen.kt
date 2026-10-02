@@ -3,6 +3,7 @@ package com.lyubishchev.timekeeper.ui.screen
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,22 +21,24 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lyubishchev.timekeeper.R
+import com.lyubishchev.timekeeper.domain.CategoryStore
 import com.lyubishchev.timekeeper.domain.TimeRules
 import com.lyubishchev.timekeeper.ui.home.HomeState
 import com.lyubishchev.timekeeper.ui.home.HomeViewModel
 import com.lyubishchev.timekeeper.ui.home.RadarDimension
 import com.lyubishchev.timekeeper.ui.home.RadarPeriod
+import com.lyubishchev.timekeeper.ui.theme.NumberSerif
 import com.lyubishchev.timekeeper.ui.widget.ChoiceRow
 import com.lyubishchev.timekeeper.ui.widget.RadarChart
 import java.time.LocalDate
@@ -43,9 +46,10 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 /**
- * 概览页：日期 + 今日/本周累计，下方一张可切换的雷达图卡片。
- * Home: the date, today's and this week's totals, then one radar card that toggles
- * between class-I/class-II events and between today-vs-yesterday / thisweek-vs-lastweek.
+ * 概览页：日期 + 今日/本周/本月三条累计，下方一张可切换的雷达图卡片。
+ * Home: the date, today/week/month totals, then one radar card that toggles
+ * between class-I/class-II events and between today-vs-yesterday / thisweek-vs-lastweek /
+ * thismonth-vs-lastmonth.
  */
 @Composable
 fun HomeScreen(
@@ -53,6 +57,7 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    LaunchedEffect(Unit) { viewModel.refreshToday() }
 
     Column(
         modifier = modifier
@@ -68,7 +73,7 @@ fun HomeScreen(
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground,
         )
-        // 今日 / 本周 两条合计并排一行，样式一致
+        // 今日 / 本周 / 本月 三条合计并排一行，与雷达图的时间档一一对应
         Row(modifier = Modifier.fillMaxWidth().padding(top = 12.dp)) {
             StatBlock(
                 label = stringResource(R.string.home_stat_today),
@@ -78,6 +83,11 @@ fun HomeScreen(
             StatBlock(
                 label = stringResource(R.string.home_stat_week),
                 value = TimeRules.formatMinutes(state.weekMinutes),
+                modifier = Modifier.weight(1f),
+            )
+            StatBlock(
+                label = stringResource(R.string.home_stat_month),
+                value = TimeRules.formatMinutes(state.monthMinutes),
                 modifier = Modifier.weight(1f),
             )
         }
@@ -93,33 +103,36 @@ fun HomeScreen(
     }
 }
 
-/** 日期下方并排的合计块：上小标签、下主色数值。 */
+/** 日期下方并排的合计块：上小标签、下主色大号衬线数值。 */
 @Composable
 private fun StatBlock(label: String, value: String, modifier: Modifier = Modifier) {
     Column(modifier = modifier) {
         Text(
             text = label,
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Text(
             text = value,
-            style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.SemiBold,
+            style = NumberSerif,
             color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(top = 2.dp),
+            modifier = Modifier.padding(top = 4.dp),
         )
     }
 }
 
-/** 雷达图卡片：顶部当期总量，中间图形，底部两组切换。 */
+/** 雷达图卡片：图形 + 居中图例 + 两组切换；总量看上方统计块，不在卡片里重复。 */
 @Composable
 private fun RadarCard(
     state: HomeState,
     onDimension: (RadarDimension) -> Unit,
     onPeriod: (RadarPeriod) -> Unit,
 ) {
-    val weekly = state.period == RadarPeriod.WEEK
+    val (currentLabelRes, previousLabelRes) = when (state.period) {
+        RadarPeriod.TODAY -> R.string.home_series_today to R.string.home_series_yesterday
+        RadarPeriod.WEEK -> R.string.home_series_week to R.string.home_series_last_week
+        RadarPeriod.MONTH -> R.string.home_series_month to R.string.home_series_last_month
+    }
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -129,14 +142,6 @@ private fun RadarCard(
             .padding(horizontal = 16.dp, vertical = 18.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(
-            text = TimeRules.formatMinutes(state.headlineMinutes),
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.SemiBold,
-            color = MaterialTheme.colorScheme.primary,
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
         RadarChart(
             axes = state.radar.axes,
             current = state.radar.current.values,
@@ -149,17 +154,16 @@ private fun RadarCard(
         Spacer(modifier = Modifier.height(6.dp))
 
         RadarLegend(
-            currentLabel = stringResource(if (weekly) R.string.home_series_week else R.string.home_series_today),
-            previousLabel = stringResource(if (weekly) R.string.home_series_last_week else R.string.home_series_yesterday),
-            currentMinutes = state.categoryMinutesCurrent,
-            previousMinutes = state.categoryMinutesPrevious,
+            currentLabel = stringResource(currentLabelRes),
+            previousLabel = stringResource(previousLabelRes),
         )
 
         Spacer(modifier = Modifier.height(18.dp))
+        // 一类/二类标签永远跟着分类设置走（固定两类，名字可在"时间分类"里改）
         ChoiceRow(
             options = RadarDimension.entries.toList(),
             selected = state.dimension,
-            labelOf = { stringResource(dimensionLabel(it)) },
+            labelOf = { CategoryStore.nameAt(if (it == RadarDimension.CLASS_II) 1 else 0) },
             onSelect = onDimension,
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -173,19 +177,15 @@ private fun RadarCard(
 }
 
 @Composable
-private fun RadarLegend(
-    currentLabel: String,
-    previousLabel: String,
-    currentMinutes: Int,
-    previousMinutes: Int,
-) {
+private fun RadarLegend(currentLabel: String, previousLabel: String) {
     Row(
         modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
         LegendDot(MaterialTheme.colorScheme.primary)
         Text(
-            text = stringResource(R.string.home_radar_legend_item, currentLabel, TimeRules.formatMinutes(currentMinutes)),
+            text = currentLabel,
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.padding(start = 6.dp),
@@ -193,7 +193,7 @@ private fun RadarLegend(
         Spacer(modifier = Modifier.width(18.dp))
         LegendDot(MaterialTheme.colorScheme.secondary)
         Text(
-            text = stringResource(R.string.home_radar_legend_item, previousLabel, TimeRules.formatMinutes(previousMinutes)),
+            text = previousLabel,
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(start = 6.dp),
@@ -212,15 +212,10 @@ private fun LegendDot(color: Color) {
 }
 
 @StringRes
-private fun dimensionLabel(dimension: RadarDimension): Int = when (dimension) {
-    RadarDimension.CLASS_I -> R.string.home_dim_class_i
-    RadarDimension.CLASS_II -> R.string.home_dim_class_ii
-}
-
-@StringRes
 private fun periodLabel(period: RadarPeriod): Int = when (period) {
     RadarPeriod.TODAY -> R.string.home_period_today
     RadarPeriod.WEEK -> R.string.home_period_week
+    RadarPeriod.MONTH -> R.string.home_period_month
 }
 
 private val CHINESE_DATE: DateTimeFormatter =

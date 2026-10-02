@@ -65,6 +65,7 @@ fun AddRecordScreen(
     modifier: Modifier = Modifier,
 ) {
     val form = viewModel.form
+    LaunchedEffect(Unit) { viewModel.alignWithToday() }
     var showDatePicker by remember { mutableStateOf(false) }
     var pickStart by remember { mutableStateOf(false) }
     var pickEnd by remember { mutableStateOf(false) }

@@ -37,7 +37,7 @@ import com.lyubishchev.timekeeper.domain.CategoryStore
 import com.lyubishchev.timekeeper.domain.TimeRules
 
 /**
- * 时间分类维护：最多三级，每个节点下最多 8 个子项。
+ * 时间分类维护：分类固定两类（写死），每类下最多 8 个事件；事件可新建、改名、删除。
  * 统计按名字匹配：改名等于新建（从零累计），保留原名的继续累加历史。
  */
 @Composable
@@ -89,23 +89,8 @@ fun CategoryEditorScreen(
             modifier = Modifier.padding(top = 6.dp),
         )
 
-        Spacer(modifier = Modifier.height(14.dp))
-
-        OutlinedButton(
-            onClick = {
-                input = InputConfig(
-                    titleRes = R.string.cat_add_category,
-                    initial = "",
-                    onConfirm = { name -> CategoryStore.addCategory(name) },
-                )
-            },
-            modifier = Modifier.fillMaxWidth(),
-        ) {
-            Text(stringResource(R.string.cat_add_category))
-        }
-
         CategoryStore.categories.forEachIndexed { ci, cat ->
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.height(14.dp))
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -125,31 +110,6 @@ fun CategoryEditorScreen(
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier.padding(start = 10.dp),
                     )
-                    Spacer(modifier = Modifier.weight(1f))
-                    MiniAction(R.string.cat_rename) {
-                        input = InputConfig(
-                            titleRes = R.string.cat_rename,
-                            initial = cat.name,
-                            onConfirm = { CategoryStore.renameCategory(ci, it) },
-                        )
-                    }
-                    MiniAction(R.string.cat_delete) {
-                        pendingDelete = DeleteConfig(
-                            name = cat.name,
-                            onConfirm = { CategoryStore.deleteCategory(ci) },
-                        )
-                    }
-                    MiniAction(R.string.cat_add_event) {
-                        if (cat.events.size >= CategoryStore.MAX_CHILDREN) {
-                            notice = maxChildrenHint
-                        } else {
-                            input = InputConfig(
-                                titleRes = R.string.cat_add_event,
-                                initial = "",
-                                onConfirm = { CategoryStore.addEvent(ci, it) },
-                            )
-                        }
-                    }
                 }
 
                 if (cat.events.isEmpty()) {
@@ -162,8 +122,12 @@ fun CategoryEditorScreen(
                 }
 
                 cat.events.forEachIndexed { ei, event ->
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Row(verticalAlignment = Alignment.CenterVertically) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 10.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
                         Text(
                             text = event.name,
                             style = MaterialTheme.typography.bodyLarge,
@@ -183,46 +147,25 @@ fun CategoryEditorScreen(
                                 onConfirm = { CategoryStore.deleteEvent(ci, ei) },
                             )
                         }
-                        MiniAction(R.string.cat_add_sub) {
-                            if (event.subs.size >= CategoryStore.MAX_CHILDREN) {
-                                notice = maxChildrenHint
-                            } else {
-                                input = InputConfig(
-                                    titleRes = R.string.cat_add_sub,
-                                    initial = "",
-                                    onConfirm = { CategoryStore.addSub(ci, ei, it) },
-                                )
-                            }
-                        }
                     }
-                    event.subs.forEachIndexed { si, sub ->
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 22.dp, top = 4.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                        ) {
-                            Text(
-                                text = "· $sub",
-                                style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                }
+
+                Spacer(modifier = Modifier.height(12.dp))
+                OutlinedButton(
+                    onClick = {
+                        if (cat.events.size >= CategoryStore.MAX_CHILDREN) {
+                            notice = maxChildrenHint
+                        } else {
+                            input = InputConfig(
+                                titleRes = R.string.cat_add_event,
+                                initial = "",
+                                onConfirm = { CategoryStore.addEvent(ci, it) },
                             )
-                            Spacer(modifier = Modifier.weight(1f))
-                            MiniAction(R.string.cat_rename) {
-                                input = InputConfig(
-                                    titleRes = R.string.cat_rename,
-                                    initial = sub,
-                                    onConfirm = { CategoryStore.renameSub(ci, ei, si, it) },
-                                )
-                            }
-                            MiniAction(R.string.cat_delete) {
-                                pendingDelete = DeleteConfig(
-                                    name = sub,
-                                    onConfirm = { CategoryStore.deleteSub(ci, ei, si) },
-                                )
-                            }
                         }
-                    }
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(stringResource(R.string.cat_add_event))
                 }
             }
         }
@@ -299,7 +242,7 @@ fun CategoryEditorScreen(
 }
 
 @Composable
-private fun MiniAction(labelRes: Int, onClick: () -> Unit) {
+private fun MiniAction(@StringRes labelRes: Int, onClick: () -> Unit) {
     Text(
         text = stringResource(labelRes),
         style = MaterialTheme.typography.labelMedium,

@@ -17,6 +17,9 @@ interface TimeLogDao {
     @Insert
     suspend fun insert(entry: TimeLogEntity): Long
 
+    @Insert
+    suspend fun insertAll(entries: List<TimeLogEntity>): List<Long>
+
     @Update
     suspend fun update(entry: TimeLogEntity)
 
@@ -96,6 +99,34 @@ interface TimeLogDao {
     )
     fun observeBreakdownByMonth(fromDate: String, toDate: String): Flow<List<MonthEventMinutes>>
 
+    /** 区间内按 (年份, ISO 周) 聚合，记录页周视图一次列出全年 */
+    @Query(
+        """
+        SELECT year,
+               week_number AS week,
+               category,
+               event,
+               COALESCE(SUM(duration_minutes), 0) AS minutes
+        FROM time_logs
+        WHERE date BETWEEN :fromDate AND :toDate
+        GROUP BY year, week_number, category, event
+        """
+    )
+    fun observeBreakdownByWeek(fromDate: String, toDate: String): Flow<List<WeekEventMinutes>>
+
+    /** 全表按年份聚合，年视图因此天然只列出有记录的年份 */
+    @Query(
+        """
+        SELECT year,
+               category,
+               event,
+               COALESCE(SUM(duration_minutes), 0) AS minutes
+        FROM time_logs
+        GROUP BY year, category, event
+        """
+    )
+    fun observeBreakdownByYear(): Flow<List<YearEventMinutes>>
+
     /** 最近若干条，用于列表页 / most recent rows for the log list */
     @Query("SELECT * FROM time_logs ORDER BY date DESC, start_time DESC LIMIT :limit")
     fun observeRecent(limit: Int): Flow<List<TimeLogEntity>>
@@ -109,6 +140,10 @@ interface TimeLogDao {
         """
     )
     suspend fun entriesInRange(fromDate: String, toDate: String): List<TimeLogEntity>
+
+    /** 全表记录，导入去重时用 / whole table, for import dedup */
+    @Query("SELECT * FROM time_logs ORDER BY date ASC, start_time ASC, id ASC")
+    suspend fun entriesAll(): List<TimeLogEntity>
 
     /** 当天"结束最晚"的那条记录的结束时间，用来自动承接开始时间 */
     @Query("SELECT MAX(end_time) FROM time_logs WHERE date = :date")
@@ -128,6 +163,23 @@ data class EventMinutes(
 /** 月视图的 GROUP BY 结果：自然月 + 分类 + 事件。 */
 data class MonthEventMinutes(
     val month: Int,
+    val category: String,
+    val event: String,
+    val minutes: Int,
+)
+
+/** 周视图的 GROUP BY 结果：年份 + ISO 周 + 分类 + 事件。 */
+data class WeekEventMinutes(
+    val year: Int,
+    val week: Int,
+    val category: String,
+    val event: String,
+    val minutes: Int,
+)
+
+/** 年视图的 GROUP BY 结果：年份 + 分类 + 事件。 */
+data class YearEventMinutes(
+    val year: Int,
     val category: String,
     val event: String,
     val minutes: Int,

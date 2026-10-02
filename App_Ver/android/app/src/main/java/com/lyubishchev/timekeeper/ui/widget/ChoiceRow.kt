@@ -30,12 +30,14 @@ fun <T> ChoiceRow(
                 onClick = { onSelect(option) },
                 shape = SegmentedButtonDefaults.itemShape(index = index, count = options.size),
                 colors = SegmentedButtonDefaults.colors(
-                    activeContainerColor = MaterialTheme.colorScheme.primary,
-                    activeContentColor = MaterialTheme.colorScheme.onPrimary,
+                    activeContainerColor = MaterialTheme.colorScheme.primaryContainer,
+                    activeContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
                     inactiveContainerColor = Color.Transparent,
                     inactiveContentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 ),
-                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
+                border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                // 选中态只靠底色区分，去掉 M3 默认那颗前导对勾
+                icon = {},
             ) {
                 Text(labelOf(option), style = MaterialTheme.typography.labelLarge)
             }

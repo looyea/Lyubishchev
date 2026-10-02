@@ -30,10 +30,21 @@ class TimeLogRepository(private val dao: TimeLogDao) {
     fun breakdownOfMonthYear(year: Int) =
         dao.observeBreakdownByMonth("$year-01-01", "$year-12-31")
 
+    /** 某一年逐 ISO 周的分布 / per-ISO-week breakdown inside one calendar year */
+    fun breakdownOfWeeksOfYear(fromDate: String, toDate: String) =
+        dao.observeBreakdownByWeek(fromDate, toDate)
+
+    /** 所有留有记录的年份 / every year that actually has rows */
+    fun breakdownOfYears() = dao.observeBreakdownByYear()
+
     fun recent(limit: Int = 200) = dao.observeRecent(limit)
 
     suspend fun entriesInRange(fromDate: String, toDate: String) =
         dao.entriesInRange(fromDate, toDate)
+
+    suspend fun entriesAll() = dao.entriesAll()
+
+    suspend fun insertAll(entries: List<TimeLogEntity>) = dao.insertAll(entries)
 
     suspend fun lastEndTime(date: String): String? = dao.lastEndTime(date)
 
