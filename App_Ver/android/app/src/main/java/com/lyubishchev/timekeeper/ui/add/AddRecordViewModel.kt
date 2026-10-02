@@ -6,8 +6,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.lyubishchev.timekeeper.R
 import com.lyubishchev.timekeeper.TimekeeperApp
 import com.lyubishchev.timekeeper.domain.TimeRules
+import com.lyubishchev.timekeeper.i18n.AppLocale
 import kotlinx.coroutines.launch
 
 /**
@@ -144,7 +146,7 @@ class AddRecordViewModel(application: Application) : AndroidViewModel(applicatio
                 endTime = "",
                 note = "",
                 saving = false,
-                feedback = "已记录 ${TimeRules.formatMinutes(minutes)}",
+                feedback = AppLocale.str(R.string.add_saved, TimeRules.formatMinutes(minutes)),
             )
         }
     }

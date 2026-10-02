@@ -1,5 +1,7 @@
 package com.lyubishchev.timekeeper.domain
 
+import com.lyubishchev.timekeeper.R
+import com.lyubishchev.timekeeper.i18n.AppLocale
 import java.time.Duration
 import java.time.LocalDate
 import java.time.LocalTime
@@ -33,6 +35,16 @@ object TimeRules {
     /** 记录页用罗马数字代替类别名 / roman badge for a category */
     fun roman(category: String): String = CategoryStore.roman(category)
 
+    /**
+     * 两个固定分类是系统文字，显示时随界面语言走；数据库与统计仍按中文原名匹配。
+     * The two fixed classes are app chrome, so they localize; lookups keep using the stored name.
+     */
+    fun categoryLabel(category: String): String = when (category) {
+        CATEGORY_L1 -> AppLocale.str(R.string.category_l1)
+        CATEGORY_L2 -> AppLocale.str(R.string.category_l2)
+        else -> category
+    }
+
     val DATE: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     val TIME: DateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm")
 
@@ -48,14 +60,14 @@ object TimeRules {
         return minutes.toInt()
     }
 
-    /** "1小时30分钟" 式可读时长 / human readable duration */
+    /** "1小时30分钟" 式可读时长，单位跟着应用语言走 / human readable duration, localized */
     fun formatMinutes(minutes: Int): String {
         val h = minutes / 60
         val m = minutes % 60
         return when {
-            h == 0 -> "${m}分钟"
-            m == 0 -> "${h}小时"
-            else -> "${h}小时${m}分钟"
+            h == 0 -> AppLocale.str(R.string.duration_m, m)
+            m == 0 -> AppLocale.str(R.string.duration_h, h)
+            else -> AppLocale.str(R.string.duration_hm, h, m)
         }
     }
 

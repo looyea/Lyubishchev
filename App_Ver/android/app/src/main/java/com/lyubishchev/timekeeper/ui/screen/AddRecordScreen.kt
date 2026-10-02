@@ -47,12 +47,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lyubishchev.timekeeper.R
 import com.lyubishchev.timekeeper.domain.CategoryStore
 import com.lyubishchev.timekeeper.domain.TimeRules
+import com.lyubishchev.timekeeper.i18n.AppLocale
 import com.lyubishchev.timekeeper.ui.add.AddRecordViewModel
 import kotlinx.coroutines.delay
 import java.time.LocalDate
 import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 /**
  * 记一笔：与 Web 版 TimeEntry 同字段的移动表单（日期 / 起止 / 时长 / 分类 / 事件 / 备注 / 常用）。
@@ -98,7 +97,7 @@ fun AddRecordScreen(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = chineseDate(form.date),
+                text = longDate(form.date),
                 style = MaterialTheme.typography.titleMedium,
                 color = if (form.backfillEnabled) {
                     MaterialTheme.colorScheme.primary
@@ -161,7 +160,7 @@ fun AddRecordScreen(
                 FilterChip(
                     selected = form.category == category,
                     onClick = { viewModel.onCategoryChange(category) },
-                    label = { Text(category) },
+                    label = { Text(TimeRules.categoryLabel(category)) },
                 )
             }
         }
@@ -383,10 +382,8 @@ private fun TimePickerDialogField(
     }
 }
 
-private val CHINESE_DATE: DateTimeFormatter =
-    DateTimeFormatter.ofPattern("yyyy 年 M 月 d 日 EEEE", Locale.CHINA)
-
-private fun chineseDate(isoDate: String): String =
-    LocalDate.parse(isoDate, TimeRules.DATE).format(CHINESE_DATE)
+private fun longDate(isoDate: String): String =
+    LocalDate.parse(isoDate, TimeRules.DATE)
+        .format(AppLocale.dateFormatter(R.string.pattern_date_long))
 
 private fun currentHour(): Int = java.time.LocalTime.now().hour

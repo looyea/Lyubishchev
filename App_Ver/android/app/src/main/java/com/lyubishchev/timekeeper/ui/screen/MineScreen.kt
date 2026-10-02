@@ -6,6 +6,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,11 +39,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.lyubishchev.timekeeper.R
+import com.lyubishchev.timekeeper.domain.AppMeta
+import com.lyubishchev.timekeeper.domain.BuiltinTemplate
+import com.lyubishchev.timekeeper.domain.ReportTemplateStore
+import com.lyubishchev.timekeeper.i18n.AppLanguage
+import com.lyubishchev.timekeeper.i18n.AppLocale
 import com.lyubishchev.timekeeper.ui.export.ExportScreen
 import com.lyubishchev.timekeeper.ui.export.ExportViewModel
 import com.lyubishchev.timekeeper.ui.export.ImportViewModel
@@ -69,7 +78,10 @@ fun MineScreen(
     var showCategoryEditor by rememberSaveable { mutableStateOf(false) }
     var showQuickEditor by rememberSaveable { mutableStateOf(false) }
     var showExport by rememberSaveable { mutableStateOf(false) }
+    var showTemplateScreen by rememberSaveable { mutableStateOf(false) }
+    var showAiDialog by rememberSaveable { mutableStateOf(false) }
     var showStyleDialog by rememberSaveable { mutableStateOf(false) }
+    var showLanguageDialog by rememberSaveable { mutableStateOf(false) }
     var showVersionHistory by rememberSaveable { mutableStateOf(false) }
     var showFullExportDialog by rememberSaveable { mutableStateOf(false) }
 
@@ -87,6 +99,10 @@ fun MineScreen(
     }
     if (showExport) {
         ExportScreen(onBack = { showExport = false })
+        return
+    }
+    if (showTemplateScreen) {
+        ReportTemplateScreen(onBack = { showTemplateScreen = false })
         return
     }
     if (showVersionHistory) {
@@ -130,13 +146,27 @@ fun MineScreen(
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 modifier = Modifier.padding(top = 4.dp),
             )
-            Text(
-                text = stringResource(R.string.mine_stat_entries, viewModel.entryCount),
-                style = MaterialTheme.typography.bodyMedium,
-                fontWeight = FontWeight.Medium,
-                color = MaterialTheme.colorScheme.onPrimaryContainer,
-                modifier = Modifier.padding(top = 10.dp),
-            )
+            Column(
+                modifier = Modifier.padding(top = 12.dp),
+                verticalArrangement = Arrangement.spacedBy(5.dp),
+            ) {
+                val days = AppMeta.daysTogether(context)
+                HeaderStat(pluralStringResource(R.plurals.mine_stat_days, days, days))
+                HeaderStat(
+                    stringResource(
+                        R.string.mine_stat_total,
+                        viewModel.totalMinutes / 60,
+                        viewModel.totalMinutes % 60,
+                    ),
+                )
+                HeaderStat(
+                    pluralStringResource(
+                        R.plurals.mine_stat_entries,
+                        viewModel.entryCount,
+                        viewModel.entryCount,
+                    ),
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -161,6 +191,18 @@ fun MineScreen(
             SettingRow(
                 title = stringResource(R.string.mine_export),
                 onClick = { showExport = true },
+            )
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+            SettingRow(
+                title = stringResource(R.string.mine_template),
+                value = templateLabel(),
+                onClick = { showTemplateScreen = true },
+            )
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+            SettingRow(
+                title = stringResource(R.string.mine_ai_api),
+                value = stringResource(R.string.mine_ai_api_value),
+                onClick = { showAiDialog = true },
             )
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
             SettingRow(
@@ -189,6 +231,15 @@ fun MineScreen(
                 title = stringResource(R.string.mine_style),
                 value = stringResource(paletteLabel(ThemePrefs.palette)),
                 onClick = { showStyleDialog = true },
+            )
+            HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
+            SettingRow(
+                title = stringResource(R.string.mine_language),
+                value = stringResource(
+                    if (AppLocale.choice == AppLanguage.SYSTEM) R.string.language_system
+                    else languageLabel(AppLocale.choice),
+                ),
+                onClick = { showLanguageDialog = true },
             )
             HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
             SettingRow(
@@ -232,6 +283,29 @@ fun MineScreen(
                 showStyleDialog = false
             },
             onDismiss = { showStyleDialog = false },
+        )
+    }
+
+    if (showLanguageDialog) {
+        LanguagePickerDialog(
+            onPick = { chosen ->
+                AppLocale.setLanguage(context, chosen)
+                showLanguageDialog = false
+                // 语言是靠 Activity 的 override configuration 生效的，重建一次整棵树才会换文案
+                (context as? android.app.Activity)?.recreate()
+            },
+            onDismiss = { showLanguageDialog = false },
+        )
+    }
+
+    if (showAiDialog) {
+        AlertDialog(
+            onDismissRequest = { showAiDialog = false },
+            title = { Text(stringResource(R.string.mine_ai_api)) },
+            text = { Text(stringResource(R.string.mine_ai_api_dialog)) },
+            confirmButton = {
+                TextButton(onClick = { showAiDialog = false }) { Text(stringResource(R.string.dialog_ok)) }
+            },
         )
     }
 
@@ -306,7 +380,7 @@ private fun FullExportOption(label: String, onClick: () -> Unit) {
     )
 }
 
-/** 设置里的一行：标题在左，右侧可选一个说明文字，末尾总是那枚进入次级页的箭头。 */
+/** 设置里的一行：标题左对齐，说明文字右对齐，末尾那枚进入次级页的箭头始终贴着右边缘。 */
 @Composable
 private fun SettingRow(title: String, value: String? = null, onClick: () -> Unit) {
     Row(
@@ -320,13 +394,18 @@ private fun SettingRow(title: String, value: String? = null, onClick: () -> Unit
             text = title,
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface,
+            modifier = Modifier.weight(1f),
         )
-        Spacer(modifier = Modifier.weight(1f))
         if (value != null) {
+            // fill 必须为 true：不填满权重槽位的话，箭头会紧跟在文字后面，看着像往左偏了一截
             Text(
                 text = value,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.primary,
+                textAlign = TextAlign.End,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1.4f),
             )
             Spacer(modifier = Modifier.width(6.dp))
         }
@@ -381,14 +460,14 @@ private fun themeModeLabel(mode: ThemeMode): Int = when (mode) {
     ThemeMode.DARK -> R.string.mine_theme_dark
 }
 
-/** 主题选择：列出四套控件配色，每套给出主/辅/第三色的色卡。 */
+/** 主题选择：列出全部控件配色，每套给出主/辅/第三色的色卡。 */
 @Composable
 private fun PalettePickerDialog(onPick: (ThemePalette) -> Unit, onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         title = { Text(stringResource(R.string.mine_style_dialog_title)) },
         text = {
-            Column {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                 ThemePalette.entries.forEach { palette ->
                     Row(
                         modifier = Modifier
@@ -436,10 +515,95 @@ private fun PaletteDot(color: Color) {
     )
 }
 
+/** 顶部统计卡里的一行：陪伴天数 / 累计时长 / 记录条数。 */
+@Composable
+private fun HeaderStat(text: String) {
+    Text(
+        text = text,
+        style = MaterialTheme.typography.bodyMedium,
+        fontWeight = FontWeight.Medium,
+        color = MaterialTheme.colorScheme.onPrimaryContainer,
+    )
+}
+
+/** 设置行右侧显示当前选用的报告模板名。 */
+@Composable
+private fun templateLabel(): String {
+    val selected = ReportTemplateStore.selectedId
+    val builtin = BuiltinTemplate.entries.firstOrNull { it.id == selected }
+    if (builtin != null) return stringResource(builtin.labelRes)
+    return ReportTemplateStore.custom.firstOrNull { it.uri == selected }?.name
+        ?: stringResource(R.string.tpl_builtin_md)
+}
+
 @StringRes
 private fun paletteLabel(palette: ThemePalette): Int = when (palette) {
     ThemePalette.MORANDI -> R.string.mine_palette_morandi
     ThemePalette.TIFFANY -> R.string.mine_palette_tiffany
     ThemePalette.OCEAN -> R.string.mine_palette_ocean
     ThemePalette.FOREST -> R.string.mine_palette_forest
+    ThemePalette.CRIMSON -> R.string.mine_palette_crimson
+    ThemePalette.AMBER -> R.string.mine_palette_amber
+    ThemePalette.ROSE -> R.string.mine_palette_rose
+    ThemePalette.GRAPHITE -> R.string.mine_palette_graphite
+    ThemePalette.OBSIDIAN -> R.string.mine_palette_obsidian
+    ThemePalette.SOLARIZED -> R.string.mine_palette_solarized
+}
+
+/** 语言选择：跟随系统 + 七种内置语言，每种都用本族语写出自己的名字。 */
+@Composable
+private fun LanguagePickerDialog(onPick: (AppLanguage) -> Unit, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(stringResource(R.string.language_dialog_title)) },
+        text = {
+            Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+                Text(
+                    text = stringResource(R.string.language_hint),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(bottom = 8.dp),
+                )
+                AppLanguage.entries.forEach { option ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(10.dp))
+                            .clickable { onPick(option) }
+                            .padding(vertical = 8.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        RadioButton(
+                            selected = option == AppLocale.choice,
+                            onClick = { onPick(option) },
+                        )
+                        Text(
+                            text = stringResource(
+                                if (option == AppLanguage.SYSTEM) R.string.language_system
+                                else languageLabel(option),
+                            ),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                    }
+                }
+            }
+        },
+        confirmButton = {},
+        dismissButton = {
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.dialog_cancel)) }
+        },
+    )
+}
+
+@StringRes
+private fun languageLabel(language: AppLanguage): Int = when (language) {
+    AppLanguage.SYSTEM -> R.string.language_system
+    AppLanguage.ZH -> R.string.language_zh
+    AppLanguage.EN -> R.string.language_en
+    AppLanguage.ES -> R.string.language_es
+    AppLanguage.PT -> R.string.language_pt
+    AppLanguage.DE -> R.string.language_de
+    AppLanguage.NL -> R.string.language_nl
+    AppLanguage.JA -> R.string.language_ja
 }

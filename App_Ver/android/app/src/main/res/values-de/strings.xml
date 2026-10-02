@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ljubischew-Zeit</string>
+
+    <!-- Bottom tabs -->
+    <string name="tab_home">Übersicht</string>
+    <string name="tab_log">Tagebuch</string>
+    <string name="tab_add">Erfassen</string>
+    <string name="tab_report">Berichte</string>
+    <string name="tab_mine">Einstellungen</string>
+
+    <!-- Overview / home -->
+    <string name="home_stat_today">Heute</string>
+    <string name="home_stat_week">Diese Woche</string>
+    <string name="home_stat_month">Diesen Monat</string>
+    <string name="home_period_today">Heute</string>
+    <string name="home_period_week">Woche</string>
+    <string name="home_period_month">Monat</string>
+    <string name="home_series_today">Heute</string>
+    <string name="home_series_yesterday">Gestern</string>
+    <string name="home_series_week">Diese Woche</string>
+    <string name="home_series_last_week">Letzte Woche</string>
+    <string name="home_series_month">Dieser Monat</string>
+    <string name="home_series_last_month">Letzter Monat</string>
+    <string name="placeholder_coming_soon">Modul noch in Arbeit</string>
+
+    <!-- Log page / read-only log browser -->
+    <string name="log_mode_day">Tag</string>
+    <string name="log_mode_week">Woche</string>
+    <string name="log_mode_month">Monat</string>
+    <string name="log_mode_year">Jahr</string>
+    <string name="log_week_title">Woche %1$d</string>
+    <string name="log_week_current_suffix">(aktuelle Woche)</string>
+    <string name="log_month_title">Monat %1$d</string>
+    <string name="log_year_title">Jahr %1$d</string>
+    <string name="log_total">Gesamt %1$s</string>
+    <string name="log_cat_totals">Summe Klasse I %1$s · Summe Klasse II %2$s</string>
+    <string name="log_empty">Keine Einträge in diesem Zeitraum</string>
+
+    <!-- Settings -->
+    <string name="mine_title">Einstellungen</string>
+    <string name="mine_header_subtitle">Die Zeit zu begleiten heißt, das Leben zu begleiten. Die Zeit zu erinnern heißt, das Leben zu erinnern.</string>
+    <plurals name="mine_stat_days">
+        <item quantity="one">%1$d Tag an Ihrer Seite</item>
+        <item quantity="other">%1$d Tage an Ihrer Seite</item>
+    </plurals>
+    <string name="mine_stat_total">Insgesamt %1$d Std. %2$d Min erfasst</string>
+    <plurals name="mine_stat_entries">
+        <item quantity="one">%1$d Eintrag erfasst</item>
+        <item quantity="other">%1$d Einträge erfasst</item>
+    </plurals>
+    <string name="mine_theme">Farbmodus</string>
+    <string name="mine_theme_dialog_title">Farbmodus wählen</string>
+    <string name="mine_theme_system">System folgen</string>
+    <string name="mine_theme_light">Hell</string>
+    <string name="mine_theme_dark">Dunkel</string>
+    <string name="mine_version">Version</string>
+    <string name="mine_category">Zeitkategorien</string>
+    <string name="mine_quick">Schnellzugriff</string>
+    <string name="mine_export">Zeitraum exportieren</string>
+    <string name="mine_export_all">Alles exportieren</string>
+    <string name="mine_export_all_value">Ganze DB (db/CSV)</string>
+    <string name="export_all_share_title">Alles exportieren</string>
+    <string name="export_all_hint">Dateiformat für den Vollexport wählen:</string>
+    <string name="export_all_db">SQLite-Datenbank (.db, per Vollimport wiederherstellbar)</string>
+    <string name="export_all_csv">CSV-Tabelle (.csv, direkt in Excel zu öffnen)</string>
+    <string name="mine_import">Alles importieren</string>
+    <string name="mine_import_value">db/CSV zusammenführen</string>
+    <string name="import_busy">Import läuft…</string>
+    <string name="import_result_text">Zusammengeführt: %1$d neue Einträge, %2$d Duplikate übersprungen (Datei enthält %3$d Einträge).</string>
+    <string name="version_title">Versionsverlauf</string>
+    <string name="version_hint">Aktuelle Version v%1$s · neueste zuerst</string>
+    <string name="version_current_tag">Aktuelle Version</string>
+    <string name="mine_style">Theme</string>
+    <string name="mine_style_dialog_title">Theme-Farbschema wählen</string>
+    <string name="mine_palette_morandi">Morandi Graugrün</string>
+    <string name="mine_palette_tiffany">Tiffany-Blau</string>
+    <string name="mine_palette_ocean">Ozeanblau</string>
+    <string name="mine_palette_forest">Waldgrün</string>
+    <string name="mine_palette_crimson">Karminrot</string>
+    <string name="mine_palette_amber">Bernstein</string>
+    <string name="mine_palette_rose">Rosé</string>
+    <string name="mine_palette_graphite">Graphitgrau</string>
+    <string name="mine_palette_obsidian">Obsidienschwarz</string>
+    <string name="mine_palette_solarized">Solarized</string>
+
+    <!-- Range export -->
+    <string name="export_title">Zeitraum exportieren</string>
+    <string name="export_hint">Start- und Enddatum sowie Dateiformat wählen, Zeitraumübersicht bestätigen, Datei erzeugen und dann Speichern oder Teilen auswählen</string>
+    <string name="export_range_label">Zeitraum</string>
+    <string name="export_format_label">Dateiformat</string>
+    <string name="export_summary_label">Zeitraumübersicht</string>
+    <string name="export_total">Gesamt %1$s</string>
+    <string name="export_radar_note">Die Datei enthält je Kategorie ein Radardiagramm sowie alle Einzelposten (Jahr / Datum / Wochentag / Kategorie / Ereignis / Start/Ende / Dauer / Notiz)</string>
+    <string name="export_run">Erzeugen und teilen</string>
+    <string name="export_busy">Erzeugung läuft…</string>
+    <string name="export_empty">Keine Einträge in diesem Zeitraum</string>
+    <string name="export_invalid_range">Startdatum muss vor dem Enddatum liegen</string>
+    <string name="export_saved">Bericht erstellt, bitte im Teilen-Fenster einen Speicherort wählen</string>
+    <string name="export_share_title">Bericht exportieren</string>
+
+    <!-- Add record -->
+    <string name="add_title">Neuer Eintrag</string>
+    <string name="add_hint">Tagsüber erfassen: Nach jeder beendeten Aufgabe einen Eintrag anlegen. Die Startzeit übernimmt automatisch die letzte Endzeit des Tages (auch bei zwei gleichzeitig laufenden Einträgen) und bleibt manuell anpassbar</string>
+    <string name="field_date">Datum</string>
+    <string name="field_start">Start</string>
+    <string name="field_end">Ende</string>
+    <string name="field_duration">Dauer</string>
+    <string name="field_category">Kategorie</string>
+    <string name="category_l1">Zeit Klasse I</string>
+    <string name="category_l2">Zeit Klasse II</string>
+    <string name="field_event">Ereignis</string>
+    <string name="field_note">Notiz</string>
+    <string name="add_note_placeholder">Optional</string>
+    <string name="add_duration_pending">Zeit noch offen</string>
+    <string name="add_quick_label">Häufig</string>
+    <string name="add_save">Speichern und weiter</string>
+    <string name="add_err_time">Bitte Start- und Endzeit angeben</string>
+    <string name="add_err_event">Bitte ein Ereignis wählen</string>
+    <string name="add_err_order">Endzeit muss nach der Startzeit liegen</string>
+    <string name="add_saved">%1$s erfasst</string>
+    <string name="add_backfill_label">Nachtrag</string>
+    <string name="add_duration_label">Dauer des Eintrags:</string>
+    <string name="add_time_pending">Offen</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Abbrechen</string>
+
+    <!-- Category tree editor -->
+    <string name="cat_editor_title">Zeitkategorien</string>
+    <string name="cat_editor_hint">Die zwei Kategorien sind fest vorgegeben; jede enthält bis zu 8 Ereignisse (Unterkategorien), die sich anlegen, umbenennen und löschen lassen. Umbenennen wirkt wie neu anlegen: der neue Name beginnt bei null, der alte behält seine Historie.</string>
+    <string name="cat_add_event">Ereignis hinzufügen</string>
+    <string name="cat_rename">Umbenennen</string>
+    <string name="cat_delete">Löschen</string>
+    <string name="cat_back">Zurück</string>
+    <string name="cat_max_children">Maximal 8 Ereignisse pro Kategorie</string>
+    <string name="cat_input_title">Benennen</string>
+    <string name="cat_delete_confirm_title">Löschen bestätigen</string>
+    <string name="cat_delete_confirm_text">Nach dem Löschen von „%1$s" sammelt der Name nicht weiter; die Alt-Daten bleiben in der Datenbank.</string>
+
+    <!-- Quick pick editor -->
+    <string name="pick_editor_title">Schnellzugriff</string>
+    <string name="pick_editor_hint">Jeder Eintrag besteht aus Kategorie, Ereignis und Dauer; ein Tipp wendet ihn in „Erfassen" an.</string>
+    <string name="pick_add_title">Häufigen Eintrag hinzufügen</string>
+    <string name="pick_category_label">Kategorie (Ebene 1)</string>
+    <string name="pick_event_label">Ereignis (Ebene 2)</string>
+    <string name="pick_minutes_label">Dauer</string>
+    <string name="pick_item_label">%1$s · %2$s · %3$s</string>
+    <string name="pick_no_event">Bitte zuerst eine Kategorie wählen</string>
+
+    <!-- Language (language names stay in their endonyms) -->
+    <string name="mine_language">Sprache</string>
+    <string name="language_dialog_title">Sprache wählen</string>
+    <string name="language_system">System</string>
+    <string name="language_hint">Die App-Sprache folgt standardmäßig dem System; eine manuelle Auswahl betrifft nur diese App.</string>
+    <string name="language_zh">中文</string>
+    <string name="language_en">English</string>
+    <string name="language_es">Español</string>
+    <string name="language_pt">Português</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_nl">Nederlands</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- Duration units -->
+    <string name="duration_hm">%1$d h %2$d min</string>
+    <string name="duration_h">%1$d h</string>
+    <string name="duration_m">%1$d min</string>
+
+    <!-- Date patterns (DateTimeFormatter templates, not prose) -->
+    <string name="pattern_date_long">EEEE d MMMM yyyy</string>
+    <string name="pattern_date_short">d. MMM</string>
+
+    <!-- Log anchor labels -->
+    <string name="log_anchor_month">Jahr %1$d · Monat %2$d</string>
+
+    <!-- Import errors -->
+    <string name="import_err_empty">Keine erkennbaren Einträge in der Datei</string>
+    <string name="import_err_unreadable">Datei kann nicht gelesen werden</string>
+    <string name="import_err_open">Ausgewählte Datei kann nicht geöffnet werden</string>
+    <string name="import_err_no_table">Die Datenbank enthält keine Tabelle time_logs</string>
+
+    <!-- Report body -->
+    <string name="report_title">Bericht zum Zeitprotokoll</string>
+    <string name="report_range">Zeitraum</string>
+    <string name="report_entries_count">%1$d Einträge gesamt</string>
+    <string name="report_summary">Zeitraumübersicht</string>
+    <string name="report_total">Gesamt</string>
+    <string name="report_item">Posten</string>
+    <string name="report_radar">Radardiagramm</string>
+    <string name="report_scale_note">Jeder Ring ca. %1$d Minuten</string>
+    <string name="report_entries">Einträge im Detail</string>
+    <string name="report_none">Keine</string>
+    <string name="report_footer">Erstellt von der lokalen Zeitstatistik-App „Ljubischew" · Daten bleiben auf dem Gerät</string>
+    <string name="report_col_year">Jahr</string>
+    <string name="report_col_md">Datum</string>
+    <string name="report_col_weekday">Wochentag</string>
+    <string name="report_col_category">Kategorie</string>
+    <string name="report_col_event">Ereignis</string>
+    <string name="report_col_duration">Dauer</string>
+    <string name="report_col_share">Anteil</string>
+    <string name="report_col_start">Start</string>
+    <string name="report_col_end">Ende</string>
+    <string name="report_col_minutes">Dauer (Min.)</string>
+    <string name="report_col_span">Start/Ende</string>
+    <string name="report_col_note">Notiz</string>
+    <string name="report_year_cell">%1$d</string>
+    <string name="report_md_cell">%1$d-%2$d</string>
+    <string name="report_cat_cell">%1$s · %2$s</string>
+    <string name="report_locale">de-DE</string>
+
+    <!-- 版本历史全档案（12 版，与中文原文逐条对应） -->
+    <string name="release_notes_092">Neue Sprachen: 中文 / English / Español / Português / Deutsch / Nederlands / 日本語 – umschaltbar jederzeit in den Einstellungen über „Sprache"; bei „System" passt sich die App automatisch der Sprache des Handys an.\nNeue Splash-Ansicht beim Start: das App-Symbol zentriert wie auf dem Startbildschirm, der App-Name erscheint je nach Sprache (auf Chinesisch „柳比歇夫时间管理", auf Englisch „Lyubishchev Time"), danach öffnet sich die Hauptansicht.\nSelbst angelegte Kategorien, Ereignisse und Notizen sind persönliche Daten und werden nie übersetzt – was in welcher Sprache eingetragen wurde, bleibt so stehen.\nText, Tabellenüberschriften, Wochentage und Dauereinheiten der exportierten Berichte folgen nun der App-Sprache; CSV-Dateien erkennt „Alles importieren" weiterhin einwandfrei.\nDas Theme bekommt sechs weitere Farbschemata: Karminrot / Bernstein / Rosé / Graphitgrau / Obsidienschwarz / Solarized (ein alter Bekannter unter den Terminalfarben), hell und dunkel jeweils angepasst, die Grundfläche bleibt Morandi.\nIn den Einstellungen die neue Seite „Berichtsvorlage": standardmäßig eine Markdown-Vorlage, auf Klartext umschaltbar, eigene .md/.txt-Dateien lassen sich hochladen (diese Version erfasst und wählt sie nur, das Einlesen folgt später); dazu der neue Einstieg „AI API", vorerst nur ein Platzhalter.\nDer Startbildschirm zeigt jetzt drei zentrierte Elemente: unter dem App-Namen einen Zähler, der Tage seit dem ersten Start zeigt, darunter das kursive Signet „LOOYEA" und ganz unten die kleine Zeile „Reine lokale Zeiterfassung – Daten bleiben nur auf dem Handy".\nDie Karte oben in den Einstellungen zeigt nun drei Zeilen – Tage an Ihrer Seite, insgesamt erfasste Zeit in Stunden und Minuten sowie die Anzahl der Einträge – und der Untertitel lautet: Die Zeit zu begleiten heißt, das Leben zu begleiten; die Zeit zu erinnern heißt, das Leben zu erinnern.\nZählzeilen wie Tage an Ihrer Seite und Einträge erfasst richten sich nun nach Singular und Plural der jeweiligen Sprache.\nDie beiden festen Klassen (Zeit Klasse I / II) sind Programmtext und werden jetzt in der Oberflächensprache angezeigt; die Datenbank erkennt sie weiterhin am gespeicherten Namen. Jede Zeile in den Einstellungen zeigt den Namen links und den Pfeil ganz rechts.</string>
+    <string name="release_notes_091">Das Theme ist jetzt richtig da: vier Farbschemata wechseln die komplette Kontrolle auf einen Tipp (Morandi Graugrün / Tiffany-Blau / Ozeanblau / Waldgrün), hell und dunkel jeweils angepasst, die neutrale Grundfläche bleibt das Morandi-Minimal.\nIm Jahrmodus des Tagebuchs sind Datums-Buttons für leere Zeiträume ausgegraut statt versteckt – ihre Position bleibt stabil.\nDie Segment-Buttons (Übersichtsumschaltung sowie Tag/Woche/Monat/Jahr) zeigen kein Häkchen mehr, die Auswahl ist nur an der Hintergrundfarbe zu erkennen.\nDie Einstellungsseite ist abgespeckt: Bei „Zeitkategorien" und „Zeitraum exportieren" entfällt der erklärende Text rechts, es bleibt nur der Pfeil in die nächste Ebene.</string>
+    <string name="release_notes_09">Die Übersicht hat jetzt auch „Diesen Monat gesamt": drei Spalten neben Heute und Diese Woche, passend zu den drei Zeitstufen unter dem Radardiagramm.\nDie Wochenansicht des Tagebuchs zeigt nicht mehr nur drei Wochen: über GROUP BY nach Wochen listet sie alle Wochen dieses Jahres mit Einträgen (Wochen ganz ohne Einträge nehmen keinen Platz ein), absteigend sortiert und standardmäßig komplett zugeklappt.\nDie Monatsansicht des Tagebuchs genauso: Jeder Monat dieses Jahres mit Einträgen bekommt einen eigenen Abschnitt, nicht mehr nur die letzten drei.\nDer Datumswähler lässt keine Zukunft mehr zu: In der Wochen- und Monatsansicht reicht die Auswahl vom Jahresanfang bis heute, nächste Woche und nächster Monat sind nicht anklickbar; die Tagesansicht startet standardmäßig bei Heute, für früher wählt man das Datum aus.\nDie Jahresansicht listet nur noch die Jahre mit echten Einträgen (etwa vorvorgestern, letztes Jahr, dieses Jahr – dazwischenliegende leere Jahre erscheinen nicht); jedes Jahr öffnet sich direkt mit den Summen von Klasse I und Klasse II samt den einzelnen Ereignissen, ein Datums-Anker ist hier nicht nötig.\nIn den Einstellungen wurde „Häufig" in „Schnellzugriff" umbenannt, der Text rechts entfällt zugunsten des Pfeils, und der Titel der nächsten Seite zieht mit.</string>
+
+    <!-- Report template (Settings) -->
+    <string name="mine_template">Berichtsvorlage</string>
+    <string name="mine_ai_api">AI API</string>
+    <string name="mine_ai_api_value">Bald verfügbar</string>
+    <string name="mine_ai_api_dialog">Dieser Eintrag ist für die Berichte vorgesehen: Später können Sie hier wählen, welche AI-Inferenz-Engine und welche API-Methode den Bericht erstellt. Diese Version platziert nur den Einstieg in den Einstellungen, bietet noch keine Konfiguration und die App baut weiterhin keine Netzwerkverbindung auf.</string>
+    <string name="tpl_back">Zurück</string>
+    <string name="tpl_title">Berichtsvorlage</string>
+    <string name="tpl_hint">Eine Vorlage bestimmt das Layout des Berichts. Hier werden nur Markdown-Dateien (.md) und Textdateien (.txt) unterstützt; der Inhalt einer .txt-Vorlage muss dennoch in Markdown geschrieben sein. Diese Version dient nur der Auswahl und der Erfassung von Uploads; das Erzeugen von Berichten aus Ihrer Vorlage folgt in einer späteren Version.</string>
+    <string name="tpl_section_builtin">Integrierte Vorlagen</string>
+    <string name="tpl_section_custom">Ihre Vorlagen</string>
+    <string name="tpl_builtin_md">Markdown-Vorlage</string>
+    <string name="tpl_builtin_md_desc">Überschriften, Übersichtstabellen und Radar-Abschnitte, gut zum Archivieren und Weiterverarbeiten</string>
+    <string name="tpl_builtin_txt">Klartext-Vorlage</string>
+    <string name="tpl_builtin_txt_desc">Gleicher Aufbau wie die Markdown-Version, der Inhalt bleibt in Markdown geschrieben</string>
+    <string name="tpl_default_badge">Standard</string>
+    <string name="tpl_custom_empty">Noch keine eigenen Vorlagen; Sie können unten eine hochladen.</string>
+    <string name="tpl_upload">Vorlage hochladen (.md / .txt)</string>
+    <string name="tpl_upload_note">Hochgeladene Dateien werden nur erfasst und ausgewählt; Berichte werden weiterhin im integrierten Format erzeugt.</string>
+    <string name="tpl_uploaded">Vorlage hinzugefügt: %1$s</string>
+    <string name="tpl_err_format">Es werden nur Dateien im Format .md oder .txt akzeptiert</string>
+    <string name="tpl_delete">Löschen</string>
+    <string name="tpl_delete_title">Vorlage löschen</string>
+    <string name="tpl_delete_text">Möchten Sie „%1$s" wirklich entfernen? Ihre erfassten Daten bleiben davon unberührt.</string>
+    <!-- Splash -->
+    <plurals name="splash_days">
+        <item quantity="one">%1$d Tag an Ihrer Seite</item>
+        <item quantity="other">%1$d Tage an Ihrer Seite</item>
+    </plurals>
+    <string name="splash_credit">von %1$s</string>
+    <string name="splash_local_only">Reine lokale Zeiterfassung – die Daten bleiben nur auf dem Handy</string>
+
+    <string name="release_notes_08">Die Oberfläche im neuen Morandi-Minimal-Look: warmes Beige-Weiß bzw. Anthrazit als Grundfläche, die Primärfarbe ist nun Graugrün, die Akzentfarbe Terrakotta; helle und dunkle Palette wurden neu abgestimmt und die Kontraste auf Lesbarkeit geprüft.\nDie Typo-Hierarchie ist überarbeitet: Die Tages- und Wochensummen der Übersicht stehen jetzt in großen Serifenzahlen auf einen Blick, und die Segment-Auswahl nutzt einen dezent getönten Auswahlzustand statt eines schlichten Farbblocks.\nDie Schriftgrößen-Stufen sind vollständig (Fließtext, kleine Labels und Button-Texte mit Zeichenabstand versehen), Kartenrahmen und Trennlinien verwenden weichere Konturfarben.</string>
+    <string name="release_notes_07">Der Vollexport ist aufgewertet: Jetzt lässt sich die SQLite-Datenbank direkt als .db-Datei exportieren (alle Einträge in einer Datei, das Protokoll ist vor dem Export zusammengeführt), die CSV-Tabelle bleibt wählbar.\nNeu ist „Alles importieren": Man wählt eine .db-Datenbank oder eine aus dieser App exportierte CSV-Datei, und die Einträge werden nach Abgleich mit der Hauptdatenbank zusammengeführt; identische Daten (gleiches Datum, gleiche Start-/Endzeit, gleiches Ereignis, gleiche Dauer) gelten als Duplikat und werden ohne Doppelzählung übersprungen.\nNach dem Import meldet die App neue, übersprungene und gelesene Einträge; nicht erkennbare Dateien (fremde Datenbank, fehlende Tabelle, falsches Format) führen zu einer klaren Fehlermeldung.\nDie Regel für Versionsnummern ist feiner gefasst: Neue Funktionen steigern 0.x, kleine Korrekturen innerhalb eines Funktionszyklus tragen Patch-Nummern wie 0.x1 oder 0.x2.</string>
+    <string name="release_notes_062">Das Radardiagramm verschwindet nicht mehr: Waren im gewählten Zeitraum weniger als drei Ereignisse mit Einträgen, konnte die Figur nicht entstehen – jetzt ergänzt die App aus den Zeitkategorien auf drei Achsen, und die ergänzten Achsen zeigen 0 an.</string>
+    <string name="release_notes_06">Die Achsen des Radardiagramms folgen nun der Datenbank: Jedes Ereignis mit Einträgen im gewählten Zeitraum bekommt eine Achse – auch wenn es gelöscht oder umbenannt wurde, solange aus dem Zeitraum Einträge vorliegen, erscheint es weiterhin; Ereignisse ohne Einträge im Zeitraum bekommen keine Achse.\nBeim Radar ist die Stufe „Dieser Monat" dazugekommen: dieser Monat gegen den letzten, dieselbe Logik wie bei Heute und Diese Woche, nur über den ganzen Monat.</string>
+    <string name="release_notes_05">Aus „Mein" wurde „Einstellungen"; die frühere Platzhalter-Zeile der Einstellungen heißt nun „Version", und in dieser Seite steckt der Versionsverlauf.\nNeu „Alles exportieren": auf Tipp alle Einträge der Protokolldatenbank als CSV (direkt in Excel zu öffnen), danach über das Teilen-Fenster speichern oder versenden.\nDas bisherige „Export" heißt nun „Zeitraum exportieren", die Funktion bleibt gleich: Zeitraum wählen und zwischen den vier Formaten MD, TXT, Excel und HTML entscheiden.\nDas Kategoriemodell ist vereinfacht: zwei feste Kategorien, Ereignisse auf zwei Ebenen – die Kategorien lassen sich nicht mehr anlegen, umbenennen oder löschen, die dritte Ebene entfällt; Ereignisse kann man anlegen, umbenennen und löschen, bis zu 8 pro Kategorie.\nDie Radarkarte der Übersicht verzichtet auf die großen Zahlen, die die Statistik oben wiederholten; die Legende sitzt zentriert und zeigt nur die Farben mit den Labels Heute und Gestern.</string>
+    <string name="release_notes_04">Der Berichtsexport ist online: Er erzeugt Berichte für einen Datumsbereich – mit Gesamtsumme, den Summen je Kategorie und je Ereignis, dem Radardiagramm und allen Einzelposten (Jahr / Datum / Wochentag / Kategorie / Ereignis / Start/Ende / Dauer / Notiz).\nDer Eintrag „Theme" heißt jetzt „Farbmodus"; dazu ein neuer Einstieg für Theme-Stile (Frisch, Urban, Gediegen-Geschäftlich – noch in Planung).\nNach Mitternacht blieben Übersicht, Tagebuch, Erfassen und der Berichtsexport auf dem alten Tag stehen; das ist behoben.</string>
+    <string name="release_notes_03">Erfassen neu angeordnet: Datumszeile (nur beim Nachtrag änderbar) mit einem Häkchen für Nachträge, Start und Ende mit je eigener Zeitauswahl, die Dauer errechnet sich automatisch.\n„Häufig" ist da: Kurzkombinationen aus Kategorie, Ereignis und Dauer anlegen und sie in „Erfassen" mit einem Tipp anwenden.\nDie Pflege-Seite „Zeitkategorien": Ereignisse anlegen, umbenennen und löschen.</string>
+    <string name="release_notes_02">Die Radarkarte der Übersichtsseite: zwischen Klasse I und Klasse II umschalten, Heute gegen Gestern und Diese Woche gegen Letzte Woche.\nDas Tagebuch in vier Stufen: Tag, Woche, Monat und Jahr mit Datums-Anker und aufklappbaren Summenblöcken.\nDer Farbmodus: System folgen, Hell oder Dunkel, dazu die gesamte Palette verschönert.</string>
+    <string name="release_notes_01">Erste nutzbare Version auf echten Geräten: das Gerüst aus fünf Seiten – Übersicht, Tagebuch, Erfassen, Berichte als Platzhalter und „Mein".\nGespeichert wird lokal in einer Room-Datenbank, die Daten bleiben nur auf dem Handy, ohne Netzwerk und ohne Konto.</string>
+</resources>

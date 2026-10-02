@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lyubishchev Time</string>
+
+    <!-- Bottom five tabs -->
+    <string name="tab_home">Overview</string>
+    <string name="tab_log">Journal</string>
+    <string name="tab_add">Log</string>
+    <string name="tab_report">Reports</string>
+    <string name="tab_mine">Settings</string>
+
+    <!-- Overview / home -->
+    <string name="home_stat_today">Today</string>
+    <string name="home_stat_week">This week</string>
+    <string name="home_stat_month">This month</string>
+    <string name="home_period_today">Today</string>
+    <string name="home_period_week">Week</string>
+    <string name="home_period_month">Month</string>
+    <string name="home_series_today">Today</string>
+    <string name="home_series_yesterday">Yesterday</string>
+    <string name="home_series_week">This week</string>
+    <string name="home_series_last_week">Last week</string>
+    <string name="home_series_month">This month</string>
+    <string name="home_series_last_month">Last month</string>
+    <string name="placeholder_coming_soon">This module is still in development</string>
+
+    <!-- Journal / read-only log browser -->
+    <string name="log_mode_day">Day</string>
+    <string name="log_mode_week">Week</string>
+    <string name="log_mode_month">Month</string>
+    <string name="log_mode_year">Year</string>
+    <string name="log_week_title">Week %1$d</string>
+    <string name="log_week_current_suffix">(current week)</string>
+    <string name="log_month_title">Month %1$d</string>
+    <string name="log_year_title">%1$d</string>
+    <string name="log_total">Total %1$s</string>
+    <string name="log_cat_totals">Category I total %1$s · Category II total %2$s</string>
+    <string name="log_empty">No entries for this period yet</string>
+
+    <!-- Settings (was "Mine") -->
+    <string name="mine_title">Settings</string>
+    <string name="mine_header_subtitle">To keep company with time is to keep company with life. To remember time is to remember life.</string>
+    <plurals name="mine_stat_days">
+        <item quantity="one">Together for %1$d day</item>
+        <item quantity="other">Together for %1$d days</item>
+    </plurals>
+    <string name="mine_stat_total">%1$d h %2$d min logged in total</string>
+    <plurals name="mine_stat_entries">
+        <item quantity="one">%1$d entry logged</item>
+        <item quantity="other">%1$d entries logged</item>
+    </plurals>
+    <string name="mine_theme">Color mode</string>
+    <string name="mine_theme_dialog_title">Choose color mode</string>
+    <string name="mine_theme_system">System default</string>
+    <string name="mine_theme_light">Light</string>
+    <string name="mine_theme_dark">Dark</string>
+    <string name="mine_version">Version</string>
+    <string name="mine_category">Time categories</string>
+    <string name="mine_quick">Quick picks</string>
+    <string name="mine_export">Export by range</string>
+    <string name="mine_export_all">Export all</string>
+    <string name="mine_export_all_value">Full db/CSV export</string>
+    <string name="export_all_share_title">Export all</string>
+    <string name="export_all_hint">Choose a file format for the full export:</string>
+    <string name="export_all_db">SQLite database (.db, can be restored by Import all)</string>
+    <string name="export_all_csv">CSV spreadsheet (.csv, opens directly in Excel)</string>
+    <string name="mine_import">Import all</string>
+    <string name="mine_import_value">Merge db or CSV</string>
+    <string name="import_busy">Importing…</string>
+    <string name="import_result_text">Merge complete: %1$d added, %2$d duplicates skipped (%3$d parsed from file in total).</string>
+    <string name="version_title">Version history</string>
+    <string name="version_hint">Current version v%1$s · Newest first</string>
+    <string name="version_current_tag">Current version</string>
+    <string name="mine_style">Theme</string>
+    <string name="mine_style_dialog_title">Choose theme palette</string>
+    <string name="mine_palette_morandi">Morandi gray-green</string>
+    <string name="mine_palette_tiffany">Tiffany blue</string>
+    <string name="mine_palette_ocean">Marine blue</string>
+    <string name="mine_palette_forest">Forest green</string>
+    <string name="mine_palette_crimson">Crimson red</string>
+    <string name="mine_palette_amber">Amber gold</string>
+    <string name="mine_palette_rose">Rose pink</string>
+    <string name="mine_palette_graphite">Graphite grey</string>
+    <string name="mine_palette_obsidian">Obsidian black</string>
+    <string name="mine_palette_solarized">Solarized</string>
+
+    <!-- Export by range -->
+    <string name="export_title">Export by range</string>
+    <string name="export_hint">Pick start and end dates and a file format, review the range summary, generate the file, then choose where to save or share it</string>
+    <string name="export_range_label">Range</string>
+    <string name="export_format_label">File format</string>
+    <string name="export_summary_label">Range summary</string>
+    <string name="export_total">Total %1$s</string>
+    <string name="export_radar_note">The generated file includes a per-category, per-event radar chart and the full entry list (year / month-day / weekday / category / event / start / end / duration / note)</string>
+    <string name="export_run">Generate and share</string>
+    <string name="export_busy">Generating…</string>
+    <string name="export_empty">No entries in this range</string>
+    <string name="export_invalid_range">Start date must be earlier than end date</string>
+    <string name="export_saved">Report generated; choose a save location in the share sheet</string>
+    <string name="export_share_title">Export report</string>
+
+    <!-- New entry / add record -->
+    <string name="add_title">New entry</string>
+    <string name="add_hint">Log as you go during the day: one entry per finished task. The start time picks up from the latest end time of the day (no conflict even when logging two at once), and you can still edit it manually</string>
+    <string name="field_date">Date</string>
+    <string name="field_start">Start</string>
+    <string name="field_end">End</string>
+    <string name="field_duration">Duration</string>
+    <string name="field_category">Category</string>
+    <string name="category_l1">Class I time</string>
+    <string name="category_l2">Class II time</string>
+    <string name="field_event">Event</string>
+    <string name="field_note">Note</string>
+    <string name="add_note_placeholder">Optional</string>
+    <string name="add_duration_pending">Time pending</string>
+    <string name="add_quick_label">Quick</string>
+    <string name="add_save">Save and continue</string>
+    <string name="add_err_time">Enter both start and end times</string>
+    <string name="add_err_event">Select an event</string>
+    <string name="add_err_order">End time must be later than start time</string>
+    <string name="add_saved">Logged %1$s</string>
+    <string name="add_backfill_label">Backfill</string>
+    <string name="add_duration_label">Entry duration:</string>
+    <string name="add_time_pending">Pending</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Cancel</string>
+
+    <!-- Time category tree editor -->
+    <string name="cat_editor_title">Time categories</string>
+    <string name="cat_editor_hint">There are two fixed categories; each holds up to 8 events (subcategories) that you can create, rename or delete. Renaming counts as creating: the new name starts from zero, while the original name keeps accumulating its history.</string>
+    <string name="cat_add_event">Add event</string>
+    <string name="cat_rename">Rename</string>
+    <string name="cat_delete">Delete</string>
+    <string name="cat_back">Back</string>
+    <string name="cat_max_children">Up to 8 events per category</string>
+    <string name="cat_input_title">Name</string>
+    <string name="cat_delete_confirm_title">Confirm deletion</string>
+    <string name="cat_delete_confirm_text">After deleting \"%1$s\", that name stops accumulating; old data stays in the database.</string>
+
+    <!-- Quick picks editor (was "Frequent") -->
+    <string name="pick_editor_title">Quick picks</string>
+    <string name="pick_editor_hint">Each item is made of a top-level category, a second-level event and a duration; tap once to apply it on the Log tab.</string>
+    <string name="pick_add_title">Add quick pick</string>
+    <string name="pick_category_label">Top-level category</string>
+    <string name="pick_event_label">Second-level event</string>
+    <string name="pick_minutes_label">Duration</string>
+    <string name="pick_item_label">%1$s · %2$s · %3$s</string>
+    <string name="pick_no_event">Choose the top-level category first</string>
+
+    <!-- Language (language names stay in their own endonyms, do not translate) -->
+    <string name="mine_language">Language</string>
+    <string name="language_dialog_title">Choose language</string>
+    <string name="language_system">System default</string>
+    <string name="language_hint">The app language follows the system by default; a manual choice affects this app only.</string>
+    <string name="language_zh">中文</string>
+    <string name="language_en">English</string>
+    <string name="language_es">Español</string>
+    <string name="language_pt">Português</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_nl">Nederlands</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- Duration units -->
+    <string name="duration_hm">%1$d h %2$d min</string>
+    <string name="duration_h">%1$d h</string>
+    <string name="duration_m">%1$d min</string>
+
+    <!-- Date patterns (java.time DateTimeFormatter patterns, not prose) -->
+    <string name="pattern_date_long">EEEE, MMMM d, yyyy</string>
+    <string name="pattern_date_short">MMM d</string>
+
+    <!-- Log anchor labels -->
+    <string name="log_anchor_month">%1$d-%2$d</string>
+
+    <!-- Full-import errors -->
+    <string name="import_err_empty">The file contains no recognizable entries</string>
+    <string name="import_err_unreadable">The file cannot be read</string>
+    <string name="import_err_open">Cannot open the selected file</string>
+    <string name="import_err_no_table">The database file has no time_logs table</string>
+
+    <!-- Export report body -->
+    <string name="report_title">Time log report</string>
+    <string name="report_range">Range</string>
+    <string name="report_entries_count">%1$d entries in total</string>
+    <string name="report_summary">Range summary</string>
+    <string name="report_total">Total</string>
+    <string name="report_item">Item</string>
+    <string name="report_radar">Radar chart</string>
+    <string name="report_scale_note">Each gridline is about %1$d min</string>
+    <string name="report_entries">Entry list</string>
+    <string name="report_none">None</string>
+    <string name="report_footer">Generated by the Lyubishchev Time local logging app · Data stays on this phone</string>
+    <string name="report_col_year">Year</string>
+    <string name="report_col_md">Month-day</string>
+    <string name="report_col_weekday">Weekday</string>
+    <string name="report_col_category">Category</string>
+    <string name="report_col_event">Event</string>
+    <string name="report_col_duration">Duration</string>
+    <string name="report_col_share">Share</string>
+    <string name="report_col_start">Start</string>
+    <string name="report_col_end">End</string>
+    <string name="report_col_minutes">Duration (min)</string>
+    <string name="report_col_span">Start / End</string>
+    <string name="report_col_note">Note</string>
+    <string name="report_year_cell">%1$d</string>
+    <string name="report_md_cell">%1$d-%2$d</string>
+    <string name="report_cat_cell">%1$s · %2$s</string>
+    <string name="report_locale">en-US</string>
+
+    <!-- 版本历史全档案（12 版，与中文原文逐条对应） -->
+    <string name="release_notes_092">Added multilingual support: 中文 / English / Español / Português / Deutsch / Nederlands / 日本語, switchable at any time in the Language row of Settings; choosing System default adapts to the system language of the phone.\nAdded a launch splash screen: the app icon, the same one as on the home screen, is shown centered, the app name is displayed per language (柳比歇夫时间管理 in Chinese / Lyubishchev Time in English), and the main interface follows.\nCategories, events and notes you define yourself are personal data and are never translated; they display in whichever language they were entered in.\nThe body and headers of exported reports, along with weekday names and duration units, now follow the app language; CSV files are still recognized by Import all.\nTheme gains six more control palettes: Crimson red / Amber gold / Rose pink / Graphite grey / Obsidian black / Solarized (a familiar palette from terminal themes), each adapted for light and dark, with the base color still Morandi.\nSettings gains a Report template screen: the Markdown template is the default, plain text can be switched to, and your own .md/.txt can be uploaded (this version only registers and selects them, parsing comes later); an AI API entry is added as well, a placeholder for now.\nThe splash screen adds three items with all text centered: below the app name a day counter showing how long the app has been with you, counted from the day of the first launch; below it the italic LOOYEA production credit; and at the very bottom a small line reading purely local time accounting, the data stays on this phone.\nThe header card in Settings now shows three lines — days together, total time logged in hours and minutes, and the entry count — and its subtitle reads: to keep company with time is to keep company with life; to remember time is to remember life.\nCount lines such as days together and entries logged now follow each language singular/plural rules, so one day or one entry reads in the singular.\nThe two fixed classes (Class I / Class II time) are app text, so they now display in the interface language while the database keeps matching them by their stored name; every Settings row shows its name on the left and the arrow flush right.</string>
+    <string name="release_notes_091">Theme is officially live: four control palettes switch the whole set with one tap (Morandi gray-green / Tiffany blue / Marine blue / Forest green), each adapted for light and dark while the neutral base keeps the Morandi minimal look.\nIn year mode on the Journal tab the date buttons are now grayed out instead of hidden, so their positions stay stable.\nSegmented buttons (the Overview switcher and Day / Week / Month / Year) drop the check mark on the selected state, only the background color tells them apart.\nSettings streamlined: the Time categories and Export by range rows drop the right-side description text and keep only the arrow into the next screen.</string>
+    <string name="release_notes_09">The Overview tab adds the entries accumulated this month as a third column beside Today and This week, which lines up with the three periods under the radar chart, Today / This week / This month.\nThe week view on the Journal tab no longer shows just three weeks: weeks of this year are grouped with GROUP BY and every week holding entries is listed, newest first and all collapsed by default, while weeks without a single entry take up no room.\nThe month view works the same way: every month of this year that has entries gets its own section instead of a fixed three most recent months.\nThe date picker no longer allows future dates: in week and month mode it is bounded from the start of this year to today, so next week and next month cannot be picked; day mode stops at today by default and you tap the date to look back at an earlier day.\nThe year view on the Journal tab now lists only the years that actually have entries (the year before last, last year and this year, for instance, with blank years not appearing), each year block laying out the Category I and Category II totals and the per-event sums directly, so no date anchor is needed there.\nIn Settings the Frequent row is renamed Quick picks, its right-side description text is dropped in favor of the arrow alone, and the title of the screen behind it matches.</string>
+
+    <!-- AI API and report templates -->
+    <string name="mine_template">Report template</string>
+    <string name="mine_ai_api">AI API</string>
+    <string name="mine_ai_api_value">Coming soon</string>
+    <string name="mine_ai_api_dialog">This row is reserved for reports: later you will choose which AI reasoning engine and API method builds them. This version only places the entry in Settings — there is nothing to configure yet and the app still makes no network calls.</string>
+    <string name="tpl_back">Back</string>
+    <string name="tpl_title">Report template</string>
+    <string name="tpl_hint">A template defines the layout of a report. Only Markdown (.md) and plain text (.txt) files are accepted, and the content of a .txt template must still be written in Markdown. This version lists, selects and registers uploads only; building reports from your template comes later.</string>
+    <string name="tpl_section_builtin">Built-in templates</string>
+    <string name="tpl_section_custom">Your templates</string>
+    <string name="tpl_builtin_md">Markdown template</string>
+    <string name="tpl_builtin_md_desc">Headings, summary tables and radar sections — easy to archive or rework</string>
+    <string name="tpl_builtin_txt">Plain text template</string>
+    <string name="tpl_builtin_txt_desc">Same structure as the Markdown one, content still in Markdown</string>
+    <string name="tpl_default_badge">Default</string>
+    <string name="tpl_custom_empty">No custom templates yet — upload one below.</string>
+    <string name="tpl_upload">Upload template (.md / .txt)</string>
+    <string name="tpl_upload_note">Uploaded files are only registered and selected; reports still use the built-in layout.</string>
+    <string name="tpl_uploaded">Template added: %1$s</string>
+    <string name="tpl_err_format">Only .md or .txt files are accepted</string>
+    <string name="tpl_delete">Delete</string>
+    <string name="tpl_delete_title">Delete template</string>
+    <string name="tpl_delete_text">Remove “%1$s”? Your logged entries are not affected.</string>
+    <!-- Splash screen -->
+    <plurals name="splash_days">
+        <item quantity="one">With you for %1$d day</item>
+        <item quantity="other">With you for %1$d days</item>
+    </plurals>
+    <string name="splash_credit">by %1$s</string>
+    <string name="splash_local_only">Purely local time accounting — the data stays on this phone</string>
+
+    <!-- Release notes archive for the earlier versions (v0.8 down to v0.1) -->
+    <string name="release_notes_08">The interface is redressed in the Morandi minimal look: warm cream and charcoal backgrounds, gray-green as the primary color and terracotta as the accent, with both the light and dark palettes retuned and the contrast checked for readability.\nThe type hierarchy is rebuilt: the today and this-week totals on the Overview tab become large serif numerals so the time spent reads at a glance, and the segmented selector switches to a low-saturation light selected state instead of a solid block of color.\nThe font-size ladder is completed, with letter spacing given to body text, small labels and button captions, and card outlines and dividers now use a softer contour color.</string>
+    <string name="release_notes_07">Export all is upgraded: it can export the SQLite database file directly (.db, a single file carrying every entry, with the log merged in before export), and the CSV spreadsheet remains an option.\nImport all is added: select a .db database or a CSV exported by this app, and each row is compared against the main database before being merged in; entries with the same date, the same start and end, the same event and the same duration count as duplicates and are skipped automatically, so nothing is double-counted.\nWhen an import finishes it reports how many entries were added, skipped and parsed; an unrecognizable file (not a database of this app, a missing table, or a mismatched format) produces a clear error.\nVersion numbering is refined: new features advance 0.x, and small fixes within one feature cycle use patch numbers like 0.x1 or 0.x2.</string>
+    <string name="release_notes_062">Fixed the radar chart disappearing: when the selected period holds entries for fewer than three events the chart could not take shape, so events from Settings now pad it up to three axes (padded axes show 0).</string>
+    <string name="release_notes_06">Radar axes now follow the database: every event with entries in the selected period gets an axis, so events that were deleted or renamed still appear as long as that period holds their entries, while events without entries in the period get no axis.\nThe radar periods gain This month: the current month compared against last month, on exactly the logic of Today and This week, only the range becomes the whole month.</string>
+    <string name="release_notes_05">The Mine tab is renamed Settings; the row that held the placeholder settings is replaced by Version, and this screen is where the update history is read.\nExport all is added: one tap exports every entry in the entry database as CSV (openable directly in Excel), which can then be saved or sent through the share sheet.\nThe old Export row is renamed Export by range with its behavior unchanged: pick a date range and one of the MD / TXT / Excel / HTML formats.\nThe category model is simplified to two fixed categories and a two-level event tree: categories can no longer be added, renamed or deleted and the third level of subcategories is removed; events can be created, renamed and deleted, at most 8 per category.\nThe radar card on the Overview tab drops the large numbers that duplicated the statistics above it, and the legend is centered, showing only the colors and the today / yesterday labels.</string>
+    <string name="release_notes_04">Report export goes live: export by date range, with the total, the per-category and per-event summaries, the radar chart and the entry-by-entry details (year / month-day / weekday / category / event / start / end / duration / note).\nTheme is renamed Color mode; an entry for theme styles is added (fresh / urban / steady business, still planned).\nFixed Overview, Journal, Log and export still sitting on the previous day after midnight.</string>
+    <string name="release_notes_03">The Log screen is rearranged: a date row that can be edited only for a backfill entry plus the Backfill checkbox, separate time pickers for start and end, and the duration calculated automatically.\nFrequent goes live: quick combinations of category plus event plus duration, applied with a single tap in Log.\nThe Time categories maintenance screen: create, rename and delete events.</string>
+    <string name="release_notes_02">The radar chart card on the Overview tab: switching between Category I and Category II, today against yesterday and this week against last week.\nThe Journal tab browses in four periods, Day / Week / Month / Year, with a date anchor picker and accordion-style summaries.\nColor mode: System default / Light / Dark, plus a general polish of the whole color scheme.</string>
+    <string name="release_notes_01">The first version usable on a real device: the five-screen frame of Overview, Journal, Log, a Reports placeholder and Mine.\nStorage in a local Room database: data stays on this phone, no network connection and no account needed.</string>
+</resources>

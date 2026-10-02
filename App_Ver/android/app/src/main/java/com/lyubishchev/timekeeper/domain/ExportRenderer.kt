@@ -1,7 +1,10 @@
 package com.lyubishchev.timekeeper.domain
 
+import com.lyubishchev.timekeeper.R
 import com.lyubishchev.timekeeper.data.TimeLogEntity
+import com.lyubishchev.timekeeper.i18n.AppLocale
 import java.time.LocalDate
+import java.time.format.TextStyle
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -26,8 +29,6 @@ data class ExportCategorySummary(
  * Renders the date-range report: summary block first, then one line per entry.
  */
 object ExportRenderer {
-
-    private val WEEKDAYS = listOf("周一", "周二", "周三", "周四", "周五", "周六", "周日")
 
     fun render(
         format: ExportFormat,
@@ -63,16 +64,20 @@ object ExportRenderer {
     private fun entryCells(e: TimeLogEntity): List<String> {
         val day = LocalDate.parse(e.date, TimeRules.DATE)
         return listOf(
-            "${e.year}年",
-            "${day.monthValue}月${day.dayOfMonth}日",
-            WEEKDAYS[day.dayOfWeek.value - 1],
-            "${TimeRules.roman(e.category)}类·${e.category}",
+            AppLocale.str(R.string.report_year_cell, e.year),
+            AppLocale.str(R.string.report_md_cell, day.monthValue, day.dayOfMonth),
+            weekday(day),
+            AppLocale.str(R.string.report_cat_cell, TimeRules.roman(e.category), e.category),
             e.event,
             "${e.startTime}-${e.endTime}",
             TimeRules.formatMinutes(e.durationMinutes),
             e.note,
         )
     }
+
+    /** 星期跟着语言走（周一 / Mon / Montag…） */
+    private fun weekday(day: LocalDate): String =
+        day.dayOfWeek.getDisplayName(TextStyle.SHORT, AppLocale.locale)
 
     // ---------- MD ----------
 
@@ -82,24 +87,30 @@ object ExportRenderer {
         categories: List<ExportCategorySummary>,
         total: Int,
     ): String = buildString {
-        appendLine("# 时间记录报告")
+        appendLine("# ${AppLocale.str(R.string.report_title)}")
         appendLine()
-        appendLine("**区间**：$from ～ $to（共 ${entries.size} 条）")
+        appendLine(
+            "**${AppLocale.str(R.string.report_range)}**：$from ～ $to" +
+                "（${AppLocale.str(R.string.report_entries_count, entries.size)}）",
+        )
         appendLine()
-        appendLine("## 区间汇总")
+        appendLine("## ${AppLocale.str(R.string.report_summary)}")
         appendLine()
-        appendLine("| 项目 | 时长 |")
+        appendLine("| ${AppLocale.str(R.string.report_item)} | ${AppLocale.str(R.string.report_col_duration)} |")
         appendLine("| --- | --- |")
-        appendLine("| 总计 | ${TimeRules.formatMinutes(total)} |")
+        appendLine("| ${AppLocale.str(R.string.report_total)} | ${TimeRules.formatMinutes(total)} |")
         categories.forEach { c ->
             appendLine("| ${c.name} | ${TimeRules.formatMinutes(c.totalMinutes)} |")
         }
         appendLine()
         categories.forEach { c ->
             if (c.events.isNotEmpty()) {
-                appendLine("### ${c.name} 各事件")
+                appendLine("### ${c.name} ${AppLocale.str(R.string.report_col_event)}")
                 appendLine()
-                appendLine("| 事件 | 时长 | 占比 |")
+                appendLine(
+                    "| ${AppLocale.str(R.string.report_col_event)} | " +
+                        "${AppLocale.str(R.string.report_col_duration)} | ${AppLocale.str(R.string.report_col_share)} |",
+                )
                 appendLine("| --- | --- | --- |")
                 c.events.forEach { (name, m) ->
                     val pct = if (total > 0) m * 100.0 / total else 0.0
@@ -108,25 +119,37 @@ object ExportRenderer {
                 appendLine()
             }
         }
-        appendLine("## 雷达图")
+        appendLine("## ${AppLocale.str(R.string.report_radar)}")
         appendLine()
         appendLine("```")
         categories.forEach { c -> appendRadarAscii(c, categories.maxOfOrNull { s -> s.events.maxOfOrNull { it.second } ?: 0 } ?: 0) }
         appendLine("```")
         appendLine()
-        appendLine("## 逐条记录")
+        appendLine("## ${AppLocale.str(R.string.report_entries)}")
         appendLine()
-        appendLine("| 年 | 月日 | 星期 | 类别 | 事件 | 起止 | 时长 | 备注 |")
+        appendLine(entryTableHeader())
         appendLine("| --- | --- | --- | --- | --- | --- | --- | --- |")
         entries.forEach { e ->
             appendLine("| " + entryCells(e).joinToString(" | ") + " |")
         }
     }
 
+    /** 逐条明细的八列表头，跟着语言走 */
+    private fun entryTableHeader(): String = listOf(
+        R.string.report_col_year,
+        R.string.report_col_md,
+        R.string.report_col_weekday,
+        R.string.report_col_category,
+        R.string.report_col_event,
+        R.string.report_col_span,
+        R.string.report_col_duration,
+        R.string.report_col_note,
+    ).joinToString(" | ", prefix = "| ", postfix = " |") { AppLocale.str(it) }
+
     private fun StringBuilder.appendRadarAscii(c: ExportCategorySummary, scaleMax: Int) {
         if (c.events.isEmpty()) return
-        appendLine("${c.name}（每格约 ${maxOf(1, scaleMax / 10)} 分钟）")
         val unit = maxOf(1, scaleMax / 10)
+        appendLine("${c.name} (${AppLocale.str(R.string.report_scale_note, unit)})")
         c.events.forEach { (name, m) ->
             val bars = m / unit
             appendLine(String.format("%-6s", name).padEnd(8, ' '))
@@ -143,42 +166,62 @@ object ExportRenderer {
         categories: List<ExportCategorySummary>,
         total: Int,
     ): String = buildString {
-        appendLine("时间记录报告　区间 $from ～ $to　共 ${entries.size} 条")
+        appendLine(
+            "${AppLocale.str(R.string.report_title)}  ${AppLocale.str(R.string.report_range)} " +
+                "$from ～ $to  ${AppLocale.str(R.string.report_entries_count, entries.size)}",
+        )
         appendLine("=".repeat(48))
         appendLine()
-        appendLine("【区间汇总】")
-        appendLine("总计：${TimeRules.formatMinutes(total)}")
+        appendLine("[${AppLocale.str(R.string.report_summary)}]")
+        appendLine("${AppLocale.str(R.string.report_total)}: ${TimeRules.formatMinutes(total)}")
         categories.forEach { c ->
-            appendLine("${c.name}：${TimeRules.formatMinutes(c.totalMinutes)}")
+            appendLine("${c.name}: ${TimeRules.formatMinutes(c.totalMinutes)}")
         }
         appendLine()
         categories.forEach { c ->
             if (c.events.isNotEmpty()) {
-                appendLine("〈${c.name} 各事件〉")
+                appendLine("<${c.name} ${AppLocale.str(R.string.report_col_event)}>")
                 c.events.forEach { (name, m) ->
-                    appendLine("  $name　${TimeRules.formatMinutes(m)}")
+                    appendLine("  $name  ${TimeRules.formatMinutes(m)}")
                 }
                 appendLine()
             }
         }
-        appendLine("【逐条记录】")
+        appendLine("[${AppLocale.str(R.string.report_entries)}]")
         entries.forEachIndexed { i, e ->
             val cells = entryCells(e)
-            appendLine("${i + 1}. ${cells[0]} ${cells[1]}（${cells[2]}）${cells[3]}　${cells[4]}　${cells[5]}　${cells[6]}　备注：${cells[7].ifBlank { "无" }}")
+            appendLine(
+                "${i + 1}. ${cells[0]} ${cells[1]} (${cells[2]}) ${cells[3]}  ${cells[4]}  " +
+                    "${cells[5]}  ${cells[6]}  ${AppLocale.str(R.string.report_col_note)}: " +
+                    cells[7].ifBlank { AppLocale.str(R.string.report_none) },
+            )
         }
     }
 
     // ---------- Excel (CSV, 带 BOM 写出) ----------
 
     private fun renderCsv(entries: List<TimeLogEntity>): String = buildString {
-        appendLine("年份,月日,星期,类别,事件,开始,结束,持续时长(分钟),持续时长,备注")
+        appendLine(
+            listOf(
+                R.string.report_col_year,
+                R.string.report_col_md,
+                R.string.report_col_weekday,
+                R.string.report_col_category,
+                R.string.report_col_event,
+                R.string.report_col_start,
+                R.string.report_col_end,
+                R.string.report_col_minutes,
+                R.string.report_col_duration,
+                R.string.report_col_note,
+            ).joinToString(",") { AppLocale.str(it) },
+        )
         entries.forEach { e ->
             val day = LocalDate.parse(e.date, TimeRules.DATE)
             val cells = listOf(
                 e.year.toString(),
-                "${day.monthValue}月${day.dayOfMonth}日",
-                WEEKDAYS[day.dayOfWeek.value - 1],
-                "${TimeRules.roman(e.category)}类·${e.category}",
+                AppLocale.str(R.string.report_md_cell, day.monthValue, day.dayOfMonth),
+                weekday(day),
+                AppLocale.str(R.string.report_cat_cell, TimeRules.roman(e.category), e.category),
                 e.event,
                 e.startTime,
                 e.endTime,
@@ -201,8 +244,9 @@ object ExportRenderer {
         categories: List<ExportCategorySummary>,
         total: Int,
     ): String = buildString {
-        appendLine("<!DOCTYPE html><html lang=\"zh-CN\"><head><meta charset=\"utf-8\">")
-        appendLine("<title>时间记录报告 $from ～ $to</title>")
+        val title = AppLocale.str(R.string.report_title)
+        appendLine("<!DOCTYPE html><html lang=\"${AppLocale.str(R.string.report_locale)}\"><head><meta charset=\"utf-8\">")
+        appendLine("<title>$title $from ～ $to</title>")
         appendLine(
             """
             <style>
@@ -223,10 +267,18 @@ object ExportRenderer {
             </style></head><body><div class="page">
             """.trimIndent()
         )
-        appendLine("<header><h1>时间记录报告</h1><p>区间 $from ～ $to　·　共 ${entries.size} 条　·　总计 ${TimeRules.formatMinutes(total)}</p></header>")
+        appendLine(
+            "<header><h1>$title</h1><p>${AppLocale.str(R.string.report_range)} $from ～ $to · " +
+                "${AppLocale.str(R.string.report_entries_count, entries.size)} · " +
+                "${AppLocale.str(R.string.report_total)} ${TimeRules.formatMinutes(total)}</p></header>",
+        )
 
-        appendLine("<section><h2>区间汇总</h2><table><tr><th>类别</th><th class=\"num\">合计</th></tr>")
-        appendLine("<tr class=\"total\"><td>总计</td><td class=\"num\">${TimeRules.formatMinutes(total)}</td></tr>")
+        appendLine(
+            "<section><h2>${AppLocale.str(R.string.report_summary)}</h2><table><tr>" +
+                "<th>${AppLocale.str(R.string.report_col_category)}</th>" +
+                "<th class=\"num\">${AppLocale.str(R.string.report_total)}</th></tr>",
+        )
+        appendLine("<tr class=\"total\"><td>${AppLocale.str(R.string.report_total)}</td><td class=\"num\">${TimeRules.formatMinutes(total)}</td></tr>")
         categories.forEach { c ->
             appendLine("<tr><td>${esc(c.name)}</td><td class=\"num\">${TimeRules.formatMinutes(c.totalMinutes)}</td></tr>")
         }
@@ -234,7 +286,12 @@ object ExportRenderer {
 
         categories.forEach { c ->
             if (c.events.isNotEmpty()) {
-                appendLine("<section><h2>${esc(c.name)} · 各事件</h2><table><tr><th>事件</th><th class=\"num\">时长</th><th class=\"num\">占比</th></tr>")
+                appendLine(
+                    "<section><h2>${esc(c.name)} · ${AppLocale.str(R.string.report_col_event)}</h2><table><tr>" +
+                        "<th>${AppLocale.str(R.string.report_col_event)}</th>" +
+                        "<th class=\"num\">${AppLocale.str(R.string.report_col_duration)}</th>" +
+                        "<th class=\"num\">${AppLocale.str(R.string.report_col_share)}</th></tr>",
+                )
                 c.events.forEach { (name, m) ->
                     val pct = if (total > 0) m * 100.0 / total else 0.0
                     appendLine("<tr><td>${esc(name)}</td><td class=\"num\">${TimeRules.formatMinutes(m)}</td><td class=\"num\">%.1f%%</td></tr>".format(pct))
@@ -243,20 +300,27 @@ object ExportRenderer {
             }
         }
 
-        appendLine("<section><h2>雷达图</h2><div class=\"radarbox\">")
+        appendLine("<section><h2>${AppLocale.str(R.string.report_radar)}</h2><div class=\"radarbox\">")
         categories.forEach { c -> appendLine(radarSvg(c)) }
         appendLine("</div></section>")
 
-        appendLine("<section><h2>逐条记录</h2><table><tr>")
-        listOf("年", "月日", "星期", "类别", "事件", "起止", "时长", "备注").forEach {
-            append("<th>$it</th>")
-        }
+        appendLine("<section><h2>${AppLocale.str(R.string.report_entries)}</h2><table><tr>")
+        listOf(
+            R.string.report_col_year,
+            R.string.report_col_md,
+            R.string.report_col_weekday,
+            R.string.report_col_category,
+            R.string.report_col_event,
+            R.string.report_col_span,
+            R.string.report_col_duration,
+            R.string.report_col_note,
+        ).forEach { append("<th>${AppLocale.str(it)}</th>") }
         appendLine("</tr>")
         entries.forEach { e ->
             appendLine("<tr>" + entryCells(e).joinToString("") { "<td>${esc(it)}</td>" } + "</tr>")
         }
         appendLine("</table></section>")
-        appendLine("<footer>由「柳比歇夫」本地时间记录应用生成 · 数据仅存于手机</footer></div></body></html>")
+        appendLine("<footer>${AppLocale.str(R.string.report_footer)}</footer></div></body></html>")
     }
 
     private fun esc(v: String): String =

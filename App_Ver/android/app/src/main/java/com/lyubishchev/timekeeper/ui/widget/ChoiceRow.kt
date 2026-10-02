@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 
 /** 一行互斥分段按钮，概览的切换与记录页的 日/周/月/年 共用。 */
@@ -39,7 +40,12 @@ fun <T> ChoiceRow(
                 // 选中态只靠底色区分，去掉 M3 默认那颗前导对勾
                 icon = {},
             ) {
-                Text(labelOf(option), style = MaterialTheme.typography.labelLarge)
+                Text(
+                    text = labelOf(option),
+                    style = MaterialTheme.typography.labelLarge,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
             }
         }
     }

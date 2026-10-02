@@ -24,16 +24,32 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.lyubishchev.timekeeper.R
+import com.lyubishchev.timekeeper.i18n.AppLocale
 import com.lyubishchev.timekeeper.ui.theme.NumberSerif
 
 /** 当前版本号：与 build.gradle.kts 的 versionName 保持一致 */
 object AppVersions {
-    const val CURRENT = "0.91"
+    const val CURRENT = "0.92"
 
     data class Release(val version: String, val notes: List<String>)
 
     /** 最新版本在前，最早版本在后；同周期小修用 0.62、0.63 这类细分 */
     val history = listOf(
+        Release(
+            "0.92",
+            listOf(
+                "新增多语种：中文 / English / Español / Português / Deutsch / Nederlands / 日本語，设置 →「语言」随时切换，选「跟随系统」时按手机系统语言自动适配。",
+                "新增启动 Splash 页：居中显示与桌面一致的应用图标，应用名按语言显示（中文「柳比歇夫时间管理」/ 英文「Lyubishchev Time」），随后进入主界面。",
+                "自己定义的分类、事件与备注属于个人数据，一律不翻译——原来填的什么语言就显示什么语言。",
+                "导出报告的正文、表头与星期、时长单位也会跟随应用语言；CSV 仍能被全量导入识别。",
+                "「主题」再加六套控件配色：朱砂红 / 琥珀黄 / 蔷薇粉 / 石墨灰 / 曜石黑 / Solarized（终端配色老熟人），浅色深色各自适配，底色仍是莫兰迪。",
+                "设置新增「报告模板」页：默认 Markdown 模板，可切纯文本，也可上传自己的 .md/.txt（本版只登记选用，解析留后续）；另加「AI API」入口，暂只占位。",
+                "启动屏补了三项，文字全部居中：应用名下方显示「已陪伴您 N 天」（从第一次运行那天起算），其下为斜体 *LOOYEA* 出品署名，屏幕最底部一行小字「纯本地时间统计，数据只存手机」。",
+                "设置页顶部统计卡改为三行：已陪伴您 N 天 / 累计记录 X 小时 Y 分 / 已记录 N 条；卡片副标题换成「与时间相伴，就是与生命相随。记住时间就是记住生命。」。",
+                "各语言的「已陪伴您 N 天」「已记录 N 条」这类计数句改用单复数规则，1 天、1 条不再写成复数。",
+                "「I类时间 / II类时间」属于系统固定文字，现在随界面语言显示对应译名（数据库与统计仍按原名匹配）；设置里的每一行统一为名称左对齐、进入次级页的箭头贴右。",
+            ),
+        ),
         Release(
             "0.91",
             listOf(
@@ -171,7 +187,7 @@ fun VersionHistoryScreen(
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        AppVersions.history.forEachIndexed { index, release ->
+        releases().forEachIndexed { index, release ->
             VersionCard(release = release, isCurrent = index == 0)
             HorizontalDivider(
                 color = MaterialTheme.colorScheme.outlineVariant,
@@ -181,6 +197,35 @@ fun VersionHistoryScreen(
         Spacer(modifier = Modifier.height(24.dp))
     }
 }
+
+/**
+ * 每个版本的说明都有七语版本：中文直接用下面 `history` 里的原文（当初逐轮写下的存档），
+ * 其余语种读各自的 `release_notes_*`。新增版本时两边都要补，否则非中文语种会少一版。
+ */
+private val localizedNotes = listOf(
+    "0.92" to R.string.release_notes_092,
+    "0.91" to R.string.release_notes_091,
+    "0.9" to R.string.release_notes_09,
+    "0.8" to R.string.release_notes_08,
+    "0.7" to R.string.release_notes_07,
+    "0.62" to R.string.release_notes_062,
+    "0.6" to R.string.release_notes_06,
+    "0.5" to R.string.release_notes_05,
+    "0.4" to R.string.release_notes_04,
+    "0.3" to R.string.release_notes_03,
+    "0.2" to R.string.release_notes_02,
+    "0.1" to R.string.release_notes_01,
+)
+
+@Composable
+private fun releases(): List<AppVersions.Release> =
+    if (AppLocale.isChinese) {
+        AppVersions.history
+    } else {
+        localizedNotes.map { (version, notesRes) ->
+            AppVersions.Release(version, stringResource(notesRes).lines())
+        }
+    }
 
 @Composable
 private fun VersionCard(release: AppVersions.Release, isCurrent: Boolean) {

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">リュビシチェフ時間</string>
+
+    <!-- 下部タブ5項目 / five bottom tabs -->
+    <string name="tab_home">概要</string>
+    <string name="tab_log">記録</string>
+    <string name="tab_add">1件記録</string>
+    <string name="tab_report">レポート</string>
+    <string name="tab_mine">設定</string>
+
+    <!-- 概要 / home -->
+    <string name="home_stat_today">本日</string>
+    <string name="home_stat_week">今週</string>
+    <string name="home_stat_month">今月</string>
+    <string name="home_period_today">今日</string>
+    <string name="home_period_week">今週</string>
+    <string name="home_period_month">今月</string>
+    <string name="home_series_today">今日</string>
+    <string name="home_series_yesterday">昨日</string>
+    <string name="home_series_week">今週</string>
+    <string name="home_series_last_week">先週</string>
+    <string name="home_series_month">今月</string>
+    <string name="home_series_last_month">先月</string>
+    <string name="placeholder_coming_soon">このモジュールは開発中です</string>
+
+    <!-- 記録ページ（読み取り専用の記録閲覧） / read-only log browser -->
+    <string name="log_mode_day">日</string>
+    <string name="log_mode_week">週</string>
+    <string name="log_mode_month">月</string>
+    <string name="log_mode_year">年</string>
+    <string name="log_week_title">第%1$d週</string>
+    <string name="log_week_current_suffix">（今週）</string>
+    <string name="log_month_title">%1$d 月</string>
+    <string name="log_year_title">%1$d 年</string>
+    <string name="log_total">計 %1$s</string>
+    <string name="log_cat_totals">I類合計 %1$s・II類合計 %2$s</string>
+    <string name="log_empty">この期間にはまだ記録がありません</string>
+
+    <!-- 設定（旧「マイページ」） / settings (was "mine") -->
+    <string name="mine_title">設定</string>
+    <string name="mine_header_subtitle">時に寄り添うことは、生命に寄り添うこと。時間を覚えることは、生命を覚えること。</string>
+    <plurals name="mine_stat_days">
+        <item quantity="other">ともに歩んだ %1$d 日間</item>
+    </plurals>
+    <string name="mine_stat_total">累計 %1$d 時間 %2$d 分</string>
+    <plurals name="mine_stat_entries">
+        <item quantity="other">記録済み %1$d 件</item>
+    </plurals>
+    <string name="mine_theme">カラーモード</string>
+    <string name="mine_theme_dialog_title">カラーモードを選択</string>
+    <string name="mine_theme_system">システム設定に従う</string>
+    <string name="mine_theme_light">ライト</string>
+    <string name="mine_theme_dark">ダーク</string>
+    <string name="mine_version">バージョン</string>
+    <string name="mine_category">時間カテゴリ</string>
+    <string name="mine_quick">クイック設定</string>
+    <string name="mine_export">期間指定エクスポート</string>
+    <string name="mine_export_all">全体エクスポート</string>
+    <string name="mine_export_all_value">DB 全体 (db/CSV)</string>
+    <string name="export_all_share_title">全体エクスポート</string>
+    <string name="export_all_hint">全体エクスポートのファイル形式を選択：</string>
+    <string name="export_all_db">SQLite データベース（.db、全体インポートで復元可能）</string>
+    <string name="export_all_csv">CSV（.csv、Excel で直接開けます）</string>
+    <string name="mine_import">全体インポート</string>
+    <string name="mine_import_value">db/CSV をマージ</string>
+    <string name="import_busy">インポート中…</string>
+    <string name="import_result_text">マージ完了：新規 %1$d 件、重複をスキップ %2$d 件（ファイルから計 %3$d 件を解析）。</string>
+    <string name="version_title">バージョン履歴</string>
+    <string name="version_hint">現在のバージョン v%1$s・最新が上に表示</string>
+    <string name="version_current_tag">現在のバージョン</string>
+    <string name="mine_style">テーマ</string>
+    <string name="mine_style_dialog_title">テーマカラーを選択</string>
+    <string name="mine_palette_morandi">モランディ グレーグリーン</string>
+    <string name="mine_palette_tiffany">ティファニーブルー</string>
+    <string name="mine_palette_ocean">オーシャンブルー</string>
+    <string name="mine_palette_forest">フォレストグリーン</string>
+    <string name="mine_palette_crimson">クリムゾンレッド</string>
+    <string name="mine_palette_amber">アンバー</string>
+    <string name="mine_palette_rose">ローズピンク</string>
+    <string name="mine_palette_graphite">グラファイトグレー</string>
+    <string name="mine_palette_obsidian">オブシディアンブラック</string>
+    <string name="mine_palette_solarized">Solarized</string>
+
+    <!-- 期間指定エクスポート / range export -->
+    <string name="export_title">期間指定エクスポート</string>
+    <string name="export_hint">開始・終了日とファイル形式を選択し、期間サマリーを確認してファイルを生成、保存先または共有先を選択します</string>
+    <string name="export_range_label">期間</string>
+    <string name="export_format_label">ファイル形式</string>
+    <string name="export_summary_label">期間サマリー</string>
+    <string name="export_total">合計 %1$s</string>
+    <string name="export_radar_note">生成ファイルには各カテゴリのイベント別レーダーチャートと記録一覧（年 / 月日 / 曜日 / カテゴリ / イベント / 開始・終了 / 所要時間 / メモ）を同梱します</string>
+    <string name="export_run">生成して共有</string>
+    <string name="export_busy">生成中…</string>
+    <string name="export_empty">この期間に記録がありません</string>
+    <string name="export_invalid_range">開始日は終了日より前にしてください</string>
+    <string name="export_saved">レポートを生成しました。共有パネルで保存先を選択してください</string>
+    <string name="export_share_title">エクスポートレポート</string>
+
+    <!-- 1件記録 / add record -->
+    <string name="add_title">新しい記録</string>
+    <string name="add_hint">日中、一つの用事が終わったらその場で1件記録。開始時間はその日の最新の終了時間を自動で引き継ぐ（2件同時の記録も競合しません）。手動での変更も可能です</string>
+    <string name="field_date">日付</string>
+    <string name="field_start">開始</string>
+    <string name="field_end">終了</string>
+    <string name="field_duration">所要時間</string>
+    <string name="field_category">カテゴリ</string>
+    <string name="category_l1">I類の時間</string>
+    <string name="category_l2">II類の時間</string>
+    <string name="field_event">イベント</string>
+    <string name="field_note">メモ</string>
+    <string name="add_note_placeholder">任意</string>
+    <string name="add_duration_pending">時間未入力</string>
+    <string name="add_quick_label">よく使う</string>
+    <string name="add_save">保存して続行</string>
+    <string name="add_err_time">開始時間と終了時間を入力してください</string>
+    <string name="add_err_event">イベントを選択してください</string>
+    <string name="add_err_order">終了時間は開始時間より後にしてください</string>
+    <string name="add_saved">%1$s を記録しました</string>
+    <string name="add_backfill_label">後から記録</string>
+    <string name="add_duration_label">記録する所要時間：</string>
+    <string name="add_time_pending">未入力</string>
+    <string name="dialog_ok">確定</string>
+    <string name="dialog_cancel">キャンセル</string>
+
+    <!-- 時間カテゴリ管理 / category tree editor -->
+    <string name="cat_editor_title">時間カテゴリ</string>
+    <string name="cat_editor_hint">カテゴリは2区分で固定。各カテゴリに最大8イベント（サブカテゴリ）を作成でき、新規作成・改名・削除が可能です。改名は新規作成と同じく、新しい名前はゼロから累計され、元の名前は履歴を引き続き累計します。</string>
+    <string name="cat_add_event">イベントを追加</string>
+    <string name="cat_rename">改名</string>
+    <string name="cat_delete">削除</string>
+    <string name="cat_back">戻る</string>
+    <string name="cat_max_children">1つのカテゴリには最大8イベントまで</string>
+    <string name="cat_input_title">名前を付ける</string>
+    <string name="cat_delete_confirm_title">削除の確認</string>
+    <string name="cat_delete_confirm_text">「%1$s」を削除するとこの名前の累計は停止し、既存データはデータベースに保持されます。</string>
+
+    <!-- クイック設定（旧「よく使う」） / quick pick editor -->
+    <string name="pick_editor_title">クイック設定</string>
+    <string name="pick_editor_hint">各項目は第1階層カテゴリ・第2階層イベント・所要時間で構成され、タップすると「1件記録」に自動で適用されます。</string>
+    <string name="pick_add_title">よく使う項目を追加</string>
+    <string name="pick_category_label">第1階層カテゴリ</string>
+    <string name="pick_event_label">第2階層イベント</string>
+    <string name="pick_minutes_label">所要時間</string>
+    <string name="pick_item_label">%1$s · %2$s · %3$s</string>
+    <string name="pick_no_event">先に第1階層カテゴリを選択してください</string>
+
+    <!-- 言語 / language（言語名は本族語表記のまま、翻訳しない） -->
+    <string name="mine_language">言語</string>
+    <string name="language_dialog_title">言語を選択</string>
+    <string name="language_system">システム設定に従う</string>
+    <string name="language_hint">アプリの言語は既定でシステム設定に従います。手動で選択すると、影響はこのアプリのみです。</string>
+    <string name="language_zh">中文</string>
+    <string name="language_en">English</string>
+    <string name="language_es">Español</string>
+    <string name="language_pt">Português</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_nl">Nederlands</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- 時間の単位 / duration units -->
+    <string name="duration_hm">%1$d時間%2$d分</string>
+    <string name="duration_h">%1$d時間</string>
+    <string name="duration_m">%1$d分</string>
+
+    <!-- 日付フォーマットテンプレート / date patterns（DateTimeFormatterテンプレート、翻訳不可） -->
+    <string name="pattern_date_long">yyyy年M月d日 EEEE</string>
+    <string name="pattern_date_short">M月d日</string>
+
+    <!-- 記録ページのアンカーラベル / log anchor labels -->
+    <string name="log_anchor_month">%1$d年%2$d月</string>
+
+    <!-- 全体インポートのエラー / import errors -->
+    <string name="import_err_empty">ファイルに認識できる記録がありません</string>
+    <string name="import_err_unreadable">ファイルを読み取れません</string>
+    <string name="import_err_open">選択したファイルを開けません</string>
+    <string name="import_err_no_table">データベースファイルに time_logs テーブルがありません</string>
+
+    <!-- エクスポートレポート本文 / report body -->
+    <string name="report_title">時間記録レポート</string>
+    <string name="report_range">期間</string>
+    <string name="report_entries_count">計 %1$d 件</string>
+    <string name="report_summary">期間サマリー</string>
+    <string name="report_total">合計</string>
+    <string name="report_item">項目</string>
+    <string name="report_radar">レーダーチャート</string>
+    <string name="report_scale_note">1目盛り約 %1$d 分</string>
+    <string name="report_entries">記録一覧</string>
+    <string name="report_none">なし</string>
+    <string name="report_footer">「リュビシチェフ」ローカル時間記録アプリで生成・データは端末のみに保存</string>
+    <string name="report_col_year">年</string>
+    <string name="report_col_md">月日</string>
+    <string name="report_col_weekday">曜日</string>
+    <string name="report_col_category">カテゴリ</string>
+    <string name="report_col_event">イベント</string>
+    <string name="report_col_duration">所要時間</string>
+    <string name="report_col_share">割合</string>
+    <string name="report_col_start">開始</string>
+    <string name="report_col_end">終了</string>
+    <string name="report_col_minutes">所要時間(分)</string>
+    <string name="report_col_span">開始・終了</string>
+    <string name="report_col_note">メモ</string>
+    <string name="report_year_cell">%1$d年</string>
+    <string name="report_md_cell">%1$d/%2$d</string>
+    <string name="report_cat_cell">%1$s·%2$s</string>
+    <string name="report_locale">ja-JP</string>
+
+    <!-- 版本历史全档案（12 版，与中文原文逐条对应） -->
+    <string name="release_notes_092">多言語に対応：中文 / English / Español / Português / Deutsch / Nederlands / 日本語、設定 →「言語」からいつでも切り替え可能、「システム設定に従う」を選択すると端末のシステム言語に自動で適応します。\n起動時に Splash 画面を新設：中央にデスクトップと同じアプリアイコンを表示し、アプリ名は言語ごとに表示（日本語では「リュビシチェフ時間」）、その後メイン画面へ移行します。\nユーザーが独自に定義したカテゴリ・イベント・メモは個人データにつき、一切翻訳しません——入力した言語のまま表示されます。\nエクスポートするレポートの本文・表見出し・曜日・所要時間の単位もアプリの言語に追従します。CSV は引き続き全体インポートで認識されます。\n「テーマ」にコントロール配色をさらに6セット追加：クリムゾンレッド / アンバー / ローズピンク / グラファイトグレー / オブシディアンブラック / Solarized（ターミナル配色の旧知）、ライト・ダークにそれぞれ適応し、背景色は引き続きモランディ。\n設定に「レポートテンプレート」ページを新設：既定は Markdown テンプレート、プレーンテキストへの切替や自分の .md/.txt のアップロードも可能（本バージョンは登録と選択のみで、解析は今後のバージョンで対応）、ほかに「AI API」項目を追加（現状はプレースホルダーのみ）。\nスプラッシュ画面に3項目を追加し、文字はすべて中央寄せ：アプリ名の下に初回起動からの日数を示す行、その下にイタリック体 *LOOYEA* の製作クレジット、画面最下部に小さく「完全ローカルの時間統計。データはこの端末にのみ保存されます」の注記。\n設定画面の上部カードを3行に：ともに歩んだ日数、累計記録時間（時間・分）、記録件数。カードのサブタイトルは「時に寄り添うことは、生命に寄り添うこと。時間を覚えることは、生命を覚えること。」に変更しました。\n「ともに歩んだ N 日間」「記録済み N 件」などの数え表示は各言語の単複形に沿うようになり、1 の場合は単数形で表示されます。\n固定の2分類（I類の時間／II類の時間）はアプリ側の文言のため画面言語に応じた表記に表示され、データベースは従来どおり登録名で照合します。設定の各行は名称左寄せ・矢印右端揃えに統一しました。</string>
+    <string name="release_notes_091">「テーマ」を正式導入：4種類のコントロール配色をワンタップで一括切り替え（モランディ グレーグリーン / ティファニーブルー / オーシャンブルー / フォレストグリーン）、ライトとダークにそれぞれ適応し、ニュートラルな背景色は引き続きモランディのミニマルを維持。\n記録ページの年モードで、日付ボタンを非表示ではなくグレーアウト表示に変更し、位置が固定されます。\nセグメントボタン（概要切り替え、日/週/月/年）から選択状態のチェックを外し、背景色のみで区別するように変更。\n設定ページを簡素化：時間カテゴリ・期間指定エクスポートの2行から右側の説明文を削除し、次のページへ入る矢印のみを残しました。</string>
+    <string name="release_notes_09">概要ページに「今月の累計記録」を追加：今日・今週と並べての3列表示となり、レーダーチャート下の今日/今週/今月の3時間区分とちょうど対応します。\n記録ページの週ビューは3週のみではなくなりました：GROUP BY 週で今年に記録のある週をすべて一覧表示（記録が1件もない週は自動的に場所を取りません）、逆順・既定はすべて折りたたみ。\n記録ページの月ビューも同様で、今年に記録のある月がそれぞれ1セクションを占め、直近3か月と固定されなくなりました。\n日付ピッカーで未来を選択できなくなりました：週・月モードはいずれも下限が今年の初日、上限が本日となり、来週・来月は選択できません。日ビューの初期表示は本日になり、過去の日付を見る場合は日付を選択します。\n記録ページの年ビューは、実際に記録のある年（一昨年・昨年・今年など、その間の空白の年は表示されません）のみを一覧表示し、各年ブロックの中で I類/II類とイベント別合計を直接展開して表示します。この場合は日付アンカーが不要です。\n設定ページの「よく使う」を「クイック設定」に改名し、右側の説明文を削除して矢印のみを残し、ページ内の見出しも同じ名称に更新しました。</string>
+    <string name="mine_template">レポートテンプレート</string>
+    <string name="mine_ai_api">AI API</string>
+    <string name="mine_ai_api_value">近日公開</string>
+    <string name="mine_ai_api_dialog">この項目は将来レポート用のものです：その際にはここで、レポートが呼び出す AI 推論エンジンと API の方式を選択できるようになります。本バージョンでは設定に入口を置くだけで、まだ設定項目は提供せず、ネットワークに接続することもありません。</string>
+    <string name="tpl_back">戻る</string>
+    <string name="tpl_title">レポートテンプレート</string>
+    <string name="tpl_hint">テンプレートはレポートのレイアウトを決定します。ここでは Markdown（.md）とプレーンテキスト（.txt）の2種類のテンプレートファイルのみに対応しており、.txt の内容も Markdown で記述する必要があります。本バージョンはテンプレートの選択とアップロード登録のみを行い、テンプレート内容の解析によるレポート生成は今後のバージョンで対応予定です。</string>
+    <string name="tpl_section_builtin">内蔵テンプレート</string>
+    <string name="tpl_section_custom">カスタムテンプレート</string>
+    <string name="tpl_builtin_md">Markdown 形式</string>
+    <string name="tpl_builtin_md_desc">見出し・集計表・レーダーチャートのセクション構成で、アーカイブや再加工に適しています</string>
+    <string name="tpl_builtin_txt">テキストテンプレート</string>
+    <string name="tpl_builtin_txt_desc">構成は Markdown 版と同じで、本文も Markdown で記述します</string>
+    <string name="tpl_default_badge">既定</string>
+    <string name="tpl_custom_empty">カスタムテンプレートはまだありません。下記からアップロードできます。</string>
+    <string name="tpl_upload">テンプレートをアップロード（.md / .txt）</string>
+    <string name="tpl_upload_note">アップロード後は登録と選択のみを行い、レポートは現時点では内蔵の書式で生成されます。</string>
+    <string name="tpl_uploaded">テンプレートを追加しました：%1$s</string>
+    <string name="tpl_err_format">.md または .txt ファイルのみ受け付けています</string>
+    <string name="tpl_delete">削除</string>
+    <string name="tpl_delete_title">テンプレートの削除</string>
+    <string name="tpl_delete_text">「%1$s」を削除しますか？記録データには影響しません。</string>
+    <!-- Splash -->
+    <plurals name="splash_days">
+        <item quantity="other">ともに歩んだ %1$d 日間</item>
+    </plurals>
+    <string name="splash_credit">%1$s 製作</string>
+    <string name="splash_local_only">完全ローカルの時間統計。データはこの端末にのみ保存されます</string>
+
+    <string name="release_notes_08">UI を「モランディ・ミニマル」に刷新：明るいベージュ/チャコールグレーの背景色、メインカラーをグレーグリーン、アクセントカラーをテラコッタに変更し、ライト・ダークの両配色を再調整、コントラストは可読性に基づいて校正しました。\nタイポグラフィの階層を作り直しました：概要の今日/今週の合計を大きなセリフ体の数字に変更し、使った時間が一目で分かります。セグメント選択器は彩度の低い淡い選択状態に替え、ベタ塗りの色の塊ではなくなりました。\nフォントサイズの階梯を整備（本文・小さなラベル・ボタンテキストに字間を設定）、カードの罫線と区切り線はより柔らかいアウトライン色に変更しました。</string>
+    <string name="release_notes_07">全体エクスポートを強化：SQLite データベースファイル（.db、単一ファイルで全記録を保持、エクスポート前にログをマージ済み）を直接エクスポートでき、CSV 表も引き続き選択可能です。\n「全体インポート」を新設：.db データベースまたは本アプリがエクスポートした CSV を選択すると、メインデータベースと1件ずつ照合してからマージ・登録します。同じ日付・同じ開始・終了・同じイベント・同じ所要時間の記録は重複とみなされ自動でスキップされ、二重計上になりません。\nインポート完了後に新規/スキップ/解析件数を報告します。ファイルが認識できない場合（本アプリのデータベースではない、テーブルがない、形式が合わない）は明確なエラーを表示します。\nバージョン番号ルールを細分化：機能の追加は 0.x、同一機能サイクル内の小さな修正は 0.x1、0.x2 のようなパッチ番号を使用します。</string>
+    <string name="release_notes_062">レーダーチャートが消える問題を修正：選択期間内で記録のあるイベントが3つ未満の場合チャートが形成できませんでしたが、現在は設定内のイベントで3本の軸まで補う方式に変更しました（補われて加わった軸は 0 と表示されます）。</string>
+    <string name="release_notes_06">レーダーチャートの軸はデータベースに追従するようになりました：選択期間内で記録のあるイベントがそれぞれ1軸を占め——イベントが削除・改名されても、その期間に記録が残っていれば通常どおり表示されます。期間内に記録のないイベントは軸になりません。\nレーダーの時間区分に「今月」を追加：今月と先月の比較で、ロジックは今日/今週と完全に一致し、範囲が1か月全体に変わるのみです。</string>
+    <string name="release_notes_05">「マイページ」を「設定」に改名し、元の設定のプレースホルダー行を「バージョン」に置き換えました。このページに入ることで更新履歴を確認できます。\n「全体エクスポート」を新設：ワンタップで記録データベース内の全記録を CSV（Excel で直接開けます）へエクスポートし、共有パネルから保存または送信できます。\n元の「エクスポート」は「期間指定エクスポート」に改名、機能は変わりません：期間を選択し、MD/TXT/Excel/HTML の4形式から選べます。\nカテゴリモデルを固定2区分・イベント2階層に簡素化：カテゴリは追加・改名・削除が不能となり、第3階層のサブカテゴリを廃止。イベントは新規作成・改名・削除が可能で、各カテゴリは最大8件までです。\n概要のレーダーチャートカードから上部の統計と重複する大きな数字を削除し、凡例を中央寄せに表示、色と今日/昨日のラベルのみを残しました。</string>
+    <string name="release_notes_04">エクスポートレポートを開始：日付範囲でエクスポートでき、合計、カテゴリ別・イベント別サマリー、レーダーチャート、明細一覧（年月日/曜日/カテゴリ/イベント/開始・終了/所要時間/メモ）を含みます。\n「テーマ」を「カラーモード」に改名。テーマスタイルの項目を新設（爽やか系、アーバン、落ち着いたビジネス——計画中）。\n深夜を過ぎた後に概要・記録・1件記録・エクスポートが前の日のまま据え置かれる問題を修正しました。</string>
+    <string name="release_notes_03">1件記録を再レイアウト：日付行（「後から記録」の場合のみ変更可）＋「後から記録」のチェック、開始と終了はそれぞれ独立した時間ピッカーを使い、所要時間は自動計算されます。\n「よく使う」を開始：カテゴリ＋イベント＋所要時間 のクイック組み合わせを設定でき、「1件記録」内でワンタップで適用できます。\n「時間カテゴリ」管理ページ：イベントの新規作成、改名、削除。</string>
+    <string name="release_notes_02">概要ページにレーダーチャートカード：I類/II類の切り替え、今日対昨日、今週対先週。\n記録ページの4段階閲覧：日/週/月/年、日付アンカー選択＋アコーディオン式サマリー。\nカラーモード：システム設定に従う/ライト/ダーク、配色全体を刷新しました。</string>
+    <string name="release_notes_01">初めて実機で使えるバージョン：概要、記録、1件記録、レポート（プレースホルダー）、マイページの5ページ構成。\nローカルの Room データベースに保存、データはこの端末にのみ蓄えられ、ネットワーク接続もアカウントも不要です。</string>
+</resources>

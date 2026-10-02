@@ -4,6 +4,8 @@ import android.app.Application
 import com.lyubishchev.timekeeper.data.AppDatabase
 import com.lyubishchev.timekeeper.data.TimeLogRepository
 import com.lyubishchev.timekeeper.domain.CategoryStore
+import com.lyubishchev.timekeeper.domain.ReportTemplateStore
+import com.lyubishchev.timekeeper.i18n.AppLocale
 import com.lyubishchev.timekeeper.ui.theme.ThemePrefs
 
 /**
@@ -20,7 +22,10 @@ class TimekeeperApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        // 语言必须最先定下来：后面所有非 Compose 文案都从 AppLocale.context 取
+        AppLocale.init(this)
         CategoryStore.init(this)
         ThemePrefs.init(this)
+        ReportTemplateStore.init(this)
     }
 }

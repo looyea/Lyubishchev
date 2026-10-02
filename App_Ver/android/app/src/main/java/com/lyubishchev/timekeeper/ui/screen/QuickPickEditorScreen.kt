@@ -103,7 +103,7 @@ fun QuickPickEditorScreen(
                 Text(
                     text = stringResource(
                         R.string.pick_item_label,
-                        pick.category,
+                        TimeRules.categoryLabel(pick.category),
                         pick.event,
                         TimeRules.formatMinutes(pick.minutes),
                     ),
@@ -156,7 +156,7 @@ private fun AddPickDialog(onDismiss: () -> Unit) {
                                 category = name
                                 event = null
                             },
-                            label = { Text(name) },
+                            label = { Text(TimeRules.categoryLabel(name)) },
                         )
                     }
                 }

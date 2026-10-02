@@ -8,9 +8,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.lyubishchev.timekeeper.R
 import com.lyubishchev.timekeeper.TimekeeperApp
 import com.lyubishchev.timekeeper.data.TimeLogEntity
 import com.lyubishchev.timekeeper.domain.TimeRules
+import com.lyubishchev.timekeeper.i18n.AppLocale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -46,12 +48,12 @@ class ImportViewModel(application: Application) : AndroidViewModel(application) 
                 val src = copyToCache(uri)
                 val rows = if (isSqlite(src)) readFromSqlite(src) else readFromCsv(src)
                 if (rows.isEmpty()) {
-                    error = "文件里没有可识别的记录"
+                    error = AppLocale.str(R.string.import_err_empty)
                     return@launch
                 }
                 merge(rows)
             } catch (e: Exception) {
-                error = e.message ?: "文件无法读取"
+                error = e.message ?: AppLocale.str(R.string.import_err_unreadable)
             } finally {
                 busy = false
             }
@@ -63,7 +65,7 @@ class ImportViewModel(application: Application) : AndroidViewModel(application) 
         val dst = File(ctx.cacheDir, "import_src.dat")
         ctx.contentResolver.openInputStream(uri)?.use { input ->
             dst.outputStream().use { output -> input.copyTo(output) }
-        } ?: throw IllegalArgumentException("无法打开所选文件")
+        } ?: throw IllegalArgumentException(AppLocale.str(R.string.import_err_open))
         return dst
     }
 
@@ -91,7 +93,7 @@ class ImportViewModel(application: Application) : AndroidViewModel(application) 
             db.rawQuery(
                 "SELECT name FROM sqlite_master WHERE type='table' AND name='time_logs'", null,
             ).use { c ->
-                if (!c.moveToFirst()) throw IllegalArgumentException("数据库文件里没有 time_logs 表")
+                if (!c.moveToFirst()) throw IllegalArgumentException(AppLocale.str(R.string.import_err_no_table))
             }
             val rows = mutableListOf<RawRow>()
             db.rawQuery(
@@ -125,18 +127,19 @@ class ImportViewModel(application: Application) : AndroidViewModel(application) 
             if (line.isBlank()) return@forEach
             val cells = splitCsvLine(line)
             if (cells.size < 7) return@forEach
-            if (cells[0].trim() == "年份") return@forEach // 表头
             parseCsvRow(cells)?.let { rows += it }
         }
         return rows
     }
 
-    /** 年份,月日,星期,类别,事件,开始,结束,持续时长(分钟),持续时长,备注 */
+    /** 年份,月日,星期,类别,事件,开始,结束,持续时长(分钟),持续时长,备注 —— 表头不是数字，自然被丢掉 */
     private fun parseCsvRow(cells: List<String>): RawRow? {
         val year = cells[0].trim().toIntOrNull() ?: return null
-        val md = Regex("^(\\d{1,2})月(\\d{1,2})日$").find(cells[1].trim()) ?: return null
-        val month = md.groupValues[1].toInt()
-        val day = md.groupValues[2].toInt()
+        // 月日单元格跟着导出语言变（10月2日 / 10-2 / 10/2），只按数字取
+        val parts = cells[1].trim().split(Regex("[^0-9]+")).filter { it.isNotEmpty() }
+        if (parts.size < 2) return null
+        val month = parts[0].toIntOrNull() ?: return null
+        val day = parts[1].toIntOrNull() ?: return null
         val date = "%04d-%02d-%02d".format(year, month, day)
         runCatching { java.time.LocalDate.parse(date, TimeRules.DATE) }.getOrNull() ?: return null
         val start = cells[5].trim()
@@ -144,7 +147,7 @@ class ImportViewModel(application: Application) : AndroidViewModel(application) 
         val minutes = cells.getOrNull(7)?.trim()?.toIntOrNull()
             ?: runCatching { TimeRules.durationMinutes(start, end) }.getOrNull() ?: 0
         if (minutes <= 0 || start.isBlank() || end.isBlank()) return null
-        val category = cells[3].trim().substringAfter('·')
+        val category = cells[3].trim().substringAfter('·').trim()
         return RawRow(
             date = date,
             startTime = start,

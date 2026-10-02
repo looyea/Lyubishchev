@@ -50,6 +50,8 @@ class TimeLogRepository(private val dao: TimeLogDao) {
 
     suspend fun count(): Int = dao.count()
 
+    suspend fun totalMinutes(): Int = dao.totalMinutes()
+
     /**
      * 保存一条记录，返回时长（分钟）供界面提示。
      * Persists one entry and reports its minutes back to the UI.

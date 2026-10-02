@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -37,13 +38,12 @@ import com.lyubishchev.timekeeper.domain.TimeRules
 import com.lyubishchev.timekeeper.ui.home.HomeState
 import com.lyubishchev.timekeeper.ui.home.HomeViewModel
 import com.lyubishchev.timekeeper.ui.home.RadarDimension
+import com.lyubishchev.timekeeper.i18n.AppLocale
 import com.lyubishchev.timekeeper.ui.home.RadarPeriod
 import com.lyubishchev.timekeeper.ui.theme.NumberSerif
 import com.lyubishchev.timekeeper.ui.widget.ChoiceRow
 import com.lyubishchev.timekeeper.ui.widget.RadarChart
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.Locale
 
 /**
  * 概览页：日期 + 今日/本周/本月三条累计，下方一张可切换的雷达图卡片。
@@ -69,7 +69,7 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(20.dp))
 
         Text(
-            text = chineseDate(state.dateText),
+            text = longDate(state.dateText),
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground,
         )
@@ -111,6 +111,8 @@ private fun StatBlock(label: String, value: String, modifier: Modifier = Modifie
             text = label,
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
         Text(
             text = value,
@@ -159,11 +161,11 @@ private fun RadarCard(
         )
 
         Spacer(modifier = Modifier.height(18.dp))
-        // 一类/二类标签永远跟着分类设置走（固定两类，名字可在"时间分类"里改）
+        // 固定两类属于系统文字：标签随界面语言走，数据库里仍按原名匹配
         ChoiceRow(
             options = RadarDimension.entries.toList(),
             selected = state.dimension,
-            labelOf = { CategoryStore.nameAt(if (it == RadarDimension.CLASS_II) 1 else 0) },
+            labelOf = { TimeRules.categoryLabel(CategoryStore.nameAt(if (it == RadarDimension.CLASS_II) 1 else 0)) },
             onSelect = onDimension,
         )
         Spacer(modifier = Modifier.height(10.dp))
@@ -218,8 +220,6 @@ private fun periodLabel(period: RadarPeriod): Int = when (period) {
     RadarPeriod.MONTH -> R.string.home_period_month
 }
 
-private val CHINESE_DATE: DateTimeFormatter =
-    DateTimeFormatter.ofPattern("yyyy 年 M 月 d 日 EEEE", Locale.CHINA)
-
-private fun chineseDate(isoDate: String): String =
-    LocalDate.parse(isoDate, TimeRules.DATE).format(CHINESE_DATE)
+private fun longDate(isoDate: String): String =
+    LocalDate.parse(isoDate, TimeRules.DATE)
+        .format(AppLocale.dateFormatter(R.string.pattern_date_long))

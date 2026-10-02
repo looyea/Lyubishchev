@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lyubishchev-tijd</string>
+
+    <!-- 底部五个入口 / five bottom tabs -->
+    <string name="tab_home">Overzicht</string>
+    <string name="tab_log">Dagboek</string>
+    <string name="tab_add">Logen</string>
+    <string name="tab_report">Rapportages</string>
+    <string name="tab_mine">Instellingen</string>
+
+    <!-- 概览 / home -->
+    <string name="home_stat_today">Vandaag</string>
+    <string name="home_stat_week">Deze week</string>
+    <string name="home_stat_month">Deze maand</string>
+    <string name="home_period_today">Vandaag</string>
+    <string name="home_period_week">Week</string>
+    <string name="home_period_month">Maand</string>
+    <string name="home_series_today">Vandaag</string>
+    <string name="home_series_yesterday">Gisteren</string>
+    <string name="home_series_week">Deze week</string>
+    <string name="home_series_last_week">Vorige week</string>
+    <string name="home_series_month">Deze maand</string>
+    <string name="home_series_last_month">Vorige maand</string>
+    <string name="placeholder_coming_soon">Deze module volgt nog</string>
+
+    <!-- 记录页 / read-only log browser -->
+    <string name="log_mode_day">Dag</string>
+    <string name="log_mode_week">Week</string>
+    <string name="log_mode_month">Maand</string>
+    <string name="log_mode_year">Jaar</string>
+    <string name="log_week_title">Week %1$d</string>
+    <string name="log_week_current_suffix">(huidige week)</string>
+    <string name="log_month_title">Maand %1$d</string>
+    <string name="log_year_title">Jaar %1$d</string>
+    <string name="log_total">Totaal %1$s</string>
+    <string name="log_cat_totals">Totaal klasse I %1$s · Totaal klasse II %2$s</string>
+    <string name="log_empty">Nog geen logregels in deze periode</string>
+
+    <!-- 设置（原"我的"） / settings (was "mine") -->
+    <string name="mine_title">Instellingen</string>
+    <string name="mine_header_subtitle">Samen met de tijd is samen met het leven. De tijd onthouden is het leven onthouden.</string>
+    <plurals name="mine_stat_days">
+        <item quantity="one">%1$d dag aan je zijde</item>
+        <item quantity="other">%1$d dagen aan je zijde</item>
+    </plurals>
+    <string name="mine_stat_total">Totaal %1$d u %2$d min vastgelegd</string>
+    <plurals name="mine_stat_entries">
+        <item quantity="one">%1$d logregel vastgelegd</item>
+        <item quantity="other">%1$d logregels vastgelegd</item>
+    </plurals>
+    <string name="mine_theme">Kleurmodus</string>
+    <string name="mine_theme_dialog_title">Kleurmodus kiezen</string>
+    <string name="mine_theme_system">Systeem volgen</string>
+    <string name="mine_theme_light">Licht</string>
+    <string name="mine_theme_dark">Donker</string>
+    <string name="mine_version">Versie</string>
+    <string name="mine_category">Tijdcategorieën</string>
+    <string name="mine_quick">Snelkeuzes</string>
+    <string name="mine_export">Periode exporteren</string>
+    <string name="mine_export_all">Alles exporteren</string>
+    <string name="mine_export_all_value">Database (db/CSV)</string>
+    <string name="export_all_share_title">Alles exporteren</string>
+    <string name="export_all_hint">Kies het bestandsformaat voor de volledige export:</string>
+    <string name="export_all_db">SQLite-database (.db, terug te zetten via alles importeren)</string>
+    <string name="export_all_csv">CSV-tabel (.csv, direct te openen in Excel)</string>
+    <string name="mine_import">Alles importeren</string>
+    <string name="mine_import_value">db/CSV samenvoegen</string>
+    <string name="import_busy">Importeren…</string>
+    <string name="import_result_text">Samengevoegd: %1$d nieuwe regels, %2$d duplicaten overgeslagen (bestand bevatte %3$d regels).</string>
+    <string name="version_title">Versiegeschiedenis</string>
+    <string name="version_hint">Huidige versie v%1$s · nieuwste bovenaan</string>
+    <string name="version_current_tag">Huidige versie</string>
+    <string name="mine_style">Thema</string>
+    <string name="mine_style_dialog_title">Kleurthema kiezen</string>
+    <string name="mine_palette_morandi">Morandi grijs-groen</string>
+    <string name="mine_palette_tiffany">Tiffany-blauw</string>
+    <string name="mine_palette_ocean">Maritiem blauw</string>
+    <string name="mine_palette_forest">Bosgroen</string>
+    <string name="mine_palette_crimson">Karminrood</string>
+    <string name="mine_palette_amber">Ambergeel</string>
+    <string name="mine_palette_rose">Rozenrosa</string>
+    <string name="mine_palette_graphite">Grafietgrijs</string>
+    <string name="mine_palette_obsidian">Obsidiaanzwart</string>
+    <string name="mine_palette_solarized">Solarized</string>
+
+    <!-- 按需导出 / range export -->
+    <string name="export_title">Periode exporteren</string>
+    <string name="export_hint">Kies start- en einddatum en het bestandsformaat, bevestig het overzicht van de periode, genereer het bestand en kies daarna een opslag- of deellocatie</string>
+    <string name="export_range_label">Periode</string>
+    <string name="export_format_label">Bestandsformaat</string>
+    <string name="export_summary_label">Overzicht van de periode</string>
+    <string name="export_total">Totaal %1$s</string>
+    <string name="export_radar_note">Het gegenereerde bestand bevat radardiagrammen per categorie en gebeurtenis plus alle logregels (jaar / maand dag / weekdag / categorie / gebeurtenis / start en einde / duur / notitie)</string>
+    <string name="export_run">Genereren en delen</string>
+    <string name="export_busy">Genereren…</string>
+    <string name="export_empty">Geen logregels in deze periode</string>
+    <string name="export_invalid_range">De startdatum moet vóór de einddatum liggen</string>
+    <string name="export_saved">Rapport gegenereerd, kies een opslaglocatie in het deelvenster</string>
+    <string name="export_share_title">Rapport exporteren</string>
+
+    <!-- 记一笔 / add record -->
+    <string name="add_title">Nieuwe logregel</string>
+    <string name="add_hint">Log overdag na elke afgeronde activiteit één regel; de starttijd neemt automatisch de laatste eindtijd van de dag over (ook bij twee gelijktijdige logregels) en kun je handmatig aanpassen</string>
+    <string name="field_date">Datum</string>
+    <string name="field_start">Start</string>
+    <string name="field_end">Einde</string>
+    <string name="field_duration">Duur</string>
+    <string name="field_category">Categorie</string>
+    <string name="category_l1">Tijd klasse I</string>
+    <string name="category_l2">Tijd klasse II</string>
+    <string name="field_event">Gebeurtenis</string>
+    <string name="field_note">Notitie</string>
+    <string name="add_note_placeholder">Optioneel</string>
+    <string name="add_duration_pending">Tijd nog in te vullen</string>
+    <string name="add_quick_label">Veelgebruikt</string>
+    <string name="add_save">Opslaan en doorgaan</string>
+    <string name="add_err_time">Vul de start- en eindtijd in</string>
+    <string name="add_err_event">Kies een gebeurtenis</string>
+    <string name="add_err_order">De eindtijd moet later zijn dan de starttijd</string>
+    <string name="add_saved">%1$s gelogd</string>
+    <string name="add_backfill_label">Achteraf loggen</string>
+    <string name="add_duration_label">Te loggen tijdsduur:</string>
+    <string name="add_time_pending">Nog in te vullen</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">Annuleren</string>
+
+    <!-- 时间分类维护 / category tree editor -->
+    <string name="cat_editor_title">Tijdcategorieën</string>
+    <string name="cat_editor_hint">De categorieën zijn vast: twee klassen; per klasse maximaal 8 gebeurtenissen (subcategorieën), die je kunt aanmaken, hernoemen en verwijderen. Hernoemen is gelijk aan nieuw aanmaken: een nieuwe naam begint bij nul, een behouden naam blijft zijn historie verzamelen.</string>
+    <string name="cat_add_event">Gebeurtenis toevoegen</string>
+    <string name="cat_rename">Naam wijzigen</string>
+    <string name="cat_delete">Verwijderen</string>
+    <string name="cat_back">Terug</string>
+    <string name="cat_max_children">Maximaal 8 gebeurtenissen per categorie</string>
+    <string name="cat_input_title">Naam geven</string>
+    <string name="cat_delete_confirm_title">Verwijderen bevestigen</string>
+    <string name="cat_delete_confirm_text">Na het verwijderen van “%1$s” stopt deze naam met verzamelen; oude gegevens blijven in de database.</string>
+
+    <!-- 快捷设置（原"常用"） / quick pick editor -->
+    <string name="pick_editor_title">Snelkeuzes</string>
+    <string name="pick_editor_hint">Elk item bestaat uit hoofdcategorie, gebeurtenis en duur; tik en het wordt toegepast bij “Logen”.</string>
+    <string name="pick_add_title">Snelkeuze toevoegen</string>
+    <string name="pick_category_label">Hoofdcategorie</string>
+    <string name="pick_event_label">Subgebeurtenis</string>
+    <string name="pick_minutes_label">Duur</string>
+    <string name="pick_item_label">%1$s · %2$s · %3$s</string>
+    <string name="pick_no_event">Kies eerst een hoofdcategorie</string>
+
+    <!-- 语言 / language（语言名一律用本族语写法，不翻译） -->
+    <string name="mine_language">Taal</string>
+    <string name="language_dialog_title">Taal kiezen</string>
+    <string name="language_system">Systeem</string>
+    <string name="language_hint">De app-taal volgt standaard het systeem; een handmatige keuze geldt alleen voor deze app.</string>
+    <string name="language_zh">中文</string>
+    <string name="language_en">English</string>
+    <string name="language_es">Español</string>
+    <string name="language_pt">Português</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_nl">Nederlands</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- 时长单位 / duration units -->
+    <string name="duration_hm">%1$d u %2$d min</string>
+    <string name="duration_h">%1$d u</string>
+    <string name="duration_m">%1$d min</string>
+
+    <!-- 日期格式模板 / date patterns（这些是 DateTimeFormatter 模板，不是文案） -->
+    <string name="pattern_date_long">EEEE d MMMM yyyy</string>
+    <string name="pattern_date_short">d MMM</string>
+
+    <!-- 记录页锚点 / log anchor labels -->
+    <string name="log_anchor_month">Maand %2$d van %1$d</string>
+
+    <!-- 全量导入错误 / import errors -->
+    <string name="import_err_empty">Geen herkenbare logregels in het bestand</string>
+    <string name="import_err_unreadable">Het bestand kan niet worden gelezen</string>
+    <string name="import_err_open">Het gekozen bestand kan niet worden geopend</string>
+    <string name="import_err_no_table">Het databasebestand bevat geen tabel time_logs</string>
+
+    <!-- 导出报告正文 / report body -->
+    <string name="report_title">Tijdregistratierapport</string>
+    <string name="report_range">Periode</string>
+    <string name="report_entries_count">Totaal %1$d regels</string>
+    <string name="report_summary">Overzicht van de periode</string>
+    <string name="report_total">Totaal</string>
+    <string name="report_item">Item</string>
+    <string name="report_radar">Radardiagram</string>
+    <string name="report_scale_note">Elk vak is ca. %1$d minuten</string>
+    <string name="report_entries">Individuele logregels</string>
+    <string name="report_none">Geen</string>
+    <string name="report_footer">Gemaakt met de lokale tijdregistratie-app Lyubishchev · gegevens alleen op je telefoon</string>
+    <string name="report_col_year">Jaar</string>
+    <string name="report_col_md">Maand/dag</string>
+    <string name="report_col_weekday">Weekdag</string>
+    <string name="report_col_category">Categorie</string>
+    <string name="report_col_event">Gebeurtenis</string>
+    <string name="report_col_duration">Duur</string>
+    <string name="report_col_share">Aandeel</string>
+    <string name="report_col_start">Start</string>
+    <string name="report_col_end">Einde</string>
+    <string name="report_col_minutes">Duur (minuten)</string>
+    <string name="report_col_span">Start-einde</string>
+    <string name="report_col_note">Notitie</string>
+    <string name="report_year_cell">%1$d</string>
+    <string name="report_md_cell">%1$d-%2$d</string>
+    <string name="report_cat_cell">%1$s · %2$s</string>
+    <string name="report_locale">nl-NL</string>
+
+    <!-- 版本历史全档案（12 版，与中文原文逐条对应） -->
+    <string name="release_notes_092">Nieuwe meertaligheid: 中文 / English / Español / Português / Deutsch / Nederlands / 日本語, op elk moment te wisselen via het item “Taal” bij Instellingen; kies je “Systeem”, dan past de taal zich automatisch aan de systeemtaal van je telefoon aan.\nNieuwe Splash-pagina bij het starten: het app-icoon, hetzelfde als op het startscherm, staat in het midden en de app-naam verschijnt per taal (in het Chinees “柳比歇夫时间管理”, in het Engels “Lyubishchev Time”), daarna gaat het door naar het hoofdscherm.\nCategorieën, gebeurtenissen en notities die je zelf aanmaakt zijn persoonlijke gegevens en worden nooit vertaald — in welke taal je ze invulde, zo blijven ze staan.\nDe tekst en de kopteksten van geëxporteerde rapporten volgen nu ook de app-taal, net als de weekdagen en de eenheden van de duur; CSV-bestanden worden door “Alles importeren” nog steeds herkend.\nBij “Thema” zes kleurenschemas voor de bedieningselementen erbij: Karminrood / Ambergeel / Rozenrosa / Grafietgrijs / Obsidiaanzwart / Solarized (de oude bekende onder de terminalkleuren), licht en donker apart afgestemd, de basis blijft Morandi.\nBij Instellingen de nieuwe pagina “Rapportsjabloon”: standaard het Markdown-sjabloon, je kunt overschakelen naar platte tekst en je eigen .md- of .txt-bestand uploaden (deze versie registreert en kiest alleen, het verwerken volgt later); verder een item “AI API”, voorlopig alleen een plaatshouder.\nOp het opstartscherm zijn drie regels toegevoegd, alle tekst gecentreerd: onder de app-naam een teller die de dagen sinds het eerste gebruik telt, daaronder het cursieve merk LOOYEA, en helemaal onderaan de kleine regel “Volledig lokale tijdsadministratie; gegevens blijven op je telefoon”.\nDe kaart bovenin Instellingen toont nu drie regels: dagen aan je zijde, de totale vastgelegde tijd in uren en minuten en het aantal logregels; de ondertitel luidt: samen met de tijd is samen met het leven; de tijd onthouden is het leven onthouden.\nTelregels zoals dagen aan je zijde en logregels vastgelegd volgen nu de enkelvoud/meervoudregels van elke taal.\nDe twee vaste klassen (Tijd klasse I / II) zijn app-tekst en volgen nu de interfacaetaal; de database herkent ze nog steeds aan de opgeslagen naam. Elke rij in Instellingen toont de naam links en de pijl helemaal rechts.</string>
+    <string name="release_notes_091">“Thema” is officieel beschikbaar: vier kleurenschemas voor de bedieningselementen die je met één tik in zijn geheel wisselt (Morandi grijs-groen / Tiffany-blauw / Maritiem blauw / Bosgroen), licht en donker apart afgestemd, en de neutrale basis blijft Morandi-minimaal.\nIn de jaarweergave van Dagboek zijn de datumknoppen nu vergrijsd in plaats van verborgen, zo blijven ze op hun plaats staan.\nDe segmentknoppen (overzichtwissel en Dag/Week/Maand/Jaar) tonen bij selectie geen vinkje meer; alleen de achtergrondkleur geeft het verschil.\nInstellingen opgeschoond: de regels “Tijdcategorieën” en “Periode exporteren” hebben geen beschrijving meer aan de rechterkant, alleen de pijl naar de volgende pagina.</string>
+    <string name="release_notes_09">Overzicht heeft er een derde kolom bij: “Deze maand gelogd”, naast Vandaag en Deze week, precies aansluitend op de drie tijdvakken vandaag / deze week / deze maand onder het radardiagram.\nDe weekweergave van Dagboek blijft niet meer bij drie weken staan: met GROUP BY op week worden alle weken van dit jaar met logregels genoemd (weken zonder één regel krijgen vanzelf geen plaats), nieuwste eerst en standaard alles ingeklapt.\nDe maandweergave van Dagboek doet hetzelfde: elke maand van dit jaar met logregels krijgt een eigen blok, niet langer vast alleen de drie meest recente maanden.\nDe datumkiezer staat geen toekomst meer toe: in de week- en maandmodus is het begin van dit jaar de ondergrens en vandaag de bovengrens, dus volgende week en volgende maand zijn niet te kiezen. De dagweergave blijft standaard op vandaag staan, eerdere dagen kies je bij de datum.\nDe jaarweergave van Dagboek toont alleen de jaren die echt logregels hebben (bijvoorbeeld het jaar daarvoor, vorig jaar en dit jaar — lege jaren vallen weg); elk jaarblok spreidt meteen de totalen per klasse I / klasse II en per gebeurtenis uit, zonder datumanker.\nBij Instellingen is “Veelgebruikt” hernoemd naar “Snelkeuzes”, is de beschrijving rechts weggehaald ten gunste van alleen de pijl, en is de titel op de pagina zelf mee aangepast.</string>
+
+    <!-- 报告模板与 AI API / report template & AI API -->
+    <string name="mine_template">Rapportsjabloon</string>
+    <string name="mine_ai_api">AI API</string>
+    <string name="mine_ai_api_value">Binnenkort</string>
+    <string name="mine_ai_api_dialog">Deze regel is bestemd voor rapporten: later kies je hier welke AI-redeneermotor en API-methode je rapporten opstelt. Deze versie zet alleen het item in Instellingen neer; er is nog niets te configureren en de app maakt nog steeds geen netwerkverbinding.</string>
+    <string name="tpl_back">Terug</string>
+    <string name="tpl_title">Rapportsjabloon</string>
+    <string name="tpl_hint">Een sjabloon bepaalt de opmaak van je rapport. Hier zijn alleen Markdown (.md) en platte tekst (.txt) als sjabloonbestand mogelijk; de inhoud van een .txt-sjabloon moet ook in Markdown geschreven zijn. Deze versie doet alleen de keuze en het registreren van uploads; rapporten uit jouw sjabloon opbouwen volgt in een latere versie.</string>
+    <string name="tpl_section_builtin">Ingebouwde sjablonen</string>
+    <string name="tpl_section_custom">Jouw sjablonen</string>
+    <string name="tpl_builtin_md">Markdown-sjabloon</string>
+    <string name="tpl_builtin_md_desc">Koppen, overzichtstabellen en radarsecties; eenvoudig te archiveren of opnieuw te bewerken</string>
+    <string name="tpl_builtin_txt">Plattetekst-sjabloon</string>
+    <string name="tpl_builtin_txt_desc">Zelfde structuur als de Markdown-versie; de inhoud blijft in Markdown geschreven</string>
+    <string name="tpl_default_badge">Standaard</string>
+    <string name="tpl_custom_empty">Nog geen eigen sjablonen; upload er hieronder een.</string>
+    <string name="tpl_upload">Sjabloon uploaden (.md / .txt)</string>
+    <string name="tpl_upload_note">Geuploade bestanden worden alleen geregistreerd en gekozen; rapporten volgen nog steeds de ingebouwde opmaak.</string>
+    <string name="tpl_uploaded">Sjabloon toegevoegd: %1$s</string>
+    <string name="tpl_err_format">Alleen .md- of .txt-bestanden worden geaccepteerd</string>
+    <string name="tpl_delete">Verwijderen</string>
+    <string name="tpl_delete_title">Sjabloon verwijderen</string>
+    <string name="tpl_delete_text">Weet je zeker dat je “%1$s” wilt verwijderen? Je loggegevens blijven onaangetast.</string>
+    <!-- Splash -->
+    <plurals name="splash_days">
+        <item quantity="one">%1$d dag aan je zijde</item>
+        <item quantity="other">%1$d dagen aan je zijde</item>
+    </plurals>
+    <string name="splash_credit">van %1$s</string>
+    <string name="splash_local_only">Volledig lokale tijdsadministratie; gegevens blijven op je telefoon</string>
+
+    <!-- 较早版本的完整历史 0.8–0.1 / earlier release notes -->
+    <string name="release_notes_08">Nieuwe look “Morandi-minimaal”: een warme roomwitte en een houtskoolgrijze achtergrond, grijs-groen als hoofdkleur en terracotta als accent, beide paletten voor licht en donker opnieuw afgestemd en het contrast op leesbaarheid gecontroleerd.\nDe typografische hiërarchie is opnieuw opgebouwd: de totalen van vandaag en deze week op Overzicht staan nu in grote schreefcijfers, zodat je in één oogopslag ziet hoeveel tijd je besteedde; de segmentkiezer heeft bij selectie een zachte, laag verzadigde toon in plaats van een massief kleurvlak.\nHet lettergrootte-trapje is afgemaakt: bodytekst, kleine labels en knoptekst hebben elk hun eigen letterafstand, en de randen van de kaarten en de scheidingslijnen gebruiken een zachtere contourkleur.</string>
+    <string name="release_notes_07">“Alles exporteren” is uitgebreid: je exporteert nu rechtstreeks het SQLite-databasebestand (.db), één bestand met alle logregels waarvan het journaal vóór het exporteren is samengevoegd; de CSV-tabel blijft een keuze.\nNieuw: “Alles importeren”. Je kiest een .db-database of een door deze app geëxporteerde CSV, elke regel wordt met de hoofddatabase vergeleken en dan samengevoegd. Regels met dezelfde datum, hetzelfde start en einde, dezelfde gebeurtenis en dezelfde duur gelden als duplicaat en worden overgeslagen, dus niets telt dubbel.\nNa het importeren krijg je het aantal nieuwe, overgeslagen en gelezen regels; een onherkenbaar bestand (niet de database van deze app, een ontbrekende tabel of een verkeerd formaat) geeft een duidelijke foutmelding.\nDe versienummers zijn scherper gemaakt: bij nieuwe functies loopt 0.x op, kleine reparaties binnen dezelfde functionele cyclus krijgen een patchnummer als 0.x1, 0.x2.</string>
+    <string name="release_notes_062">Het verdwenen radardiagram is hersteld: had de gekozen periode minder dan drie gebeurtenissen met logregels, dan kon de figuur niet gevormd worden; nu vult de app aan met gebeurtenissen uit Instellingen tot er drie assen zijn, en de toegevoegde assen tonen 0.</string>
+    <string name="release_notes_06">De assen van het radardiagram volgen nu de database: elke gebeurtenis met logregels in de gekozen periode krijgt een eigen as — ook als die gebeurtenis later verwijderd of hernoemd is, zolang de periode er maar regels van bewaart; gebeurtenissen zonder regels in die periode krijgen geen as.\nDe tijdvakken van het radardiagram hebben er “Deze maand” bij: deze maand tegenover vorige maand, precies dezelfde werkwijze als vandaag en deze week, alleen nu over een hele maand.</string>
+    <string name="release_notes_05">“Mijn” is hernoemd naar “Instellingen”, en de oude plaatshouderregel voor instellingen is vervangen door “Versie” — op deze pagina lees je de updategeschiedenis.\nNieuw: “Alles exporteren”, één tik en alle logregels uit de logboekdatabase gaan naar een CSV die Excel direct opent, daarna bewaar of verstuur je hem via het deelvenster.\nHet oude “Exporteren” heet nu “Periode exporteren”, verder onveranderd: je kiest een periode en één van de vier formaten MD, TXT, Excel of HTML.\nHet categoriemodel is vereenvoudigd tot twee vaste klassen met gebeurtenissen op twee niveaus: de categorieën zijn niet meer aan te maken, te hernoemen of te verwijderen en de subclassen op het derde niveau zijn vervallen; gebeurtenissen kun je wel aanmaken, hernoemen en verwijderen, maximaal 8 per klasse.\nDe radarkaart op Overzicht is de grote cijfers kwijt die herhaalden wat erboven al stond; de legenda staat in het midden en toont alleen de kleuren met de labels vandaag en gisteren.</string>
+    <string name="release_notes_04">De rapportexport is er: exporteren op datumreeks, met totaal, de samenvatting per categorie en per gebeurtenis, het radardiagram en alle individuele regels (jaar, maand/dag, weekdag, categorie, gebeurtenis, start en einde, duur, notitie).\n“Thema” is hernoemd naar “Kleurmodus”, en er is een instap voor thema-stijlen bijgekomen (licht en fris, stedelijk, ingetogen zakelijk — in planning).\nHersteld: na middernacht bleven Overzicht, Dagboek, Logen en het exporteren op de vorige dag steken.</string>
+    <string name="release_notes_03">De pagina “Logen” is opnieuw gerangschikt: een datumregel (alleen aan te passen bij achteraf loggen) plus het keuzevak “Achteraf loggen”, start en einde elk met een eigen tijdkiezer, en de duur die automatisch wordt berekend.\nNieuw: “Snelkeuzes” — combinaties van categorie, gebeurtenis en duur die je zelf instelt en bij “Logen” met één tik toepast.\nEen beheerpagina voor “Tijdcategorieën”: gebeurtenissen aanmaken, hernoemen en verwijderen.</string>
+    <string name="release_notes_02">Een radardiagramkaart op Overzicht: wisselen tussen klasse I en klasse II, vandaag tegenover gisteren en deze week tegenover vorige week.\nDagboek heeft vier manieren van bladeren: Dag, Week, Maand en Jaar, met een datumanker en uitklapbare samenvattingen.\nKleurmodus: Systeem volgen / Licht / Donker, en het hele kleurenschema is verzorgder gemaakt.</string>
+    <string name="release_notes_01">De eerste versie die echt op de telefoon werkt: het raamwerk van vijf schermen — Overzicht, Dagboek, Logen, Rapportages als plaatshouder en Mijn.\nOpslag in een lokale Room-database: gegevens blijven op je telefoon, zonder netwerk en zonder account.</string>
+</resources>

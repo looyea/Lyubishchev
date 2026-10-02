@@ -151,6 +151,10 @@ interface TimeLogDao {
 
     @Query("SELECT COUNT(*) FROM time_logs")
     suspend fun count(): Int
+
+    /** 全表累计分钟数，设置页统计卡用 / whole-table total minutes */
+    @Query("SELECT COALESCE(SUM(duration_minutes), 0) FROM time_logs")
+    suspend fun totalMinutes(): Int
 }
 
 /** 一条 GROUP BY 结果，不是表，只给概览页聚合用。 */

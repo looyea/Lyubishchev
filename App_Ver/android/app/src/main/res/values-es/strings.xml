@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tiempo de Liubishchev</string>
+
+    <!-- 底部五个入口 / five bottom tabs -->
+    <string name="tab_home">Resumen</string>
+    <string name="tab_log">Diario</string>
+    <string name="tab_add">Registrar</string>
+    <string name="tab_report">Informes</string>
+    <string name="tab_mine">Ajustes</string>
+
+    <!-- 概览 / home -->
+    <string name="home_stat_today">Hoy</string>
+    <string name="home_stat_week">Esta semana</string>
+    <string name="home_stat_month">Este mes</string>
+    <string name="home_period_today">Hoy</string>
+    <string name="home_period_week">Semana</string>
+    <string name="home_period_month">Mes</string>
+    <string name="home_series_today">Hoy</string>
+    <string name="home_series_yesterday">Ayer</string>
+    <string name="home_series_week">Esta semana</string>
+    <string name="home_series_last_week">Semana anterior</string>
+    <string name="home_series_month">Este mes</string>
+    <string name="home_series_last_month">Mes anterior</string>
+    <string name="placeholder_coming_soon">Módulo en desarrollo</string>
+
+    <!-- 记录页 / read-only log browser -->
+    <string name="log_mode_day">Día</string>
+    <string name="log_mode_week">Semana</string>
+    <string name="log_mode_month">Mes</string>
+    <string name="log_mode_year">Año</string>
+    <string name="log_week_title">Semana %1$d</string>
+    <string name="log_week_current_suffix">(semana actual)</string>
+    <string name="log_month_title">Mes %1$d</string>
+    <string name="log_year_title">Año %1$d</string>
+    <string name="log_total">Total %1$s</string>
+    <string name="log_cat_totals">Total clase I %1$s · Total clase II %2$s</string>
+    <string name="log_empty">Aún no hay registros en este periodo</string>
+
+    <!-- 设置（原"我的"） / settings (was "mine") -->
+    <string name="mine_title">Ajustes</string>
+    <string name="mine_header_subtitle">Acompañar al tiempo es acompañar la vida. Recordar el tiempo es recordar la vida.</string>
+    <plurals name="mine_stat_days">
+        <item quantity="one">A tu lado durante %1$d día</item>
+        <item quantity="other">A tu lado durante %1$d días</item>
+    </plurals>
+    <string name="mine_stat_total">Total registrado: %1$d h %2$d min</string>
+    <plurals name="mine_stat_entries">
+        <item quantity="one">%1$d registro</item>
+        <item quantity="other">%1$d registros</item>
+    </plurals>
+    <string name="mine_theme">Modo de color</string>
+    <string name="mine_theme_dialog_title">Elegir modo de color</string>
+    <string name="mine_theme_system">Sistema</string>
+    <string name="mine_theme_light">Claro</string>
+    <string name="mine_theme_dark">Oscuro</string>
+    <string name="mine_version">Versión</string>
+    <string name="mine_category">Categorías de tiempo</string>
+    <string name="mine_quick">Accesos rápidos</string>
+    <string name="mine_export">Exportar rango</string>
+    <string name="mine_export_all">Exportar todo</string>
+    <string name="mine_export_all_value">BD (db/CSV)</string>
+    <string name="export_all_share_title">Exportar todo</string>
+    <string name="export_all_hint">Selecciona el formato de archivo para la exportación completa:</string>
+    <string name="export_all_db">Base de datos SQLite (.db, restaurable con Importar todo)</string>
+    <string name="export_all_csv">Tabla CSV (.csv, se abre directamente en Excel)</string>
+    <string name="mine_import">Importar todo</string>
+    <string name="mine_import_value">Combina db o CSV</string>
+    <string name="import_busy">Importando…</string>
+    <string name="import_result_text">Combinación completada: %1$d registros nuevos, %2$d duplicados omitidos (se leyeron %3$d registros del archivo).</string>
+    <string name="version_title">Historial de versiones</string>
+    <string name="version_hint">Versión actual v%1$s · la más reciente arriba</string>
+    <string name="version_current_tag">Versión actual</string>
+    <string name="mine_style">Tema</string>
+    <string name="mine_style_dialog_title">Elegir colores del tema</string>
+    <string name="mine_palette_morandi">Verde grisáceo Morandi</string>
+    <string name="mine_palette_tiffany">Azul Tiffany</string>
+    <string name="mine_palette_ocean">Azul marino</string>
+    <string name="mine_palette_forest">Verde bosque</string>
+    <string name="mine_palette_crimson">Rojo carmín</string>
+    <string name="mine_palette_amber">Ámbar dorado</string>
+    <string name="mine_palette_rose">Rosa silvestre</string>
+    <string name="mine_palette_graphite">Gris grafito</string>
+    <string name="mine_palette_obsidian">Negro obsidiana</string>
+    <string name="mine_palette_solarized">Solarized</string>
+
+    <!-- 按需导出 / range export -->
+    <string name="export_title">Exportar rango</string>
+    <string name="export_hint">Selecciona las fechas de inicio y fin y el formato; confirma el resumen del rango, genera el archivo y elige dónde guardarlo o compartirlo</string>
+    <string name="export_range_label">Rango</string>
+    <string name="export_format_label">Formato de archivo</string>
+    <string name="export_summary_label">Resumen del rango</string>
+    <string name="export_total">Total %1$s</string>
+    <string name="export_radar_note">El archivo generado incluye gráficos radar por categoría y evento y el detalle de cada registro (año / mes-día / día de la semana / categoría / evento / inicio-fin / duración / nota)</string>
+    <string name="export_run">Generar y compartir</string>
+    <string name="export_busy">Generando…</string>
+    <string name="export_empty">No hay registros en este rango</string>
+    <string name="export_invalid_range">La fecha de inicio debe ser anterior a la de fin</string>
+    <string name="export_saved">Informe generado; elige la ubicación de guardado en el panel de compartir</string>
+    <string name="export_share_title">Exportar informe</string>
+
+    <!-- 记一笔 / add record -->
+    <string name="add_title">Nuevo registro</string>
+    <string name="add_hint">Anota durante el día: al terminar una actividad añade un registro; la hora de inicio toma automáticamente la última hora de fin del día (sin conflicto si registras dos seguidas) y puedes editarla</string>
+    <string name="field_date">Fecha</string>
+    <string name="field_start">Inicio</string>
+    <string name="field_end">Fin</string>
+    <string name="field_duration">Duración</string>
+    <string name="field_category">Categoría</string>
+    <string name="category_l1">Tiempo clase I</string>
+    <string name="category_l2">Tiempo clase II</string>
+    <string name="field_event">Evento</string>
+    <string name="field_note">Nota</string>
+    <string name="add_note_placeholder">Opcional</string>
+    <string name="add_duration_pending">Tiempo por completar</string>
+    <string name="add_quick_label">Frecuentes</string>
+    <string name="add_save">Guardar y continuar</string>
+    <string name="add_err_time">Indica las horas de inicio y de fin</string>
+    <string name="add_err_event">Selecciona un evento</string>
+    <string name="add_err_order">La hora de fin debe ser posterior a la de inicio</string>
+    <string name="add_saved">Registrado %1$s</string>
+    <string name="add_backfill_label">Registro retroactivo</string>
+    <string name="add_duration_label">Duración a registrar:</string>
+    <string name="add_time_pending">Por completar</string>
+    <string name="dialog_ok">Aceptar</string>
+    <string name="dialog_cancel">Cancelar</string>
+
+    <!-- 时间分类维护 / category tree editor -->
+    <string name="cat_editor_title">Categorías de tiempo</string>
+    <string name="cat_editor_hint">Las dos categorías son fijas; hasta 8 eventos (subcategorías) por categoría, que puedes crear, renombrar o eliminar. Renombrar equivale a crear: el nombre nuevo empieza desde cero y el anterior sigue acumulando historial.</string>
+    <string name="cat_add_event">Añadir evento</string>
+    <string name="cat_rename">Renombrar</string>
+    <string name="cat_delete">Eliminar</string>
+    <string name="cat_back">Atrás</string>
+    <string name="cat_max_children">Máximo 8 eventos por categoría</string>
+    <string name="cat_input_title">Nombre</string>
+    <string name="cat_delete_confirm_title">Confirmar eliminación</string>
+    <string name="cat_delete_confirm_text">Al eliminar \"%1$s\", ese nombre dejará de acumular tiempo; los datos antiguos se conservan en la base de datos.</string>
+
+    <!-- 快捷设置（原"常用"） / quick pick editor -->
+    <string name="pick_editor_title">Accesos rápidos</string>
+    <string name="pick_editor_hint">Cada elemento combina una categoría principal, un evento secundario y una duración; tócalo para aplicarlo en «Registrar».</string>
+    <string name="pick_add_title">Añadir acceso rápido</string>
+    <string name="pick_category_label">Categoría principal</string>
+    <string name="pick_event_label">Evento secundario</string>
+    <string name="pick_minutes_label">Duración</string>
+    <string name="pick_item_label">%1$s · %2$s · %3$s</string>
+    <string name="pick_no_event">Selecciona primero la categoría principal</string>
+
+    <!-- 语言 / language（语言名一律用本族语写法，不翻译） -->
+    <string name="mine_language">Idioma</string>
+    <string name="language_dialog_title">Seleccionar idioma</string>
+    <string name="language_system">Sistema</string>
+    <string name="language_hint">El idioma sigue al sistema por defecto; si lo eliges manualmente, solo afectará a esta aplicación.</string>
+    <string name="language_zh">中文</string>
+    <string name="language_en">English</string>
+    <string name="language_es">Español</string>
+    <string name="language_pt">Português</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_nl">Nederlands</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- 时长单位 / duration units -->
+    <string name="duration_hm">%1$d h %2$d min</string>
+    <string name="duration_h">%1$d h</string>
+    <string name="duration_m">%1$d min</string>
+
+    <!-- 日期格式模板 / date patterns（这些是 DateTimeFormatter 模板，不是文案） -->
+    <string name="pattern_date_long">EEEE, d MMMM yyyy</string>
+    <string name="pattern_date_short">d MMM</string>
+
+    <!-- 记录页锚点 / log anchor labels -->
+    <string name="log_anchor_month">Mes %2$d de %1$d</string>
+
+    <!-- 全量导入错误 / import errors -->
+    <string name="import_err_empty">El archivo no contiene registros reconocibles</string>
+    <string name="import_err_unreadable">No se puede leer el archivo</string>
+    <string name="import_err_open">No se puede abrir el archivo seleccionado</string>
+    <string name="import_err_no_table">La base de datos no tiene la tabla time_logs</string>
+
+    <!-- 导出报告正文 / report body -->
+    <string name="report_title">Informe de registro de tiempo</string>
+    <string name="report_range">Rango</string>
+    <string name="report_entries_count">%1$d registros en total</string>
+    <string name="report_summary">Resumen del rango</string>
+    <string name="report_total">Total</string>
+    <string name="report_item">Elemento</string>
+    <string name="report_radar">Gráfico radar</string>
+    <string name="report_scale_note">Cada división ≈ %1$d min</string>
+    <string name="report_entries">Detalle de registros</string>
+    <string name="report_none">Ninguno</string>
+    <string name="report_footer">Generado por «Liubishchev», la app local de registro de tiempo · Los datos solo se guardan en el móvil</string>
+    <string name="report_col_year">Año</string>
+    <string name="report_col_md">Mes/día</string>
+    <string name="report_col_weekday">Día de la semana</string>
+    <string name="report_col_category">Categoría</string>
+    <string name="report_col_event">Evento</string>
+    <string name="report_col_duration">Duración</string>
+    <string name="report_col_share">Proporción</string>
+    <string name="report_col_start">Inicio</string>
+    <string name="report_col_end">Fin</string>
+    <string name="report_col_minutes">Duración (min)</string>
+    <string name="report_col_span">Inicio-fin</string>
+    <string name="report_col_note">Nota</string>
+    <string name="report_year_cell">%1$d</string>
+    <string name="report_md_cell">%1$d-%2$d</string>
+    <string name="report_cat_cell">%1$s · %2$s</string>
+    <string name="report_locale">es-ES</string>
+
+    <!-- 版本历史全档案（12 版，与中文原文逐条对应） -->
+    <string name="release_notes_092">Nuevos idiomas: 中文 / English / Español / Português / Deutsch / Nederlands / 日本語, conmutables en cualquier momento desde la fila «Idioma» de Ajustes; con «Sistema» elegido, la aplicación se adapta al idioma del teléfono.\nNueva pantalla Splash al arrancar: muestra centrado el mismo icono de la aplicación que el del escritorio, con el nombre según el idioma (柳比歇夫时间管理 en chino / Lyubishchev Time en inglés) y a continuación la pantalla principal.\nLas categorías, los eventos y las notas que defines tú son datos personales y no se traducen nunca: se muestran en el idioma en que los escribiste.\nEl texto y las cabeceras de los informes exportados, lo mismo que los días de la semana y las unidades de duración, siguen el idioma de la aplicación; los archivos CSV siguen siendo reconocidos por «Importar todo».\n«Tema» suma seis paletas de controles más: Rojo carmín / Ámbar dorado / Rosa silvestre / Gris grafito / Negro obsidiana / Solarized (una vieja conocida de los temas de terminal), cada una adaptada a claro y oscuro, con el color de base todavía en Morandi.\nAjustes incorpora la pantalla «Plantilla del informe»: la plantilla Markdown es la predeterminada, se puede cambiar a texto sin formato y también subir tus propios archivos .md/.txt (esta versión solo los registra y selecciona, el análisis queda para después); además se añade la entrada «API de IA», por ahora solo un marcador de posición.\nLa pantalla de inicio suma tres elementos, con todo el texto centrado: bajo el nombre de la aplicación, un contador de días junto a ti, contado desde el día del primer arranque; debajo, la firma de la autoría *LOOYEA* en cursiva; y al pie de la pantalla, una línea pequeña: «registro de tiempo puramente local, los datos solo se guardan en el móvil».\nLa tarjeta superior de Ajustes ahora muestra tres líneas: días a tu lado, tiempo total registrado en horas y minutos y número de registros; el subtítulo dice: acompañar al tiempo es acompañar la vida; recordar el tiempo es recordar la vida.\nLas líneas de recuento (días a tu lado, registros) siguen ahora las reglas de singular y plural de cada idioma.\nLas dos clases fijas (Tiempo clase I / II) son texto de la aplicación y ahora se muestran en el idioma de la interfaz; la base de datos sigue reconociéndolas por su nombre guardado. Cada fila de Ajustes lleva el nombre a la izquierda y la flecha pegada a la derecha.</string>
+    <string name="release_notes_091">«Tema» ya está disponible: cuatro paletas de controles que se cambian en bloque con un toque (Verde grisáceo Morandi / Azul Tiffany / Azul marino / Verde bosque), cada una adaptada a claro y oscuro, mientras el color de base neutro mantiene el minimalismo Morandi.\nEn el modo anual del Diario, los botones de fecha se atenúan en lugar de ocultarse, así que conservan su posición.\nLos botones segmentados (el conmutador de Resumen y Día/Semana/Mes/Año) eliminan la marca de verificación del estado seleccionado; solo el color de fondo los distingue.\nAjustes simplificado: las filas «Categorías de tiempo» y «Exportar rango» quitan el texto explicativo de la derecha y conservan solo la flecha hacia la pantalla siguiente.</string>
+    <string name="release_notes_09">Resumen añade «Acumulado este mes»: una tercera columna junto a Hoy y Esta semana, que coincide con los tres periodos de hoy/esta semana/este mes que hay bajo el gráfico radar.\nLa vista semanal del Diario ya no se limita a tres semanas: con GROUP BY por semanas se enumeran todas las semanas de este año que tienen registros (las que no tienen ninguna no ocupan sitio), en orden inverso y todas contraídas por defecto.\nLa vista mensual hace lo mismo: cada mes de este año con registros tiene su propia sección, en lugar de los tres últimos meses fijos.\nEl selector de fechas ya no permite elegir el futuro: en los modos semanal y mensual el límite va del comienzo de este año a hoy, de modo que la próxima semana y el próximo mes quedan fuera; la vista diaria se detiene en hoy por defecto y basta tocar la fecha para revisar un día anterior.\nLa vista anual del Diario solo enumera los años que realmente tienen registros (por ejemplo el año anterior al pasado, el año pasado y este año, sin que aparezcan los años en blanco) y despliega en cada bloque los totales de clase I/clase II y por evento, sin necesidad de ancla de fecha.\nEn Ajustes, «Frecuentes» pasa a llamarse «Accesos rápidos», se quita el texto explicativo de la derecha y queda solo la flecha; el título de la pantalla interna coincide.</string>
+
+    <!-- Plantilla del informe y AI API / report template and AI API -->
+    <string name="mine_template">Plantilla del informe</string>
+    <string name="mine_ai_api">API de IA</string>
+    <string name="mine_ai_api_value">Próximamente</string>
+    <string name="mine_ai_api_dialog">Esta opción queda reservada para los informes: más adelante podrás elegir aquí el motor de razonamiento de IA y el método de API con el que se generen. Esta versión solo coloca la entrada en Ajustes; todavía no hay nada que configurar y la app sigue sin conectarse a la red.</string>
+    <string name="tpl_back">Volver</string>
+    <string name="tpl_title">Plantilla del informe</string>
+    <string name="tpl_hint">Una plantilla define la presentación del informe. Solo se admiten plantillas en Markdown (.md) y en texto sin formato (.txt), y el contenido de un archivo .txt también debe escribirse en Markdown. Esta versión solo enumera, selecciona y registra las cargas; generar informes a partir de tu plantilla llegará en versiones posteriores.</string>
+    <string name="tpl_section_builtin">Plantillas integradas</string>
+    <string name="tpl_section_custom">Tus plantillas</string>
+    <string name="tpl_builtin_md">Plantilla Markdown</string>
+    <string name="tpl_builtin_md_desc">Títulos, tablas de resumen y secciones del gráfico radar, fáciles de archivar o reformular.</string>
+    <string name="tpl_builtin_txt">Plantilla de texto</string>
+    <string name="tpl_builtin_txt_desc">La misma estructura que la versión en Markdown; el contenido se escribe igualmente en Markdown.</string>
+    <string name="tpl_default_badge">Predeterminada</string>
+    <string name="tpl_custom_empty">Aún no hay plantillas personalizadas; puedes subir una más abajo.</string>
+    <string name="tpl_upload">Subir plantilla (.md / .txt)</string>
+    <string name="tpl_upload_note">Los archivos subidos solo se registran y se eligen; por ahora los informes siguen generándose con el formato integrado.</string>
+    <string name="tpl_uploaded">Plantilla añadida: %1$s</string>
+    <string name="tpl_err_format">Solo se aceptan archivos .md o .txt</string>
+    <string name="tpl_delete">Eliminar</string>
+    <string name="tpl_delete_title">Eliminar plantilla</string>
+    <string name="tpl_delete_text">¿Seguro que quieres quitar «%1$s»? Los datos de los registros no se ven afectados.</string>
+    <!-- Splash -->
+    <plurals name="splash_days">
+        <item quantity="one">A tu lado durante %1$d día</item>
+        <item quantity="other">A tu lado durante %1$d días</item>
+    </plurals>
+    <string name="splash_credit">por %1$s</string>
+    <string name="splash_local_only">Registro de tiempo puramente local; los datos solo se guardan en el teléfono</string>
+
+    <!-- 版本历史 0.8 至 0.1 / version history, 0.8 down to 0.1 -->
+    <string name="release_notes_08">La interfaz se viste con el minimalismo Morandi: fondo blanco crema cálido y gris carbón, verde grisáceo como color principal y terracota como color de apoyo; las dos paletas, clara y oscura, se han reajustado y el contraste se ha revisado en función de la legibilidad.\nSe rehace la jerarquía tipográfica: los totales de hoy/esta semana de Resumen pasan a números serif de gran tamaño, para ver de un vistazo cuánto tiempo se ha empleado, y el selector segmentado adopta un estado seleccionado claro y de baja saturación en lugar de bloques de color plano.\nSe completa la escala de tamaños de letra (el texto del cuerpo, las etiquetas pequeñas y los botones reciben espaciado entre letras) y los bordes de las tarjetas y las líneas divisorias usan un color de contorno más suave.</string>
+    <string name="release_notes_07">«Exportar todo» mejorado: puede exportar directamente el archivo de base de datos SQLite (.db, un único archivo con todos los registros y el registro de actividad ya combinado antes de exportar); la tabla CSV sigue siendo una opción.\nSe añade «Importar todo»: elige una base de datos .db o un CSV exportado por esta aplicación y cada fila se compara con la base de datos principal antes de combinarse; los registros con la misma fecha, el mismo inicio y fin, el mismo evento y la misma duración cuentan como duplicados y se omiten automáticamente, sin doble cómputo.\nAl terminar la importación se informa de los registros añadidos, omitidos y leídos; un archivo no reconocible (que no sea una base de datos de esta aplicación, que le falte la tabla o que no tenga el formato correcto) produce un error claro.\nSe afinan las reglas del número de versión: cada novedad funcional avanza 0.x y las correcciones menores dentro del mismo ciclo usan números de parche como 0.x1 o 0.x2.</string>
+    <string name="release_notes_062">Corregida la desaparición del gráfico radar: si el periodo seleccionado tenía registros de menos de 3 eventos la figura no podía formarse, y ahora los eventos de Ajustes lo completan hasta 3 ejes (los añadidos muestran 0).</string>
+    <string name="release_notes_06">Los ejes del gráfico radar siguen a la base de datos: cada evento con registros en el periodo seleccionado ocupa un eje, de modo que un evento eliminado o renombrado sigue apareciendo mientras ese periodo conserve sus registros; los eventos sin registros en el periodo no ocupan eje.\nEl radar incorpora el periodo «Este mes»: el mes actual frente al mes anterior, con una lógica idéntica a la de Hoy/Esta semana y solo el rango cambiado al mes completo.</string>
+    <string name="release_notes_05">La pestaña «Mi» pasa a llamarse «Ajustes»; la fila de ajustes reservada se sustituye por «Versión», que abre esta pantalla con el historial de actualizaciones.\nSe añade «Exportar todo»: con un toque exporta todos los registros de la base de datos como CSV (que Excel abre directamente) y lo guarda o lo envía desde el panel de compartir.\nLa antigua fila «Exportar» se renombra a «Exportar rango» sin cambiar su función: elegir el intervalo y uno de los cuatro formatos MD/TXT/Excel/HTML.\nEl modelo de categorías se simplifica a dos categorías fijas y eventos en dos niveles: las categorías ya no se crean, renombran ni eliminan y desaparece el tercer nivel de subcategorías; los eventos se pueden crear, renombrar y eliminar, hasta 8 por categoría.\nLa tarjeta del radar en Resumen quita los números grandes que repetían las estadísticas de arriba; la leyenda se centra y muestra solo los colores y las etiquetas de hoy/ayer.</string>
+    <string name="release_notes_04">Llega la exportación de informes: por intervalo de fechas, con el total, los resúmenes por categoría y por evento, el gráfico radar y el detalle de cada registro (año/mes-día/día de la semana/categoría/evento/inicio-fin/duración/nota).\n«Tema» pasa a llamarse «Modo de color»; se añade la entrada de estilos de tema (fresco, urbano y sobrio de negocio, todavía en planificación).\nCorregido el fallo por el que, pasada la medianoche, Resumen, Diario, Registrar y la exportación seguían mostrando el día anterior.</string>
+    <string name="release_notes_03">Se reordena la pantalla «Registrar»: una fila de fecha (editable solo con «Registro retroactivo» marcado) más la casilla de registro retroactivo, selectores de hora independientes para inicio y fin, y la duración calculada automáticamente.\nLlega «Frecuentes»: combinaciones rápidas de categoría, evento y duración que se aplican con un toque en «Registrar».\nPantalla de mantenimiento de «Categorías de tiempo»: crear, renombrar y eliminar eventos.</string>
+    <string name="release_notes_02">Tarjeta del gráfico radar en Resumen: conmutador entre clase I y clase II, hoy frente a ayer y esta semana frente a la semana anterior.\nEl Diario se recorre en cuatro niveles, Día/Semana/Mes/Año, con selección de ancla de fecha y resúmenes en acordeón.\nModo de color: Sistema/Claro/Oscuro, y un repaso estético general de toda la paleta.</string>
+    <string name="release_notes_01">La primera versión utilizable en un dispositivo real: el armazón de cinco pantallas de Resumen, Diario, Registrar, Informes aún en desarrollo y «Mi».\nAlmacenamiento en una base de datos Room local: los datos solo se guardan en el móvil, sin conexión a la red ni cuenta.</string>
+</resources>

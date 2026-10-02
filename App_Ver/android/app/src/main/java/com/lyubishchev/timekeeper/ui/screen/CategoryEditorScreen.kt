@@ -105,7 +105,7 @@ fun CategoryEditorScreen(
                         color = MaterialTheme.colorScheme.primary,
                     )
                     Text(
-                        text = cat.name,
+                        text = TimeRules.categoryLabel(cat.name),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier.padding(start = 10.dp),

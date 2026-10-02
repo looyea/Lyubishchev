@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tempo de Liubishchev</string>
+
+    <!-- Bottom tabs -->
+    <string name="tab_home">Resumo</string>
+    <string name="tab_log">Diário</string>
+    <string name="tab_add">Lançar</string>
+    <string name="tab_report">Relatórios</string>
+    <string name="tab_mine">Configurações</string>
+
+    <!-- Overview / home -->
+    <string name="home_stat_today">Hoje</string>
+    <string name="home_stat_week">Na semana</string>
+    <string name="home_stat_month">No mês</string>
+    <string name="home_period_today">Hoje</string>
+    <string name="home_period_week">Semana</string>
+    <string name="home_period_month">Mês</string>
+    <string name="home_series_today">Hoje</string>
+    <string name="home_series_yesterday">Ontem</string>
+    <string name="home_series_week">Esta semana</string>
+    <string name="home_series_last_week">Semana passada</string>
+    <string name="home_series_month">Este mês</string>
+    <string name="home_series_last_month">Mês passado</string>
+    <string name="placeholder_coming_soon">Módulo em desenvolvimento</string>
+
+    <!-- Read-only log browser -->
+    <string name="log_mode_day">Dia</string>
+    <string name="log_mode_week">Semana</string>
+    <string name="log_mode_month">Mês</string>
+    <string name="log_mode_year">Ano</string>
+    <string name="log_week_title">Semana %1$d</string>
+    <string name="log_week_current_suffix">(Semana atual)</string>
+    <string name="log_month_title">Mês %1$d</string>
+    <string name="log_year_title">Ano %1$d</string>
+    <string name="log_total">Total %1$s</string>
+    <string name="log_cat_totals">Total classe I %1$s · Total classe II %2$s</string>
+    <string name="log_empty">Nenhum lançamento neste período</string>
+
+    <!-- Settings (was "mine") -->
+    <string name="mine_title">Configurações</string>
+    <string name="mine_header_subtitle">Acompanhar o tempo é acompanhar a vida. Lembrar o tempo é lembrar a vida.</string>
+    <plurals name="mine_stat_days">
+        <item quantity="one">Já é %1$d dia ao seu lado</item>
+        <item quantity="other">Já são %1$d dias ao seu lado</item>
+    </plurals>
+    <string name="mine_stat_total">Tempo total: %1$d h %2$d min</string>
+    <plurals name="mine_stat_entries">
+        <item quantity="one">%1$d lançamento registrado</item>
+        <item quantity="other">%1$d lançamentos registrados</item>
+    </plurals>
+    <string name="mine_theme">Modo de cor</string>
+    <string name="mine_theme_dialog_title">Escolher modo de cor</string>
+    <string name="mine_theme_system">Sistema</string>
+    <string name="mine_theme_light">Claro</string>
+    <string name="mine_theme_dark">Escuro</string>
+    <string name="mine_version">Versão</string>
+    <string name="mine_category">Categorias de tempo</string>
+    <string name="mine_quick">Atalhos</string>
+    <string name="mine_export">Exportar período</string>
+    <string name="mine_export_all">Exportar tudo</string>
+    <string name="mine_export_all_value">BD (db/CSV)</string>
+    <string name="export_all_share_title">Exportar tudo</string>
+    <string name="export_all_hint">Escolha o formato do arquivo da exportação completa:</string>
+    <string name="export_all_db">Banco de dados SQLite (.db, pode ser restaurado com Importar tudo)</string>
+    <string name="export_all_csv">Planilha CSV (.csv, abre direto no Excel)</string>
+    <string name="mine_import">Importar tudo</string>
+    <string name="mine_import_value">Mesclar db ou CSV</string>
+    <string name="import_busy">Importando…</string>
+    <string name="import_result_text">Mesclagem concluída: %1$d novos, %2$d duplicados ignorados (arquivo com %3$d registros lidos).</string>
+    <string name="version_title">Histórico de versões</string>
+    <string name="version_hint">Versão atual v%1$s · mais recente primeiro</string>
+    <string name="version_current_tag">Versão atual</string>
+    <string name="mine_style">Tema</string>
+    <string name="mine_style_dialog_title">Escolher cores do tema</string>
+    <string name="mine_palette_morandi">Cinza-esverdeado Morandi</string>
+    <string name="mine_palette_tiffany">Azul Tiffany</string>
+    <string name="mine_palette_ocean">Azul marítimo</string>
+    <string name="mine_palette_forest">Verde floresta</string>
+    <string name="mine_palette_crimson">Vermelho carmim</string>
+    <string name="mine_palette_amber">Âmbar dourado</string>
+    <string name="mine_palette_rose">Rosa silvestre</string>
+    <string name="mine_palette_graphite">Cinza grafite</string>
+    <string name="mine_palette_obsidian">Preto obsidiana</string>
+    <string name="mine_palette_solarized">Solarized</string>
+
+    <!-- Range export -->
+    <string name="export_title">Exportar período</string>
+    <string name="export_hint">Escolha as datas inicial e final e o formato do arquivo, confira o resumo do período, gere o arquivo e selecione onde salvar ou compartilhar</string>
+    <string name="export_range_label">Período</string>
+    <string name="export_format_label">Formato do arquivo</string>
+    <string name="export_summary_label">Resumo do período</string>
+    <string name="export_total">Total %1$s</string>
+    <string name="export_radar_note">O arquivo gerado inclui um gráfico radar por categoria e atividade e a lista de lançamentos (ano / mês-dia / dia da semana / categoria / atividade / início-fim / duração / nota)</string>
+    <string name="export_run">Gerar e compartilhar</string>
+    <string name="export_busy">Gerando…</string>
+    <string name="export_empty">Nenhum lançamento neste período</string>
+    <string name="export_invalid_range">A data inicial deve ser anterior à data final</string>
+    <string name="export_saved">Relatório gerado; escolha onde salvar no painel de compartilhamento</string>
+    <string name="export_share_title">Exportar relatório</string>
+
+    <!-- Add record -->
+    <string name="add_title">Novo lançamento</string>
+    <string name="add_hint">Registre durante o dia: terminou uma atividade, faça um lançamento; a hora inicial continua automaticamente a última hora final do dia (sem conflito ao registrar duas ao mesmo tempo) e você ainda pode ajustá-la manualmente</string>
+    <string name="field_date">Data</string>
+    <string name="field_start">Início</string>
+    <string name="field_end">Fim</string>
+    <string name="field_duration">Duração</string>
+    <string name="field_category">Categoria</string>
+    <string name="category_l1">Tempo classe I</string>
+    <string name="category_l2">Tempo classe II</string>
+    <string name="field_event">Atividade</string>
+    <string name="field_note">Nota</string>
+    <string name="add_note_placeholder">Opcional</string>
+    <string name="add_duration_pending">Tempo a definir</string>
+    <string name="add_quick_label">Frequentes</string>
+    <string name="add_save">Salvar e continuar</string>
+    <string name="add_err_time">Informe as horas de início e fim</string>
+    <string name="add_err_event">Selecione uma atividade</string>
+    <string name="add_err_order">A hora final deve ser posterior à inicial</string>
+    <string name="add_saved">Registrado %1$s</string>
+    <string name="add_backfill_label">Lançamento retroativo</string>
+    <string name="add_duration_label">Duração do lançamento:</string>
+    <string name="add_time_pending">A definir</string>
+    <string name="dialog_ok">Confirmar</string>
+    <string name="dialog_cancel">Cancelar</string>
+
+    <!-- Category tree editor -->
+    <string name="cat_editor_title">Categorias de tempo</string>
+    <string name="cat_editor_hint">Duas categorias fixas; até 8 atividades (subcategorias) em cada uma, com criação, renomeação e exclusão. Renomear equivale a criar: o novo nome começa do zero e o nome antigo continua acumulando histórico.</string>
+    <string name="cat_add_event">Adicionar atividade</string>
+    <string name="cat_rename">Renomear</string>
+    <string name="cat_delete">Excluir</string>
+    <string name="cat_back">Voltar</string>
+    <string name="cat_max_children">Máximo de 8 atividades por categoria</string>
+    <string name="cat_input_title">Nomear</string>
+    <string name="cat_delete_confirm_title">Confirmar exclusão</string>
+    <string name="cat_delete_confirm_text">Depois de excluir \"%1$s\", esse nome para de acumular; os dados antigos ficam no banco.</string>
+
+    <!-- Quick pick editor -->
+    <string name="pick_editor_title">Atalhos</string>
+    <string name="pick_editor_hint">Cada item reúne categoria, atividade e duração e é aplicado em \"Lançar\" com um toque.</string>
+    <string name="pick_add_title">Adicionar atalho</string>
+    <string name="pick_category_label">Categoria</string>
+    <string name="pick_event_label">Atividade</string>
+    <string name="pick_minutes_label">Duração</string>
+    <string name="pick_item_label">%1$s · %2$s · %3$s</string>
+    <string name="pick_no_event">Selecione primeiro a categoria</string>
+
+    <!-- Language (language names stay in their own language) -->
+    <string name="mine_language">Idioma</string>
+    <string name="language_dialog_title">Escolher idioma</string>
+    <string name="language_system">Sistema</string>
+    <string name="language_hint">O idioma segue o sistema por padrão; a escolha manual vale só para este app.</string>
+    <string name="language_zh">中文</string>
+    <string name="language_en">English</string>
+    <string name="language_es">Español</string>
+    <string name="language_pt">Português</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_nl">Nederlands</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- Duration units -->
+    <string name="duration_hm">%1$d h %2$d min</string>
+    <string name="duration_h">%1$d h</string>
+    <string name="duration_m">%1$d min</string>
+
+    <!-- Date patterns (DateTimeFormatter templates, not prose) -->
+    <string name="pattern_date_long">EEEE, d MMMM yyyy</string>
+    <string name="pattern_date_short">d MMM</string>
+
+    <!-- Log anchor labels -->
+    <string name="log_anchor_month">Ano %1$d · Mês %2$d</string>
+
+    <!-- Import errors -->
+    <string name="import_err_empty">Nenhum lançamento reconhecível no arquivo</string>
+    <string name="import_err_unreadable">Não foi possível ler o arquivo</string>
+    <string name="import_err_open">Não foi possível abrir o arquivo selecionado</string>
+    <string name="import_err_no_table">O banco de dados não tem a tabela time_logs</string>
+
+    <!-- Report body -->
+    <string name="report_title">Relatório de registros de tempo</string>
+    <string name="report_range">Período</string>
+    <string name="report_entries_count">Total de %1$d lançamentos</string>
+    <string name="report_summary">Resumo do período</string>
+    <string name="report_total">Total</string>
+    <string name="report_item">Item</string>
+    <string name="report_radar">Gráfico radar</string>
+    <string name="report_scale_note">Cada divisão equivale a cerca de %1$d min</string>
+    <string name="report_entries">Lançamentos detalhados</string>
+    <string name="report_none">Nenhum</string>
+    <string name="report_footer">Gerado pelo app local Tempo de Liubishchev · dados apenas no celular</string>
+    <string name="report_col_year">Ano</string>
+    <string name="report_col_md">Mês-dia</string>
+    <string name="report_col_weekday">Dia da semana</string>
+    <string name="report_col_category">Categoria</string>
+    <string name="report_col_event">Atividade</string>
+    <string name="report_col_duration">Duração</string>
+    <string name="report_col_share">Proporção</string>
+    <string name="report_col_start">Início</string>
+    <string name="report_col_end">Fim</string>
+    <string name="report_col_minutes">Duração (min)</string>
+    <string name="report_col_span">Início-fim</string>
+    <string name="report_col_note">Nota</string>
+    <string name="report_year_cell">%1$d</string>
+    <string name="report_md_cell">%1$d-%2$d</string>
+    <string name="report_cat_cell">%1$s · %2$s</string>
+    <string name="report_locale">pt-BR</string>
+
+    <!-- Release notes (multi-line prose kept as one value with \n) -->
+    <string name="release_notes_092">Novos idiomas: 中文 / English / Español / Português / Deutsch / Nederlands / 日本語, com troca a qualquer momento em Configurações → \"Idioma\"; ao escolher \"Sistema\", o app acompanha o idioma do sistema do celular.\nNova tela Splash de abertura: o ícone do app, igual ao da área de trabalho, aparece centralizado, o nome do app é exibido conforme o idioma e depois o app entra na tela principal.\nCategorias, atividades e notas criadas por você são dados pessoais e nunca são traduzidas: aparecem exatamente no idioma em que foram preenchidas.\nO texto, os cabeçalhos, os dias da semana e as unidades de duração dos relatórios exportados também seguem o idioma do app; o CSV continua sendo reconhecido pela \"Importar tudo\".\n\"Tema\" recebe seis novas paletas de cores para os controles: Vermelho carmim / Âmbar dourado / Rosa silvestre / Cinza grafite / Preto obsidiana / Solarized (o clássico das paletas de terminal), cada uma adaptada ao claro e ao escuro, mantendo a cor de fundo Morandi.\nAs Configurações ganham a tela \"Modelo de relatório\": modelo Markdown padrão, opção de texto simples e envio dos seus próprios arquivos .md/.txt (nesta versão apenas para registro e seleção; a leitura virá depois); há também uma entrada \"AI API\", ainda só um espaço reservado.\nA tela de abertura acrescenta três linhas, todas centralizadas: abaixo do nome do app aparece um contador de dias ao seu lado, contado desde o primeiro uso, abaixo dele a assinatura em itálico da LOOYEA e, no rodapé da tela, o aviso de estatística de tempo totalmente local, com os dados apenas no celular.\nO cartão superior de Configurações agora traz três linhas: dias ao seu lado, tempo total registrado em horas e minutos e quantidade de lançamentos; o subtítulo passou a ser: acompanhar o tempo é acompanhar a vida; lembrar o tempo é lembrar a vida.\nAs linhas de contagem (dias ao seu lado, registros) agora seguem as regras de singular e plural de cada idioma.\nAs duas classes fixas (Tempo classe I / II) são texto do aplicativo e agora aparecem no idioma da interface; o banco de dados continua reconhecendo-as pelo nome salvo. Cada linha de Ajustes traz o nome à esquerda e a seta encostada à direita.</string>
+    <string name="release_notes_091">\"Tema\" chega oficialmente: troca de quatro paletas de cores para os controles com um toque (Cinza-esverdeado Morandi / Azul Tiffany / Azul marítimo / Verde floresta), cada uma adaptada ao claro e ao escuro, mantendo o fundo neutro minimalista Morandi.\nNo modo Ano do Diário, os botões de data agora ficam esmaecidos em vez de ocultos, mantendo a posição fixa.\nOs botões segmentados (troca do Resumo e Dia/Semana/Mês/Ano) deixam de mostrar a marca de seleção quando ativos e passam a se distinguir apenas pela cor de fundo.\nConfigurações mais enxutas: as linhas \"Categorias de tempo\" e \"Exportar período\" perdem o texto explicativo à direita e mantêm só a seta para abrir a subpágina.</string>
+    <string name="release_notes_09">O Resumo ganhou a coluna \"Acumulado no mês\", ao lado de Hoje e Semana, correspondendo exatamente às três faixas de tempo Hoje/Semana/Mês abaixo do gráfico radar.\nA visão Semana do Diário não se limita mais a três semanas: com GROUP BY semanal, lista todas as semanas do ano que têm lançamentos (as sem lançamento simplesmente não ocupam espaço), em ordem inversa e todas recolhidas por padrão.\nA visão Mês do Diário funciona da mesma forma: cada mês do ano com lançamentos forma uma seção, em vez de fixar apenas os três últimos meses.\nO seletor de datas não permite mais datas futuras: nos modos Semana e Mês o limite inferior é o início deste ano e o superior é hoje, então a próxima semana e o próximo mês ficam bloqueados; a visão Dia abre por padrão no dia de hoje e, para ver um dia anterior, toque na data e escolha.\nA visão Ano do Diário passou a listar somente os anos que realmente têm registros (por exemplo, há dois anos, o ano passado e este ano, sem que os anos em branco no meio apareçam); cada ano abre direto os totais da classe I / classe II e por atividade, sem precisar de âncora de data.\nNa tela Configurações, \"Frequentes\" foi renomeado para \"Atalhos\"; o texto explicativo à direita saiu, restando só a seta, e o título interno acompanhou a mudança.</string>
+
+    <!-- Settings: report template & AI API -->
+    <string name="mine_template">Modelo de relatório</string>
+    <string name="mine_ai_api">AI API</string>
+    <string name="mine_ai_api_value">Em breve</string>
+    <string name="mine_ai_api_dialog">Esta opção está reservada para os relatórios: no futuro poderá escolher aqui o motor de inferência de IA e o tipo de API usados na geração. Esta versão apenas coloca a entrada nas Configurações — ainda não há nada para configurar e o app continua sem acesso à rede.</string>
+
+    <!-- Report template screen -->
+    <string name="tpl_back">Voltar</string>
+    <string name="tpl_title">Modelo de relatório</string>
+    <string name="tpl_hint">O modelo define a diagramação do relatório. Aqui só são aceitos modelos em Markdown (.md) e texto simples (.txt), e o conteúdo do .txt também deve ser escrito em Markdown. Esta versão apenas lista, seleciona e registra os modelos enviados; a geração de relatórios a partir do seu modelo virá em uma versão futura.</string>
+    <string name="tpl_section_builtin">Modelos integrados</string>
+    <string name="tpl_section_custom">Seus modelos</string>
+    <string name="tpl_builtin_md">Modelo Markdown</string>
+    <string name="tpl_builtin_md_desc">Títulos, tabelas-resumo e seções de gráfico radar — fáceis de arquivar ou reaproveitar</string>
+    <string name="tpl_builtin_txt">Modelo de texto</string>
+    <string name="tpl_builtin_txt_desc">Mesma estrutura da versão Markdown, com o conteúdo ainda escrito em Markdown</string>
+    <string name="tpl_default_badge">Padrão</string>
+    <string name="tpl_custom_empty">Ainda não há modelos personalizados — envie o seu abaixo.</string>
+    <string name="tpl_upload">Enviar modelo (.md / .txt)</string>
+    <string name="tpl_upload_note">O upload serve apenas para registro e seleção; por enquanto os relatórios ainda são gerados no formato integrado.</string>
+    <string name="tpl_uploaded">Modelo adicionado: %1$s</string>
+    <string name="tpl_err_format">Somente arquivos .md ou .txt são aceitos</string>
+    <string name="tpl_delete">Excluir</string>
+    <string name="tpl_delete_title">Excluir modelo</string>
+    <string name="tpl_delete_text">Deseja remover \"%1$s\"? Os registros já lançados não são afetados.</string>
+    <!-- Splash -->
+    <plurals name="splash_days">
+        <item quantity="one">Já é %1$d dia ao seu lado</item>
+        <item quantity="other">Já são %1$d dias ao seu lado</item>
+    </plurals>
+    <string name="splash_credit">por %1$s</string>
+    <string name="splash_local_only">Estatística de tempo totalmente local; os dados ficam apenas no celular</string>
+
+    <!-- Release notes: versões anteriores -->
+    <string name="release_notes_08">A interface adotou o estilo \"Morandi minimalista\": fundo em branco-bege quente e cinza-carvão, cor principal verde-acinzentada e cor de apoio terracota, com os esquemas claro e escuro reajustados e o contraste calibrado para a legibilidade.\nA hierarquia tipográfica foi refeita: os totais Hoje/Semana do Resumo viraram números grandes com serifa, para ver de imediato quanto tempo foi gasto, e o seletor segmentado passou a um estado selecionado claro e de baixa saturação, sem o bloco de cor sólida de antes.\nA escala de tamanhos de fonte foi completada (corpo do texto, rótulos pequenos e texto dos botões ganharam espaçamento), e as bordas dos cartões e as linhas divisórias passaram a usar uma cor de contorno mais suave.</string>
+    <string name="release_notes_07">A \"Exportar tudo\" evoluiu: agora exporta direto o arquivo de banco de dados SQLite (.db, um único arquivo com todos os registros, com o diário já consolidado antes da exportação), e a planilha CSV continua como opção.\nChegou a \"Importar tudo\": escolha um banco .db ou um CSV exportado por este app; cada registro é comparado com o banco de dados principal e depois mesclado. Registros com a mesma data, o mesmo início-fim, a mesma atividade e a mesma duração são tratados como duplicados e ignorados automaticamente, sem contagem dupla.\nAo fim da importação o app informa quantos registros foram adicionados, ignorados e lidos do arquivo; se o arquivo não for reconhecível (não é um banco deste app, falta a tabela ou o formato é incompatível), ele mostra um erro claro.\nA regra de numeração das versões foi refinada: novos recursos avançam 0.x; correções pequenas dentro do mesmo ciclo de recurso usam números de patch como 0.x1, 0.x2.</string>
+    <string name="release_notes_062">Corrigido o desaparecimento do gráfico radar: quando o período selecionado tinha menos de 3 atividades com registros, o gráfico não se formava; agora ele é completado até 3 eixos com atividades das Configurações (as adicionadas para completar aparecem com 0).</string>
+    <string name="release_notes_06">Os eixos do gráfico radar agora seguem o banco de dados: cada atividade com registros no período selecionado forma um eixo; mesmo que a atividade tenha sido excluída ou renomeada, basta que haja registros naquele período para ela continuar aparecendo, e atividades sem registro no período não ocupam eixo.\nA faixa de tempo do radar ganhou \"Este mês\", comparando este mês com o mês passado, com a mesma lógica de Hoje/Semana, só que com o intervalo sendo o mês inteiro.</string>
+    <string name="release_notes_05">A aba \"Minha\" passou a se chamar \"Configurações\"; a antiga linha de Configurações virou \"Versão\", que abre esta página de histórico de atualizações.\nChegou a \"Exportar tudo\": com um toque exporta todos os registros do banco de dados como CSV (que abre direto no Excel) e, pelo painel de compartilhamento, salva ou envia o arquivo.\nA antiga \"Exportar\" virou \"Exportar período\", mantendo a função: escolha o intervalo e um dos quatro formatos MD/TXT/Excel/HTML.\nO modelo de categorias foi simplificado para duas categorias fixas e atividades em dois níveis: as categorias não são mais criadas, renomeadas nem excluídas, o terceiro nível de subcategorias foi eliminado, e as atividades podem ser criadas, renomeadas e excluídas, até 8 por categoria.\nO cartão do gráfico radar no Resumo retirou os números grandes que repetiam as estatísticas de cima; a legenda ficou centralizada, mostrando apenas as cores e os rótulos Hoje/Ontem.</string>
+    <string name="release_notes_04">A exportação de relatórios foi lançada: exporta por intervalo de datas, incluindo o total, o resumo por categoria e por atividade, o gráfico radar e os lançamentos detalhados (ano / mês-dia / dia da semana / categoria / atividade / início-fim / duração / nota).\nA opção antes chamada \"Tema\" passou a se chamar \"Modo de cor\"; foi criada uma nova entrada de estilo de tema (fresco, urbano e executivo sóbrio, em planejamento).\nCorrigido o problema em que, depois da meia-noite, Resumo, Diário, Lançar e a exportação ainda mostravam o dia anterior.</string>
+    <string name="release_notes_03">\"Lançar\" foi reorganizado: uma linha de data (editável apenas no lançamento retroativo) com a caixa \"Lançamento retroativo\", seletores de hora independentes para início e fim e duração calculada automaticamente.\nChegaram os \"Frequentes\": salve combinações de categoria, atividade e duração e aplique-as com um toque em \"Lançar\".\nNova página de manutenção de \"Categorias de tempo\": criar, renomear e excluir atividades.</string>
+    <string name="release_notes_02">Cartão de gráfico radar no Resumo: alternância entre classe I e classe II, comparando Hoje com Ontem e Esta semana com Semana passada.\nNavegação do Diário em quatro níveis: Dia/Semana/Mês/Ano, com escolha da âncora de data e resumos em sanfona.\nModo de cor: Sistema, Claro ou Escuro, com o conjunto de cores todo embelezado.</string>
+    <string name="release_notes_01">Primeira versão realmente utilizável no celular: a estrutura das cinco páginas Resumo, Diário, Lançar, Relatórios (espaço reservado) e Minha.\nArmazenamento local em banco de dados Room; os dados ficam só no celular, sem precisar de internet nem de conta.</string>
+</resources>

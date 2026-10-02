@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">柳比歇夫</string>
+    <string name="app_name">柳比歇夫时间管理</string>
 
     <!-- 底部五个入口 / five bottom tabs -->
     <string name="tab_home">概览</string>
@@ -39,8 +39,14 @@
 
     <!-- 设置（原"我的"） / settings (was "mine") -->
     <string name="mine_title">设置</string>
-    <string name="mine_header_subtitle">纯本地时间统计 · 数据只存手机</string>
-    <string name="mine_stat_entries">已记录 %1$d 条</string>
+    <string name="mine_header_subtitle">与时间相伴，就是与生命相随。记住时间就是记住生命。</string>
+    <plurals name="mine_stat_days">
+        <item quantity="other">已陪伴您 %1$d 天</item>
+    </plurals>
+    <string name="mine_stat_total">累计记录 %1$d 小时 %2$d 分</string>
+    <plurals name="mine_stat_entries">
+        <item quantity="other">已记录 %1$d 条</item>
+    </plurals>
     <string name="mine_theme">颜色模式</string>
     <string name="mine_theme_dialog_title">选择颜色模式</string>
     <string name="mine_theme_system">跟随系统</string>
@@ -69,6 +75,12 @@
     <string name="mine_palette_tiffany">蒂芙尼蓝</string>
     <string name="mine_palette_ocean">海运蓝</string>
     <string name="mine_palette_forest">森林绿</string>
+    <string name="mine_palette_crimson">朱砂红</string>
+    <string name="mine_palette_amber">琥珀黄</string>
+    <string name="mine_palette_rose">蔷薇粉</string>
+    <string name="mine_palette_graphite">石墨灰</string>
+    <string name="mine_palette_obsidian">曜石黑</string>
+    <string name="mine_palette_solarized">Solarized</string>
 
     <!-- 按需导出 / range export -->
     <string name="export_title">按需导出</string>
@@ -93,6 +105,8 @@
     <string name="field_end">结束</string>
     <string name="field_duration">时长</string>
     <string name="field_category">分类</string>
+    <string name="category_l1">I类时间</string>
+    <string name="category_l2">II类时间</string>
     <string name="field_event">事件</string>
     <string name="field_note">备注</string>
     <string name="add_note_placeholder">可选</string>
@@ -130,4 +144,111 @@
     <string name="pick_minutes_label">持续时间</string>
     <string name="pick_item_label">%1$s · %2$s · %3$s</string>
     <string name="pick_no_event">请先选一级分类</string>
+
+    <!-- 语言 / language（语言名一律用本族语写法，不翻译） -->
+    <string name="mine_language">语言</string>
+    <string name="language_dialog_title">选择语言</string>
+    <string name="language_system">跟随系统</string>
+    <string name="language_hint">应用语言默认跟随系统；手动选择后只影响本应用。</string>
+    <string name="language_zh">中文</string>
+    <string name="language_en">English</string>
+    <string name="language_es">Español</string>
+    <string name="language_pt">Português</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_nl">Nederlands</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- 时长单位 / duration units -->
+    <string name="duration_hm">%1$d 小时 %2$d 分钟</string>
+    <string name="duration_h">%1$d 小时</string>
+    <string name="duration_m">%1$d 分钟</string>
+
+    <!-- 日期格式模板 / date patterns（这些是 DateTimeFormatter 模板，不是文案） -->
+    <string name="pattern_date_long">yyyy 年 M 月 d 日 EEEE</string>
+    <string name="pattern_date_short">M月d日</string>
+
+    <!-- 记录页锚点 / log anchor labels -->
+    <string name="log_anchor_month">%1$d年%2$d月</string>
+
+    <!-- 全量导入错误 / import errors -->
+    <string name="import_err_empty">文件里没有可识别的记录</string>
+    <string name="import_err_unreadable">文件无法读取</string>
+    <string name="import_err_open">无法打开所选文件</string>
+    <string name="import_err_no_table">数据库文件里没有 time_logs 表</string>
+
+    <!-- 导出报告正文 / report body -->
+    <string name="report_title">时间记录报告</string>
+    <string name="report_range">区间</string>
+    <string name="report_entries_count">共 %1$d 条</string>
+    <string name="report_summary">区间汇总</string>
+    <string name="report_total">总计</string>
+    <string name="report_item">项目</string>
+    <string name="report_radar">雷达图</string>
+    <string name="report_scale_note">每格约 %1$d 分钟</string>
+    <string name="report_entries">逐条记录</string>
+    <string name="report_none">无</string>
+    <string name="report_footer">由「柳比歇夫」本地时间记录应用生成 · 数据仅存于手机</string>
+    <string name="report_col_year">年</string>
+    <string name="report_col_md">月日</string>
+    <string name="report_col_weekday">星期</string>
+    <string name="report_col_category">类别</string>
+    <string name="report_col_event">事件</string>
+    <string name="report_col_duration">时长</string>
+    <string name="report_col_share">占比</string>
+    <string name="report_col_start">开始</string>
+    <string name="report_col_end">结束</string>
+    <string name="report_col_minutes">持续时长(分钟)</string>
+    <string name="report_col_span">起止</string>
+    <string name="report_col_note">备注</string>
+    <string name="report_year_cell">%1$d年</string>
+    <string name="report_md_cell">%1$d月%2$d日</string>
+    <string name="report_cat_cell">%1$s类·%2$s</string>
+    <string name="report_locale">zh-CN</string>
+
+    <!-- 版本历史的英文/多语版本（仅近三版；完整存档见中文） -->
+
+    <!-- AI 接口与报告模板 -->
+    <string name="mine_template">报告模板</string>
+    <string name="mine_ai_api">AI API</string>
+    <string name="mine_ai_api_value">待开放</string>
+    <string name="mine_ai_api_dialog">这一项将来给报告用：届时可以在这里选择报告所调用的 AI 推理引擎与 API 方式。本版只是把入口放在设置里，暂不提供任何配置，也不会联网。</string>
+    <string name="tpl_back">返回</string>
+    <string name="tpl_title">报告模板</string>
+    <string name="tpl_hint">模板决定报告的排版。这里只支持 Markdown（.md）与纯文本（.txt）两种模板文件，且 TXT 里的内容也必须按 Markdown 书写。本版只做选择与上传登记，模板内容的解析生成在后续版本接入。</string>
+    <string name="tpl_section_builtin">内置模板</string>
+    <string name="tpl_section_custom">自定义模板</string>
+    <string name="tpl_builtin_md">Markdown 模板</string>
+    <string name="tpl_builtin_md_desc">标题、汇总表、雷达图分节，适合归档与再加工</string>
+    <string name="tpl_builtin_txt">纯文本模板</string>
+    <string name="tpl_builtin_txt_desc">结构与 Markdown 版一致，正文仍按 Markdown 书写</string>
+    <string name="tpl_default_badge">默认</string>
+    <string name="tpl_custom_empty">还没有自定义模板，可在下方上传。</string>
+    <string name="tpl_upload">上传模板（.md / .txt）</string>
+    <string name="tpl_upload_note">上传后只做登记与选用，报告目前仍按内置格式生成。</string>
+    <string name="tpl_uploaded">已添加模板：%1$s</string>
+    <string name="tpl_err_format">只接受 .md 或 .txt 文件</string>
+    <string name="tpl_delete">删除</string>
+    <string name="tpl_delete_title">删除模板</string>
+    <string name="tpl_delete_text">确定移除「%1$s」吗？记录数据不受影响。</string>
+
+    <!-- 启动屏 -->
+    <plurals name="splash_days">
+        <item quantity="other">已陪伴您 %1$d 天</item>
+    </plurals>
+    <string name="splash_credit">%1$s 出品</string>
+    <string name="splash_local_only">纯本地时间统计，数据只存手机</string>
+
+    <!-- 版本历史全档案（中文原文；非中文语种见各 values-*/strings.xml） -->
+    <string name="release_notes_092">新增多语种：中文 / English / Español / Português / Deutsch / Nederlands / 日本語，设置 →「语言」随时切换，选「跟随系统」时按手机系统语言自动适配。\n新增启动 Splash 页：居中显示与桌面一致的应用图标，应用名按语言显示（中文「柳比歇夫时间管理」/ 英文「Lyubishchev Time」），随后进入主界面。\n自己定义的分类、事件与备注属于个人数据，一律不翻译——原来填的什么语言就显示什么语言。\n导出报告的正文、表头与星期、时长单位也会跟随应用语言；CSV 仍能被全量导入识别。\n「主题」再加六套控件配色：朱砂红 / 琥珀黄 / 蔷薇粉 / 石墨灰 / 曜石黑 / Solarized（终端配色老熟人），浅色深色各自适配，底色仍是莫兰迪。\n设置新增「报告模板」页：默认 Markdown 模板，可切纯文本，也可上传自己的 .md/.txt（本版只登记选用，解析留后续）；另加「AI API」入口，暂只占位。\n启动屏补了三项，文字全部居中：应用名下方显示「已陪伴您 N 天」（从第一次运行那天起算），其下为斜体 *LOOYEA* 出品署名，屏幕最底部一行小字「纯本地时间统计，数据只存手机」。\n设置页顶部统计卡改为三行：已陪伴您 N 天、累计记录 X 小时 Y 分、已记录 N 条；卡片副标题换成「与时间相伴，就是与生命相随。记住时间就是记住生命。」\n各语言的「已陪伴您 N 天」「已记录 N 条」这类计数句改用单复数规则，1 天、1 条不再写成复数。\n「I类时间 / II类时间」属于系统固定文字，现在随界面语言显示对应译名（数据库与统计仍按原名匹配）；设置里的每一行统一为名称左对齐、进入次级页的箭头贴右。</string>
+    <string name="release_notes_091">「主题」正式上线：四套控件配色一键整组切换（莫兰迪灰绿 / 蒂芙尼蓝 / 海运蓝 / 森林绿），浅色与深色各自适配，中性底色仍保持莫兰迪极简。\n记录页年模式的日期按钮改为置灰而非隐藏，位置稳定。\n分段按钮（概览切换、日/周/月/年）去掉选中态的对勾，只以底色区分。\n设置页精简：时间分类、按需导出两行去掉右侧说明文字，只留进入次级页的箭头。</string>
+    <string name="release_notes_09">概览页补上「本月累计记录」：与今日、本周并排三列，正好对上雷达图下方今日/本周/本月三个时间档。\n记录页周视图不再只显示三周：按 GROUP BY 周把今年有记录的周全部列出（一条记录都没有的周自然不占位置），倒序、默认全部收起。\n记录页月视图同理：今年有记录的月份各占一节，不再固定只给最近三个月。\n日期选择器不再能选未来：周、月两种模式下限到今年年初、上限到今天，下周和下月都点不了。日视图默认停在今天，看以前哪天就点日期选。\n记录页年视图改为只列出真正有记录的年份（例如大前年、去年、今年，中间空白的年份不出现），每年一块直接铺开一类/二类与逐事件合计，此时不需要日期锚点。\n设置页「常用」改名「快捷设置」，右侧说明文字去掉只留箭头，进入后的标题同步。</string>
+    <string name="release_notes_08">界面换装「莫兰迪极简」：暖米白 / 炭灰底色，主色改为灰绿，辅色陶土，深浅两套配色都重新调过，对比度按可读性校过。\n排版层级重做：概览的今日/本周合计改成大号衬线数字，一眼看到花了多少时间；分段选择器换成低饱和的浅色选中态，不再是一片纯色块。\n字号阶梯补齐（正文、小标签、按钮文字都给了字距），卡片描边、分隔线改用更柔的轮廓色。</string>
+    <string name="release_notes_07">全量导出升级：可直接导出 SQLite 数据库文件（.db，单文件携带全部记录，导出前已合并日志），CSV 表格仍是可选项。\n新增「全量导入」：选择 .db 数据库或本 App 导出的 CSV，逐条与主数据库比对后合并入库；同日期、同起止、同事件、同时长的记录视为重复自动跳过，不会双计。\n导入完成会报告新增/跳过/解析条数；文件无法识别（非本 App 库、缺表、格式不符）会给出明确错误。\n版本号规则细化：功能上新进 0.x，同一功能周期内的小修复用 0.x1、0.x2 这类补丁号。</string>
+    <string name="release_notes_062">修复雷达图消失：所选期间内有记录的事件不足 3 个时图无法成形，现用设置里的事件补足到 3 根轴（补进来的显示 0）。</string>
+    <string name="release_notes_06">雷达图轴改为跟随数据库：所选期间内有记录的事件各占一轴——事件即使被删除或改名，只要该期间留有记录就照样显示；期间内没记录的事件不占轴。\n雷达时间档新增「本月」：本月对比上月，逻辑与今日/本周完全一致，只是范围换成整月。</string>
+    <string name="release_notes_05">「我的」改名为「设置」，原设置占位行换成「版本」，进入本页查看更新历史。\n新增「全量导出」：一键把记录数据库里的全部记录导出为 CSV（Excel 可直接打开），再经分享面板保存或发送。\n原「导出」更名「按需导出」，功能不变：选区间、选 MD/TXT/Excel/HTML 四种格式。\n分类模型简化为固定两类、事件两层：分类不再增删改，取消三级子类；事件可新建、改名、删除，每类最多 8 个。\n概览雷达卡片去掉与上方统计重复的大数字，图例居中、只显示颜色与今天/昨天标签。</string>
+    <string name="release_notes_04">导出报告上线：按日期区间导出，含总计、分类与逐事件汇总、雷达图与逐条明细（年月日/星期/类别/事件/起止/时长/备注）。\n「主题」更名为「颜色模式」；新增主题风格入口（小清新、都市、沉稳商务，规划中）。\n修复过午夜后概览、记录、记一笔、导出仍停在旧一天的问题。</string>
+    <string name="release_notes_03">记一笔重排：日期行（仅补充记录可改）+ 补充记录勾选，开始/结束各用独立时间选择器，时长自动计算。\n「常用」上线：配置分类+事件+时长的快捷组合，记一笔里一键套用。\n「时间分类」维护页：事件的新建、改名、删除。</string>
+    <string name="release_notes_02">概览页雷达图卡片：一类/二类切换，今日对比昨天、本周对比上周。\n记录页四档浏览：日/周/月/年，日期锚点选择 + 手风琴式汇总。\n颜色模式：跟随系统/浅色/深色，整体配色美化。</string>
+    <string name="release_notes_01">首个真机可用版本：概览、记录、记一笔、报表占位、我的五页框架。\n本地 Room 数据库存储，数据只存手机，无需联网与账号。</string>
 </resources>

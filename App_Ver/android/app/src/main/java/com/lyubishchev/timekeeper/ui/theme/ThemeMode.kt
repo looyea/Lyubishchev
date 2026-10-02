@@ -14,6 +14,12 @@ enum class ThemePalette(val day: Accents, val night: Accents) {
     TIFFANY(TiffanyDay, TiffanyNight),
     OCEAN(OceanDay, OceanNight),
     FOREST(ForestDay, ForestNight),
+    CRIMSON(CrimsonDay, CrimsonNight),
+    AMBER(AmberDay, AmberNight),
+    ROSE(RoseDay, RoseNight),
+    GRAPHITE(GraphiteDay, GraphiteNight),
+    OBSIDIAN(ObsidianDay, ObsidianNight),
+    SOLARIZED(SolarizedDay, SolarizedNight),
 }
 
 /**

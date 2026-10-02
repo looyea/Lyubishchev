@@ -48,6 +48,7 @@ import com.lyubishchev.timekeeper.R
 import com.lyubishchev.timekeeper.data.TimeLogEntity
 import com.lyubishchev.timekeeper.domain.CategoryStore
 import com.lyubishchev.timekeeper.domain.TimeRules
+import com.lyubishchev.timekeeper.i18n.AppLocale
 import com.lyubishchev.timekeeper.ui.log.LogMode
 import com.lyubishchev.timekeeper.ui.log.LogState
 import com.lyubishchev.timekeeper.ui.log.LogViewModel
@@ -57,7 +58,6 @@ import com.lyubishchev.timekeeper.ui.widget.ChoiceRow
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 
 /**
  * 记录页：日/周/月/年四档只读浏览 + 日期选择。
@@ -464,10 +464,10 @@ private class BoundedDates(
 private fun anchorLabel(state: LogState): String {
     val date = LocalDate.parse(state.anchor, TimeRules.DATE)
     return when (state.mode) {
-        LogMode.DAY -> date.format(SHORT_DATE)
-        LogMode.WEEK -> "第${TimeRules.isoWeek(state.anchor)}周"
-        LogMode.MONTH -> "${date.year}年${date.monthValue}月"
-        LogMode.YEAR -> "${date.year}年"
+        LogMode.DAY -> date.format(AppLocale.dateFormatter(R.string.pattern_date_short))
+        LogMode.WEEK -> AppLocale.str(R.string.log_week_title, TimeRules.isoWeek(state.anchor))
+        LogMode.MONTH -> AppLocale.str(R.string.log_anchor_month, date.year, date.monthValue)
+        LogMode.YEAR -> AppLocale.str(R.string.log_year_title, date.year)
     }
 }
 
@@ -478,5 +478,3 @@ private fun modeLabel(mode: LogMode): Int = when (mode) {
     LogMode.MONTH -> R.string.log_mode_month
     LogMode.YEAR -> R.string.log_mode_year
 }
-
-private val SHORT_DATE: DateTimeFormatter = DateTimeFormatter.ofPattern("M月d日")
