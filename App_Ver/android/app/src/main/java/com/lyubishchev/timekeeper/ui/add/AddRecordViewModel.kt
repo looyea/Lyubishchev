@@ -74,18 +74,24 @@ class AddRecordViewModel(application: Application) : AndroidViewModel(applicatio
     }
 
     fun onStartChange(time: String) {
+        val clearsEnd = time.isNotBlank() && form.endTime.isNotBlank() && form.endTime <= time
         form = form.copy(
             startTime = time,
-            // 结束早于开始视为无效，直接清空
-            // Drop an end time that is no longer after the start.
-            endTime = if (time.isNotBlank() && form.endTime.isNotBlank() && form.endTime <= time) "" else form.endTime,
+            // 新开始时间不早于已填结束时间时结束时间失效：清空并给出提示，别让人猜
+            // Drop a now-invalid end time, but explain why instead of clearing silently.
+            endTime = if (clearsEnd) "" else form.endTime,
+            feedback = if (clearsEnd) FEEDBACK_ORDER else form.feedback,
         )
     }
 
     fun onEndChange(time: String) {
-        form = form.copy(
-            endTime = if (time.isNotBlank() && time <= form.startTime) "" else time,
-        )
+        // 结束不晚于开始：不接受，保留原结束时间并用横幅说明原因
+        // Reject an end time that is not after the start; keep the old value and explain.
+        if (time.isNotBlank() && time <= form.startTime) {
+            form = form.copy(feedback = FEEDBACK_ORDER)
+            return
+        }
+        form = form.copy(endTime = time)
     }
 
     fun onCategoryChange(category: String) {
@@ -106,7 +112,10 @@ class AddRecordViewModel(application: Application) : AndroidViewModel(applicatio
      */
     fun onQuickPick(category: String, event: String, minutes: Int) {
         val start = form.startTime.ifBlank { TimeRules.now() }
-        val end = TimeRules.plusMinutes(start, minutes)
+        // 结束时间最晚 23:59：跨午夜时夹到 23:59，时长按当天剩余分钟计，不再回绕成 00:00
+        // Clamp the derived end to 23:59 so a cross-midnight pick never wraps back to 00:00.
+        val startMinutes = start.substring(0, 2).toInt() * 60 + start.substring(3, 5).toInt()
+        val end = if (startMinutes + minutes >= 24 * 60) "23:59" else TimeRules.plusMinutes(start, minutes)
         form = form.copy(category = category, event = event, startTime = start, endTime = end)
     }
 
@@ -123,7 +132,8 @@ class AddRecordViewModel(application: Application) : AndroidViewModel(applicatio
                 return
             }
 
-            current.durationMinutes <= 0 -> {
+            // 一行防御：夹到 23:59 后理论上不会再出现，但仍挡住"结束早于等于开始"这种回绕后可能变正的情况
+            current.durationMinutes <= 0 || current.endTime <= current.startTime -> {
                 form = current.copy(feedback = FEEDBACK_ORDER)
                 return
             }

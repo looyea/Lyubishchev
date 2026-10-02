@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">柳比歇夫時間管理</string>
+
+    <!-- 底部五个入口 / five bottom tabs -->
+    <string name="tab_home">概覽</string>
+    <string name="tab_log">記錄</string>
+    <string name="tab_add">記一筆</string>
+    <string name="tab_report">報表</string>
+    <string name="tab_mine">設定</string>
+
+    <!-- 概览 / home -->
+    <string name="home_stat_today">今日已記錄</string>
+    <string name="home_stat_week">本週累計記錄</string>
+    <string name="home_stat_month">本月累計記錄</string>
+    <string name="home_period_today">今日</string>
+    <string name="home_period_week">本週</string>
+    <string name="home_period_month">本月</string>
+    <string name="home_series_today">今天</string>
+    <string name="home_series_yesterday">昨天</string>
+    <string name="home_series_week">本週</string>
+    <string name="home_series_last_week">上週</string>
+    <string name="home_series_month">本月</string>
+    <string name="home_series_last_month">上月</string>
+    <string name="placeholder_coming_soon">該模組待開發</string>
+
+    <!-- 记录页 / read-only log browser -->
+    <string name="log_mode_day">日</string>
+    <string name="log_mode_week">週</string>
+    <string name="log_mode_month">月</string>
+    <string name="log_mode_year">年</string>
+    <string name="log_week_title">第%1$d週</string>
+    <string name="log_week_current_suffix">（目前週）</string>
+    <string name="log_month_title">%1$d 月</string>
+    <string name="log_year_title">%1$d 年</string>
+    <string name="log_total">共 %1$s</string>
+    <string name="log_cat_totals">一類合計 %1$s · 二類合計 %2$s</string>
+    <string name="log_empty">該時段還沒有記錄</string>
+
+    <!-- 设置（原"我的"） / settings (was "mine") -->
+    <string name="mine_title">設定</string>
+    <string name="mine_header_subtitle">與時間相伴，就是與生命相隨。記住時間就是記住生命。</string>
+    <plurals name="mine_stat_days">
+        <item quantity="other">已陪伴您 %1$d 天</item>
+    </plurals>
+    <string name="mine_stat_total">累計記錄 %1$d 小時 %2$d 分</string>
+    <plurals name="mine_stat_entries">
+        <item quantity="other">已記錄 %1$d 條</item>
+    </plurals>
+    <string name="mine_theme">顏色模式</string>
+    <string name="mine_theme_dialog_title">選擇顏色模式</string>
+    <string name="mine_theme_system">跟隨系統</string>
+    <string name="mine_theme_light">淺色</string>
+    <string name="mine_theme_dark">深色</string>
+    <string name="mine_version">版本</string>
+    <string name="mine_category">時間分類</string>
+    <string name="mine_quick">快捷設定</string>
+    <string name="mine_export">按需匯出</string>
+    <string name="mine_export_all">全量匯出</string>
+    <string name="mine_export_all_value">整庫匯出 db/CSV</string>
+    <string name="export_all_share_title">全量匯出</string>
+    <string name="export_all_hint">選擇全量匯出的檔案格式：</string>
+    <string name="export_all_db">SQLite 資料庫（.db，可被全量匯入還原）</string>
+    <string name="export_all_csv">CSV 表格（.csv，Excel 可直接開啟）</string>
+    <string name="mine_import">全量匯入</string>
+    <string name="mine_import_value">合併 db 或 CSV</string>
+    <string name="import_busy">匯入中…</string>
+    <string name="import_result_text">合併完成：新增 %1$d 條，跳過重複 %2$d 條（檔案共解析 %3$d 條）。</string>
+    <string name="version_title">版本歷史</string>
+    <string name="version_hint">目前版本 v%1$s · 最新在上</string>
+    <string name="version_current_tag">目前版本</string>
+    <string name="mine_style">主題</string>
+    <string name="mine_style_dialog_title">選擇主題配色</string>
+    <string name="mine_palette_morandi">莫蘭迪灰綠</string>
+    <string name="mine_palette_tiffany">蒂芙尼藍</string>
+    <string name="mine_palette_ocean">海運藍</string>
+    <string name="mine_palette_forest">森林綠</string>
+    <string name="mine_palette_crimson">硃砂紅</string>
+    <string name="mine_palette_amber">琥珀黃</string>
+    <string name="mine_palette_rose">薔薇粉</string>
+    <string name="mine_palette_graphite">石墨灰</string>
+    <string name="mine_palette_obsidian">曜石黑</string>
+    <string name="mine_palette_solarized">Solarized</string>
+
+    <!-- 按需导出 / range export -->
+    <string name="export_title">按需匯出</string>
+    <string name="export_hint">選起止日期與檔案格式，確認區間匯總後產生檔案，再選擇儲存或分享目標</string>
+    <string name="export_range_label">區間</string>
+    <string name="export_format_label">檔案格式</string>
+    <string name="export_summary_label">區間匯總</string>
+    <string name="export_total">總計 %1$s</string>
+    <string name="export_radar_note">產生的檔案內附各分類逐事件雷達圖與逐條記錄（年 / 月日 / 星期 / 類別 / 事件 / 起止 / 時長 / 備註）</string>
+    <string name="export_run">產生並分享</string>
+    <string name="export_busy">產生中…</string>
+    <string name="export_empty">該區間沒有記錄</string>
+    <string name="export_invalid_range">開始日期需早於結束日期</string>
+    <string name="export_saved">報告已產生，請在分享面板選擇儲存位置</string>
+    <string name="export_share_title">匯出報告</string>
+
+    <!-- 记一笔 / add record -->
+    <string name="add_title">登記一條</string>
+    <string name="add_hint">白天隨手記錄，做完一件事就登記一條；開始時間自動承接當天結束的最新時間（同時記兩條時也不衝突），仍可手動修改</string>
+    <string name="field_date">日期</string>
+    <string name="field_start">開始</string>
+    <string name="field_end">結束</string>
+    <string name="field_duration">時長</string>
+    <string name="field_category">分類</string>
+    <string name="category_l1">I類時間</string>
+    <string name="category_l2">II類時間</string>
+    <string name="field_event">事件</string>
+    <string name="field_note">備註</string>
+    <string name="add_note_placeholder">選填</string>
+    <string name="add_duration_pending">____</string>
+    <string name="add_quick_label">常用</string>
+    <string name="add_save">儲存並繼續</string>
+    <string name="add_err_time">請填寫開始與結束時間</string>
+    <string name="add_err_event">請選擇事件</string>
+    <string name="add_err_order">結束時間需晚於開始時間</string>
+    <string name="add_saved">已記錄 %1$s</string>
+    <string name="add_backfill_label">補充記錄</string>
+    <string name="add_duration_label">記錄時間長度：</string>
+    <string name="add_time_pending">____</string>
+    <string name="dialog_ok">確定</string>
+    <string name="dialog_cancel">取消</string>
+
+    <!-- 时间分类维护 / category tree editor -->
+    <string name="cat_editor_title">時間分類</string>
+    <string name="cat_editor_hint">分類固定兩類；每類下最多 8 個事件（子類），可新建、改名、刪除。改名等於新建：新名字從零累計，保留原名的繼續累加歷史。</string>
+    <string name="cat_add_event">新增事件</string>
+    <string name="cat_rename">改名</string>
+    <string name="cat_delete">刪除</string>
+    <string name="cat_back">返回</string>
+    <string name="cat_max_children">每個分類下最多 8 個事件</string>
+    <string name="cat_input_title">命名</string>
+    <string name="cat_delete_confirm_title">確認刪除</string>
+    <string name="cat_delete_confirm_text">刪除"%1$s"後，該名稱停止累計，舊資料保留在庫裡。</string>
+
+    <!-- 快捷设置（原"常用"） / quick pick editor -->
+    <string name="pick_editor_title">快捷設定</string>
+    <string name="pick_editor_hint">每項由一級分類、二級事件和持續時間組成，點一下就在"記一筆"裡套用。</string>
+    <string name="pick_add_title">新增常用</string>
+    <string name="pick_category_label">一級分類</string>
+    <string name="pick_event_label">二級事件</string>
+    <string name="pick_minutes_label">持續時間</string>
+    <string name="pick_item_label">%1$s · %2$s · %3$s</string>
+    <string name="pick_no_event">請先選一級分類</string>
+
+    <!-- 语言 / language（语言名一律用本族语写法，不翻译） -->
+    <string name="mine_language">語言</string>
+    <string name="language_dialog_title">選擇語言</string>
+    <string name="language_system">跟隨系統</string>
+    <string name="language_hint">應用程式語言預設跟隨系統；手動選擇後只影響本應用程式。</string>
+    <string name="language_zh">簡體中文</string>
+    <string name="language_zh_tw">繁體中文</string>
+    <string name="language_en">English</string>
+    <string name="language_es">Español</string>
+    <string name="language_pt">Português</string>
+    <string name="language_de">Deutsch</string>
+    <string name="language_nl">Nederlands</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- 时长单位 / duration units -->
+    <string name="duration_hm">%1$d 小時 %2$d 分鐘</string>
+    <string name="duration_h">%1$d 小時</string>
+    <string name="duration_m">%1$d 分鐘</string>
+    <string name="duration_short_hm">%1$dh %2$dm</string>
+    <string name="duration_short_h">%1$dh</string>
+    <string name="duration_short_m">%1$dm</string>
+
+    <!-- 日期格式模板 / date patterns（这些是 DateTimeFormatter 模板，不是文案） -->
+    <string name="pattern_date_long">yyyy 年 M 月 d 日 EEEE</string>
+    <string name="pattern_date_short">M月d日</string>
+
+    <!-- 记录页锚点 / log anchor labels -->
+    <string name="log_anchor_month">%1$d年%2$d月</string>
+
+    <!-- 全量导入错误 / import errors -->
+    <string name="import_err_empty">檔案裡沒有可識別的記錄</string>
+    <string name="import_err_unreadable">檔案無法讀取</string>
+    <string name="import_err_open">無法開啟所選檔案</string>
+    <string name="import_err_no_table">資料庫檔案裡沒有 time_logs 表</string>
+
+    <!-- 导出报告正文 / report body -->
+    <string name="report_title">時間記錄報告</string>
+    <string name="report_range">區間</string>
+    <string name="report_entries_count">共 %1$d 條</string>
+    <string name="report_summary">區間匯總</string>
+    <string name="report_total">總計</string>
+    <string name="report_item">項目</string>
+    <string name="report_radar">雷達圖</string>
+    <string name="report_scale_note">每格約 %1$d 分鐘</string>
+    <string name="report_entries">逐條記錄</string>
+    <string name="report_none">無</string>
+    <string name="report_footer">由「柳比歇夫」本地時間記錄應用程式產生 · 資料僅存於手機</string>
+    <string name="report_col_year">年</string>
+    <string name="report_col_md">月日</string>
+    <string name="report_col_weekday">星期</string>
+    <string name="report_col_category">類別</string>
+    <string name="report_col_event">事件</string>
+    <string name="report_col_duration">時長</string>
+    <string name="report_col_share">佔比</string>
+    <string name="report_col_start">開始</string>
+    <string name="report_col_end">結束</string>
+    <string name="report_col_minutes">持續時長(分鐘)</string>
+    <string name="report_col_span">起止</string>
+    <string name="report_col_note">備註</string>
+    <string name="report_year_cell">%1$d年</string>
+    <string name="report_md_cell">%1$d月%2$d日</string>
+    <string name="report_cat_cell">%1$s類·%2$s</string>
+    <string name="report_locale">zh-TW</string>
+
+    <!-- 版本历史的英文/多语版本（仅近三版；完整存档见中文） -->
+
+    <!-- AI 接口与报告模板 -->
+    <string name="mine_template">報告範本</string>
+    <string name="mine_ai_api">AI API</string>
+    <string name="mine_ai_api_value">待開放</string>
+    <string name="mine_ai_api_dialog">這一項將來給報告用：屆時可以在這裡選擇報告所呼叫的 AI 推理引擎與 API 方式。本版只是把入口放在設定裡，暫不提供任何設定，也不會聯網。</string>
+    <string name="tpl_back">返回</string>
+    <string name="tpl_title">報告範本</string>
+    <string name="tpl_hint">範本決定報告的排版。這裡只支援 Markdown（.md）與純文字（.txt）兩種範本檔案，且 TXT 裡的內容也必須按 Markdown 書寫。本版只做選擇與上傳登記，範本內容的解析產生在後續版本接入。</string>
+    <string name="tpl_section_builtin">內建範本</string>
+    <string name="tpl_section_custom">自訂範本</string>
+    <string name="tpl_builtin_md">Markdown 範本</string>
+    <string name="tpl_builtin_md_desc">標題、匯總表、雷達圖分節，適合存檔與再加工</string>
+    <string name="tpl_builtin_txt">純文字範本</string>
+    <string name="tpl_builtin_txt_desc">結構與 Markdown 版一致，正文仍按 Markdown 書寫</string>
+    <string name="tpl_default_badge">預設</string>
+    <string name="tpl_custom_empty">還沒有自訂範本，可在下方上傳。</string>
+    <string name="tpl_upload">上傳範本（.md / .txt）</string>
+    <string name="tpl_upload_note">上傳後只做登記與選用，報告目前仍按內建格式產生。</string>
+    <string name="tpl_uploaded">已新增範本：%1$s</string>
+    <string name="tpl_err_format">僅接受 .md 或 .txt 檔案</string>
+    <string name="tpl_delete">刪除</string>
+    <string name="tpl_delete_title">刪除範本</string>
+    <string name="tpl_delete_text">確定移除「%1$s」嗎？記錄資料不受影響。</string>
+
+    <!-- 启动屏 -->
+    <plurals name="splash_days">
+        <item quantity="other">已陪伴您 %1$d 天</item>
+    </plurals>
+    <string name="splash_credit">%1$s 出品</string>
+    <string name="splash_local_only">純本地時間統計，資料只存手機</string>
+
+    <!-- 版本历史全档案（此处为繁体译文；简体原文见 values/strings.xml） -->
+    <string name="release_notes_093">「主題」補齊配套底色：十套主題現在各自帶一套與主題色相相配的中性層，大背景、卡片、浮起層、文字與描邊一起染色，不再只換文字和按鈕的顏色。\n淺色模式是「帶色相的淺」、深色模式是「帶色相的深」：薔薇粉的淺底透著粉、深底是暗玫瑰色，森林綠的淺底泛著綠、深底是墨綠色，兩種模式各有各的染法。\n設定頁的選項卡片、底部五個主選單那一欄，以及對話方塊與下拉選單都跟著主題走，不會再停在純白或灰黑上。\n預設的莫蘭迪觀感一字未改，仍是暖米白與炭灰底；其餘色盤按主色相分別染色，正文與底色的對比度不低於 7:1。\nSolarized 與曜石黑為手調底色：Solarized 用官方羊皮紙與深藍黑，曜石黑保持近中性、深色模式比莫蘭迪更沉。\n記錄頁年視圖改為手風琴：年份標題、年度總計與一類/二類合計常駐在卡片頭部，其下的逐條子類事件列預設收起，點擊年份頭部才展開。\n語言新增第八種：繁體中文（臺灣用語），設定 →「語言」裡「簡體中文 / 繁體中文」並列可選，系統語言為繁體時自動對應。\n首頁雷達圖改按明暗與線型區分兩條系列：当期為主色實線並帶圓點，對比期往卡片底色退一檔、畫虛線且不帶圓點，十套主題下一眼可分。\n首頁三個統計塊（今日已記錄 / 本週累計記錄 / 本月累計記錄）的時長改為緊湊的 h/m 寫法，長單位語言下也能同行放下；記錄頁、記一筆與匯出報告仍保留在地化的完整單位。\n記一筆的開始與結束時間並排到同一行、字號收小；未選的時間改用底線佔位；結束早於開始會明確提示而不再靜默清空；快捷錄入跨午夜時結束時間夾到 23:59。</string>
+    <string name="release_notes_092">新增多語系：中文 / English / Español / Português / Deutsch / Nederlands / 日本語，設定 →「語言」隨時切換，選「跟隨系統」時依手機系統語言自動適配。\n新增啟動 Splash 頁：置中顯示與桌面一致的應用程式圖示，應用名稱按語言顯示（中文「柳比歇夫時間管理」/ 英文「Lyubishchev Time」），隨後進入主介面。\n自己定義的分類、事件與備註屬於個人資料，一律不翻譯——原本填的什麼語言就顯示什麼語言。\n匯出報告的正文、表頭與星期、時長單位也會跟隨應用程式語言；CSV 仍可被全量匯入識別。\n「主題」再加六套控件配色：硃砂紅 / 琥珀黃 / 薔薇粉 / 石墨灰 / 曜石黑 / Solarized（終端配色老熟人），淺色深色各自適配，底色仍是莫蘭迪。\n設定新增「報告範本」頁：預設 Markdown 範本，可切純文字，也可上傳自己的 .md/.txt（本版只登記選用，解析留後續）；另加「AI API」入口，暫只佔位。\n啟動屏補了三項，文字全部置中：應用名稱下方顯示「已陪伴您 N 天」（從第一次執行那天起算），其下為斜體 *LOOYEA* 出品署名，螢幕最底部一行小字「純本地時間統計，資料只存手機」。\n設定頁頂部統計卡改為三行：已陪伴您 N 天、累計記錄 X 小時 Y 分、已記錄 N 條；卡片副標題換成「與時間相伴，就是與生命相隨。記住時間就是記住生命。」\n各語言的「已陪伴您 N 天」「已記錄 N 條」這類計數句改用單複數規則，1 天、1 條不再寫成複數。\n「I類時間 / II類時間」屬於系統固定文字，現在隨介面語言顯示對應譯名（資料庫與統計仍按原名匹配）；設定裡的每一行統一為名稱左對齊、進入次級頁的箭頭貼右。</string>
+    <string name="release_notes_091">「主題」正式上線：四套控件配色一鍵整組切換（莫蘭迪灰綠 / 蒂芙尼藍 / 海運藍 / 森林綠），淺色與深色各自適配，中性底色仍維持莫蘭迪極簡。\n記錄頁年模式的日期按鈕改為置灰而非隱藏，位置穩定。\n分段按鈕（概覽切換、日/週/月/年）去掉選中態的對勾，只以底色區分。\n設定頁精簡：時間分類、按需匯出兩行去掉右側說明文字，只留進入次級頁的箭頭。</string>
+    <string name="release_notes_09">概覽頁補上「本月累計記錄」：與今日、本週並排三列，正好對應雷達圖下方今日/本週/本月三個時間檔。\n記錄頁週視圖不再只顯示三週：按 GROUP BY 週把今年有記錄的週全部列出（一條記錄都沒有的週自然不佔位置），倒序、預設全部收起。\n記錄頁月視圖同理：今年有記錄的月份各佔一節，不再固定只給最近三個月。\n日期選擇器不再能選未來：週、月兩種模式下限到今年年初、上限到今天，下週和下月都點不了。日視圖預設停在今天，看以前哪天就點日期選。\n記錄頁年視圖改為只列出真正有記錄的年份（例如大前年、去年、今年，中間空白的年份不出現），每年一塊直接鋪開一類/二類與逐事件合計，此時不需要日期錨點。\n設定頁「常用」改名「快捷設定」，右側說明文字去掉只留箭頭，進入後的標題同步。</string>
+    <string name="release_notes_08">介面換裝「莫蘭迪極簡」：暖米白 / 炭灰底色，主色改為灰綠，輔色陶土，深淺兩套配色都重新調過，對比度按可讀性校過。\n排版層級重做：概覽的今日/本週合計改成大號襯線數字，一眼看到花了多少時間；分段選擇器換成低飽和的淺色選中態，不再是一片純色塊。\n字號階梯補齊（正文、小標籤、按鈕文字都給了字距），卡片描邊、分隔線改用更柔的輪廓色。</string>
+    <string name="release_notes_07">全量匯出升級：可直接匯出 SQLite 資料庫檔案（.db，單檔案攜帶全部記錄，匯出前已合併日誌），CSV 表格仍是可選項。\n新增「全量匯入」：選擇 .db 資料庫或本 App 匯出的 CSV，逐條與主資料庫比對後合併入庫；同日期、同起止、同事件、同時長的記錄視為重複自動跳過，不會雙計。\n匯入完成會回報新增/跳過/解析條數；檔案無法識別（非本 App 庫、缺表、格式不符）會給出明確錯誤。\n版本號規則細化：功能上新進 0.x，同一功能週期內的小修復用 0.x1、0.x2 這類補丁號。</string>
+    <string name="release_notes_062">修復雷達圖消失：所選期間內有記錄的事件不足 3 個時圖無法成形，現用設定裡的事件補足到 3 根軸（補進來的顯示 0）。</string>
+    <string name="release_notes_06">雷達圖軸改為跟隨資料庫：所選期間內有記錄的事件各佔一軸——事件即使被刪除或改名，只要該期間留有記錄就照常顯示；期間內沒記錄的事件不佔軸。\n雷達時間檔新增「本月」：本月對比上月，邏輯與今日/本週完全一致，只是範圍換成整月。</string>
+    <string name="release_notes_05">「我的」更名為「設定」，原設定佔位列換成「版本」，進入本頁查看更新歷史。\n新增「全量匯出」：一鍵把記錄資料庫裡的全部記錄匯出為 CSV（Excel 可直接開啟），再經分享面板儲存或發送。\n原「匯出」更名「按需匯出」，功能不變：選區間、選 MD/TXT/Excel/HTML 四種格式。\n分類模型簡化為固定兩類、事件兩層：分類不再增刪改，取消三級子類；事件可新建、改名、刪除，每類最多 8 個。\n概覽雷達卡片去掉與上方統計重複的大數字，圖例置中、只顯示顏色與今天/昨天標籤。</string>
+    <string name="release_notes_04">匯出報告上線：按日期區間匯出，含總計、分類與逐事件匯總、雷達圖與逐條明細（年月日/星期/類別/事件/起止/時長/備註）。\n「主題」更名為「顏色模式」；新增主題風格入口（小清新、都市、沉穩商務，規劃中）。\n修復過午夜後概覽、記錄、記一筆、匯出仍停在舊一天的問題。</string>
+    <string name="release_notes_03">記一筆重排：日期行（僅補充記錄可改）+ 補充記錄勾選，開始/結束各用獨立時間選擇器，時長自動計算。\n「常用」上線：設定分類+事件+時長的快捷組合，記一筆裡一鍵套用。\n「時間分類」維護頁：事件的新建、改名、刪除。</string>
+    <string name="release_notes_02">概覽頁雷達圖卡片：一類/二類切換，今日對比昨天、本週對比上週。\n記錄頁四檔瀏覽：日/週/月/年，日期錨點選擇 + 手風琴式匯總。\n顏色模式：跟隨系統/淺色/深色，整體配色美化。</string>
+    <string name="release_notes_01">首個真機可用版本：概覽、記錄、記一筆、報表佔位、我的五頁框架。\n本地 Room 資料庫儲存，資料只存手機，無需聯網與帳號。</string>
+</resources>

@@ -112,7 +112,7 @@
     <string name="field_event">Gebeurtenis</string>
     <string name="field_note">Notitie</string>
     <string name="add_note_placeholder">Optioneel</string>
-    <string name="add_duration_pending">Tijd nog in te vullen</string>
+    <string name="add_duration_pending">____</string>
     <string name="add_quick_label">Veelgebruikt</string>
     <string name="add_save">Opslaan en doorgaan</string>
     <string name="add_err_time">Vul de start- en eindtijd in</string>
@@ -121,7 +121,7 @@
     <string name="add_saved">%1$s gelogd</string>
     <string name="add_backfill_label">Achteraf loggen</string>
     <string name="add_duration_label">Te loggen tijdsduur:</string>
-    <string name="add_time_pending">Nog in te vullen</string>
+    <string name="add_time_pending">____</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Annuleren</string>
 
@@ -152,7 +152,8 @@
     <string name="language_dialog_title">Taal kiezen</string>
     <string name="language_system">Systeem</string>
     <string name="language_hint">De app-taal volgt standaard het systeem; een handmatige keuze geldt alleen voor deze app.</string>
-    <string name="language_zh">中文</string>
+    <string name="language_zh">简体中文</string>
+    <string name="language_zh_tw">繁體中文</string>
     <string name="language_en">English</string>
     <string name="language_es">Español</string>
     <string name="language_pt">Português</string>
@@ -164,6 +165,9 @@
     <string name="duration_hm">%1$d u %2$d min</string>
     <string name="duration_h">%1$d u</string>
     <string name="duration_m">%1$d min</string>
+    <string name="duration_short_hm">%1$dh %2$dm</string>
+    <string name="duration_short_h">%1$dh</string>
+    <string name="duration_short_m">%1$dm</string>
 
     <!-- 日期格式模板 / date patterns（这些是 DateTimeFormatter 模板，不是文案） -->
     <string name="pattern_date_long">EEEE d MMMM yyyy</string>
@@ -207,7 +211,8 @@
     <string name="report_cat_cell">%1$s · %2$s</string>
     <string name="report_locale">nl-NL</string>
 
-    <!-- 版本历史全档案（12 版，与中文原文逐条对应） -->
+    <!-- 版本历史全档案（13 版，与中文原文逐条对应） -->
+    <string name="release_notes_093">Alle tien thema’s hebben nu een bijpassende neutrale laag: pagina-achtergrond, kaarten, opgetilde vlakken, tekst en lijnen krijgen de tint van het thema — een thema verandert dus veel meer dan alleen tekst en knoppen.\nDe lichte modus is een getint licht, de donkere een getint donker: Roos rust op bleekroze en donkerpruim, Bos op groen-getint gebroken wit en donkerden; elke modus heeft een eigen kleuring.\nDe optiekaarten op het Instellingenscherm, de onderste balk met de vijf hoofdmenu’s, dialogs en vervolgkeuzemenu’s volgen het thema in plaats van op puur wit of grijszwart te blijven staan.\nHet standaard Morandi-uiterlijk blijft onveranderd, nog steeds warm ivoorwit boven antraciet; in alle andere thema’s houdt de lopende tekst minstens 7:1 contrast met de achtergrond.\nSolarized en Obsidian hebben met de hand gekleurde lagen: Solarized behoudt het officiële perkament en donker petrol, Obsidian blijft bijna neutraal en wordt in de donkere modus nog dieper.\nDe jaarweergave in het dagboek is nu een accordeon: jaartitel, jaartotaal en de totalen van klasse I/II blijven vaststaan in de kop van de kaart, terwijl de losse eventregels eronder ingeklapt starten en zich alleen openklappen als je de jaarkop aanraakt.\nAchtste taal: traditioneel Chinees (Taiwanese terminologie), naast 简体中文 bij Instellingen > Taal, en automatisch gekozen als de systeemtaal traditioneel Chinees is.\nDe radar op de startpagina scheidt zijn twee series nu via tint en lijnstijl: de huidige periode blijft een ononderbroken lijn met stippen, de vergelijkingsperiode wijkt als stippellijn zonder stippen één stap terug naar de kaartachtergrond — in alle tien thema&#8217;s in één oogopslag te onderscheiden.\nDe drie statistiekblokken op de startpagina tonen tijden in compacte h/m-notatie zodat ze in één regel passen; Dagboek, Logen en geëxporteerde rapporten houden de volledige gelokaliseerde eenheden.\nIn Logen staan Start en Einde nu naast elkaar op één regel met een kleiner tijdslettertype; een niet-gekozen tijd krijgt een liggend-streepje-placeholder; een eindtijd vóór de starttijd wordt nu duidelijk gemeld in plaats van stilgewist; een snelle invoer over middernacht wordt afgekapt op 23:59.</string>
     <string name="release_notes_092">Nieuwe meertaligheid: 中文 / English / Español / Português / Deutsch / Nederlands / 日本語, op elk moment te wisselen via het item “Taal” bij Instellingen; kies je “Systeem”, dan past de taal zich automatisch aan de systeemtaal van je telefoon aan.\nNieuwe Splash-pagina bij het starten: het app-icoon, hetzelfde als op het startscherm, staat in het midden en de app-naam verschijnt per taal (in het Chinees “柳比歇夫时间管理”, in het Engels “Lyubishchev Time”), daarna gaat het door naar het hoofdscherm.\nCategorieën, gebeurtenissen en notities die je zelf aanmaakt zijn persoonlijke gegevens en worden nooit vertaald — in welke taal je ze invulde, zo blijven ze staan.\nDe tekst en de kopteksten van geëxporteerde rapporten volgen nu ook de app-taal, net als de weekdagen en de eenheden van de duur; CSV-bestanden worden door “Alles importeren” nog steeds herkend.\nBij “Thema” zes kleurenschemas voor de bedieningselementen erbij: Karminrood / Ambergeel / Rozenrosa / Grafietgrijs / Obsidiaanzwart / Solarized (de oude bekende onder de terminalkleuren), licht en donker apart afgestemd, de basis blijft Morandi.\nBij Instellingen de nieuwe pagina “Rapportsjabloon”: standaard het Markdown-sjabloon, je kunt overschakelen naar platte tekst en je eigen .md- of .txt-bestand uploaden (deze versie registreert en kiest alleen, het verwerken volgt later); verder een item “AI API”, voorlopig alleen een plaatshouder.\nOp het opstartscherm zijn drie regels toegevoegd, alle tekst gecentreerd: onder de app-naam een teller die de dagen sinds het eerste gebruik telt, daaronder het cursieve merk LOOYEA, en helemaal onderaan de kleine regel “Volledig lokale tijdsadministratie; gegevens blijven op je telefoon”.\nDe kaart bovenin Instellingen toont nu drie regels: dagen aan je zijde, de totale vastgelegde tijd in uren en minuten en het aantal logregels; de ondertitel luidt: samen met de tijd is samen met het leven; de tijd onthouden is het leven onthouden.\nTelregels zoals dagen aan je zijde en logregels vastgelegd volgen nu de enkelvoud/meervoudregels van elke taal.\nDe twee vaste klassen (Tijd klasse I / II) zijn app-tekst en volgen nu de interfacaetaal; de database herkent ze nog steeds aan de opgeslagen naam. Elke rij in Instellingen toont de naam links en de pijl helemaal rechts.</string>
     <string name="release_notes_091">“Thema” is officieel beschikbaar: vier kleurenschemas voor de bedieningselementen die je met één tik in zijn geheel wisselt (Morandi grijs-groen / Tiffany-blauw / Maritiem blauw / Bosgroen), licht en donker apart afgestemd, en de neutrale basis blijft Morandi-minimaal.\nIn de jaarweergave van Dagboek zijn de datumknoppen nu vergrijsd in plaats van verborgen, zo blijven ze op hun plaats staan.\nDe segmentknoppen (overzichtwissel en Dag/Week/Maand/Jaar) tonen bij selectie geen vinkje meer; alleen de achtergrondkleur geeft het verschil.\nInstellingen opgeschoond: de regels “Tijdcategorieën” en “Periode exporteren” hebben geen beschrijving meer aan de rechterkant, alleen de pijl naar de volgende pagina.</string>
     <string name="release_notes_09">Overzicht heeft er een derde kolom bij: “Deze maand gelogd”, naast Vandaag en Deze week, precies aansluitend op de drie tijdvakken vandaag / deze week / deze maand onder het radardiagram.\nDe weekweergave van Dagboek blijft niet meer bij drie weken staan: met GROUP BY op week worden alle weken van dit jaar met logregels genoemd (weken zonder één regel krijgen vanzelf geen plaats), nieuwste eerst en standaard alles ingeklapt.\nDe maandweergave van Dagboek doet hetzelfde: elke maand van dit jaar met logregels krijgt een eigen blok, niet langer vast alleen de drie meest recente maanden.\nDe datumkiezer staat geen toekomst meer toe: in de week- en maandmodus is het begin van dit jaar de ondergrens en vandaag de bovengrens, dus volgende week en volgende maand zijn niet te kiezen. De dagweergave blijft standaard op vandaag staan, eerdere dagen kies je bij de datum.\nDe jaarweergave van Dagboek toont alleen de jaren die echt logregels hebben (bijvoorbeeld het jaar daarvoor, vorig jaar en dit jaar — lege jaren vallen weg); elk jaarblok spreidt meteen de totalen per klasse I / klasse II en per gebeurtenis uit, zonder datumanker.\nBij Instellingen is “Veelgebruikt” hernoemd naar “Snelkeuzes”, is de beschrijving rechts weggehaald ten gunste van alleen de pijl, en is de titel op de pagina zelf mee aangepast.</string>

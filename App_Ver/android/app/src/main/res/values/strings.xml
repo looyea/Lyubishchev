@@ -110,7 +110,7 @@
     <string name="field_event">事件</string>
     <string name="field_note">备注</string>
     <string name="add_note_placeholder">可选</string>
-    <string name="add_duration_pending">待填写时间</string>
+    <string name="add_duration_pending">____</string>
     <string name="add_quick_label">常用</string>
     <string name="add_save">保存并继续</string>
     <string name="add_err_time">请填写开始与结束时间</string>
@@ -119,7 +119,7 @@
     <string name="add_saved">已记录 %1$s</string>
     <string name="add_backfill_label">补充记录</string>
     <string name="add_duration_label">记录时间长度：</string>
-    <string name="add_time_pending">待填写</string>
+    <string name="add_time_pending">____</string>
     <string name="dialog_ok">确定</string>
     <string name="dialog_cancel">取消</string>
 
@@ -150,7 +150,8 @@
     <string name="language_dialog_title">选择语言</string>
     <string name="language_system">跟随系统</string>
     <string name="language_hint">应用语言默认跟随系统；手动选择后只影响本应用。</string>
-    <string name="language_zh">中文</string>
+    <string name="language_zh">简体中文</string>
+    <string name="language_zh_tw">繁體中文</string>
     <string name="language_en">English</string>
     <string name="language_es">Español</string>
     <string name="language_pt">Português</string>
@@ -162,6 +163,9 @@
     <string name="duration_hm">%1$d 小时 %2$d 分钟</string>
     <string name="duration_h">%1$d 小时</string>
     <string name="duration_m">%1$d 分钟</string>
+    <string name="duration_short_hm">%1$dh %2$dm</string>
+    <string name="duration_short_h">%1$dh</string>
+    <string name="duration_short_m">%1$dm</string>
 
     <!-- 日期格式模板 / date patterns（这些是 DateTimeFormatter 模板，不是文案） -->
     <string name="pattern_date_long">yyyy 年 M 月 d 日 EEEE</string>
@@ -239,6 +243,7 @@
     <string name="splash_local_only">纯本地时间统计，数据只存手机</string>
 
     <!-- 版本历史全档案（中文原文；非中文语种见各 values-*/strings.xml） -->
+    <string name="release_notes_093">「主题」补齐配套底色：十套主题现在各自带一套与主题色相相配的中性层，大背景、卡片、浮起层、文字与描边一起染色，不再只换文字和按钮的颜色。\n浅色模式是「带色相的浅」、深色模式是「带色相的深」：蔷薇粉的浅底透着粉、深底是暗玫瑰色，森林绿的浅底泛着绿、深底是墨绿色，两种模式各有各的染法。\n设置页的选项卡片、底部五个主菜单那一栏，以及对话框与下拉菜单都跟着主题走，不会再停在纯白或灰黑上。\n默认的莫兰迪观感一字未改，仍是暖米白与炭灰底；其余色盘按主色相分别染色，正文与底色的对比度不低于 7:1。\nSolarized 与曜石黑为手调底色：Solarized 用官方羊皮纸与深蓝黑，曜石黑保持近中性、深色模式比莫兰迪更沉。\n记录页年视图改为手风琴：年份标题、年度总计与一类/二类合计常驻在卡片头部，其下的逐条子类事件行默认收起，点击年份头部才展开。\n语言新增第八种：繁体中文（台湾用语），设置 →「语言」里「简体中文 / 繁體中文」并列可选，系统语言是繁体时自动适配。\n首页雷达图改按明暗与线型区分两条系列：当期为主色实线并带圆点，对比期往卡片底色退一档、画虚线且不带圆点，十套主题下一眼可分。\n首页三个统计块（今日已记录 / 本周累计记录 / 本月累计记录）的时长改为紧凑的 h/m 写法，长单位语言下也能同行放下；记录页、记一笔与导出报告仍保留本地化的完整单位。\n记一笔的开始与结束时间并排到同一行、字号收小；未选的时间改用下划线占位；结束早于开始会明确提示而不再静默清空；快捷录入跨午夜时结束时间夹到 23:59。</string>
     <string name="release_notes_092">新增多语种：中文 / English / Español / Português / Deutsch / Nederlands / 日本語，设置 →「语言」随时切换，选「跟随系统」时按手机系统语言自动适配。\n新增启动 Splash 页：居中显示与桌面一致的应用图标，应用名按语言显示（中文「柳比歇夫时间管理」/ 英文「Lyubishchev Time」），随后进入主界面。\n自己定义的分类、事件与备注属于个人数据，一律不翻译——原来填的什么语言就显示什么语言。\n导出报告的正文、表头与星期、时长单位也会跟随应用语言；CSV 仍能被全量导入识别。\n「主题」再加六套控件配色：朱砂红 / 琥珀黄 / 蔷薇粉 / 石墨灰 / 曜石黑 / Solarized（终端配色老熟人），浅色深色各自适配，底色仍是莫兰迪。\n设置新增「报告模板」页：默认 Markdown 模板，可切纯文本，也可上传自己的 .md/.txt（本版只登记选用，解析留后续）；另加「AI API」入口，暂只占位。\n启动屏补了三项，文字全部居中：应用名下方显示「已陪伴您 N 天」（从第一次运行那天起算），其下为斜体 *LOOYEA* 出品署名，屏幕最底部一行小字「纯本地时间统计，数据只存手机」。\n设置页顶部统计卡改为三行：已陪伴您 N 天、累计记录 X 小时 Y 分、已记录 N 条；卡片副标题换成「与时间相伴，就是与生命相随。记住时间就是记住生命。」\n各语言的「已陪伴您 N 天」「已记录 N 条」这类计数句改用单复数规则，1 天、1 条不再写成复数。\n「I类时间 / II类时间」属于系统固定文字，现在随界面语言显示对应译名（数据库与统计仍按原名匹配）；设置里的每一行统一为名称左对齐、进入次级页的箭头贴右。</string>
     <string name="release_notes_091">「主题」正式上线：四套控件配色一键整组切换（莫兰迪灰绿 / 蒂芙尼蓝 / 海运蓝 / 森林绿），浅色与深色各自适配，中性底色仍保持莫兰迪极简。\n记录页年模式的日期按钮改为置灰而非隐藏，位置稳定。\n分段按钮（概览切换、日/周/月/年）去掉选中态的对勾，只以底色区分。\n设置页精简：时间分类、按需导出两行去掉右侧说明文字，只留进入次级页的箭头。</string>
     <string name="release_notes_09">概览页补上「本月累计记录」：与今日、本周并排三列，正好对上雷达图下方今日/本周/本月三个时间档。\n记录页周视图不再只显示三周：按 GROUP BY 周把今年有记录的周全部列出（一条记录都没有的周自然不占位置），倒序、默认全部收起。\n记录页月视图同理：今年有记录的月份各占一节，不再固定只给最近三个月。\n日期选择器不再能选未来：周、月两种模式下限到今年年初、上限到今天，下周和下月都点不了。日视图默认停在今天，看以前哪天就点日期选。\n记录页年视图改为只列出真正有记录的年份（例如大前年、去年、今年，中间空白的年份不出现），每年一块直接铺开一类/二类与逐事件合计，此时不需要日期锚点。\n设置页「常用」改名「快捷设置」，右侧说明文字去掉只留箭头，进入后的标题同步。</string>

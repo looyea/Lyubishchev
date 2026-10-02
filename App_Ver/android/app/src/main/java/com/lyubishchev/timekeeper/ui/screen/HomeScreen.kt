@@ -1,6 +1,7 @@
 package com.lyubishchev.timekeeper.ui.screen
 
 import androidx.annotation.StringRes
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -15,7 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
@@ -26,7 +26,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -43,6 +46,8 @@ import com.lyubishchev.timekeeper.ui.home.RadarPeriod
 import com.lyubishchev.timekeeper.ui.theme.NumberSerif
 import com.lyubishchev.timekeeper.ui.widget.ChoiceRow
 import com.lyubishchev.timekeeper.ui.widget.RadarChart
+import com.lyubishchev.timekeeper.ui.widget.radarDashIntervals
+import com.lyubishchev.timekeeper.ui.widget.radarPreviousColor
 import java.time.LocalDate
 
 /**
@@ -77,17 +82,17 @@ fun HomeScreen(
         Row(modifier = Modifier.fillMaxWidth().padding(top = 12.dp)) {
             StatBlock(
                 label = stringResource(R.string.home_stat_today),
-                value = TimeRules.formatMinutes(state.todayMinutes),
+                value = TimeRules.formatMinutesCompact(state.todayMinutes),
                 modifier = Modifier.weight(1f),
             )
             StatBlock(
                 label = stringResource(R.string.home_stat_week),
-                value = TimeRules.formatMinutes(state.weekMinutes),
+                value = TimeRules.formatMinutesCompact(state.weekMinutes),
                 modifier = Modifier.weight(1f),
             )
             StatBlock(
                 label = stringResource(R.string.home_stat_month),
-                value = TimeRules.formatMinutes(state.monthMinutes),
+                value = TimeRules.formatMinutesCompact(state.monthMinutes),
                 modifier = Modifier.weight(1f),
             )
         }
@@ -178,14 +183,19 @@ private fun RadarCard(
     }
 }
 
+/**
+ * 图例与雷达图同一套编码：当期=主色实线段+实心圆点，对比期=radarPreviousColor 的虚线段、无圆点。
+ * 虚线疏密走 RadarChart 的 radarDashIntervals，两处共用一份参数。
+ */
 @Composable
 private fun RadarLegend(currentLabel: String, previousLabel: String) {
+    val scheme = MaterialTheme.colorScheme
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        LegendDot(MaterialTheme.colorScheme.primary)
+        LegendSolidLine(color = scheme.primary)
         Text(
             text = currentLabel,
             style = MaterialTheme.typography.bodySmall,
@@ -193,7 +203,7 @@ private fun RadarLegend(currentLabel: String, previousLabel: String) {
             modifier = Modifier.padding(start = 6.dp),
         )
         Spacer(modifier = Modifier.width(18.dp))
-        LegendDot(MaterialTheme.colorScheme.secondary)
+        LegendDashedLine(color = radarPreviousColor(scheme))
         Text(
             text = previousLabel,
             style = MaterialTheme.typography.bodySmall,
@@ -203,14 +213,34 @@ private fun RadarLegend(currentLabel: String, previousLabel: String) {
     }
 }
 
+/** 当期图例：2dp 实线段 + 3dp 实心圆点，与图内 drawSeries 一致 */
 @Composable
-private fun LegendDot(color: Color) {
-    Spacer(
-        modifier = Modifier
-            .size(9.dp)
-            .clip(CircleShape)
-            .background(color)
-    )
+private fun LegendSolidLine(color: Color) {
+    Canvas(modifier = Modifier.size(width = 20.dp, height = 7.dp)) {
+        val y = size.height / 2f
+        drawLine(
+            color = color,
+            start = Offset(0f, y),
+            end = Offset(size.width, y),
+            strokeWidth = 2.dp.toPx(),
+            cap = StrokeCap.Round,
+        )
+        drawCircle(color = color, radius = 3.dp.toPx(), center = Offset(size.width / 2f, y))
+    }
+}
+
+/** 对比期图例：1.5dp 虚线段、无圆点，dash 参数与雷达图共用 */
+@Composable
+private fun LegendDashedLine(color: Color) {
+    Canvas(modifier = Modifier.size(width = 20.dp, height = 7.dp)) {
+        drawLine(
+            color = color,
+            start = Offset(0f, size.height / 2f),
+            end = Offset(size.width, size.height / 2f),
+            strokeWidth = 1.5.dp.toPx(),
+            pathEffect = PathEffect.dashPathEffect(radarDashIntervals()),
+        )
+    }
 }
 
 @StringRes

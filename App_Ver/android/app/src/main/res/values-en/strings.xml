@@ -112,7 +112,7 @@
     <string name="field_event">Event</string>
     <string name="field_note">Note</string>
     <string name="add_note_placeholder">Optional</string>
-    <string name="add_duration_pending">Time pending</string>
+    <string name="add_duration_pending">____</string>
     <string name="add_quick_label">Quick</string>
     <string name="add_save">Save and continue</string>
     <string name="add_err_time">Enter both start and end times</string>
@@ -121,7 +121,7 @@
     <string name="add_saved">Logged %1$s</string>
     <string name="add_backfill_label">Backfill</string>
     <string name="add_duration_label">Entry duration:</string>
-    <string name="add_time_pending">Pending</string>
+    <string name="add_time_pending">____</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Cancel</string>
 
@@ -152,7 +152,8 @@
     <string name="language_dialog_title">Choose language</string>
     <string name="language_system">System default</string>
     <string name="language_hint">The app language follows the system by default; a manual choice affects this app only.</string>
-    <string name="language_zh">中文</string>
+    <string name="language_zh">简体中文</string>
+    <string name="language_zh_tw">繁體中文</string>
     <string name="language_en">English</string>
     <string name="language_es">Español</string>
     <string name="language_pt">Português</string>
@@ -164,6 +165,9 @@
     <string name="duration_hm">%1$d h %2$d min</string>
     <string name="duration_h">%1$d h</string>
     <string name="duration_m">%1$d min</string>
+    <string name="duration_short_hm">%1$dh %2$dm</string>
+    <string name="duration_short_h">%1$dh</string>
+    <string name="duration_short_m">%1$dm</string>
 
     <!-- Date patterns (java.time DateTimeFormatter patterns, not prose) -->
     <string name="pattern_date_long">EEEE, MMMM d, yyyy</string>
@@ -207,7 +211,8 @@
     <string name="report_cat_cell">%1$s · %2$s</string>
     <string name="report_locale">en-US</string>
 
-    <!-- 版本历史全档案（12 版，与中文原文逐条对应） -->
+    <!-- 版本历史全档案（13 版，与中文原文逐条对应） -->
+    <string name="release_notes_093">Themes now ship their own matching neutral layers: each of the ten palettes brings a page background, cards, raised surfaces, text and outlines tinted to its own hue, so switching a theme changes far more than a few buttons.\nLight mode is a tinted light and dark mode a tinted dark: Rose rests on pale pink and deep plum, Forest on green-tinged off-white and dark pine — each mode is dyed its own way.\nThe option cards on the Settings screen, the five-tab bottom bar, dialogs and dropdown menus all follow the theme instead of sitting on plain white or grey-black.\nThe default Morandi look is untouched, still warm off-white over charcoal; in every other palette body text keeps a contrast of at least 7:1 against the background.\nSolarized and Obsidian use hand-set layers: Solarized keeps the official parchment and dark-cyan bases, while Obsidian stays near-neutral and sinks deeper in dark mode.\nThe year view on the Journal screen is now an accordion: the year title, the yearly total and the Category I/II totals stay pinned in the card header, while the per-event lines under each year start collapsed and open only when you tap the year header.\nAn eighth language: Traditional Chinese (Taiwan terminology), listed next to 简体中文 under Settings > Language, and chosen automatically when the system language is Traditional.\nThe home radar now separates its two series by tint and line style: the current period keeps a solid primary line with dots, while the comparison period steps back toward the card surface as a dashed line without dots — easy to tell apart in all ten themes.\nThe three home stat blocks now show durations in compact h/m form so they always fit on one line; the Journal, the Log screen and exported reports keep the full localized units.\nThe Log screen now puts Start and End side by side on one line with a smaller time size; an unselected time shows an underscore placeholder; an end time not after the start is reported clearly instead of being silently cleared; a quick entry that would cross midnight is clamped to 23:59.</string>
     <string name="release_notes_092">Added multilingual support: 中文 / English / Español / Português / Deutsch / Nederlands / 日本語, switchable at any time in the Language row of Settings; choosing System default adapts to the system language of the phone.\nAdded a launch splash screen: the app icon, the same one as on the home screen, is shown centered, the app name is displayed per language (柳比歇夫时间管理 in Chinese / Lyubishchev Time in English), and the main interface follows.\nCategories, events and notes you define yourself are personal data and are never translated; they display in whichever language they were entered in.\nThe body and headers of exported reports, along with weekday names and duration units, now follow the app language; CSV files are still recognized by Import all.\nTheme gains six more control palettes: Crimson red / Amber gold / Rose pink / Graphite grey / Obsidian black / Solarized (a familiar palette from terminal themes), each adapted for light and dark, with the base color still Morandi.\nSettings gains a Report template screen: the Markdown template is the default, plain text can be switched to, and your own .md/.txt can be uploaded (this version only registers and selects them, parsing comes later); an AI API entry is added as well, a placeholder for now.\nThe splash screen adds three items with all text centered: below the app name a day counter showing how long the app has been with you, counted from the day of the first launch; below it the italic LOOYEA production credit; and at the very bottom a small line reading purely local time accounting, the data stays on this phone.\nThe header card in Settings now shows three lines — days together, total time logged in hours and minutes, and the entry count — and its subtitle reads: to keep company with time is to keep company with life; to remember time is to remember life.\nCount lines such as days together and entries logged now follow each language singular/plural rules, so one day or one entry reads in the singular.\nThe two fixed classes (Class I / Class II time) are app text, so they now display in the interface language while the database keeps matching them by their stored name; every Settings row shows its name on the left and the arrow flush right.</string>
     <string name="release_notes_091">Theme is officially live: four control palettes switch the whole set with one tap (Morandi gray-green / Tiffany blue / Marine blue / Forest green), each adapted for light and dark while the neutral base keeps the Morandi minimal look.\nIn year mode on the Journal tab the date buttons are now grayed out instead of hidden, so their positions stay stable.\nSegmented buttons (the Overview switcher and Day / Week / Month / Year) drop the check mark on the selected state, only the background color tells them apart.\nSettings streamlined: the Time categories and Export by range rows drop the right-side description text and keep only the arrow into the next screen.</string>
     <string name="release_notes_09">The Overview tab adds the entries accumulated this month as a third column beside Today and This week, which lines up with the three periods under the radar chart, Today / This week / This month.\nThe week view on the Journal tab no longer shows just three weeks: weeks of this year are grouped with GROUP BY and every week holding entries is listed, newest first and all collapsed by default, while weeks without a single entry take up no room.\nThe month view works the same way: every month of this year that has entries gets its own section instead of a fixed three most recent months.\nThe date picker no longer allows future dates: in week and month mode it is bounded from the start of this year to today, so next week and next month cannot be picked; day mode stops at today by default and you tap the date to look back at an earlier day.\nThe year view on the Journal tab now lists only the years that actually have entries (the year before last, last year and this year, for instance, with blank years not appearing), each year block laying out the Category I and Category II totals and the per-event sums directly, so no date anchor is needed there.\nIn Settings the Frequent row is renamed Quick picks, its right-side description text is dropped in favor of the arrow alone, and the title of the screen behind it matches.</string>

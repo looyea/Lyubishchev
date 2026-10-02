@@ -106,7 +106,7 @@ fun LogScreen(
             LogMode.DAY -> DayList(state, viewModel::toggle)
             LogMode.WEEK -> WeekList(state, viewModel::toggle)
             LogMode.MONTH -> MonthList(state, viewModel::toggle)
-            LogMode.YEAR -> YearList(state)
+            LogMode.YEAR -> YearList(state, viewModel::toggle)
         }
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -288,45 +288,93 @@ private fun PeriodAccordion(
     }
 }
 
-/** 年视图：只列出数据库里有记录的年份，一年一块直接铺开，不用日期锚点。 */
+/**
+ * 年视图手风琴：只列出数据库里有记录的年份，一年一节。
+ * 与周/月共用 viewModel.toggle，但把「一类/二类合计」留在常显头部（见 YearAccordion）。
+ */
 @Composable
-private fun YearList(state: LogState) {
+private fun YearList(state: LogState, onToggle: (String) -> Unit) {
     if (state.years.isEmpty()) {
         EmptyHint()
         return
     }
     state.years.forEach { year ->
-        SectionCard {
-            Column(modifier = Modifier.padding(horizontal = 14.dp, vertical = 12.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = stringResource(R.string.log_year_title, year.year),
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                    Spacer(modifier = Modifier.weight(1f))
-                    Text(
-                        text = stringResource(R.string.log_total, TimeRules.formatMinutes(year.total)),
-                        style = NumberSerif,
-                        color = MaterialTheme.colorScheme.primary,
-                    )
-                }
-                Spacer(modifier = Modifier.height(6.dp))
+        val key = "y${year.year}"
+        YearAccordion(
+            title = stringResource(R.string.log_year_title, year.year),
+            total = year.total,
+            expanded = key in state.expanded,
+            onToggle = { onToggle(key) },
+            cat1 = year.cat1,
+            cat2 = year.cat2,
+            rows = year.rows,
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+    }
+}
+
+/**
+ * 年视图专用手风琴：红框（年份标题 + 年度总计 + 一类/二类合计）常驻在整行可点的头部，
+ * 绿框（该年逐条子类事件行）默认折叠，只有这里把它单独放进 AnimatedVisibility。
+ * 周/月用的 PeriodAccordion 把合计也收进展开体，故不复用、另写本变体以免改动周/月行为。
+ */
+@Composable
+private fun YearAccordion(
+    title: String,
+    total: Int,
+    expanded: Boolean,
+    onToggle: () -> Unit,
+    cat1: Int,
+    cat2: Int,
+    rows: List<StatRow>,
+) {
+    SectionCard {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable(onClick = onToggle)
+                .padding(horizontal = 14.dp, vertical = 12.dp),
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = stringResource(
-                        R.string.log_cat_totals,
-                        TimeRules.formatMinutes(year.cat1),
-                        TimeRules.formatMinutes(year.cat2),
-                    ),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = stringResource(R.string.log_total, TimeRules.formatMinutes(total)),
+                    style = NumberSerif,
+                    color = MaterialTheme.colorScheme.primary,
+                )
+            }
+            Spacer(modifier = Modifier.height(6.dp))
+            Text(
+                text = stringResource(
+                    R.string.log_cat_totals,
+                    TimeRules.formatMinutes(cat1),
+                    TimeRules.formatMinutes(cat2),
+                ),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
+        AnimatedVisibility(visible = expanded) {
+            Column(modifier = Modifier.padding(horizontal = 14.dp)) {
                 HorizontalDivider(color = MaterialTheme.colorScheme.outlineVariant)
                 Spacer(modifier = Modifier.height(6.dp))
-                year.rows.forEach { StatRowLine(it) }
+                if (rows.isEmpty()) {
+                    Text(
+                        text = stringResource(R.string.log_empty),
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                } else {
+                    rows.forEach { StatRowLine(it) }
+                }
+                Spacer(modifier = Modifier.height(10.dp))
             }
         }
-        Spacer(modifier = Modifier.height(10.dp))
     }
 }
 

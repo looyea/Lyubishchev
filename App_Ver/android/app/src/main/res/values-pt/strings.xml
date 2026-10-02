@@ -112,7 +112,7 @@
     <string name="field_event">Atividade</string>
     <string name="field_note">Nota</string>
     <string name="add_note_placeholder">Opcional</string>
-    <string name="add_duration_pending">Tempo a definir</string>
+    <string name="add_duration_pending">____</string>
     <string name="add_quick_label">Frequentes</string>
     <string name="add_save">Salvar e continuar</string>
     <string name="add_err_time">Informe as horas de início e fim</string>
@@ -121,7 +121,7 @@
     <string name="add_saved">Registrado %1$s</string>
     <string name="add_backfill_label">Lançamento retroativo</string>
     <string name="add_duration_label">Duração do lançamento:</string>
-    <string name="add_time_pending">A definir</string>
+    <string name="add_time_pending">____</string>
     <string name="dialog_ok">Confirmar</string>
     <string name="dialog_cancel">Cancelar</string>
 
@@ -152,7 +152,8 @@
     <string name="language_dialog_title">Escolher idioma</string>
     <string name="language_system">Sistema</string>
     <string name="language_hint">O idioma segue o sistema por padrão; a escolha manual vale só para este app.</string>
-    <string name="language_zh">中文</string>
+    <string name="language_zh">简体中文</string>
+    <string name="language_zh_tw">繁體中文</string>
     <string name="language_en">English</string>
     <string name="language_es">Español</string>
     <string name="language_pt">Português</string>
@@ -164,6 +165,9 @@
     <string name="duration_hm">%1$d h %2$d min</string>
     <string name="duration_h">%1$d h</string>
     <string name="duration_m">%1$d min</string>
+    <string name="duration_short_hm">%1$dh %2$dm</string>
+    <string name="duration_short_h">%1$dh</string>
+    <string name="duration_short_m">%1$dm</string>
 
     <!-- Date patterns (DateTimeFormatter templates, not prose) -->
     <string name="pattern_date_long">EEEE, d MMMM yyyy</string>
@@ -208,6 +212,7 @@
     <string name="report_locale">pt-BR</string>
 
     <!-- Release notes (multi-line prose kept as one value with \n) -->
+    <string name="release_notes_093">Os dez temas trazem agora a sua camada neutra combinante: fundo, cartões, superfícies elevadas, texto e contornos são tingidos pelo tom do tema, então mudar de tema faz muito mais do que recolorecer botões.\nO modo claro é um claro tingido e o escuro um escuro tingido: Rosa apoia o fundo em rosa pálido e ameixa escura, Floresta em branco esverdeado e pinheiro escuro; cada modo tem o seu próprio tingimento.\nOs cartões de opções de Configurações, a barra inferior dos cinco separadores, os diálogos e os menus suspensos seguem o tema em vez de ficarem em branco puro ou cinza escuro.\nA aparência Morandi padrão continua igual, branco quente e cinza carvão; nos demais temas o texto mantém contraste de pelo menos 7:1 com o fundo.\nSolarized e Obsidian têm neutros ajustados à mão: Solarized conserva o pergaminho oficial e o azul-esverdeado escuro, e Obsidian permanece quase neutro e mais profundo no modo escuro.\nA visão anual do Diário agora é um acordeão: o título do ano, o total anual e os totais das classes I/II ficam fixos no cabeçalho do cartão, enquanto as linhas de cada evento começam recolhidas e só se abrem ao tocar no cabeçalho do ano.\nOitavo idioma: chinês tradicional (terminologia de Taiwan), exibido ao lado de 简体中文 em Configurações > Idioma e selecionado automaticamente quando o sistema usa chinês tradicional.\nO radar da página inicial distingue agora as duas séries por tom e traço: a atual usa linha contínua com pontos e a de comparação recua um passo para o fundo do cartão em linha tracejada sem pontos; é fácil separá-las num relance nos dez temas.\nOs três blocos de estatística da página inicial mostram a duração na forma compacta h/m para caber numa linha; o Diário, Lançar e os relatórios exportados mantêm as unidades completas localizadas.\nEm Lançar, Início e Fim ficam agora lado a lado numa linha com a hora em corpo menor; uma hora por escolher é marcada com sublinhado; uma hora final anterior à inicial é avisada com clareza em vez de ser apagada em silêncio; um lançamento rápido que atravesse a meia-noite é limitado a 23:59.</string>
     <string name="release_notes_092">Novos idiomas: 中文 / English / Español / Português / Deutsch / Nederlands / 日本語, com troca a qualquer momento em Configurações → \"Idioma\"; ao escolher \"Sistema\", o app acompanha o idioma do sistema do celular.\nNova tela Splash de abertura: o ícone do app, igual ao da área de trabalho, aparece centralizado, o nome do app é exibido conforme o idioma e depois o app entra na tela principal.\nCategorias, atividades e notas criadas por você são dados pessoais e nunca são traduzidas: aparecem exatamente no idioma em que foram preenchidas.\nO texto, os cabeçalhos, os dias da semana e as unidades de duração dos relatórios exportados também seguem o idioma do app; o CSV continua sendo reconhecido pela \"Importar tudo\".\n\"Tema\" recebe seis novas paletas de cores para os controles: Vermelho carmim / Âmbar dourado / Rosa silvestre / Cinza grafite / Preto obsidiana / Solarized (o clássico das paletas de terminal), cada uma adaptada ao claro e ao escuro, mantendo a cor de fundo Morandi.\nAs Configurações ganham a tela \"Modelo de relatório\": modelo Markdown padrão, opção de texto simples e envio dos seus próprios arquivos .md/.txt (nesta versão apenas para registro e seleção; a leitura virá depois); há também uma entrada \"AI API\", ainda só um espaço reservado.\nA tela de abertura acrescenta três linhas, todas centralizadas: abaixo do nome do app aparece um contador de dias ao seu lado, contado desde o primeiro uso, abaixo dele a assinatura em itálico da LOOYEA e, no rodapé da tela, o aviso de estatística de tempo totalmente local, com os dados apenas no celular.\nO cartão superior de Configurações agora traz três linhas: dias ao seu lado, tempo total registrado em horas e minutos e quantidade de lançamentos; o subtítulo passou a ser: acompanhar o tempo é acompanhar a vida; lembrar o tempo é lembrar a vida.\nAs linhas de contagem (dias ao seu lado, registros) agora seguem as regras de singular e plural de cada idioma.\nAs duas classes fixas (Tempo classe I / II) são texto do aplicativo e agora aparecem no idioma da interface; o banco de dados continua reconhecendo-as pelo nome salvo. Cada linha de Ajustes traz o nome à esquerda e a seta encostada à direita.</string>
     <string name="release_notes_091">\"Tema\" chega oficialmente: troca de quatro paletas de cores para os controles com um toque (Cinza-esverdeado Morandi / Azul Tiffany / Azul marítimo / Verde floresta), cada uma adaptada ao claro e ao escuro, mantendo o fundo neutro minimalista Morandi.\nNo modo Ano do Diário, os botões de data agora ficam esmaecidos em vez de ocultos, mantendo a posição fixa.\nOs botões segmentados (troca do Resumo e Dia/Semana/Mês/Ano) deixam de mostrar a marca de seleção quando ativos e passam a se distinguir apenas pela cor de fundo.\nConfigurações mais enxutas: as linhas \"Categorias de tempo\" e \"Exportar período\" perdem o texto explicativo à direita e mantêm só a seta para abrir a subpágina.</string>
     <string name="release_notes_09">O Resumo ganhou a coluna \"Acumulado no mês\", ao lado de Hoje e Semana, correspondendo exatamente às três faixas de tempo Hoje/Semana/Mês abaixo do gráfico radar.\nA visão Semana do Diário não se limita mais a três semanas: com GROUP BY semanal, lista todas as semanas do ano que têm lançamentos (as sem lançamento simplesmente não ocupam espaço), em ordem inversa e todas recolhidas por padrão.\nA visão Mês do Diário funciona da mesma forma: cada mês do ano com lançamentos forma uma seção, em vez de fixar apenas os três últimos meses.\nO seletor de datas não permite mais datas futuras: nos modos Semana e Mês o limite inferior é o início deste ano e o superior é hoje, então a próxima semana e o próximo mês ficam bloqueados; a visão Dia abre por padrão no dia de hoje e, para ver um dia anterior, toque na data e escolha.\nA visão Ano do Diário passou a listar somente os anos que realmente têm registros (por exemplo, há dois anos, o ano passado e este ano, sem que os anos em branco no meio apareçam); cada ano abre direto os totais da classe I / classe II e por atividade, sem precisar de âncora de data.\nNa tela Configurações, \"Frequentes\" foi renomeado para \"Atalhos\"; o texto explicativo à direita saiu, restando só a seta, e o título interno acompanhou a mudança.</string>

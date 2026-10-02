@@ -112,7 +112,7 @@
     <string name="field_event">Evento</string>
     <string name="field_note">Nota</string>
     <string name="add_note_placeholder">Opcional</string>
-    <string name="add_duration_pending">Tiempo por completar</string>
+    <string name="add_duration_pending">____</string>
     <string name="add_quick_label">Frecuentes</string>
     <string name="add_save">Guardar y continuar</string>
     <string name="add_err_time">Indica las horas de inicio y de fin</string>
@@ -121,7 +121,7 @@
     <string name="add_saved">Registrado %1$s</string>
     <string name="add_backfill_label">Registro retroactivo</string>
     <string name="add_duration_label">Duración a registrar:</string>
-    <string name="add_time_pending">Por completar</string>
+    <string name="add_time_pending">____</string>
     <string name="dialog_ok">Aceptar</string>
     <string name="dialog_cancel">Cancelar</string>
 
@@ -152,7 +152,8 @@
     <string name="language_dialog_title">Seleccionar idioma</string>
     <string name="language_system">Sistema</string>
     <string name="language_hint">El idioma sigue al sistema por defecto; si lo eliges manualmente, solo afectará a esta aplicación.</string>
-    <string name="language_zh">中文</string>
+    <string name="language_zh">简体中文</string>
+    <string name="language_zh_tw">繁體中文</string>
     <string name="language_en">English</string>
     <string name="language_es">Español</string>
     <string name="language_pt">Português</string>
@@ -164,6 +165,9 @@
     <string name="duration_hm">%1$d h %2$d min</string>
     <string name="duration_h">%1$d h</string>
     <string name="duration_m">%1$d min</string>
+    <string name="duration_short_hm">%1$dh %2$dm</string>
+    <string name="duration_short_h">%1$dh</string>
+    <string name="duration_short_m">%1$dm</string>
 
     <!-- 日期格式模板 / date patterns（这些是 DateTimeFormatter 模板，不是文案） -->
     <string name="pattern_date_long">EEEE, d MMMM yyyy</string>
@@ -207,7 +211,8 @@
     <string name="report_cat_cell">%1$s · %2$s</string>
     <string name="report_locale">es-ES</string>
 
-    <!-- 版本历史全档案（12 版，与中文原文逐条对应） -->
+    <!-- 版本历史全档案（13 版，与中文原文逐条对应） -->
+    <string name="release_notes_093">Los diez temas traen ahora su propia capa neutra a juego: fondo, tarjetas, superficies elevadas, texto y bordes se tiñen con el tono del tema, así que cambiar de tema hace mucho más que recolorear unos botones.\nEl modo claro es un claro teñido y el oscuro un oscuro teñido: Rosa apoya el fondo en rosa pálido y ciruela profunda, Bosque en blanco verdoso y pino oscuro; cada modo se tiñe a su manera.\nLas tarjetas de opciones de Ajustes, la barra inferior de las cinco pestañas, los diálogos y los menús desplegables siguen al tema en lugar de quedarse en blanco puro o gris negruzco.\nLa estética Morandi por defecto no cambia, sigue siendo blanco roto cálido y gris carbón; en los demás temas el texto mantiene al menos 7:1 de contraste con el fondo.\nSolarized y Obsidian llevan neutros ajustados a mano: Solarized conserva el pergamino oficial y el azul verdoso oscuro, y Obsidian permanece casi neutro y más profundo en modo oscuro.\nLa vista anual del Diario ahora es un acordeón: el título del año, el total anual y los totales de las clases I/II quedan fijos en la cabecera de la tarjeta, mientras que las líneas de cada evento empiezan plegadas y se abren solo al tocar la cabecera del año.\nOctavo idioma: chino tradicional (terminología de Taiwán), que aparece junto a 简体中文 en Ajustes > Idioma y se activa automáticamente si el sistema usa chino tradicional.\nEl radar de la pantalla de inicio distingue ahora sus dos series por tono y trazo: la actual va en línea continua con puntos y la comparativa retrocede un paso hacia el fondo de la tarjeta con trazo discontinuo y sin puntos; se diferencian de un vistazo con los diez temas.\nLas tres estadísticas de inicio (hoy / semana / mes) muestran la duración en forma compacta h/m para que quepan en una línea; el Diario, Registrar y los informes exportados conservan las unidades completas localizadas.\nEn Registrar, Inicio y Fin quedan ahora lado a lado en una línea con la hora en cuerpo más pequeño; una hora sin elegir se marca con un guion bajo; una hora de fin anterior a la de inicio se avisa con claridad en lugar de borrarse en silencio; una entrada rápida que cruce la medianoche se limita a 23:59.</string>
     <string name="release_notes_092">Nuevos idiomas: 中文 / English / Español / Português / Deutsch / Nederlands / 日本語, conmutables en cualquier momento desde la fila «Idioma» de Ajustes; con «Sistema» elegido, la aplicación se adapta al idioma del teléfono.\nNueva pantalla Splash al arrancar: muestra centrado el mismo icono de la aplicación que el del escritorio, con el nombre según el idioma (柳比歇夫时间管理 en chino / Lyubishchev Time en inglés) y a continuación la pantalla principal.\nLas categorías, los eventos y las notas que defines tú son datos personales y no se traducen nunca: se muestran en el idioma en que los escribiste.\nEl texto y las cabeceras de los informes exportados, lo mismo que los días de la semana y las unidades de duración, siguen el idioma de la aplicación; los archivos CSV siguen siendo reconocidos por «Importar todo».\n«Tema» suma seis paletas de controles más: Rojo carmín / Ámbar dorado / Rosa silvestre / Gris grafito / Negro obsidiana / Solarized (una vieja conocida de los temas de terminal), cada una adaptada a claro y oscuro, con el color de base todavía en Morandi.\nAjustes incorpora la pantalla «Plantilla del informe»: la plantilla Markdown es la predeterminada, se puede cambiar a texto sin formato y también subir tus propios archivos .md/.txt (esta versión solo los registra y selecciona, el análisis queda para después); además se añade la entrada «API de IA», por ahora solo un marcador de posición.\nLa pantalla de inicio suma tres elementos, con todo el texto centrado: bajo el nombre de la aplicación, un contador de días junto a ti, contado desde el día del primer arranque; debajo, la firma de la autoría *LOOYEA* en cursiva; y al pie de la pantalla, una línea pequeña: «registro de tiempo puramente local, los datos solo se guardan en el móvil».\nLa tarjeta superior de Ajustes ahora muestra tres líneas: días a tu lado, tiempo total registrado en horas y minutos y número de registros; el subtítulo dice: acompañar al tiempo es acompañar la vida; recordar el tiempo es recordar la vida.\nLas líneas de recuento (días a tu lado, registros) siguen ahora las reglas de singular y plural de cada idioma.\nLas dos clases fijas (Tiempo clase I / II) son texto de la aplicación y ahora se muestran en el idioma de la interfaz; la base de datos sigue reconociéndolas por su nombre guardado. Cada fila de Ajustes lleva el nombre a la izquierda y la flecha pegada a la derecha.</string>
     <string name="release_notes_091">«Tema» ya está disponible: cuatro paletas de controles que se cambian en bloque con un toque (Verde grisáceo Morandi / Azul Tiffany / Azul marino / Verde bosque), cada una adaptada a claro y oscuro, mientras el color de base neutro mantiene el minimalismo Morandi.\nEn el modo anual del Diario, los botones de fecha se atenúan en lugar de ocultarse, así que conservan su posición.\nLos botones segmentados (el conmutador de Resumen y Día/Semana/Mes/Año) eliminan la marca de verificación del estado seleccionado; solo el color de fondo los distingue.\nAjustes simplificado: las filas «Categorías de tiempo» y «Exportar rango» quitan el texto explicativo de la derecha y conservan solo la flecha hacia la pantalla siguiente.</string>
     <string name="release_notes_09">Resumen añade «Acumulado este mes»: una tercera columna junto a Hoy y Esta semana, que coincide con los tres periodos de hoy/esta semana/este mes que hay bajo el gráfico radar.\nLa vista semanal del Diario ya no se limita a tres semanas: con GROUP BY por semanas se enumeran todas las semanas de este año que tienen registros (las que no tienen ninguna no ocupan sitio), en orden inverso y todas contraídas por defecto.\nLa vista mensual hace lo mismo: cada mes de este año con registros tiene su propia sección, en lugar de los tres últimos meses fijos.\nEl selector de fechas ya no permite elegir el futuro: en los modos semanal y mensual el límite va del comienzo de este año a hoy, de modo que la próxima semana y el próximo mes quedan fuera; la vista diaria se detiene en hoy por defecto y basta tocar la fecha para revisar un día anterior.\nLa vista anual del Diario solo enumera los años que realmente tienen registros (por ejemplo el año anterior al pasado, el año pasado y este año, sin que aparezcan los años en blanco) y despliega en cada bloque los totales de clase I/clase II y por evento, sin necesidad de ancla de fecha.\nEn Ajustes, «Frecuentes» pasa a llamarse «Accesos rápidos», se quita el texto explicativo de la derecha y queda solo la flecha; el título de la pantalla interna coincide.</string>

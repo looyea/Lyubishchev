@@ -1,14 +1,18 @@
 package com.lyubishchev.timekeeper.ui.widget
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.lerp
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextMeasurer
@@ -25,6 +29,18 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 private const val RINGS = 4
+
+/**
+ * 对比期取色：主色往卡片底色退一档，浅色模式变浅、深色模式变暗，两个方向都是"往背景靠"。
+ * The previous-period color: the primary hue stepped toward the card surface — lighter on
+ * light backgrounds, darker on dark ones — so the two series never rely on hue distance again.
+ */
+fun radarPreviousColor(scheme: ColorScheme): Color =
+    lerp(scheme.primary, scheme.surface, 0.45f)
+
+/** 对比期虚线的疏密参数（6dp 实段 / 4dp 空段），图表描边与概览页图例共用 */
+fun Density.radarDashIntervals(): FloatArray =
+    floatArrayOf(6.dp.toPx(), 4.dp.toPx())
 
 /**
  * 手写雷达图：两组数据叠在同一组轴上，统一按 [scaleMax] 归一。
@@ -46,7 +62,7 @@ fun RadarChart(
 ) {
     val scheme = MaterialTheme.colorScheme
     val currentColor = scheme.primary
-    val previousColor = scheme.secondary
+    val previousColor = radarPreviousColor(scheme)
     val gridColor = scheme.outline
     val labelColor = scheme.onSurfaceVariant
     val measurer = rememberTextMeasurer()
@@ -61,7 +77,7 @@ fun RadarChart(
         if (radius <= 16f) return@Canvas
 
         drawGrid(center, radius, count, gridColor)
-        drawSeries(center, radius, scaleMax, previous, previousColor, fillAlpha = 0.10f, dots = false)
+        drawSeries(center, radius, scaleMax, previous, previousColor, fillAlpha = 0.12f, dots = false, dashed = true)
         drawSeries(center, radius, scaleMax, current, currentColor, fillAlpha = 0.28f, dots = true)
 
         axes.forEachIndexed { index, name ->
@@ -116,6 +132,7 @@ private fun DrawScope.drawSeries(
     color: Color,
     fillAlpha: Float,
     dots: Boolean,
+    dashed: Boolean = false,
 ) {
     if (values.size < 3) return
     val points = ArrayList<Offset>(values.size)
@@ -132,8 +149,14 @@ private fun DrawScope.drawSeries(
         points.drop(1).forEach { lineTo(it.x, it.y) }
         close()
     }
+    // pathEffect 只给描边用；填充 Path 不支持虚线
+    val stroke = if (dashed) {
+        Stroke(width = 1.5.dp.toPx(), pathEffect = PathEffect.dashPathEffect(radarDashIntervals()))
+    } else {
+        Stroke(width = 2.dp.toPx())
+    }
     drawPath(shape, color, alpha = fillAlpha)
-    drawPath(shape, color, style = Stroke(width = 2.dp.toPx()))
+    drawPath(shape, color, style = stroke)
     if (dots) points.forEach { drawCircle(color = color, radius = 3.dp.toPx(), center = it) }
 }
 

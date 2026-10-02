@@ -7,23 +7,27 @@ import androidx.annotation.StringRes
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-/** 可选语言；SYSTEM 表示跟随系统。tag 与 res/values-<tag> 目录一一对应。 */
-enum class AppLanguage(val tag: String) {
-    SYSTEM("system"),
-    ZH("zh"),
-    EN("en"),
-    ES("es"),
-    PT("pt"),
-    DE("de"),
-    NL("nl"),
-    JA("ja"),
+/**
+ * 可选语言；SYSTEM 表示跟随系统。tag 与 res/values-<tag> 目录一一对应，
+ * 且 tag 是 SharedPreferences 里的存量值，一旦写下不可更改。
+ * locale 逐档自带：ZH_TW 的 tag「zh-rTW」不能直接喂给 Locale 单参构造（那是错的），
+ * 必须用 Locale("zh", "TW")，才能命中 values-zh-rTW。
+ */
+enum class AppLanguage(val tag: String, val locale: Locale) {
+    SYSTEM("system", Locale("zh")), // locale 占位：SYSTEM 永不成为生效语言（见 refresh）
+    ZH("zh", Locale("zh")),
+    ZH_TW("zh-rTW", Locale("zh", "TW")),
+    EN("en", Locale("en")),
+    ES("es", Locale("es")),
+    PT("pt", Locale("pt")),
+    DE("de", Locale("de")),
+    NL("nl", Locale("nl")),
+    JA("ja", Locale("ja")),
     ;
-
-    val locale: Locale get() = Locale(tag)
 }
 
 /**
- * 应用内多语言：设置里选的语言优先；选「跟随系统」时，系统语言若在我们内置的七种里就用它，
+ * 应用内多语言：设置里选的语言优先；选「跟随系统」时，系统语言若在我们内置的八种里就用它，
  * 否则退回英文。用户自己填的分类名、事件名、备注属于数据，一律不翻译。
  * In-app locale: explicit choice wins; otherwise the system language when we ship it, else English.
  */
@@ -79,11 +83,22 @@ object AppLocale {
     fun dateFormatter(@StringRes patternId: Int): DateTimeFormatter =
         DateTimeFormatter.ofPattern(str(patternId), locale)
 
+    /**
+     * 仅指简体中文。繁体中文不算「中文」是有意的：VersionHistoryScreen 用它决定
+     * 直接显示硬编码简体的 AppVersions.history，还是走 release_notes_* 本地化资源；
+     * 繁体用户必须走资源路径，才能拿到 values-zh-rTW 里的繁体 release_notes。
+     */
     val isChinese: Boolean get() = language == AppLanguage.ZH
 
     private fun fromSystem(): AppLanguage {
-        val code = Locale.getDefault().language
-        return AppLanguage.values().firstOrNull { it != AppLanguage.SYSTEM && it.tag == code }
+        val sys = Locale.getDefault()
+        if (sys.language == "zh") {
+            // 繁体系统（Hant 脚本或台/港/澳地区）落 ZH_TW，其余中文仍落 ZH（简体）
+            val traditional = sys.script.contains("Hant") || sys.country in setOf("TW", "HK", "MO")
+            return if (traditional) AppLanguage.ZH_TW else AppLanguage.ZH
+        }
+        val code = sys.language
+        return AppLanguage.values().firstOrNull { it != AppLanguage.SYSTEM && it != AppLanguage.ZH_TW && it.tag == code }
             ?: AppLanguage.EN
     }
 

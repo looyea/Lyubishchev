@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
@@ -41,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -122,10 +124,21 @@ fun AddRecordScreen(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // 开始/结束各占一行：label 在左，点右侧时间弹出各自的 TimePicker
-        TimeField(R.string.field_start, form.startTime) { pickStart = true }
-        Spacer(modifier = Modifier.height(4.dp))
-        TimeField(R.string.field_end, form.endTime) { pickEnd = true }
+        // 开始/结束并排一行：各占一半宽度，组内 label 在左、值在右，点击各自弹出 TimePicker
+        Row(modifier = Modifier.fillMaxWidth()) {
+            TimeField(
+                labelRes = R.string.field_start,
+                value = form.startTime,
+                onClick = { pickStart = true },
+                modifier = Modifier.weight(1f),
+            )
+            TimeField(
+                labelRes = R.string.field_end,
+                value = form.endTime,
+                onClick = { pickEnd = true },
+                modifier = Modifier.weight(1f),
+            )
+        }
 
         Spacer(modifier = Modifier.height(12.dp))
 
@@ -306,30 +319,40 @@ private fun FieldLabel(@StringRes res: Int) {
     )
 }
 
-/** 时间行：左 label，右侧当前值，点击弹出该字段自己的 TimePicker */
+/** 时间单元：组内 label 在左、值在右，点击值弹出该字段自己的 TimePicker；可半宽并排复用 */
 @Composable
-private fun TimeField(@StringRes labelRes: Int, value: String, onClick: () -> Unit) {
+private fun TimeField(
+    @StringRes labelRes: Int,
+    value: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = stringResource(labelRes),
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurface,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
         Spacer(modifier = Modifier.weight(1f))
         Text(
             text = value.ifBlank { stringResource(R.string.add_time_pending) },
-            style = MaterialTheme.typography.headlineSmall,
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.SemiBold,
             color = if (value.isBlank()) {
                 MaterialTheme.colorScheme.onSurfaceVariant
             } else {
                 MaterialTheme.colorScheme.primary
             },
+            maxLines = 1,
             modifier = Modifier
                 .clickable(onClick = onClick)
-                .padding(horizontal = 8.dp, vertical = 6.dp),
+                .heightIn(min = 48.dp)
+                .padding(horizontal = 8.dp, vertical = 10.dp),
         )
     }
 }

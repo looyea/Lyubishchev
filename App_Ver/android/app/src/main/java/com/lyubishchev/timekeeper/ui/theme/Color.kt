@@ -73,6 +73,50 @@ private fun accentsNight(h1: Float, h2: Float, h3: Float, sat: Float = 1f) = Acc
 
 private fun s(base: Float, boost: Float): Float = (base * boost).coerceAtMost(0.72f)
 
+/**
+ * 一套中性层：大底/卡片/浮起层/文字/次要文字/描边，随所属色盘染色。
+ * v0.93 起每套主题自带配套的中性层，浅色是「带色相的浅」、深色是「带色相的深」，
+ * 只有默认的莫兰迪保持原来的暖米白 / 炭灰。
+ */
+data class Neutrals(
+    val background: Color,
+    val surface: Color,
+    val surfaceHigh: Color,
+    val text: Color,
+    val muted: Color,
+    val outline: Color,
+    val outlineVariant: Color,
+)
+
+/**
+ * 浅色中性层生成器：hue 取该色盘的主色相，sat 沿用该盘已有的饱和乘数。
+ * 高亮度的白底能容纳的色度很小（HSL 里 chroma = (1-|2L-1|)*S），所以浅色的饱和基数
+ * 看着比深色大得多，实际染出来的深浅两套「色感」才一致。
+ */
+private fun neutralsDay(hue: Float, sat: Float = 1f) = Neutrals(
+    background = Color.hsl(hue, ns(0.50f, sat), 0.952f),
+    surface = Color.hsl(hue, ns(0.50f, sat), 0.972f),
+    surfaceHigh = Color.hsl(hue, ns(0.30f, sat), 0.905f),
+    text = Color.hsl(hue, ns(0.08f, sat), 0.185f),
+    muted = Color.hsl(hue, ns(0.055f, sat), 0.400f),
+    outline = Color.hsl(hue, ns(0.06f, sat), 0.575f),
+    outlineVariant = Color.hsl(hue, ns(0.21f, sat), 0.868f),
+)
+
+/** 深色中性层生成器：同一主色相，深底染色天然比浅底显眼，饱和基数相应放小。 */
+private fun neutralsNight(hue: Float, sat: Float = 1f) = Neutrals(
+    background = Color.hsl(hue, ns(0.17f, sat), 0.095f),
+    surface = Color.hsl(hue, ns(0.16f, sat), 0.135f),
+    surfaceHigh = Color.hsl(hue, ns(0.15f, sat), 0.195f),
+    text = Color.hsl(hue, ns(0.06f, sat), 0.925f),
+    muted = Color.hsl(hue, ns(0.09f, sat), 0.635f),
+    outline = Color.hsl(hue, ns(0.10f, sat), 0.425f),
+    outlineVariant = Color.hsl(hue, ns(0.15f, sat), 0.215f),
+)
+
+/** 中性层的饱和上限：防止高 sat 乘数的色盘（朱砂红 / 琥珀黄 / 蔷薇粉）染到刺眼 */
+private fun ns(base: Float, boost: Float): Float = (base * boost).coerceAtMost(0.78f)
+
 // 默认：灰绿 + 陶土 + 灰紫（v0.8 起的手调值，保持不动）
 val MorandiDay = Accents(
     primary = Color(0xFF5F7361),
@@ -186,4 +230,92 @@ val SolarizedNight = Accents(
     tertiary = Color(0xFFE06BB0),
     tertiaryContainer = Color(0xFF4A1F42),
     onTertiaryContainer = Color(0xFFF5CFE9),
+)
+
+// ── 每套主题配套的中性层（v0.93）：大底 / 卡片 / 浮起 / 文字 / 次要 / 描边 ──
+
+// 莫兰迪是「无主题」基准，中性层就是上面那组全局常量原值，一字未改。
+val MorandiDayNeutrals = Neutrals(
+    background = DayBackground,
+    surface = DaySurface,
+    surfaceHigh = DaySurfaceHigh,
+    text = DayText,
+    muted = DayMuted,
+    outline = DayOutline,
+    outlineVariant = DayOutlineVariant,
+)
+
+val MorandiNightNeutrals = Neutrals(
+    background = NightBackground,
+    surface = NightSurface,
+    surfaceHigh = NightSurfaceHigh,
+    text = NightText,
+    muted = NightMuted,
+    outline = NightOutline,
+    outlineVariant = NightOutlineVariant,
+)
+
+// 色相轮生成的七套：主色相与上面 Accents 用的 h1、sat 乘数保持一致
+val TiffanyDayNeutrals = neutralsDay(180f)
+val TiffanyNightNeutrals = neutralsNight(180f)
+
+val OceanDayNeutrals = neutralsDay(213f)
+val OceanNightNeutrals = neutralsNight(213f)
+
+val ForestDayNeutrals = neutralsDay(152f)
+val ForestNightNeutrals = neutralsNight(152f)
+
+val CrimsonDayNeutrals = neutralsDay(355f, 1.45f)
+val CrimsonNightNeutrals = neutralsNight(355f, 1.45f)
+
+val AmberDayNeutrals = neutralsDay(46f, 1.5f)
+val AmberNightNeutrals = neutralsNight(46f, 1.5f)
+
+val RoseDayNeutrals = neutralsDay(338f, 1.4f)
+val RoseNightNeutrals = neutralsNight(338f, 1.4f)
+
+// 石墨灰 sat 只有 0.35，染色几乎看不出，正是「沉稳」要的效果
+val GraphiteDayNeutrals = neutralsDay(215f, 0.35f)
+val GraphiteNightNeutrals = neutralsNight(215f, 0.35f)
+
+// 曜石黑：近中性冷灰，深色下刻意比莫兰迪更沉
+val ObsidianDayNeutrals = Neutrals(
+    background = Color(0xFFF5F4F2),
+    surface = Color(0xFFFAFAF9),
+    surfaceHigh = Color(0xFFEAE9E6),
+    text = Color(0xFF1B1B1E),
+    muted = Color(0xFF66666C),
+    outline = Color(0xFF9A9AA0),
+    outlineVariant = Color(0xFFDEDDD9),
+)
+
+val ObsidianNightNeutrals = Neutrals(
+    background = Color(0xFF111113),
+    surface = Color(0xFF191A1C),
+    surfaceHigh = Color(0xFF232427),
+    text = Color(0xFFECEBE6),
+    muted = Color(0xFFA3A3A8),
+    outline = Color(0xFF4A4A50),
+    outlineVariant = Color(0xFF2C2D31),
+)
+
+// Solarized：官方 base 色，浅色羊皮纸 / 深蓝黑
+val SolarizedDayNeutrals = Neutrals(
+    background = Color(0xFFFBF3DE),
+    surface = Color(0xFFFDF6E3),
+    surfaceHigh = Color(0xFFEEE8D5),
+    text = Color(0xFF073642),
+    muted = Color(0xFF586E75),
+    outline = Color(0xFF93A1A1),
+    outlineVariant = Color(0xFFE5E0C8),
+)
+
+val SolarizedNightNeutrals = Neutrals(
+    background = Color(0xFF002B36),
+    surface = Color(0xFF073642),
+    surfaceHigh = Color(0xFF0C4051),
+    text = Color(0xFFEEE8D5),
+    muted = Color(0xFF93A1A1),
+    outline = Color(0xFF586E75),
+    outlineVariant = Color(0xFF1B4A56),
 )

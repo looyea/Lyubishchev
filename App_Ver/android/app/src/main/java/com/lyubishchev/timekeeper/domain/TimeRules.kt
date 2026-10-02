@@ -71,6 +71,20 @@ object TimeRules {
         }
     }
 
+    /**
+     * "1h 30m" 式紧凑时长（h/m 为国际单位记号，八语同写法），只给概览页三个并排统计块用；
+     * Compact h/m form for the home stat row only — every other screen keeps formatMinutes.
+     */
+    fun formatMinutesCompact(minutes: Int): String {
+        val h = minutes / 60
+        val m = minutes % 60
+        return when {
+            h == 0 -> AppLocale.str(R.string.duration_short_m, m)
+            m == 0 -> AppLocale.str(R.string.duration_short_h, h)
+            else -> AppLocale.str(R.string.duration_short_hm, h, m)
+        }
+    }
+
     /** "3.5h" 式十进制小时，报表用 / decimal hours for reports */
     fun formatHours(minutes: Int): String =
         String.format("%.1f", minutes / 60.0)

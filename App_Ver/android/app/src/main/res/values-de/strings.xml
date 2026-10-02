@@ -112,7 +112,7 @@
     <string name="field_event">Ereignis</string>
     <string name="field_note">Notiz</string>
     <string name="add_note_placeholder">Optional</string>
-    <string name="add_duration_pending">Zeit noch offen</string>
+    <string name="add_duration_pending">____</string>
     <string name="add_quick_label">Häufig</string>
     <string name="add_save">Speichern und weiter</string>
     <string name="add_err_time">Bitte Start- und Endzeit angeben</string>
@@ -121,7 +121,7 @@
     <string name="add_saved">%1$s erfasst</string>
     <string name="add_backfill_label">Nachtrag</string>
     <string name="add_duration_label">Dauer des Eintrags:</string>
-    <string name="add_time_pending">Offen</string>
+    <string name="add_time_pending">____</string>
     <string name="dialog_ok">OK</string>
     <string name="dialog_cancel">Abbrechen</string>
 
@@ -152,7 +152,8 @@
     <string name="language_dialog_title">Sprache wählen</string>
     <string name="language_system">System</string>
     <string name="language_hint">Die App-Sprache folgt standardmäßig dem System; eine manuelle Auswahl betrifft nur diese App.</string>
-    <string name="language_zh">中文</string>
+    <string name="language_zh">简体中文</string>
+    <string name="language_zh_tw">繁體中文</string>
     <string name="language_en">English</string>
     <string name="language_es">Español</string>
     <string name="language_pt">Português</string>
@@ -164,6 +165,9 @@
     <string name="duration_hm">%1$d h %2$d min</string>
     <string name="duration_h">%1$d h</string>
     <string name="duration_m">%1$d min</string>
+    <string name="duration_short_hm">%1$dh %2$dm</string>
+    <string name="duration_short_h">%1$dh</string>
+    <string name="duration_short_m">%1$dm</string>
 
     <!-- Date patterns (DateTimeFormatter templates, not prose) -->
     <string name="pattern_date_long">EEEE d MMMM yyyy</string>
@@ -207,7 +211,8 @@
     <string name="report_cat_cell">%1$s · %2$s</string>
     <string name="report_locale">de-DE</string>
 
-    <!-- 版本历史全档案（12 版，与中文原文逐条对应） -->
+    <!-- 版本历史全档案（13 版，与中文原文逐条对应） -->
+    <string name="release_notes_093">Alle zehn Themes haben jetzt eine passende Neutralfläche: Grundfläche, Karten, angehobene Flächen, Text und Linien werden im Farbton des Themes eingefärbt — ein Theme wechselt damit weit mehr als nur Text und Buttons.\nDer helle Modus ist ein getöntes Hell, der dunkle ein getöntes Dunkel: Rosé liegt auf Blassrosa und dunkler Pflaume, Waldgrün auf grünlichem gebrochenem Weiß und dunkler Kiefer; jeder Modus hat seine eigene Tönung.\nOptionskarten auf der Einstellungsseite, die untere Leiste mit den fünf Hauptbereichen, Dialoge und Aufklappmenüs folgen dem Thema, statt auf reinem Weiß oder Grauschwarz zu stehen.\nDie standardmäßige Morandi-Optik bleibt unverändert, weiterhin warmes Elfenbein über Anthrazit; in allen anderen Paletten hält der Fließtext mindestens 7:1 Kontrast zum Hintergrund.\nSolarized und Obsidian haben handgesetzte Flächen: Solarized behält das offizielle Pergament und das dunkle Petrol bei, Obsidian bleibt nahezu neutral und wird im dunklen Modus noch tiefer.\nDie Jahresansicht im Tagebuch ist jetzt ein Akkordeon: Jahrestitel, Jahresgesamtbetrag und die Summen der Klasse I/II bleiben dauerhaft im Kopfbereich der Karte, die einzelnen Ereigniszeilen darunter sind zunächst eingeklappt und öffnen sich erst nach einem Tipp auf den Jahreskopf.\nAchte Sprache: Traditionelles Chinesisch (Formulare aus Taiwan), in Einstellungen > Sprache neben 简体中文 aufgelistet und bei traditionell-chinesischer Systemsprache automatisch gewählt.\nDas Radar auf der Startseite trennt seine beiden Serien jetzt über Ton und Linienstil: die laufende Periode bleibt ein durchgehender Zug mit Punkten, die Vergleichsperiode weicht einen Schritt zum Kartenhintergrund als gestrichelte Linie ohne Punkte — in allen zehn Themes auf einen Blick zu unterscheiden.\nDie drei Statistikblöcke der Startseite zeigen Zeiten im kompakten h/m-Format, damit sie in eine Zeile passen; Tagebuch, Erfassen und exportierte Berichte behalten die vollständig lokalisierten Einheiten.\nIm Erfassen stehen Start und Ende jetzt nebeneinander in einer Zeile mit kleinerer Zeitgröße; eine nicht gewählte Zeit wird mit einem Unterstrich-Platzhalter markiert; eine Endzeit vor der Startzeit wird klar gemeldet, statt still gelöscht zu werden; eine Schnelleingabe über Mitternacht wird auf 23:59 begrenzt.</string>
     <string name="release_notes_092">Neue Sprachen: 中文 / English / Español / Português / Deutsch / Nederlands / 日本語 – umschaltbar jederzeit in den Einstellungen über „Sprache"; bei „System" passt sich die App automatisch der Sprache des Handys an.\nNeue Splash-Ansicht beim Start: das App-Symbol zentriert wie auf dem Startbildschirm, der App-Name erscheint je nach Sprache (auf Chinesisch „柳比歇夫时间管理", auf Englisch „Lyubishchev Time"), danach öffnet sich die Hauptansicht.\nSelbst angelegte Kategorien, Ereignisse und Notizen sind persönliche Daten und werden nie übersetzt – was in welcher Sprache eingetragen wurde, bleibt so stehen.\nText, Tabellenüberschriften, Wochentage und Dauereinheiten der exportierten Berichte folgen nun der App-Sprache; CSV-Dateien erkennt „Alles importieren" weiterhin einwandfrei.\nDas Theme bekommt sechs weitere Farbschemata: Karminrot / Bernstein / Rosé / Graphitgrau / Obsidienschwarz / Solarized (ein alter Bekannter unter den Terminalfarben), hell und dunkel jeweils angepasst, die Grundfläche bleibt Morandi.\nIn den Einstellungen die neue Seite „Berichtsvorlage": standardmäßig eine Markdown-Vorlage, auf Klartext umschaltbar, eigene .md/.txt-Dateien lassen sich hochladen (diese Version erfasst und wählt sie nur, das Einlesen folgt später); dazu der neue Einstieg „AI API", vorerst nur ein Platzhalter.\nDer Startbildschirm zeigt jetzt drei zentrierte Elemente: unter dem App-Namen einen Zähler, der Tage seit dem ersten Start zeigt, darunter das kursive Signet „LOOYEA" und ganz unten die kleine Zeile „Reine lokale Zeiterfassung – Daten bleiben nur auf dem Handy".\nDie Karte oben in den Einstellungen zeigt nun drei Zeilen – Tage an Ihrer Seite, insgesamt erfasste Zeit in Stunden und Minuten sowie die Anzahl der Einträge – und der Untertitel lautet: Die Zeit zu begleiten heißt, das Leben zu begleiten; die Zeit zu erinnern heißt, das Leben zu erinnern.\nZählzeilen wie Tage an Ihrer Seite und Einträge erfasst richten sich nun nach Singular und Plural der jeweiligen Sprache.\nDie beiden festen Klassen (Zeit Klasse I / II) sind Programmtext und werden jetzt in der Oberflächensprache angezeigt; die Datenbank erkennt sie weiterhin am gespeicherten Namen. Jede Zeile in den Einstellungen zeigt den Namen links und den Pfeil ganz rechts.</string>
     <string name="release_notes_091">Das Theme ist jetzt richtig da: vier Farbschemata wechseln die komplette Kontrolle auf einen Tipp (Morandi Graugrün / Tiffany-Blau / Ozeanblau / Waldgrün), hell und dunkel jeweils angepasst, die neutrale Grundfläche bleibt das Morandi-Minimal.\nIm Jahrmodus des Tagebuchs sind Datums-Buttons für leere Zeiträume ausgegraut statt versteckt – ihre Position bleibt stabil.\nDie Segment-Buttons (Übersichtsumschaltung sowie Tag/Woche/Monat/Jahr) zeigen kein Häkchen mehr, die Auswahl ist nur an der Hintergrundfarbe zu erkennen.\nDie Einstellungsseite ist abgespeckt: Bei „Zeitkategorien" und „Zeitraum exportieren" entfällt der erklärende Text rechts, es bleibt nur der Pfeil in die nächste Ebene.</string>
     <string name="release_notes_09">Die Übersicht hat jetzt auch „Diesen Monat gesamt": drei Spalten neben Heute und Diese Woche, passend zu den drei Zeitstufen unter dem Radardiagramm.\nDie Wochenansicht des Tagebuchs zeigt nicht mehr nur drei Wochen: über GROUP BY nach Wochen listet sie alle Wochen dieses Jahres mit Einträgen (Wochen ganz ohne Einträge nehmen keinen Platz ein), absteigend sortiert und standardmäßig komplett zugeklappt.\nDie Monatsansicht des Tagebuchs genauso: Jeder Monat dieses Jahres mit Einträgen bekommt einen eigenen Abschnitt, nicht mehr nur die letzten drei.\nDer Datumswähler lässt keine Zukunft mehr zu: In der Wochen- und Monatsansicht reicht die Auswahl vom Jahresanfang bis heute, nächste Woche und nächster Monat sind nicht anklickbar; die Tagesansicht startet standardmäßig bei Heute, für früher wählt man das Datum aus.\nDie Jahresansicht listet nur noch die Jahre mit echten Einträgen (etwa vorvorgestern, letztes Jahr, dieses Jahr – dazwischenliegende leere Jahre erscheinen nicht); jedes Jahr öffnet sich direkt mit den Summen von Klasse I und Klasse II samt den einzelnen Ereignissen, ein Datums-Anker ist hier nicht nötig.\nIn den Einstellungen wurde „Häufig" in „Schnellzugriff" umbenannt, der Text rechts entfällt zugunsten des Pfeils, und der Titel der nächsten Seite zieht mit.</string>

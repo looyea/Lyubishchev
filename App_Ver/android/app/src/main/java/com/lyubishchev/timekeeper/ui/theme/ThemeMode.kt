@@ -8,18 +8,26 @@ import androidx.compose.runtime.setValue
 /** 颜色模式三档：跟随系统 / 浅色 / 深色 */
 enum class ThemeMode { SYSTEM, LIGHT, DARK }
 
-/** 主题：整套控件配色的换色盘，中性底色始终是莫兰迪。 */
-enum class ThemePalette(val day: Accents, val night: Accents) {
-    MORANDI(MorandiDay, MorandiNight),
-    TIFFANY(TiffanyDay, TiffanyNight),
-    OCEAN(OceanDay, OceanNight),
-    FOREST(ForestDay, ForestNight),
-    CRIMSON(CrimsonDay, CrimsonNight),
-    AMBER(AmberDay, AmberNight),
-    ROSE(RoseDay, RoseNight),
-    GRAPHITE(GraphiteDay, GraphiteNight),
-    OBSIDIAN(ObsidianDay, ObsidianNight),
-    SOLARIZED(SolarizedDay, SolarizedNight),
+/**
+ * 主题：整套配色的换色盘。控件色（Accents）与中性底色（Neutrals）各带一对，
+ * 浅/深两种颜色模式分开取，切主题时大背景与卡片一起跟着染色。
+ */
+enum class ThemePalette(
+    val day: Accents,
+    val night: Accents,
+    val dayNeutrals: Neutrals,
+    val nightNeutrals: Neutrals,
+) {
+    MORANDI(MorandiDay, MorandiNight, MorandiDayNeutrals, MorandiNightNeutrals),
+    TIFFANY(TiffanyDay, TiffanyNight, TiffanyDayNeutrals, TiffanyNightNeutrals),
+    OCEAN(OceanDay, OceanNight, OceanDayNeutrals, OceanNightNeutrals),
+    FOREST(ForestDay, ForestNight, ForestDayNeutrals, ForestNightNeutrals),
+    CRIMSON(CrimsonDay, CrimsonNight, CrimsonDayNeutrals, CrimsonNightNeutrals),
+    AMBER(AmberDay, AmberNight, AmberDayNeutrals, AmberNightNeutrals),
+    ROSE(RoseDay, RoseNight, RoseDayNeutrals, RoseNightNeutrals),
+    GRAPHITE(GraphiteDay, GraphiteNight, GraphiteDayNeutrals, GraphiteNightNeutrals),
+    OBSIDIAN(ObsidianDay, ObsidianNight, ObsidianDayNeutrals, ObsidianNightNeutrals),
+    SOLARIZED(SolarizedDay, SolarizedNight, SolarizedDayNeutrals, SolarizedNightNeutrals),
 }
 
 /**

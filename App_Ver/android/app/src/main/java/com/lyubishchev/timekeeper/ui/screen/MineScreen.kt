@@ -600,6 +600,7 @@ private fun LanguagePickerDialog(onPick: (AppLanguage) -> Unit, onDismiss: () ->
 private fun languageLabel(language: AppLanguage): Int = when (language) {
     AppLanguage.SYSTEM -> R.string.language_system
     AppLanguage.ZH -> R.string.language_zh
+    AppLanguage.ZH_TW -> R.string.language_zh_tw
     AppLanguage.EN -> R.string.language_en
     AppLanguage.ES -> R.string.language_es
     AppLanguage.PT -> R.string.language_pt
